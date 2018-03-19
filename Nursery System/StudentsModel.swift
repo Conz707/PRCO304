@@ -8,12 +8,18 @@
 
 import UIKit
 
-class StudentsModelA: NSObject {
+class StudentsModel: NSObject {
 
         
         //properties
-        var firstName: String?
-        var surname: String?
+    var studentID: String?
+    var firstName: String?
+    var surname: String?
+    var mother: String?
+    var father: String?
+    var guardian: String?
+    var keyPerson: String?
+ 
         //do age variable var age: Age??????
         
         //empty constructor
@@ -25,11 +31,16 @@ class StudentsModelA: NSObject {
         
         //construct with first name and surname parameters
         
-        init(firstName: String, surname: String)//keyPerson: String?)
+    init(studentID: String, firstName: String, surname: String, mother: String, father: String, guardian: String, keyPerson: String)
         {
+            self.studentID = studentID
             self.firstName = firstName
             self.surname = surname
-
+            self.mother = mother
+            self.father = father
+            self.guardian = guardian
+            self.keyPerson = keyPerson
+       
             
         }
         
@@ -37,6 +48,9 @@ class StudentsModelA: NSObject {
         
         override var description: String {
             return "FirstName: \(firstName), Surname: \(surname)"
+            
         }
         
 }
+
+ 

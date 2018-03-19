@@ -1,0 +1,6 @@
+framework module Pods_Nursery_SystemTests {
+  umbrella header "Pods-Nursery SystemTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

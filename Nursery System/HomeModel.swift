@@ -1,5 +1,5 @@
 //
-//  HomeModelA.swift
+//  HomeModel.swift
 //  Nursery System
 //
 //  Created by (s) Connor Smith 1 on 20/02/2018.
@@ -8,14 +8,14 @@
 
 import Foundation
 
-protocol HomeModelAProtocol: class {
+protocol HomeModelProtocol: class {
     func itemsDownloaded(items: NSArray)
 }
 
-class HomeModelA: NSObject, URLSessionDelegate {
+class HomeModel: NSObject, URLSessionDelegate {
     
     //properties
-    weak var delegate: HomeModelAProtocol!
+    weak var delegate: HomeModelProtocol!
     
     let urlPath: String = "https://shod-verses.000webhostapp.com/AgeGroupA.php"
     
@@ -50,14 +50,28 @@ class HomeModelA: NSObject, URLSessionDelegate {
         for i in 0 ..< jsonResult.count{
             jsonElement = jsonResult[i] as! NSDictionary
         
-            let student = StudentsModelA()
+            let student = StudentsModel()
             
             //the following ensures none of the JsonElement values are nil through optional binding
-            if let firstName = jsonElement["FirstName"] as? String,
-                let surname = jsonElement["Surname"] as? String
+            if let studentID = jsonElement["S_ID"] as? String,
+            let firstName = jsonElement["FirstName"] as? String,
+            let surname = jsonElement["Surname"] as? String,
+          //  let dateOfBirth = jsonElement["DateofBirth"] as? Date,
+            let mother = jsonElement["Mother"] as? String,
+            let father = jsonElement["Father"] as? String,
+            let guardian = jsonElement["Guardian"] as? String,
+            let keyPerson = jsonElement["KeyPerson"] as? String
+            
+                
             {
+                student.studentID = studentID
                 student.firstName = firstName
                 student.surname = surname
+                student.mother  = mother
+                student.father = father
+                student.guardian = guardian
+                student.keyPerson = keyPerson
+                
 
             }
             studentArr.add(student)

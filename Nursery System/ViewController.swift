@@ -7,21 +7,40 @@
 //
 
 import UIKit
+import Alamofire
 
 class ViewController: UIViewController{
     
+    
+    let main = DispatchQueue.main
+    let background = DispatchQueue.global()
 
     @IBOutlet weak var emailTxt: UITextField!
     @IBOutlet weak var passwordTxt: UITextField!
-    
+    var loginSuccess = false
+    var responseSuccess = false
+ 
     //Properties
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        responseSuccess = false;
+    }
     
-    @IBAction func loginBtn(_ sender: Any) {
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
+    
+    func checkLogin(completion: @escaping (_ success: Bool) -> ()){
       
+        
+        var success = true
+        
         let emailVar = emailTxt.text
         let passwordVar = passwordTxt.text
-        
-        
         
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/Login.php")!)
         request.httpMethod = "POST"
@@ -30,6 +49,8 @@ class ViewController: UIViewController{
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {                                                 // check for fundamental networking error
                 print("error=\(error)")
+                success = false
+                print(success)
                 return
             }
             
@@ -39,26 +60,47 @@ class ViewController: UIViewController{
                 
             }
             
-            let responseString = String(data: data, encoding: .utf8)
+            var responseString = String(data: data, encoding: .utf8)!
             print("responseString = \(responseString)")
-            if (responseString == "success"){
-                print("responsestring doing mad shit")
-             } else {
-                print("shit sucks")
+            if (responseString == ""){
+                self.responseSuccess = false
+                success = false
+            } else {
+                self.responseSuccess = true
+                success = true
             }
+            
+            DispatchQueue.main.async {
+                   completion(success)
+            }
+            
+            
         }
         task.resume()
+        print(success)
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-       
+    
+    func validateLogin(){
+        if (responseSuccess == true){
+            print("work")
+           self.performSegue(withIdentifier: "segueGo", sender: self)
+        } else {
+            print ("not work")
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    
+    @IBAction func loginBtn(_ sender: Any) {
+        DispatchQueue.main.async {
+            self.checkLogin(completion: { success in
+                if(self.responseSuccess == true){
+                self.performSegue(withIdentifier: "segueGo", sender: self)
+                }
+            } )
+            
+        }
+       // self.performSegue(withIdentifier: "segueGo", sender: self)
+        
     }
-
-
 }
 

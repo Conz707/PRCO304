@@ -1,5 +1,5 @@
 //
-//  AgeGroupAViewController.swift
+//  AgeGroupCViewController.swift
 //  Nursery System
 //
 //  Created by (s) Connor Smith 1 on 28/02/2018.
@@ -8,20 +8,22 @@
 
 import UIKit
 
-class AgeGroupAViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, HomeModelProtocol {
+class AgeGroupCViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, HomeModelCProtocol {
 
     var feedItems: NSArray = NSArray()
     var selectedStudent : StudentsModel = StudentsModel()
-    @IBOutlet weak var tblAgeGroupA: UITableView!
+    
+    @IBOutlet weak var tblAgeGroupC: UITableView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tblAgeGroupA.delegate = self
-        self.tblAgeGroupA.dataSource = self
+        self.tblAgeGroupC.delegate = self
+        self.tblAgeGroupC.dataSource = self
         
-        let homeModel = HomeModel()
+        
+        let homeModel = HomeModelC()
         homeModel.delegate = self
         homeModel.downloadItems()
         
@@ -31,7 +33,7 @@ class AgeGroupAViewController: UIViewController, UITableViewDataSource, UITableV
     
     func itemsDownloaded(items: NSArray){
         feedItems = items
-        self.tblAgeGroupA.reloadData()
+        self.tblAgeGroupC.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -49,12 +51,29 @@ class AgeGroupAViewController: UIViewController, UITableViewDataSource, UITableV
         //get student to show
         let item: StudentsModel = feedItems[indexPath.row] as! StudentsModel
         //get references to labels of cells
-        myCell.textLabel!.text = item.firstName
-        myCell.textLabel!.text = item.surname
+        myCell.textLabel!.text = item.firstName! + " " + item.surname!
         
         return myCell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {     //whenever user taps row
+        //set selected student to var
+        selectedStudent = feedItems[indexPath.row] as! StudentsModel
+        //Manually call segue to detail view controller
+        self.performSegue(withIdentifier: "AgeCSegue", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        //get reference to destination view controller
+        let studentVC = segue.destination as! StudentDetailsViewController
+        //set property to selected student so when view loads, it accesses the properties of feeditem obj
+        studentVC.selectedStudent = selectedStudent
+        
+        
+        
+        
+    }
     
     
 

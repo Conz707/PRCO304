@@ -10,4 +10,36 @@ import UIKit
 
 class ActivitiesModel: NSObject {
 
+        
+        
+        //properties
+        var activityID: String?
+        var studentID: String?
+        var activity: String?
+        var observation: String?
+
+    
+        
+        //empty constructor
+        override init()
+        {
+            
+        }
+    
+        
+        init(activityID: String, studentID: String, activity: String, observation: String)
+        {
+            self.activityID = activityID
+            self.studentID = studentID
+            self.activity = activity
+            self.observation = observation
+        }
+        
+        //print object current state
+        
+        override var description: String {
+            return "Activity: \(activity)"
+        }
+    
+    
 }
