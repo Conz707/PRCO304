@@ -19,13 +19,9 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var lblKeyPerson: UILabel!
     @IBOutlet weak var lblGuardian: UILabel!
     @IBOutlet weak var lblFather: UILabel!
-    @IBOutlet weak var lblID: UILabel!
     @IBOutlet var lblAgeGroup: UILabel!
     @IBOutlet var tblActivities: UITableView!
-    
-    
-    @IBAction func btnLoadTable(_ sender: Any) {
-    }
+    var selectedActivity : ActivitiesModel = ActivitiesModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,11 +70,6 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         // Pass the selected object to the new view controller.
     }
     */
-
-    @IBAction func testbtn(_ sender: Any) {
-
-    }
-    
     
   /*  func checkStudentActivities(completion: @escaping (_ success: Bool) -> ()){
         var success = true
@@ -140,7 +131,7 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
             
             
             
-            //get student to show
+            //get activity to show
             let item: ActivitiesModel = feedItems[indexPath.row] as! ActivitiesModel
             //get references to labels of cells
             myCell.textLabel!.text = item.activity
@@ -150,7 +141,19 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {     //whenever user taps row
 
+            //set selected activity to var
+            selectedActivity = feedItems[indexPath.row] as! ActivitiesModel
+            //manually call segue to detail view controller
+            self.performSegue(withIdentifier: "viewActivity", sender: self)
         }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //get reference to destination view controller
+     //   let activityVC = segue.destination as! ActivityDetailsViewController
+        //set property to selected activity so when view loads, it accesses the properties of feeditem obj
+       // activityVC.selectedActivity = selectedActivity
+        
+    }
     
     
     

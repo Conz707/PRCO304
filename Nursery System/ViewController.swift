@@ -18,13 +18,13 @@ class ViewController: UIViewController{
     @IBOutlet weak var emailTxt: UITextField!
     @IBOutlet weak var passwordTxt: UITextField!
     var loginSuccess = false
-    var responseSuccess = false
+    var roleString = ""
  
     //Properties
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        responseSuccess = false;
+       
     }
     
     
@@ -42,7 +42,7 @@ class ViewController: UIViewController{
         let emailVar = emailTxt.text
         let passwordVar = passwordTxt.text
         
-        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/Login.php")!)
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/Login2.php")!)
         request.httpMethod = "POST"
         let postString = ("email=" + emailVar! + "&password=" + passwordVar!)
         request.httpBody = postString.data(using: .utf8)
@@ -62,12 +62,15 @@ class ViewController: UIViewController{
             
             var responseString = String(data: data, encoding: .utf8)!
             print("responseString = \(responseString)")
-            if (responseString == ""){
-                self.responseSuccess = false
+            self.roleString = responseString
+            if (self.roleString == "Teacher"){
+                print("roleString  Teacher")
                 success = false
-            } else {
-                self.responseSuccess = true
+            } else if (self.roleString == "Parent"){
+                print("roleString Parent")
                 success = true
+            } else{
+                print("roleString Failure")
             }
             
             DispatchQueue.main.async {
@@ -80,21 +83,15 @@ class ViewController: UIViewController{
         print(success)
     }
     
-    func validateLogin(){
-        if (responseSuccess == true){
-            print("work")
-           self.performSegue(withIdentifier: "segueGo", sender: self)
-        } else {
-            print ("not work")
-        }
-    }
-    
-    
     @IBAction func loginBtn(_ sender: Any) {
         DispatchQueue.main.async {
             self.checkLogin(completion: { success in
-                if(self.responseSuccess == true){
-                self.performSegue(withIdentifier: "segueGo", sender: self)
+                if(self.roleString == "Teacher"){
+                self.performSegue(withIdentifier: "segueGoTeacher", sender: self)
+                } else if (self.roleString == "Parent") {
+                    self.performSegue(withIdentifier: "segueGoParent", sender: self)
+                } else {
+                    
                 }
             } )
             

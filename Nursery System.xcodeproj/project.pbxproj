@@ -19,6 +19,8 @@
 		9CA199832051A2AB00E4B617 /* LiteracyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA199822051A2AB00E4B617 /* LiteracyViewController.swift */; };
 		9CC3AC29204EEB52003B5359 /* StudentDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC3AC28204EEB52003B5359 /* StudentDetailsViewController.swift */; };
 		9CC3AC2B204EF80B003B5359 /* earlyYears.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9CC3AC2A204EF80B003B5359 /* earlyYears.jpg */; };
+		9CC4418B2060029A002E9456 /* ActivityDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4418A2060029A002E9456 /* ActivityDetailsViewController.swift */; };
+		9CC4418D20603365002E9456 /* CreateActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4418C20603365002E9456 /* CreateActivityViewController.swift */; };
 		9CC646732046F467000A3548 /* AgeGroupAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC646722046F467000A3548 /* AgeGroupAViewController.swift */; };
 		9CC646772046F641000A3548 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC646762046F641000A3548 /* HomeModel.swift */; };
 		9CC6467B2046FAD9000A3548 /* StudentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC6467A2046FAD9000A3548 /* StudentsModel.swift */; };
@@ -73,6 +75,8 @@
 		9CA199822051A2AB00E4B617 /* LiteracyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiteracyViewController.swift; sourceTree = "<group>"; };
 		9CC3AC28204EEB52003B5359 /* StudentDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentDetailsViewController.swift; sourceTree = "<group>"; };
 		9CC3AC2A204EF80B003B5359 /* earlyYears.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = earlyYears.jpg; path = ../../../../Downloads/earlyYears.jpg; sourceTree = "<group>"; };
+		9CC4418A2060029A002E9456 /* ActivityDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailsViewController.swift; sourceTree = "<group>"; };
+		9CC4418C20603365002E9456 /* CreateActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateActivityViewController.swift; sourceTree = "<group>"; };
 		9CC646722046F467000A3548 /* AgeGroupAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeGroupAViewController.swift; sourceTree = "<group>"; };
 		9CC646762046F641000A3548 /* HomeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		9CC6467A2046FAD9000A3548 /* StudentsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsModel.swift; sourceTree = "<group>"; };
@@ -174,6 +178,8 @@
 				9CC64680204719FE000A3548 /* HomeModelB.swift */,
 				9CC6468220471A09000A3548 /* HomeModelC.swift */,
 				9CA199822051A2AB00E4B617 /* LiteracyViewController.swift */,
+				9CC4418A2060029A002E9456 /* ActivityDetailsViewController.swift */,
+				9CC4418C20603365002E9456 /* CreateActivityViewController.swift */,
 			);
 			path = "Nursery System";
 			sourceTree = "<group>";
@@ -513,11 +519,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CC4418B2060029A002E9456 /* ActivityDetailsViewController.swift in Sources */,
 				9CCE281C205997FA003FBEDA /* ActivitiesModel.swift in Sources */,
 				9C722F7D203F3EF100EB1805 /* TeacherLandingPageViewController.swift in Sources */,
 				9CC6467B2046FAD9000A3548 /* StudentsModel.swift in Sources */,
 				9CC6468320471A09000A3548 /* HomeModelC.swift in Sources */,
 				9CA199832051A2AB00E4B617 /* LiteracyViewController.swift in Sources */,
+				9CC4418D20603365002E9456 /* CreateActivityViewController.swift in Sources */,
 				9CC646772046F641000A3548 /* HomeModel.swift in Sources */,
 				9C8A23D5203B3259008C4D10 /* ViewController.swift in Sources */,
 				9CEF4EC92056F3AD001A6C1B /* ProgressReport1ViewController.swift in Sources */,
