@@ -8,20 +8,39 @@
 
 import UIKit
 
-class CreateActivityViewController: UIViewController {
-
-
+class CreateActivityViewController: UIViewController, UIGestureRecognizerDelegate {
+    
     @IBOutlet var dateActivity: UIDatePicker!
+    
     @IBOutlet var txtStudentObservation: UITextView!
     @IBOutlet var txtStudentActivity: UITextField!
-    @IBOutlet var txtStudentID: UITextField!    //This needs to be automatic - obviously - ...
+
+    @IBOutlet var lblStudentName: UILabel!
+    
     @IBOutlet var imgOne: UIImageView!
     @IBOutlet var imgTwo: UIImageView!
     @IBOutlet var imgThree: UIImageView!
+    var selectedStudent : StudentsModel = StudentsModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        lblStudentName.text = selectedStudent.firstName! + " " + selectedStudent.surname!
 
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        
+        imgOne.isUserInteractionEnabled = true
+        imgOne.addGestureRecognizer(tapGestureRecognizer)
+        imgTwo.isUserInteractionEnabled = true
+        imgTwo.addGestureRecognizer(tapGestureRecognizer)
+        imgThree.isUserInteractionEnabled = true
+        imgThree.addGestureRecognizer(tapGestureRecognizer)
+        
         // Do any additional setup after loading the view.
+    }
+    
+    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer){
+     print("sssssss")
+        let tappedImage = tapGestureRecognizer.view as! UIImageView
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,7 +48,6 @@ class CreateActivityViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
     /*
     // MARK: - Navigation
 
@@ -40,17 +58,16 @@ class CreateActivityViewController: UIViewController {
     }
     */
     @IBAction func btnSaveActivity(_ sender: Any) {
-        let S_ID = txtStudentID.text
         let activity = txtStudentActivity.text
         let observation = txtStudentObservation.text
         let date = dateActivity.date
-        let testDate = "2018-03-19"
+        let S_ID = selectedStudent.studentID!
         
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/SaveActivity.php")!)
       
         request.httpMethod = "POST"
        
-        let postString = ("S_ID=\(S_ID!)&Activity=\(activity!)&Observation=\(observation!)&Date=\(testDate)")
+        let postString = ("S_ID=\(S_ID)&Activity=\(activity!)&Observation=\(observation!)&Date=\(date)")
        
         print(postString)
         

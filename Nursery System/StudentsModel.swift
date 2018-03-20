@@ -15,10 +15,10 @@ class StudentsModel: NSObject {
     var studentID: String?
     var firstName: String?
     var surname: String?
-    var mother: String?
-    var father: String?
-    var guardian: String?
-    var keyPerson: String?
+ //   var mother: String?
+ //  var father: String?
+  //  var guardian: String?
+ //   var keyPerson: String?
  
         //do age variable var age: Age??????
         
@@ -31,15 +31,15 @@ class StudentsModel: NSObject {
         
         //construct with first name and surname parameters
         
-    init(studentID: String, firstName: String, surname: String, mother: String, father: String, guardian: String, keyPerson: String)
+    init(studentID: String, firstName: String, surname: String) //mother: String, father: String, guardian: String, keyPerson: String)
         {
             self.studentID = studentID
             self.firstName = firstName
             self.surname = surname
-            self.mother = mother
-            self.father = father
-            self.guardian = guardian
-            self.keyPerson = keyPerson
+          //  self.mother = mother
+          //  self.father = father
+          //  self.guardian = guardian
+          //  self.keyPerson = keyPerson
        
             
         }

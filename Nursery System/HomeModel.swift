@@ -55,22 +55,22 @@ class HomeModel: NSObject, URLSessionDelegate {
             //the following ensures none of the JsonElement values are nil through optional binding
             if let studentID = jsonElement["S_ID"] as? String,
             let firstName = jsonElement["FirstName"] as? String,
-            let surname = jsonElement["Surname"] as? String,
+            let surname = jsonElement["Surname"] as? String
           //  let dateOfBirth = jsonElement["DateofBirth"] as? Date,
-            let mother = jsonElement["Mother"] as? String,
-            let father = jsonElement["Father"] as? String,
-            let guardian = jsonElement["Guardian"] as? String,
-            let keyPerson = jsonElement["KeyPerson"] as? String
+        //    let mother = jsonElement["Mother"] as? String,
+        //    let father = jsonElement["Father"] as? String,
+        //    let guardian = jsonElement["Guardian"] as? String,
+        //    let keyPerson = jsonElement["KeyPerson"] as? String
             
                 
             {
                 student.studentID = studentID
                 student.firstName = firstName
                 student.surname = surname
-                student.mother  = mother
-                student.father = father
-                student.guardian = guardian
-                student.keyPerson = keyPerson
+          //      student.mother  = mother
+          //      student.father = father
+          //      student.guardian = guardian
+          //      student.keyPerson = keyPerson
                 
 
             }

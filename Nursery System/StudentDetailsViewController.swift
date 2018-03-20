@@ -14,6 +14,8 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
     var feedItems: NSArray = NSArray()
     let loadActivitiesModel = LoadActivitiesModel()
     
+    
+    @IBOutlet var imgStudent: UIImageView!
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblMother: UILabel!
     @IBOutlet weak var lblKeyPerson: UILabel!
@@ -23,10 +25,55 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet var tblActivities: UITableView!
     var selectedActivity : ActivitiesModel = ActivitiesModel()
     
+    //TEST TEST TEST MAKE BETTER IDIOT - NEEDS TO PULL FROM DATABASE ANYWAY DUMBASS
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
-
+        let URL_IMAGE = URL(string: "shod-verses.000webhostapp.com/StudentImage/" + (selectedStudent?.firstName)! + (selectedStudent?.surname)! + ".jpg")
+        print(URL_IMAGE)
+        //TEST TEST TEST MAKE BETTER IDIOT
+        let session = URLSession(configuration: .default)
+        
+        //create a dataTask
+        let getImageFromUrl = session.dataTask(with: URL_IMAGE!) { data, response, error in
+        
+           //if error
+            if let e = error {
+                //display message
+                print("Error occurred: \(e)")
+            } else {
+                if (response as? HTTPURLResponse) != nil {
+                    
+                    //check response contains image
+                    if let imageData = data {
+                        
+                        //get image
+                        let image = UIImage(data: imageData)
+                        
+                        //display the image
+                        DispatchQueue.main.async{
+                        self.imgStudent.image = image
+                            }
+                        } else {
+                        print("image corrupted")
+                        }
+                    } else {
+                        print("No server response")
+                    }
+                }
+            }
+            getImageFromUrl.resume()
+        
+    
+        //END //TEST TEST TEST MAKE BETTER IDIOT
+        
+        
+        
+        
+        
       
         self.tblActivities.delegate = self
         self.tblActivities.dataSource = self
@@ -37,10 +84,11 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
        
         
         lblName.text = (selectedStudent?.firstName)! + " " + (selectedStudent?.surname)!
-        lblMother.text = selectedStudent?.mother
-        lblFather.text = selectedStudent?.father
-        lblGuardian.text = selectedStudent?.guardian
-        lblKeyPerson.text = selectedStudent?.keyPerson
+     //TEST TEST TEST FIX MOTHER FATHER GUARDIAN KEYPERSON TO PULL THE NAMES FROM OTHER TABLES
+        //   lblMother.text = selectedStudent?.mother
+       // lblFather.text = selectedStudent?.father
+        //lblGuardian.text = selectedStudent?.guardian
+       // lblKeyPerson.text = selectedStudent?.keyPerson
       //  lblID.text = selectedStudent?.studentID
         
         
@@ -148,11 +196,19 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+       
+        if (segue.identifier == "viewActivity"){
         //get reference to destination view controller
-     //   let activityVC = segue.destination as! ActivityDetailsViewController
+      let viewActivityVC = segue.destination as! ActivityDetailsViewController
         //set property to selected activity so when view loads, it accesses the properties of feeditem obj
-       // activityVC.selectedActivity = selectedActivity
-        
+        viewActivityVC.selectedActivity = selectedActivity
+        } else if (segue.identifier == "createActivity"){
+            //get reference to destination view controller
+            let createActivityVC = segue.destination as! CreateActivityViewController
+            //set property to selected student so when view loads, it accesses the properties of feeditem obj ??
+            createActivityVC.selectedStudent = selectedStudent!
+            
+        }
     }
     
     

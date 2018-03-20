@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ActivityDetailsViewController: UIViewController, UIImagePickerControllerDelegate {
+class ActivityDetailsViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
     var selectedActivity : ActivitiesModel?
     
@@ -16,20 +16,31 @@ class ActivityDetailsViewController: UIViewController, UIImagePickerControllerDe
     @IBOutlet var activityTitle: UILabel!
     
     @IBOutlet var imgOne: UIImageView!
+    
+    
+    //TEST TEST TEST - This needs to be moved to Create Activity, and upload to the database so must add URLSessions functionality.
     @IBAction func btnUploadImgOne(_ sender: Any) {
-        let imgOne = UIImagePickerController()
-     //   imgOne.delegate = self as! UIImagePickerControllerDelegate & UINavigationControllerDelegate
+        let image = UIImagePickerController()  //handles stuff that lets user interact with image
+        image.delegate = self
+        image.sourceType = UIImagePickerControllerSourceType.photoLibrary  //pick image from ipad photo library
+        image.allowsEditing = false //hmm
         
-        imgOne.sourceType = UIImagePickerControllerSourceType.photoLibrary
-        
-        imgOne.allowsEditing = false
-        
-        self.present(imgOne, animated: true)
+        self.present(image, animated: true)
         {
             //after it is complete
         }
     }
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage{ //check if using image possible
+        imgOne.image = image
+        } else {
+            print("error using image")//error message
+        }
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+//END TEST TEST TEST
     
     
     override func viewDidLoad() {
