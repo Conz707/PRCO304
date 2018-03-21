@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		18C0E6793DFDD5B321190444 /* Pods_Nursery_System.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D1DE7FD35F63B0B3AA582F7 /* Pods_Nursery_System.framework */; };
 		9C722F7D203F3EF100EB1805 /* TeacherLandingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C722F7C203F3EF100EB1805 /* TeacherLandingPageViewController.swift */; };
+		9C7AD8062062B3D700623FDE /* ParentLandingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7AD8052062B3D700623FDE /* ParentLandingPageViewController.swift */; };
+		9C7AD80D2062C35700623FDE /* ViewChildrenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7AD80C2062C35700623FDE /* ViewChildrenModel.swift */; };
 		9C8A23D3203B3259008C4D10 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8A23D2203B3259008C4D10 /* AppDelegate.swift */; };
 		9C8A23D5203B3259008C4D10 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8A23D4203B3259008C4D10 /* ViewController.swift */; };
 		9C8A23D8203B3259008C4D10 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C8A23D6203B3259008C4D10 /* Main.storyboard */; };
@@ -59,6 +61,8 @@
 		6BFF698320EED9F5B6E5C028 /* Pods-Nursery SystemTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nursery SystemTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nursery SystemTests/Pods-Nursery SystemTests.release.xcconfig"; sourceTree = "<group>"; };
 		72CDE4703A3C0AC4EC04935F /* Pods-Nursery SystemUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nursery SystemUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nursery SystemUITests/Pods-Nursery SystemUITests.release.xcconfig"; sourceTree = "<group>"; };
 		9C722F7C203F3EF100EB1805 /* TeacherLandingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherLandingPageViewController.swift; sourceTree = "<group>"; };
+		9C7AD8052062B3D700623FDE /* ParentLandingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentLandingPageViewController.swift; sourceTree = "<group>"; };
+		9C7AD80C2062C35700623FDE /* ViewChildrenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewChildrenModel.swift; sourceTree = "<group>"; };
 		9C8A23CF203B3259008C4D10 /* Nursery System.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nursery System.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C8A23D2203B3259008C4D10 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9C8A23D4203B3259008C4D10 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +137,57 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9C7AD8072062C01100623FDE /* Students Pages */ = {
+			isa = PBXGroup;
+			children = (
+				9CC3AC28204EEB52003B5359 /* StudentDetailsViewController.swift */,
+				9CC6467A2046FAD9000A3548 /* StudentsModel.swift */,
+				9CC646762046F641000A3548 /* HomeModel.swift */,
+				9CC64680204719FE000A3548 /* HomeModelB.swift */,
+				9CC6468220471A09000A3548 /* HomeModelC.swift */,
+				9CC646722046F467000A3548 /* AgeGroupAViewController.swift */,
+				9CC6467C20471527000A3548 /* AgeGroupBViewController.swift */,
+				9CC6467E20471532000A3548 /* AgeGroupCViewController.swift */,
+			);
+			path = "Students Pages";
+			sourceTree = "<group>";
+		};
+		9C7AD8082062C03E00623FDE /* Login Page */ = {
+			isa = PBXGroup;
+			children = (
+				9C8A23D4203B3259008C4D10 /* ViewController.swift */,
+			);
+			path = "Login Page";
+			sourceTree = "<group>";
+		};
+		9C7AD8092062C06600623FDE /* Activities Pages */ = {
+			isa = PBXGroup;
+			children = (
+				9CCE281B205997FA003FBEDA /* ActivitiesModel.swift */,
+				9CCE2819205997C0003FBEDA /* LoadActivitiesModel.swift */,
+				9CC4418A2060029A002E9456 /* ActivityDetailsViewController.swift */,
+			);
+			path = "Activities Pages";
+			sourceTree = "<group>";
+		};
+		9C7AD80A2062C0BE00623FDE /* Teachers Pages */ = {
+			isa = PBXGroup;
+			children = (
+				9C722F7C203F3EF100EB1805 /* TeacherLandingPageViewController.swift */,
+				9CC4418C20603365002E9456 /* CreateActivityViewController.swift */,
+			);
+			path = "Teachers Pages";
+			sourceTree = "<group>";
+		};
+		9C7AD80B2062C0FD00623FDE /* Parents Pages */ = {
+			isa = PBXGroup;
+			children = (
+				9C7AD8052062B3D700623FDE /* ParentLandingPageViewController.swift */,
+				9C7AD80C2062C35700623FDE /* ViewChildrenModel.swift */,
+			);
+			path = "Parents Pages";
+			sourceTree = "<group>";
+		};
 		9C8A23C6203B3259008C4D10 = {
 			isa = PBXGroup;
 			children = (
@@ -158,28 +213,19 @@
 		9C8A23D1203B3259008C4D10 /* Nursery System */ = {
 			isa = PBXGroup;
 			children = (
+				9C7AD8082062C03E00623FDE /* Login Page */,
+				9C7AD80B2062C0FD00623FDE /* Parents Pages */,
+				9C7AD80A2062C0BE00623FDE /* Teachers Pages */,
+				9C7AD8072062C01100623FDE /* Students Pages */,
+				9C7AD8092062C06600623FDE /* Activities Pages */,
 				9CD3ACB9203F25D5003A21C0 /* media */,
 				9C8A23D2203B3259008C4D10 /* AppDelegate.swift */,
 				9C8A23D6203B3259008C4D10 /* Main.storyboard */,
 				9C8A23D9203B3259008C4D10 /* Assets.xcassets */,
 				9C8A23DB203B3259008C4D10 /* LaunchScreen.storyboard */,
 				9C8A23DE203B3259008C4D10 /* Info.plist */,
-				9C8A23D4203B3259008C4D10 /* ViewController.swift */,
-				9C722F7C203F3EF100EB1805 /* TeacherLandingPageViewController.swift */,
 				9CEF4EC82056F3AD001A6C1B /* ProgressReport1ViewController.swift */,
-				9CC646722046F467000A3548 /* AgeGroupAViewController.swift */,
-				9CC6467C20471527000A3548 /* AgeGroupBViewController.swift */,
-				9CC6467E20471532000A3548 /* AgeGroupCViewController.swift */,
-				9CCE281B205997FA003FBEDA /* ActivitiesModel.swift */,
-				9CCE2819205997C0003FBEDA /* LoadActivitiesModel.swift */,
-				9CC3AC28204EEB52003B5359 /* StudentDetailsViewController.swift */,
-				9CC6467A2046FAD9000A3548 /* StudentsModel.swift */,
-				9CC646762046F641000A3548 /* HomeModel.swift */,
-				9CC64680204719FE000A3548 /* HomeModelB.swift */,
-				9CC6468220471A09000A3548 /* HomeModelC.swift */,
 				9CA199822051A2AB00E4B617 /* LiteracyViewController.swift */,
-				9CC4418A2060029A002E9456 /* ActivityDetailsViewController.swift */,
-				9CC4418C20603365002E9456 /* CreateActivityViewController.swift */,
 			);
 			path = "Nursery System";
 			sourceTree = "<group>";
@@ -526,8 +572,10 @@
 				9CC6468320471A09000A3548 /* HomeModelC.swift in Sources */,
 				9CA199832051A2AB00E4B617 /* LiteracyViewController.swift in Sources */,
 				9CC4418D20603365002E9456 /* CreateActivityViewController.swift in Sources */,
+				9C7AD8062062B3D700623FDE /* ParentLandingPageViewController.swift in Sources */,
 				9CC646772046F641000A3548 /* HomeModel.swift in Sources */,
 				9C8A23D5203B3259008C4D10 /* ViewController.swift in Sources */,
+				9C7AD80D2062C35700623FDE /* ViewChildrenModel.swift in Sources */,
 				9CEF4EC92056F3AD001A6C1B /* ProgressReport1ViewController.swift in Sources */,
 				9CC3AC29204EEB52003B5359 /* StudentDetailsViewController.swift in Sources */,
 				9CCE281A205997C0003FBEDA /* LoadActivitiesModel.swift in Sources */,

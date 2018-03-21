@@ -10,10 +10,6 @@ import UIKit
 import Alamofire
 
 class ViewController: UIViewController{
-    
-    
-    let main = DispatchQueue.main
-    let background = DispatchQueue.global()
 
     @IBOutlet weak var emailTxt: UITextField!
     @IBOutlet weak var passwordTxt: UITextField!
@@ -35,8 +31,7 @@ class ViewController: UIViewController{
 
     
     func checkLogin(completion: @escaping (_ success: Bool) -> ()){
-      
-        
+
         var success = true
         
         let emailVar = emailTxt.text
@@ -53,31 +48,27 @@ class ViewController: UIViewController{
                 print(success)
                 return
             }
-            
             if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
                 print("statusCode should be 200, but is \(httpStatus.statusCode)")
                 print("response = \(response)")
-                
             }
-            
             var responseString = String(data: data, encoding: .utf8)!
             print("responseString = \(responseString)")
+            
             self.roleString = responseString
-            if (self.roleString == "Teacher"){
-                print("roleString  Teacher")
-                success = false
-            } else if (self.roleString == "Parent"){
-                print("roleString Parent")
-                success = true
-            } else{
-                print("roleString Failure")
-            }
+                if (self.roleString == "Teacher"){
+                    print("roleString  Teacher")
+                    success = false
+                } else if (self.roleString == "Parent"){
+                    print("roleString Parent")
+                    success = true
+                } else{
+                    print("roleString Failure")
+                }
             
             DispatchQueue.main.async {
                    completion(success)
             }
-            
-            
         }
         task.resume()
         print(success)
@@ -86,18 +77,18 @@ class ViewController: UIViewController{
     @IBAction func loginBtn(_ sender: Any) {
         DispatchQueue.main.async {
             self.checkLogin(completion: { success in
-                if(self.roleString == "Teacher"){
-                self.performSegue(withIdentifier: "segueGoTeacher", sender: self)
+                    if(self.roleString == "Teacher"){
+                    self.performSegue(withIdentifier: "segueGoTeacher", sender: self)
                 } else if (self.roleString == "Parent") {
                     self.performSegue(withIdentifier: "segueGoParent", sender: self)
                 } else {
-                    
+                    let alertController = UIAlertController(title: "Error", message: "Incorrect Email or Password", preferredStyle: .alert)
+                    let defaultAction = UIAlertAction(title: "Close Alert", style: .default, handler: nil)
+                    alertController.addAction(defaultAction)
+                    self.present(alertController, animated: true, completion: nil)
                 }
-            } )
-            
+            })
         }
-       // self.performSegue(withIdentifier: "segueGo", sender: self)
-        
     }
 }
 

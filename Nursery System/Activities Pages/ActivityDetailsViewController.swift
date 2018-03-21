@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class ActivityDetailsViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
@@ -34,12 +35,22 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage{ //check if using image possible
         imgOne.image = image
+            
         } else {
             print("error using image")//error message
         }
-        
         self.dismiss(animated: true, completion: nil)
+        
+        
+        
+        
+        //upload()
     }
+    
+    func upload(image: UIImage){
+
+    }
+
 //END TEST TEST TEST
     
     

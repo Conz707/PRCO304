@@ -15,6 +15,9 @@ class StudentsModel: NSObject {
     var studentID: String?
     var firstName: String?
     var surname: String?
+    var displayPicture: String?
+  //  var dateOfBirth: Date?
+
  //   var mother: String?
  //  var father: String?
   //  var guardian: String?
@@ -31,11 +34,13 @@ class StudentsModel: NSObject {
         
         //construct with first name and surname parameters
         
-    init(studentID: String, firstName: String, surname: String) //mother: String, father: String, guardian: String, keyPerson: String)
+    init(studentID: String, firstName: String, surname: String, displayPicture: String)//dateOfBirth: Date) //mother: String, father: String, guardian: String, keyPerson: String)
         {
             self.studentID = studentID
             self.firstName = firstName
             self.surname = surname
+            self.displayPicture = displayPicture
+        //    self.dateOfBirth = dateOfBirth
           //  self.mother = mother
           //  self.father = father
           //  self.guardian = guardian

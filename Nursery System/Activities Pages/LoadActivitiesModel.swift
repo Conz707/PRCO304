@@ -56,7 +56,6 @@ class LoadActivitiesModel: NSObject, URLSessionDelegate {
             if let activityID = jsonElement["A_ID"] as? String,
                 let studentID = jsonElement["S_ID"] as? String,
                 let activity = jsonElement["Activity"] as? String,
-                //  let dateOfBirth = jsonElement["DateofBirth"] as? Date,
                 let observation = jsonElement["Observation"] as? String
                 
             {
