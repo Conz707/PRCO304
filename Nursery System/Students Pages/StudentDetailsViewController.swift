@@ -8,11 +8,12 @@
 import Foundation
 import UIKit
 
+
 class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, LoadActivitiesModelProtocol {
 
     var selectedStudent : StudentsModel?
     var feedItems: NSArray = NSArray()
-    let loadActivitiesModel = LoadActivitiesModel()
+ //   let loadActivitiesModel = LoadActivitiesModel()
     
     
     @IBOutlet var imgStudent: UIImageView!
@@ -62,12 +63,17 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
             }
             getImageFromUrl.resume()
       
-        self.tblActivities.dataSource = self
-        self.tblActivities.delegate = self
         
-        loadActivitiesModel.downloadItems()
-        loadActivitiesModel.delegate = self
+                self.tblActivities.dataSource = self
+                self.tblActivities.delegate = self
+                
+                let loadActivitiesModel = LoadActivitiesModel()
+                loadActivitiesModel.downloadItems()
+                loadActivitiesModel.delegate = self
+
         
+
+
         lblName.text = (selectedStudent?.firstName)! + " " + (selectedStudent?.surname)!
         
         //TEST TEST TEST FIX MOTHER FATHER GUARDIAN KEYPERSON TO PULL THE NAMES FROM OTHER TABLES
@@ -88,6 +94,7 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         super.didReceiveMemoryWarning()
     }
     
+    
         func itemsDownloaded(items: NSArray){
             feedItems = items
             tblActivities.reloadData()
@@ -104,13 +111,13 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
             //retrieve cell
             let cellIdentifier: String = "BasicCell"
             let myCell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)!
-            
-            
-            
             //get activity to show
-            let item: ActivitiesModel = feedItems[indexPath.row] as! ActivitiesModel
+                let item: ActivitiesModel = self.feedItems[indexPath.row] as! ActivitiesModel
+ 
+                    print("attempting to attach activity to table")
+                    myCell.textLabel!.text = item.activity
             //get references to labels of cells
-            myCell.textLabel!.text = item.activity
+
             
             return myCell
         }

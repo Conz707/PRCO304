@@ -1,12 +1,15 @@
 PODS:
   - Alamofire (4.7.0)
+  - LBTAComponents (1.0.2)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7.0)
+  - LBTAComponents
 
 SPEC CHECKSUMS:
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
+  LBTAComponents: c4c8863e0ef6715e378300db148b96a09df656f7
 
-PODFILE CHECKSUM: a66f9a2288345c45d20c8528ca7c0fdb75ae5269
+PODFILE CHECKSUM: 3ede182d1ad819497f5e65ce58c5ac7dd1ba4bde
 
 COCOAPODS: 1.4.0

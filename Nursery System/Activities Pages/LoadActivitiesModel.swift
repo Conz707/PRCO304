@@ -34,7 +34,7 @@ class LoadActivitiesModel: NSObject, URLSessionDelegate {
         }
         task.resume()
     }
-    
+
     func parseJSON(_ data:Data) {
         var jsonResult = NSArray()
         
@@ -75,3 +75,4 @@ class LoadActivitiesModel: NSObject, URLSessionDelegate {
         })
     }
 }
+

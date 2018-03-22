@@ -33,6 +33,7 @@ class ViewChildrenModel: NSObject, URLSessionDelegate {
             }
         }
         task.resume()
+    
     }
     
     func parseJSON(_ data:Data) {
@@ -57,6 +58,7 @@ class ViewChildrenModel: NSObject, URLSessionDelegate {
                 let firstName = jsonElement["FirstName"] as? String,
                 let surname = jsonElement["Surname"] as? String,
                 let displayPicture = jsonElement["StudentPicture"] as? String
+                
                 //   let dateOfBirth = jsonElement["DateofBirth"] as? Date
                 //    let mother = jsonElement["Mother"] as? String,
                 //    let father = jsonElement["Father"] as? String,
@@ -69,6 +71,7 @@ class ViewChildrenModel: NSObject, URLSessionDelegate {
                 student.firstName = firstName
                 student.surname = surname
                 student.displayPicture = displayPicture
+                
                 //       student.dateOfBirth = dateOfBirth
                 //      student.mother  = mother
                 //      student.father = father
