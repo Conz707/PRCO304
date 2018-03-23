@@ -7,20 +7,20 @@
 //
 
 import UIKit
+import Alamofire
 
-class CreateActivityViewController: UIViewController, UIGestureRecognizerDelegate {
+
+class CreateActivityViewController: UIViewController, UINavigationControllerDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, URLSessionTaskDelegate, URLSessionDelegate, URLSessionDataDelegate {
     
     @IBOutlet var dateActivity: UIDatePicker!
-    
     @IBOutlet var txtStudentObservation: UITextView!
     @IBOutlet var txtStudentActivity: UITextField!
-
     @IBOutlet var lblStudentName: UILabel!
-    
-    @IBOutlet var imgOne: UIImageView!
-    @IBOutlet var imgTwo: UIImageView!
-    @IBOutlet var imgThree: UIImageView!
+    @IBOutlet var imgActivity: UIImageView!
     var selectedStudent : StudentsModel = StudentsModel()
+    var image = #imageLiteral(resourceName: "placeholder.png")
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,19 +28,25 @@ class CreateActivityViewController: UIViewController, UIGestureRecognizerDelegat
 
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         
-        imgOne.isUserInteractionEnabled = true
-        imgOne.addGestureRecognizer(tapGestureRecognizer)
-        imgTwo.isUserInteractionEnabled = true
-        imgTwo.addGestureRecognizer(tapGestureRecognizer)
-        imgThree.isUserInteractionEnabled = true
-        imgThree.addGestureRecognizer(tapGestureRecognizer)
+        imgActivity.isUserInteractionEnabled = true
+        imgActivity.addGestureRecognizer(tapGestureRecognizer)
         
         // Do any additional setup after loading the view.
     }
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer){
-     print("sssssss")
         let tappedImage = tapGestureRecognizer.view as! UIImageView
+        print("image tapped")
+        let image = UIImagePickerController()  //handles stuff that lets user interact with image
+        image.delegate = self
+        image.sourceType = UIImagePickerControllerSourceType.photoLibrary  //pick image from ipad photo library
+        image.allowsEditing = false //hmm
+        
+        self.present(image, animated: true)
+        {
+            //after it is complete
+            
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,26 +54,30 @@ class CreateActivityViewController: UIViewController, UIGestureRecognizerDelegat
         // Dispose of any resources that can be recreated.
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage{ //check if using image possible
+            imgActivity.image = image
+        } else {
+            print("error using image")//error message
+        }
+        self.dismiss(animated: true, completion: nil)
+        
     }
-    */
+
+
+    
     @IBAction func btnSaveActivity(_ sender: Any) {
         let activity = txtStudentActivity.text
         let observation = txtStudentObservation.text
         let date = dateActivity.date
         let S_ID = selectedStudent.studentID!
+        let activityPicture = "https://shod-verses.000webhostapp.com/students/\(S_ID)/ActivityPictures/\(activity!).jpg"
         
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/SaveActivity.php")!)
       
         request.httpMethod = "POST"
        
-        let postString = ("S_ID=\(S_ID)&Activity=\(activity!)&Observation=\(observation!)&Date=\(date)")
+        let postString = ("S_ID=\(S_ID)&Activity=\(activity!)&Observation=\(observation!)&Date=\(date)&ActivityPicture=\(activityPicture)")
        
         print(postString)
         
@@ -89,5 +99,44 @@ class CreateActivityViewController: UIViewController, UIGestureRecognizerDelegat
 
         }
         task.resume()
+        
+        upload(image: imgActivity.image!, activity2: activity!)
+        
+    }
+    
+    
+    func upload(image: UIImage, activity2: String){
+        guard let imageData = UIImageJPEGRepresentation(imgActivity.image!, 0.5) else {
+            print("could not get jpeg of image")
+            return
+        }
+        
+        
+        let parameters = ["studentID": "\(selectedStudent.studentID!)"]
+        print(parameters)
+        
+        Alamofire.upload(multipartFormData: { multipartFormData in
+            multipartFormData.append(imageData, withName: "file",fileName: "\((activity2) + ".jpg")", mimeType: "image/jpg")
+            for (key, value) in parameters {
+                multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
+            }
+        },
+                         to:"https://shod-verses.000webhostapp.com/ImageUpload.php")
+        { (result) in
+            switch result {
+            case .success(let upload, _, _):
+                
+                upload.uploadProgress(closure: { (progress) in
+                    print("Upload Progress: \(progress.fractionCompleted)")
+                })
+                
+                upload.responseString { response in
+                    print(response.result.value)
+                }
+                
+            case .failure(let encodingError):
+                print(encodingError)
+            }
+        }
     }
 }

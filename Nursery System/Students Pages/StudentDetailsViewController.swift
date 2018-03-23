@@ -115,12 +115,45 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
                 let item: ActivitiesModel = self.feedItems[indexPath.row] as! ActivitiesModel
  
                     print("attempting to attach activity to table")
-                    myCell.textLabel!.text = item.activity
-            //get references to labels of cells
-
             
+            
+            let URL_IMAGE = URL(string: (item.activityPicture)!)
+            print(URL_IMAGE)
+            let session = URLSession(configuration: .default)
+            
+            //create a dataTask
+            let getImageFromUrl = session.dataTask(with: URL_IMAGE!) { data, response, error in
+                
+                //if error
+                if let e = error {
+                    //display message
+                    print("Error occurred: \(e)")
+                } else {
+                    if (response as? HTTPURLResponse) != nil {
+                        
+                        //check response contains image
+                        if let imageData = data {
+                            
+                            //get image
+                            let image = UIImage(data: imageData)
+                            print("image", image)
+                            print(URL_IMAGE)
+                            //display the image
+                            DispatchQueue.main.async{
+                                myCell.textLabel!.text = item.activity
+                                myCell.imageView?.image = image
+                            }
+                        } else {
+                            print("image corrupted")
+                        }
+                    } else {
+                        print("No server response")
+                    }
+                }
+            }
+            getImageFromUrl.resume()
             return myCell
-        }
+    }
         
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {     //whenever user taps row
 

@@ -56,13 +56,15 @@ class LoadActivitiesModel: NSObject, URLSessionDelegate {
             if let activityID = jsonElement["A_ID"] as? String,
                 let studentID = jsonElement["S_ID"] as? String,
                 let activity = jsonElement["Activity"] as? String,
-                let observation = jsonElement["Observation"] as? String
+                let observation = jsonElement["Observation"] as? String,
+                let activityPicture = jsonElement["ActivityPicture"] as? String
                 
             {
                 activities.activityID = activityID
                 activities.studentID = studentID
                 activities.activity = activity
                 activities.observation = observation
+                activities.activityPicture = activityPicture
             }
             
             activityArr.add(activities)

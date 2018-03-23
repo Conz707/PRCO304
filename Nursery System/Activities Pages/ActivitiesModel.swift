@@ -17,6 +17,7 @@ class ActivitiesModel: NSObject {
         var studentID: String?
         var activity: String?
         var observation: String?
+    var activityPicture: String?
 
     
         
@@ -27,12 +28,13 @@ class ActivitiesModel: NSObject {
         }
     
         
-        init(activityID: String, studentID: String, activity: String, observation: String)
+    init(activityID: String, studentID: String, activity: String, observation: String, activityPicture: String)
         {
             self.activityID = activityID
             self.studentID = studentID
             self.activity = activity
             self.observation = observation
+            self.activityPicture = activityPicture
         }
         
         //print object current state
