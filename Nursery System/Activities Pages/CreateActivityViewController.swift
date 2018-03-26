@@ -71,7 +71,7 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
         let observation = txtStudentObservation.text
         let date = dateActivity.date
         let S_ID = selectedStudent.studentID!
-        let activityPicture = "https://shod-verses.000webhostapp.com/students/\(S_ID)/ActivityPictures/\(activity!).jpg"
+        let activityPicture = "https://shod-verses.000webhostapp.com/students/\((selectedStudent.firstName!) + (selectedStudent.surname!))/ActivityPictures/\(activity!).jpg"
         
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/SaveActivity.php")!)
       

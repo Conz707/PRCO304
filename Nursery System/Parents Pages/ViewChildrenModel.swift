@@ -17,7 +17,7 @@ class ViewChildrenModel: NSObject, URLSessionDelegate {
     //properties
     weak var delegate: ViewChildrenModelProtocol!
     
-    let urlPath: String = "https://shod-verses.000webhostapp.com/test123.php?email=jc@memes.com"
+    let urlPath: String = "https://shod-verses.000webhostapp.com/test123.php"
     
     func downloadItems() {
         let url: URL = URL(string: urlPath)!
@@ -29,6 +29,8 @@ class ViewChildrenModel: NSObject, URLSessionDelegate {
                 print("Failed to download data")
             } else {
                 print("Data downloaded")
+                print(data)
+                
                 self.parseJSON(data!)
             }
         }

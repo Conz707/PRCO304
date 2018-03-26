@@ -62,6 +62,9 @@ class ViewController: UIViewController{
                 } else if (self.roleString == "Parent"){
                     print("roleString Parent")
                     success = true
+                } else if (self.roleString == "Manager"){
+                    print("roleString Manager")
+                    success = true
                 } else{
                     print("roleString Failure")
                 }
@@ -81,7 +84,9 @@ class ViewController: UIViewController{
                     self.performSegue(withIdentifier: "segueGoTeacher", sender: self)
                 } else if (self.roleString == "Parent") {
                     self.performSegue(withIdentifier: "segueGoParent", sender: self)
-                } else {
+                } else if (self.roleString == "Manager") {
+                        self.performSegue(withIdentifier: "segueGoManager", sender: self)
+                    } else {
                     let alertController = UIAlertController(title: "Error", message: "Incorrect Email or Password", preferredStyle: .alert)
                     let defaultAction = UIAlertAction(title: "Close Alert", style: .default, handler: nil)
                     alertController.addAction(defaultAction)

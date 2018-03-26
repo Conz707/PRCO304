@@ -77,7 +77,7 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         lblName.text = (selectedStudent?.firstName)! + " " + (selectedStudent?.surname)!
         
         //TEST TEST TEST FIX MOTHER FATHER GUARDIAN KEYPERSON TO PULL THE NAMES FROM OTHER TABLES
-        //lblMother.text = selectedStudent?.mother
+//        lblMother.text = selectedStudent?.mother
         //lblFather.text = selectedStudent?.father
         //lblGuardian.text = selectedStudent?.guardian
         //lblKeyPerson.text = selectedStudent?.keyPerson
