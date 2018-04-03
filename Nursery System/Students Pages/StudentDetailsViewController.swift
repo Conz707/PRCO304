@@ -14,8 +14,11 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
     var selectedStudent : StudentsModel?
     var feedItems: NSArray = NSArray()
  //   let loadActivitiesModel = LoadActivitiesModel()
+
     
+    @IBOutlet var activityIndicatorTableLoading: UIActivityIndicatorView!
     
+    @IBOutlet var lblDateOfBirth: UILabel!
     @IBOutlet var imgStudent: UIImageView!
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblMother: UILabel!
@@ -28,6 +31,10 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        activityIndicatorTableLoading.hidesWhenStopped = true
+        activityIndicatorTableLoading.startAnimating()
+
         
         let URL_IMAGE = URL(string: (selectedStudent?.displayPicture)!)
         print(URL_IMAGE)
@@ -62,32 +69,45 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
                 }
             }
             getImageFromUrl.resume()
-      
         
-                self.tblActivities.dataSource = self
-                self.tblActivities.delegate = self
-                
-                let loadActivitiesModel = LoadActivitiesModel()
-                loadActivitiesModel.downloadItems()
-                loadActivitiesModel.delegate = self
-
-        
-
 
         lblName.text = (selectedStudent?.firstName)! + " " + (selectedStudent?.surname)!
+        lblDateOfBirth.text = selectedStudent?.dateOfBirth
+        
+        //small piece to make date more easily identifiable
+        //Convert String to Date for formatting
+      let dateString = selectedStudent?.dateOfBirth
+      let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let myDate = dateFormatter.date(from: dateString!)!
+        print("original date is \(dateString!)")
+        
+        
+        dateFormatter.dateFormat = "MMMM dd, YYYY"
+        let newDateString = dateFormatter.string(from: myDate)
+        print("new date string is \(newDateString)")
+        lblDateOfBirth.text = "\(newDateString)"
+        
         
         //TEST TEST TEST FIX MOTHER FATHER GUARDIAN KEYPERSON TO PULL THE NAMES FROM OTHER TABLES
 //        lblMother.text = selectedStudent?.mother
         //lblFather.text = selectedStudent?.father
         //lblGuardian.text = selectedStudent?.guardian
         //lblKeyPerson.text = selectedStudent?.keyPerson
-        //lblID.text = selectedStudent?.studentID
-        //var dateFormatter = DateFormatter()
-        //var displayDOB = dateFormatter.string(from: (selectedStudent?.dateOfBirth)!)
-        //lblDateOfBirth.text = displayDOB
-        //lblDateOfBirth.text = selectedStudent?.dateOfBirth as? [String: AnyObject]
         //This needs to pull key person from staff database based on ID
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        navigationController?.navigationBar.isHidden = true
+        self.tblActivities.dataSource = self
+        self.tblActivities.delegate = self
+  
+        
+        let loadActivitiesModel = LoadActivitiesModel()
+        loadActivitiesModel.downloadItems()
+        loadActivitiesModel.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -98,6 +118,8 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         func itemsDownloaded(items: NSArray){
             feedItems = items
             tblActivities.reloadData()
+            activityIndicatorTableLoading.stopAnimating()
+             navigationController?.navigationBar.isHidden = false //stops backing too fast crashing application
             
         }
     

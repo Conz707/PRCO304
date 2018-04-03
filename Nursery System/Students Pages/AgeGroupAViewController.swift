@@ -9,14 +9,23 @@ import Foundation
 import UIKit
 
 class AgeGroupAViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, HomeModelProtocol {
-
+    
+    @IBOutlet var activityIndicatorTableLoading: UIActivityIndicatorView!
+    
     var feedItems: NSArray = NSArray()
     var selectedStudent : StudentsModel = StudentsModel()
     @IBOutlet weak var tblAgeGroupA: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        activityIndicatorTableLoading.hidesWhenStopped = true
+        activityIndicatorTableLoading.startAnimating()
+         navigationController?.navigationBar.isHidden = true    //stops backing too fast crashing application
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
         self.tblAgeGroupA.delegate = self
         self.tblAgeGroupA.dataSource = self
         
@@ -29,6 +38,8 @@ class AgeGroupAViewController: UIViewController, UITableViewDataSource, UITableV
     func itemsDownloaded(items: NSArray){
         feedItems = items
         self.tblAgeGroupA.reloadData()
+        activityIndicatorTableLoading.stopAnimating()
+         navigationController?.navigationBar.isHidden = false
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -40,6 +51,7 @@ class AgeGroupAViewController: UIViewController, UITableViewDataSource, UITableV
         //retrieve cell
         let cellIdentifier: String = "BasicCell"
         let myCell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)!
+        
         
         //get student to show
         let item: StudentsModel = feedItems[indexPath.row] as! StudentsModel

@@ -10,17 +10,24 @@
 import UIKit
 
 class AgeGroupBViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, HomeModelBProtocol {
-
+    @IBOutlet var activityIndicatorTableLoading: UIActivityIndicatorView!
+    
     var feedItems: NSArray = NSArray()
     var selectedStudent : StudentsModel = StudentsModel()
     let urlPath: String = "https://shod-verses.000webhostapp.com/AgeGroupB.php"
     
     @IBOutlet weak var tblAgeGroupB: UITableView!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        activityIndicatorTableLoading.hidesWhenStopped = true
+        activityIndicatorTableLoading.startAnimating()
+         navigationController?.navigationBar.isHidden = true
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
         self.tblAgeGroupB.delegate = self
         self.tblAgeGroupB.dataSource = self
         
@@ -28,13 +35,13 @@ class AgeGroupBViewController: UIViewController, UITableViewDataSource, UITableV
         homeModel.delegate = self
         homeModel.downloadItems()
         
-        
-        // Do any additional setup after loading the view.
     }
     
     func itemsDownloaded(items: NSArray){
         feedItems = items
         self.tblAgeGroupB.reloadData()
+        activityIndicatorTableLoading.stopAnimating()
+         navigationController?.navigationBar.isHidden = false
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

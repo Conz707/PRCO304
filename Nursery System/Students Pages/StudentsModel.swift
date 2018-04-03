@@ -16,6 +16,7 @@ class StudentsModel: NSObject {
     var firstName: String?
     var surname: String?
     var displayPicture: String?
+    var dateOfBirth: String?
    // var mother: String?
   //  var father: String?
   //  var guardian: String?
@@ -36,12 +37,13 @@ class StudentsModel: NSObject {
         
         //construct with first name and surname parameters
         
-    init(studentID: String, firstName: String, surname: String, displayPicture: String, displayPictureImg: UIImage)//, mother: String)//, father: String, guardian: String  )//dateOfBirth: Date) //mother: String, father: String, guardian: String, keyPerson: String)
+    init(studentID: String, firstName: String, surname: String, dateOfBirth: String, displayPicture: String, displayPictureImg: UIImage )//, mother: String)//, father: String, guardian: String  )//dateOfBirth: Date) //mother: String, father: String, guardian: String, keyPerson: String)
         {
             self.studentID = studentID
             self.firstName = firstName
             self.surname = surname
             self.displayPicture = displayPicture
+            self.dateOfBirth = dateOfBirth
      //       self.mother = mother
         //    self.father = father
         //    self.guardian = guardian
@@ -58,7 +60,7 @@ class StudentsModel: NSObject {
         //print object current state
         
         override var description: String {
-            return "FirstName: \(firstName), Surname: \(surname)"
+            return "FirstName: \(firstName), Surname: \(surname), studentID: \(studentID), dateOfBirth: \(dateOfBirth)"
             
         }
         

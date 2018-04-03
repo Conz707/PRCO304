@@ -9,7 +9,8 @@
 import UIKit
 
 class AgeGroupCViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, HomeModelCProtocol {
-
+    @IBOutlet var activityIndicatorTableLoading: UIActivityIndicatorView!
+    
     var feedItems: NSArray = NSArray()
     var selectedStudent : StudentsModel = StudentsModel()
     
@@ -18,22 +19,27 @@ class AgeGroupCViewController: UIViewController, UITableViewDataSource, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        activityIndicatorTableLoading.hidesWhenStopped = true
+        activityIndicatorTableLoading.startAnimating()
+         navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
         self.tblAgeGroupC.delegate = self
         self.tblAgeGroupC.dataSource = self
-        
         
         let homeModel = HomeModelC()
         homeModel.delegate = self
         homeModel.downloadItems()
         
-        
-        // Do any additional setup after loading the view.
     }
     
     func itemsDownloaded(items: NSArray){
         feedItems = items
         self.tblAgeGroupC.reloadData()
+        activityIndicatorTableLoading.stopAnimating()
+         navigationController?.navigationBar.isHidden = false
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

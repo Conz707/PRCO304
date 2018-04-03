@@ -27,6 +27,7 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
         lblStudentName.text = selectedStudent.firstName! + " " + selectedStudent.surname!
 
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+  
         
         imgActivity.isUserInteractionEnabled = true
         imgActivity.addGestureRecognizer(tapGestureRecognizer)
@@ -39,16 +40,32 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
         print("image tapped")
         let image = UIImagePickerController()  //handles stuff that lets user interact with image
         image.delegate = self
-        image.sourceType = UIImagePickerControllerSourceType.photoLibrary  //pick image from ipad photo library
-        image.allowsEditing = false //hmm
-        
-        self.present(image, animated: true)
-        {
-            //after it is complete
-            
-        }
-    }
 
+        let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Take Photo", style: .default, handler: { _ in
+            image.sourceType = UIImagePickerControllerSourceType.camera
+            image.allowsEditing = false
+            self.present(image, animated: true)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Choose from Photo Library", style: .default, handler: { _ in
+            image.sourceType = UIImagePickerControllerSourceType.photoLibrary  //pick image from ipad camera roll
+            image.allowsEditing = true //hmm
+            self.present(image, animated: true, completion: nil)
+        }))
+        
+        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+        
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.sourceView = self.view
+            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+            popoverController.permittedArrowDirections = []
+        }
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -71,7 +88,7 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
         let observation = txtStudentObservation.text
         let date = dateActivity.date
         let S_ID = selectedStudent.studentID!
-        let activityPicture = "https://shod-verses.000webhostapp.com/students/\((selectedStudent.firstName!) + (selectedStudent.surname!))/ActivityPictures/\(activity!).jpg"
+        let activityPicture = "https://shod-verses.000webhostapp.com/students/\((selectedStudent.studentID!))/ActivityPictures/\(activity!).jpg"
         
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/SaveActivity.php")!)
       
@@ -94,12 +111,11 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
                 
             }
             
-            var responseString = String(data: data, encoding: .utf8)!
+            let responseString = String(data: data, encoding: .utf8)!
             print("responseString = \(responseString)")
 
         }
         task.resume()
-        
         upload(image: imgActivity.image!, activity2: activity!)
         
     }

@@ -25,7 +25,9 @@
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Your image is safe with me bro</string>
+	<string>Allows access to Photo Library</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Allows access to Camera</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

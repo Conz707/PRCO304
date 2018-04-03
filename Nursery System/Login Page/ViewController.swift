@@ -11,6 +11,8 @@ import Alamofire
 
 class ViewController: UIViewController{
 
+    
+    @IBOutlet var activityIndicatorLogin: UIActivityIndicatorView!
     @IBOutlet weak var emailTxt: UITextField!
     @IBOutlet weak var passwordTxt: UITextField!
     var loginSuccess = false
@@ -20,7 +22,14 @@ class ViewController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+       activityIndicatorLogin.hidesWhenStopped = true
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        passwordTxt.isEnabled = true
+        emailTxt.isEnabled = true
+        
     }
     
     
@@ -75,22 +84,34 @@ class ViewController: UIViewController{
         }
         task.resume()
         print(success)
+        
     }
     
     @IBAction func loginBtn(_ sender: Any) {
+        
+        activityIndicatorLogin.startAnimating()
+        passwordTxt.isEnabled = false
+        emailTxt.isEnabled = false
+        
         DispatchQueue.main.async {
             self.checkLogin(completion: { success in
                     if(self.roleString == "Teacher"){
                     self.performSegue(withIdentifier: "segueGoTeacher", sender: self)
+                    self.activityIndicatorLogin.stopAnimating()
                 } else if (self.roleString == "Parent") {
                     self.performSegue(withIdentifier: "segueGoParent", sender: self)
+                    self.activityIndicatorLogin.stopAnimating()
                 } else if (self.roleString == "Manager") {
-                        self.performSegue(withIdentifier: "segueGoManager", sender: self)
+                    self.performSegue(withIdentifier: "segueGoManager", sender: self)
+                    self.activityIndicatorLogin.stopAnimating()
                     } else {
                     let alertController = UIAlertController(title: "Error", message: "Incorrect Email or Password", preferredStyle: .alert)
                     let defaultAction = UIAlertAction(title: "Close Alert", style: .default, handler: nil)
                     alertController.addAction(defaultAction)
                     self.present(alertController, animated: true, completion: nil)
+                    self.passwordTxt.isEnabled = true
+                    self.emailTxt.isEnabled = true
+                        self.activityIndicatorLogin.stopAnimating()
                 }
             })
         }

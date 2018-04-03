@@ -56,7 +56,8 @@ class HomeModel: NSObject, URLSessionDelegate {
             if let studentID = jsonElement["S_ID"] as? String,
             let firstName = jsonElement["FirstName"] as? String,
             let surname = jsonElement["Surname"] as? String,
-                let displayPicture = jsonElement["StudentPicture"] as? String
+            let displayPicture = jsonElement["StudentPicture"] as? String,
+            let dateOfBirth = jsonElement["DateofBirth"] as? String
       //   let dateOfBirth = jsonElement["DateofBirth"] as? Date
         //    let mother = jsonElement["Mother"] as? String,
         //    let father = jsonElement["Father"] as? String,
@@ -69,6 +70,7 @@ class HomeModel: NSObject, URLSessionDelegate {
                 student.firstName = firstName
                 student.surname = surname
                 student.displayPicture = displayPicture
+                student.dateOfBirth = dateOfBirth
          //       student.dateOfBirth = dateOfBirth
           //      student.mother  = mother
           //      student.father = father

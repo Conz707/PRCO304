@@ -19,6 +19,7 @@ class CreateStudentViewController: UIViewController,  UINavigationControllerDele
     @IBOutlet var datePicker: UIDatePicker!
     @IBOutlet var txtSurname: UITextField!
     @IBOutlet var txtFirstName: UITextField!
+    var StudentID = 0
     var image = #imageLiteral(resourceName: "placeholder.png")
 
     override func viewDidLoad() {
@@ -59,30 +60,51 @@ class CreateStudentViewController: UIViewController,  UINavigationControllerDele
         self.dismiss(animated: true, completion: nil)
         
     }
+
+    func getMaxStudentID(completion: @escaping (_ success: Bool) -> ()){
+        var success = true
+        
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetMaxStudentID.php")!)
+        request.httpMethod = "GET"
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                print("error=\(error)")
+                success = false
+                return
+            }
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(response)")
+            }
+            var responseString = String(data: data, encoding: .utf8)!
+            print("responseString = \(responseString)")
+            self.StudentID = Int(responseString)! + 1
+            print("student id is: \(self.StudentID)")
+            if(self.StudentID == 0){
+                success = false
+            }
+            DispatchQueue.main.async{
+                completion(success)
+            }
+        }
+        task.resume()
+        print(success)
+    }
+    
     
     @IBAction func finalizeCreation(_ sender: Any) {
-    
-        let firstName = txtFirstName.text
-        let surname = txtSurname.text
-        let dateOfBirth = "2018-03-26"//datePicker.date
-        let mother = txtMother.text
-        let father = txtFather.text
-        let guardian = txtGuardian.text
         
-        /* var mother = "null"
-        if (txtMother.text != ""){
-            mother = txtMother.text!
-        }
-        var father = "null"
-        if (txtFather.text != ""){
-            father = txtFather.text!
-        }
-        var guardian = "null"
-        if (txtGuardian.text != "") {
-            guardian = txtGuardian.text!
-        }*/
-        let keyPerson = txtKeyPerson.text
-        var studentPicture = "https://shod-verses.000webhostapp.com/students/\((firstName!) + (surname!))/DisplayPicture/.jpg"
+        DispatchQueue.main.async {
+            self.getMaxStudentID(completion: { success in
+            let firstName = self.txtFirstName.text
+            let surname = self.txtSurname.text
+            let dateOfBirth = self.datePicker.date
+            let mother = self.txtMother.text
+            let father = self.txtFather.text
+            let guardian = self.txtGuardian.text
+
+            let keyPerson = self.txtKeyPerson.text
+            var studentPicture = "https://shod-verses.000webhostapp.com/students/\((self.StudentID))/DisplayPictures/\((firstName!) + (surname!)).jpg"
         
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/CreateStudent.php")!)
         
@@ -108,7 +130,9 @@ class CreateStudentViewController: UIViewController,  UINavigationControllerDele
             
         }
         task.resume()
-        upload(image: imgStudent.image!, studentFirstName: firstName!, studentSurname: surname!)
+            self.upload(image: self.imgStudent.image!, studentFirstName: firstName!, studentSurname: surname!)
+            })
+        }
     }
     
     
@@ -120,7 +144,7 @@ class CreateStudentViewController: UIViewController,  UINavigationControllerDele
         }
         
         
-        let parameters = ["name": "\((studentFirstName) + (studentSurname))"]
+        let parameters = ["studentID": "\(StudentID)"]
         print(parameters)
         
         Alamofire.upload(multipartFormData: { multipartFormData in
