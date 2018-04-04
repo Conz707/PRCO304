@@ -26,7 +26,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nursery System/Students Pages/StudentDetailsViewController.swift"
-            timestampString = "544477249.407943"
+            timestampString = "544559596.723105"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "StudentDetailsViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Nursery System/Students Pages/StudentDetailsViewController.swift"
+            timestampString = "544559596.723176"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "131"
@@ -42,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nursery System/Students Pages/StudentDetailsViewController.swift"
-            timestampString = "544477249.40825"
+            timestampString = "544559596.723233"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
             landmarkName = "StudentDetailsViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -58,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nursery System/Students Pages/StudentDetailsViewController.swift"
-            timestampString = "544477249.4084409"
+            timestampString = "544559596.72329"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
+            startingLineNumber = "239"
+            endingLineNumber = "239"
             landmarkName = "StudentDetailsViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -73,14 +89,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Nursery System/Students Pages/StudentDetailsViewController.swift"
-            timestampString = "544477249.408626"
+            filePath = "Nursery System/Students Pages/HomeModel.swift"
+            timestampString = "544559596.723346"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
-            landmarkName = "StudentDetailsViewController"
-            landmarkType = "3">
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "parseJSON(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

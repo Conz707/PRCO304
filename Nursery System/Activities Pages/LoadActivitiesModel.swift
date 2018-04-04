@@ -57,6 +57,7 @@ class LoadActivitiesModel: NSObject, URLSessionDelegate {
                 let studentID = jsonElement["S_ID"] as? String,
                 let activity = jsonElement["Activity"] as? String,
                 let observation = jsonElement["Observation"] as? String,
+                let activityDate = jsonElement["Date"] as? String,
                 let activityPicture = jsonElement["ActivityPicture"] as? String
                 
             {
@@ -64,6 +65,7 @@ class LoadActivitiesModel: NSObject, URLSessionDelegate {
                 activities.studentID = studentID
                 activities.activity = activity
                 activities.observation = observation
+                activities.activityDate = activityDate
                 activities.activityPicture = activityPicture
             }
             

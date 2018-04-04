@@ -17,18 +17,21 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
     @IBOutlet var txtStudentActivity: UITextField!
     @IBOutlet var lblStudentName: UILabel!
     @IBOutlet var imgActivity: UIImageView!
-    var selectedStudent : StudentsModel = StudentsModel()
+    var selectedStudent : StudentsModel = StudentsModel()   //WHY???
     var image = #imageLiteral(resourceName: "placeholder.png")
 
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let minDate = Calendar.current.date(byAdding: .month, value: -18, to: Date())
+        dateActivity.minimumDate = minDate // 18Months
+        dateActivity.maximumDate = Date() //todays date //this datepicker kinda sucks, try to fix
+        
         lblStudentName.text = selectedStudent.firstName! + " " + selectedStudent.surname!
-
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
   
-        
         imgActivity.isUserInteractionEnabled = true
         imgActivity.addGestureRecognizer(tapGestureRecognizer)
         
@@ -84,39 +87,55 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
 
     
     @IBAction func btnSaveActivity(_ sender: Any) {
-        let activity = txtStudentActivity.text
-        let observation = txtStudentObservation.text
-        let date = dateActivity.date
-        let S_ID = selectedStudent.studentID!
-        let activityPicture = "https://shod-verses.000webhostapp.com/students/\((selectedStudent.studentID!))/ActivityPictures/\(activity!).jpg"
-        
-        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/SaveActivity.php")!)
-      
-        request.httpMethod = "POST"
        
-        let postString = ("S_ID=\(S_ID)&Activity=\(activity!)&Observation=\(observation!)&Date=\(date)&ActivityPicture=\(activityPicture)")
-       
-        print(postString)
+        let alert = UIAlertController(title: "Create this Activity?", message: nil, preferredStyle: .actionSheet)
         
-        request.httpBody = postString.data(using: .utf8)
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {                                                 // check for fundamental networking error
-                print("error=\(error)")
-                return
-            }
+        alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { _ in
+        
+            let activity = self.txtStudentActivity.text
+            let observation = self.txtStudentObservation.text
+            let date = self.dateActivity.date
+            let S_ID = self.selectedStudent.studentID!
+            let activityPicture = "https://shod-verses.000webhostapp.com/students/\((self.selectedStudent.studentID!))/ActivityPictures/\(activity!).jpg"
             
-            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(response)")
+            var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/SaveActivity.php")!)
+            
+            request.httpMethod = "POST"
+            
+            let postString = ("S_ID=\(S_ID)&Activity=\(activity!)&Observation=\(observation!)&Date=\(date)&ActivityPicture=\(activityPicture)")
+            
+            print(postString)
+            
+            request.httpBody = postString.data(using: .utf8)
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                    print("error=\(error)")
+                    return
+                }
+                
+                if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+                    print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                    print("response = \(response)")
+                    
+                }
+                
+                let responseString = String(data: data, encoding: .utf8)!
+                print("responseString = \(responseString)")
                 
             }
-            
-            let responseString = String(data: data, encoding: .utf8)!
-            print("responseString = \(responseString)")
-
+            task.resume()
+            self.upload(image: self.imgActivity.image!, activity2: activity!)
+            self.performSegue(withIdentifier: "returnSegue", sender: self)
+        }))
+        
+        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+        
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.sourceView = self.view
+            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+            popoverController.permittedArrowDirections = []
         }
-        task.resume()
-        upload(image: imgActivity.image!, activity2: activity!)
+       
         
     }
     

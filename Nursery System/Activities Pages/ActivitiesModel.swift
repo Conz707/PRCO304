@@ -17,6 +17,7 @@ class ActivitiesModel: NSObject {
         var studentID: String?
         var activity: String?
         var observation: String?
+    var activityDate: String?
     var activityPicture: String?
 
     
@@ -28,19 +29,20 @@ class ActivitiesModel: NSObject {
         }
     
         
-    init(activityID: String, studentID: String, activity: String, observation: String, activityPicture: String)
+    init(activityID: String, studentID: String, activity: String, observation: String, activityDate: String, activityPicture: String)
         {
             self.activityID = activityID
             self.studentID = studentID
             self.activity = activity
             self.observation = observation
+            self.activityDate = activityDate
             self.activityPicture = activityPicture
         }
         
         //print object current state
         
         override var description: String {
-            return "Activity: \(activity)"
+            return "Activity: \(activity) studentID \(studentID) observation \(observation)  date \(activityDate)  activityPicture \(activityPicture) "
         }
     
     

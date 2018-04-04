@@ -15,6 +15,7 @@ protocol HomeModelProtocol: class {
 class HomeModel: NSObject, URLSessionDelegate {
     
     //properties
+    var mother: String?
     weak var delegate: HomeModelProtocol!
     
     let urlPath: String = "https://shod-verses.000webhostapp.com/AgeGroupA.php"
@@ -58,27 +59,38 @@ class HomeModel: NSObject, URLSessionDelegate {
             let surname = jsonElement["Surname"] as? String,
             let displayPicture = jsonElement["StudentPicture"] as? String,
             let dateOfBirth = jsonElement["DateofBirth"] as? String
-      //   let dateOfBirth = jsonElement["DateofBirth"] as? Date
-        //    let mother = jsonElement["Mother"] as? String,
-        //    let father = jsonElement["Father"] as? String,
-        //    let guardian = jsonElement["Guardian"] as? String,
-        //    let keyPerson = jsonElement["KeyPerson"] as? String
             
-                
             {
                 student.studentID = studentID
                 student.firstName = firstName
                 student.surname = surname
                 student.displayPicture = displayPicture
                 student.dateOfBirth = dateOfBirth
-         //       student.dateOfBirth = dateOfBirth
-          //      student.mother  = mother
-          //      student.father = father
-          //      student.guardian = guardian
-          //      student.keyPerson = keyPerson
-                
-
             }
+           
+            if let mother = jsonElement["Mother"] as? String {  //these elements might be returned nil, changed to empty string, probably a better method - ask nick? (NIL COALESCING OPERATORS??)
+                student.mother = mother
+            } else {
+                student.mother = ""
+            }
+            if let father = jsonElement["Father"] as? String
+            {
+                student.father = father
+            } else {
+                student.father = ""
+            }
+            if let guardian = jsonElement["Guardian"] as? String
+            {
+                student.guardian = guardian
+            } else {
+                student.guardian = ""
+            }
+            
+            if let keyPerson = jsonElement["KeyPerson"] as? String
+            {
+                student.keyPerson = keyPerson
+            }
+            
             studentArr.add(student)
               print("trying to print student")
             print(student)
