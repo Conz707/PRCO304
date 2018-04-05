@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		18C0E6793DFDD5B321190444 /* Pods_Nursery_System.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D1DE7FD35F63B0B3AA582F7 /* Pods_Nursery_System.framework */; };
+		9C66FB94207678220070E25F /* AccountDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C66FB93207678220070E25F /* AccountDetailsViewController.swift */; };
+		9C66FB9620767C9A0070E25F /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C66FB9520767C9A0070E25F /* UserModel.swift */; };
+		9C66FB9820767CB50070E25F /* UserHomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C66FB9720767CB50070E25F /* UserHomeModel.swift */; };
 		9C722F7D203F3EF100EB1805 /* TeacherLandingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C722F7C203F3EF100EB1805 /* TeacherLandingPageViewController.swift */; };
 		9C7AD8062062B3D700623FDE /* ParentLandingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7AD8052062B3D700623FDE /* ParentLandingPageViewController.swift */; };
 		9C7AD80D2062C35700623FDE /* ViewChildrenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7AD80C2062C35700623FDE /* ViewChildrenModel.swift */; };
@@ -63,6 +66,9 @@
 		43A146C69A35D45273679D21 /* Pods-Nursery System.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nursery System.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Nursery System/Pods-Nursery System.debug.xcconfig"; sourceTree = "<group>"; };
 		6BFF698320EED9F5B6E5C028 /* Pods-Nursery SystemTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nursery SystemTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nursery SystemTests/Pods-Nursery SystemTests.release.xcconfig"; sourceTree = "<group>"; };
 		72CDE4703A3C0AC4EC04935F /* Pods-Nursery SystemUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nursery SystemUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nursery SystemUITests/Pods-Nursery SystemUITests.release.xcconfig"; sourceTree = "<group>"; };
+		9C66FB93207678220070E25F /* AccountDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsViewController.swift; sourceTree = "<group>"; };
+		9C66FB9520767C9A0070E25F /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		9C66FB9720767CB50070E25F /* UserHomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHomeModel.swift; sourceTree = "<group>"; };
 		9C722F7C203F3EF100EB1805 /* TeacherLandingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherLandingPageViewController.swift; sourceTree = "<group>"; };
 		9C7AD8052062B3D700623FDE /* ParentLandingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentLandingPageViewController.swift; sourceTree = "<group>"; };
 		9C7AD80C2062C35700623FDE /* ViewChildrenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewChildrenModel.swift; sourceTree = "<group>"; };
@@ -162,6 +168,8 @@
 			isa = PBXGroup;
 			children = (
 				9C8A23D4203B3259008C4D10 /* ViewController.swift */,
+				9C66FB9520767C9A0070E25F /* UserModel.swift */,
+				9C66FB9720767CB50070E25F /* UserHomeModel.swift */,
 			);
 			path = "Login Page";
 			sourceTree = "<group>";
@@ -233,6 +241,7 @@
 				9C8A23DE203B3259008C4D10 /* Info.plist */,
 				9CEF4EC82056F3AD001A6C1B /* ProgressReport1ViewController.swift */,
 				9CA199822051A2AB00E4B617 /* LiteracyViewController.swift */,
+				9C66FB93207678220070E25F /* AccountDetailsViewController.swift */,
 			);
 			path = "Nursery System";
 			sourceTree = "<group>";
@@ -594,12 +603,15 @@
 				9CC4418D20603365002E9456 /* CreateActivityViewController.swift in Sources */,
 				9C7AD8062062B3D700623FDE /* ParentLandingPageViewController.swift in Sources */,
 				9CC646772046F641000A3548 /* HomeModel.swift in Sources */,
+				9C66FB9620767C9A0070E25F /* UserModel.swift in Sources */,
 				9C8A23D5203B3259008C4D10 /* ViewController.swift in Sources */,
 				9C7AD80D2062C35700623FDE /* ViewChildrenModel.swift in Sources */,
+				9C66FB9820767CB50070E25F /* UserHomeModel.swift in Sources */,
 				9CEF4EC92056F3AD001A6C1B /* ProgressReport1ViewController.swift in Sources */,
 				9CB9103120693EC300294C9B /* CreateStudentViewController.swift in Sources */,
 				9CC3AC29204EEB52003B5359 /* StudentDetailsViewController.swift in Sources */,
 				9CCE281A205997C0003FBEDA /* LoadActivitiesModel.swift in Sources */,
+				9C66FB94207678220070E25F /* AccountDetailsViewController.swift in Sources */,
 				9CC6467F20471532000A3548 /* AgeGroupCViewController.swift in Sources */,
 				9CB9103320693ECD00294C9B /* CreateUserViewController.swift in Sources */,
 				9CC6467D20471527000A3548 /* AgeGroupBViewController.swift in Sources */,

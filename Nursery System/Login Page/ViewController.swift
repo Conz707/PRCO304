@@ -64,6 +64,9 @@ class ViewController: UIViewController{
             var responseString = String(data: data, encoding: .utf8)!
             print("responseString = \(responseString)")
             
+            let accessToken = emailVar!
+            
+            
             self.roleString = responseString
                 if (self.roleString == "Teacher"){
                     print("roleString  Teacher")
@@ -77,6 +80,7 @@ class ViewController: UIViewController{
                 } else{
                     print("roleString Failure")
                 }
+            
             
             DispatchQueue.main.async {
                    completion(success)

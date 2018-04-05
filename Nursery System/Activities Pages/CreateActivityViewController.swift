@@ -12,13 +12,16 @@ import Alamofire
 
 class CreateActivityViewController: UIViewController, UINavigationControllerDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, URLSessionTaskDelegate, URLSessionDelegate, URLSessionDataDelegate {
     
+    @IBOutlet var progressIndicatorUpload: UIProgressView!
     @IBOutlet var dateActivity: UIDatePicker!
     @IBOutlet var txtStudentObservation: UITextView!
     @IBOutlet var txtStudentActivity: UITextField!
     @IBOutlet var lblStudentName: UILabel!
     @IBOutlet var imgActivity: UIImageView!
+    var responseSuccess = false
     var selectedStudent : StudentsModel = StudentsModel()   //WHY???
     var image = #imageLiteral(resourceName: "placeholder.png")
+    var NewActivityID = 0
 
     
     
@@ -38,35 +41,40 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+            progressIndicatorUpload.isHidden = true
+    }
+    
+    
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer){
         let tappedImage = tapGestureRecognizer.view as! UIImageView
         print("image tapped")
         let image = UIImagePickerController()  //handles stuff that lets user interact with image
         image.delegate = self
 
-        let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
+        let alertImageTapped = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
         
-        alert.addAction(UIAlertAction(title: "Take Photo", style: .default, handler: { _ in
+        alertImageTapped.addAction(UIAlertAction(title: "Take Photo", style: .default, handler: { _ in
             image.sourceType = UIImagePickerControllerSourceType.camera
             image.allowsEditing = false
             self.present(image, animated: true)
         }))
         
-        alert.addAction(UIAlertAction(title: "Choose from Photo Library", style: .default, handler: { _ in
+        alertImageTapped.addAction(UIAlertAction(title: "Choose from Photo Library", style: .default, handler: { _ in
             image.sourceType = UIImagePickerControllerSourceType.photoLibrary  //pick image from ipad camera roll
             image.allowsEditing = true //hmm
             self.present(image, animated: true, completion: nil)
         }))
         
-        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+        alertImageTapped.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
         
-        if let popoverController = alert.popoverPresentationController {
+        if let popoverController = alertImageTapped.popoverPresentationController {
             popoverController.sourceView = self.view
             popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
             popoverController.permittedArrowDirections = []
         }
         
-        self.present(alert, animated: true, completion: nil)
+        self.present(alertImageTapped, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -88,15 +96,18 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
     
     @IBAction func btnSaveActivity(_ sender: Any) {
        
-        let alert = UIAlertController(title: "Create this Activity?", message: nil, preferredStyle: .actionSheet)
+        DispatchQueue.main.async {
+            self.getMaxActivityID { success in
         
-        alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { _ in
+        let alertSave = UIAlertController(title: "Create this Activity?", message: nil, preferredStyle: .actionSheet)
+        
+        alertSave.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { _ in
         
             let activity = self.txtStudentActivity.text
             let observation = self.txtStudentObservation.text
             let date = self.dateActivity.date
             let S_ID = self.selectedStudent.studentID!
-            let activityPicture = "https://shod-verses.000webhostapp.com/students/\((self.selectedStudent.studentID!))/ActivityPictures/\(activity!).jpg"
+            let activityPicture = "https://shod-verses.000webhostapp.com/students/\((self.selectedStudent.studentID!))/ActivityPictures/\(self.NewActivityID).jpg"
             
             var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/SaveActivity.php")!)
             
@@ -110,6 +121,7 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 guard let data = data, error == nil else {                                                 // check for fundamental networking error
                     print("error=\(error)")
+        
                     return
                 }
                 
@@ -121,37 +133,73 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
                 
                 let responseString = String(data: data, encoding: .utf8)!
                 print("responseString = \(responseString)")
-                
+                if(responseString == "Record inserted successfully"){
+                    self.responseSuccess = true
+                    
+                }
+        
             }
             task.resume()
-            self.upload(image: self.imgActivity.image!, activity2: activity!)
-            self.performSegue(withIdentifier: "returnSegue", sender: self)
+            self.progressIndicatorUpload.isHidden = false
+            self.upload(image: self.imgActivity.image!)
         }))
         
-        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+        alertSave.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
         
-        if let popoverController = alert.popoverPresentationController {
+        if let popoverController = alertSave.popoverPresentationController {
             popoverController.sourceView = self.view
             popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
             popoverController.permittedArrowDirections = []
         }
-       
         
+        self.present(alertSave, animated: true, completion: nil)
+            }
+        }
     }
     
+    func getMaxActivityID(completion: @escaping (_ success: Bool) -> ()){
+        //Get max activity id +1
+        var success = true
+        
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetMaxActivityID.php")!)
+        request.httpMethod = "GET"
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                print("error=\(error)")
+                success = false
+                return
+            }
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(response)")
+            }
+            var responseString = String(data: data, encoding: .utf8)!
+            print("responseString = \(responseString)")
+            self.NewActivityID = Int(responseString)! + 1
+            print("student id is: \(self.NewActivityID)")
+            if(self.NewActivityID == 0){
+                success = false
+            }
+            DispatchQueue.main.async{
+                completion(success)
+            }
+        }
+        task.resume()
+        print(success)
     
-    func upload(image: UIImage, activity2: String){
+    }
+    
+    func upload(image: UIImage){
         guard let imageData = UIImageJPEGRepresentation(imgActivity.image!, 0.5) else {
             print("could not get jpeg of image")
             return
         }
-        
-        
-        let parameters = ["studentID": "\(selectedStudent.studentID!)"]
+
+            let parameters = ["studentID": "\(self.selectedStudent.studentID!)"]
         print(parameters)
         
         Alamofire.upload(multipartFormData: { multipartFormData in
-            multipartFormData.append(imageData, withName: "file",fileName: "\((activity2) + ".jpg")", mimeType: "image/jpg")
+            multipartFormData.append(imageData, withName: "file",fileName: "\((String(self.NewActivityID)) + ".jpg")", mimeType: "image/jpg")
             for (key, value) in parameters {
                 multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
             }
@@ -163,6 +211,25 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
                 
                 upload.uploadProgress(closure: { (progress) in
                     print("Upload Progress: \(progress.fractionCompleted)")
+                    self.progressIndicatorUpload.setProgress(Float(progress.fractionCompleted), animated: true)
+                    DispatchQueue.main.async {
+                        if(progress.fractionCompleted == 1.0){
+                            let alertUploadSuccess = UIAlertController(title: "Successfully created activity", message: nil, preferredStyle: .actionSheet)
+                            
+                            alertUploadSuccess.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { _ in
+                                self.navigationController?.popViewController(animated: true)
+                            }))
+                            
+                            if let popoverController = alertUploadSuccess.popoverPresentationController {
+                                popoverController.sourceView = self.view
+                                popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+                                popoverController.permittedArrowDirections = []
+                            }
+                            
+                            self.present(alertUploadSuccess, animated: true, completion: nil)
+                        }
+                    }
+
                 })
                 
                 upload.responseString { response in
@@ -171,6 +238,8 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
                 
             case .failure(let encodingError):
                 print(encodingError)
+                
+                
             }
         }
     }

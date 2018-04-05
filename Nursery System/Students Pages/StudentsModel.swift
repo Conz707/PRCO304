@@ -21,19 +21,24 @@ class StudentsModel: NSObject {
     var father: String?
     var guardian: String?
     var keyPerson: String?
- 
-        //do age variable var age: Age??????
         
         //empty constructor
         override init()
         {
             
         }
+
         
-        
-        //construct with first name and surname parameters
-        
-    init(studentID: String, firstName: String, surname: String, dateOfBirth: String, mother: String, father: String, guardian: String, keyPerson: String,  displayPicture: String)
+    init(
+         studentID: String,
+         firstName: String,
+         surname: String,
+         dateOfBirth: String,
+         mother: String,
+         father: String,
+         guardian: String,
+         keyPerson: String,
+         displayPicture: String)
         {
             self.studentID = studentID
             self.firstName = firstName

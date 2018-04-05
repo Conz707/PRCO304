@@ -44,7 +44,7 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         }
         
         activityIndicatorTableLoading.hidesWhenStopped = true
-        activityIndicatorTableLoading.startAnimating()
+
 
         
         let URL_IMAGE = URL(string: (selectedStudent?.displayPicture)!)
@@ -102,9 +102,7 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
     
     override func viewDidAppear(_ animated: Bool) {
         
-        
-        print(responseArr)
-  //      responseArr.removeAll()
+        activityIndicatorTableLoading.startAnimating()
         navigationController?.navigationBar.isHidden = true
         self.tblActivities.dataSource = self
         self.tblActivities.delegate = self

@@ -15,7 +15,6 @@ protocol HomeModelProtocol: class {
 class HomeModel: NSObject, URLSessionDelegate {
     
     //properties
-    var mother: String?
     weak var delegate: HomeModelProtocol!
     
     let urlPath: String = "https://shod-verses.000webhostapp.com/AgeGroupA.php"
