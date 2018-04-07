@@ -8,27 +8,48 @@
 
 import UIKit
 
-class UserHomeModel: NSObject {
+protocol LoadUserModelProtocol: class {
+    func itemsDownloaded(items: NSArray)
+}
+
+class UserHomeModel: NSObject, URLSessionDelegate {
     //properties
-    weak var delegate: HomeModelProtocol!
+    weak var delegate: LoadUserModelProtocol!
+    var emailLogin = ""
+    var passwordLogin = ""
     
-    let urlPath: String = "https://shod-verses.000webhostapp.com/NewLogin.php"
     
     func downloadItems() {
-        let url: URL = URL(string: urlPath)!
-        let defaultSession = Foundation.URLSession(configuration: URLSessionConfiguration.default)
+    
+    var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/NewLogin.php")!)
+    request.httpMethod = "POST"
+    
+
+    
+        let postString = ("email=\(emailLogin)&password=\(passwordLogin)")
+    print(postString)
         
-        let task = defaultSession.dataTask(with: url) { (data, response, error) in
-            
-            if error != nil {
-                print("Failed to download data")
-            } else {
-                print("Data downloaded")
-                self.parseJSON(data!)
-            }
+    request.httpBody = postString.data(using: .utf8)
+    let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        guard let data = data, error == nil else {                                                 // check for fundamental networking error
+            print("error=\(error)")
+            return
         }
-        task.resume()
+        
+        if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+            print("statusCode should be 200, but is \(httpStatus.statusCode)")
+            print("response = \(response)")
+            
+        }
+        
+        var responseString = String(data: data, encoding: .utf8)!
+        print("responseString for table loading etc etc= \(responseString)")
+        self.parseJSON(data)
+        
     }
+    task.resume()
+    
+}
     
     func parseJSON(_ data:Data) {
         var jsonResult = NSArray()

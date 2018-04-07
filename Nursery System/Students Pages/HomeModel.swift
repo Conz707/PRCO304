@@ -29,6 +29,7 @@ class HomeModel: NSObject, URLSessionDelegate {
                 print("Failed to download data")
             } else {
                 print("Data downloaded")
+                print("CAN I PRINT THIS?")
                 self.parseJSON(data!)
             }
         }

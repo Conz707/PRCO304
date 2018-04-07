@@ -10,7 +10,7 @@ import UIKit
 
 
 class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, LoadActivitiesModelProtocol {
-
+    
     var selectedStudent : StudentsModel?
     var feedItems: NSArray = NSArray()
     var responseMother = ""
@@ -43,9 +43,7 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
             })
         }
         
-        activityIndicatorTableLoading.hidesWhenStopped = true
-
-
+        activityIndicatorTableLoading.hidesWhenStopped = true 
         
         let URL_IMAGE = URL(string: (selectedStudent?.displayPicture)!)
         let session = URLSession(configuration: .default)
@@ -102,21 +100,20 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
     
     override func viewDidAppear(_ animated: Bool) {
         
-        activityIndicatorTableLoading.startAnimating()
-        navigationController?.navigationBar.isHidden = true
-        self.tblActivities.dataSource = self
-        self.tblActivities.delegate = self
-  
-        
-        let loadActivitiesModel = LoadActivitiesModel()
-        loadActivitiesModel.downloadItems()
-        loadActivitiesModel.delegate = self
+                activityIndicatorTableLoading.startAnimating()
+                navigationController?.navigationBar.isHidden = true
+                self.tblActivities.dataSource = self
+                self.tblActivities.delegate = self
+                let loadActivitiesModel = LoadActivitiesModel()
+                loadActivitiesModel.selectedStudent = selectedStudent
+                loadActivitiesModel.downloadItems()
+                loadActivitiesModel.delegate = self
+
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
     
         func itemsDownloaded(items: NSArray){
             feedItems = items
@@ -178,10 +175,6 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
             return myCell
     }
     
-
-    
-
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {     //whenever user taps row
 
             //set selected activity to var
@@ -225,7 +218,7 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
 
             var responseString = String(data: data, encoding: .utf8)!
             self.responseArr = (responseString.split(separator: ";") as NSArray) as! [String]
-            print("responseString = \(responseString)")
+            print("responseString <br /> = \(responseString)")
           
             DispatchQueue.main.async{
                 completion(success)
@@ -244,7 +237,7 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         //set property to selected activity so when view loads, it accesses the properties of feeditem obj
             
             viewActivityVC.selectedActivity = selectedActivity
-        viewActivityVC.selectedStudent = selectedStudent!
+            viewActivityVC.selectedStudent = selectedStudent!
         } else if (segue.identifier == "createActivity"){
             //get reference to destination view controller
             
@@ -255,8 +248,5 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
             
         }
     }
-    
-    
-    
     
 }

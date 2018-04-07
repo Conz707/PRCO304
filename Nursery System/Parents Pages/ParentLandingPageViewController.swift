@@ -32,7 +32,6 @@ class ParentLandingPageViewController: UIViewController, UITableViewDelegate, UI
         let item: StudentsModel = feedItems[indexPath.row] as! StudentsModel
         
         let URL_IMAGE = URL(string: (item.displayPicture)!)
-        print(URL_IMAGE)
         let session = URLSession(configuration: .default)
         
         //create a dataTask
@@ -50,8 +49,6 @@ class ParentLandingPageViewController: UIViewController, UITableViewDelegate, UI
                         
                         //get image
                         let image = UIImage(data: imageData)
-                        print("image", image)
-                        print(URL_IMAGE)
                         //display the image
                         DispatchQueue.main.async{
                         myCell.textLabel!.text = item.firstName! + " " + item.surname!

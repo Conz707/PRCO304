@@ -58,7 +58,6 @@ class AgeGroupAViewController: UIViewController, UITableViewDataSource, UITableV
         //get references to labels of cells
         
         let URL_IMAGE = URL(string: (item.displayPicture)!)
-        print(URL_IMAGE)
         let session = URLSession(configuration: .default)
         
         //create a dataTask
@@ -76,8 +75,6 @@ class AgeGroupAViewController: UIViewController, UITableViewDataSource, UITableV
                         
                         //get image
                         let image = UIImage(data: imageData)
-                        print("image", image)
-                        print(URL_IMAGE)
                         //display the image
                         DispatchQueue.main.async{
                             myCell.textLabel!.text = item.firstName! + " " + item.surname!
@@ -110,39 +107,7 @@ class AgeGroupAViewController: UIViewController, UITableViewDataSource, UITableV
         studentVC.selectedStudent = selectedStudent
         
         print("finding the list of activities")
-        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/LoadActivities.php")!)
-        
-        request.httpMethod = "POST"
-        
-        let postString = ("a=257")
-        
-        request.httpBody = postString.data(using: .utf8)
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {                                                 // check for fundamental networking error
-                print("error=\(error)")
-                return
-            }
-            
-            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(response)")
-                
-            }
-            
-            var responseString = String(data: data, encoding: .utf8)!
-            print("responseString = \(responseString)")
-            print("doing this shit")
-            print("doing this shit")
-            print("doing this shit")
-            print("doing this shit")
-            print("doing this shit")
-            
-        }
-        task.resume()
-        print("found them")
-        
-        
-        
+
         
     }
     

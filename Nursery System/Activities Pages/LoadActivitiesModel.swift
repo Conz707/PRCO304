@@ -16,23 +16,40 @@ class LoadActivitiesModel: NSObject, URLSessionDelegate {
 
     //properties
     weak var delegate: LoadActivitiesModelProtocol!
+    var selectedStudent : StudentsModel?
+  //  let urlPath: String = "https://shod-verses.000webhostapp.com/LoadActivities.php?"
     
-    let urlPath: String = "https://shod-verses.000webhostapp.com/LoadActivities.php"
+
     
     func downloadItems() {
-        let url: URL = URL(string: urlPath)!
-        let defaultSession = Foundation.URLSession(configuration: URLSessionConfiguration.default)
         
-        let task = defaultSession.dataTask(with: url) { (data, response, error) in
-            
-            if error != nil {
-                print("Failed to download data")
-            } else {
-                print("Data downloaded")
-                self.parseJSON(data!)
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/LoadActivities.php")!)
+         request.httpMethod = "POST"
+        
+      let S_ID = selectedStudent?.studentID
+        
+        let postString = ("Student_ID=\(S_ID!)")
+        print(postString)
+        request.httpBody = postString.data(using: .utf8)
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                print("error=\(error)")
+                return
             }
+            
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(response)")
+                
+            }
+            
+            var responseString = String(data: data, encoding: .utf8)!
+            print("responseString for table loading etc etc= \(responseString)")
+            self.parseJSON(data)
+            
         }
         task.resume()
+    
     }
 
     func parseJSON(_ data:Data) {
