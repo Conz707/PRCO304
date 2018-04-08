@@ -11,10 +11,12 @@ import UIKit
 
 class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, LoadActivitiesModelProtocol {
     
+    let defaultValues = UserDefaults.standard
     var selectedStudent : StudentsModel?
     var feedItems: NSArray = NSArray()
     var responseMother = ""
     var responseArr: [String] = []
+    @IBOutlet var btnAddActivity: UIButton!
     
     @IBOutlet var tblImageView: UIImageView!
     @IBOutlet var activityIndicatorTableLoading: UIActivityIndicatorView!
@@ -99,6 +101,12 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
+        let checkUserRole = defaultValues.string(forKey: "UserRole")
+        print(checkUserRole)
+        if(checkUserRole! == "Parent"){ //only for parents -- manager and teacher should bth see it
+            btnAddActivity.isHidden = true
+        } else { btnAddActivity.isHidden = false }
         
                 activityIndicatorTableLoading.startAnimating()
                 navigationController?.navigationBar.isHidden = true

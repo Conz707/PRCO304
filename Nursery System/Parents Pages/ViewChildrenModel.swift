@@ -16,26 +16,36 @@ class ViewChildrenModel: NSObject, URLSessionDelegate {
     
     //properties
     weak var delegate: ViewChildrenModelProtocol!
+    var defaultValues = UserDefaults.standard
     
-    let urlPath: String = "https://shod-verses.000webhostapp.com/test123.php"
     
     func downloadItems() {
-        let url: URL = URL(string: urlPath)!
-        let defaultSession = Foundation.URLSession(configuration: URLSessionConfiguration.default)
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/test123.php")!)
+        request.httpMethod = "POST"
+        let UserEmail = self.defaultValues.string(forKey: "UserEmail")
         
-        let task = defaultSession.dataTask(with: url) { (data, response, error) in
-            
-            if error != nil {
-                print("Failed to download data")
-            } else {
-                print("Data downloaded")
-                print(data)
-                
-                self.parseJSON(data!)
+        let postString = ("email=\(UserEmail!)")
+        print(postString)
+        request.httpBody = postString.data(using: .utf8)
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                print("error=\(error)")
+                return
             }
+            
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(response)")
+                
+            }
+            
+            var responseString = String(data: data, encoding: .utf8)!
+            print("responseString for table loading etc etc= \(responseString)")
+            self.parseJSON(data)
+            
         }
         task.resume()
-    
+        
     }
     
     func parseJSON(_ data:Data) {
@@ -59,28 +69,38 @@ class ViewChildrenModel: NSObject, URLSessionDelegate {
             if let studentID = jsonElement["S_ID"] as? String,
                 let firstName = jsonElement["FirstName"] as? String,
                 let surname = jsonElement["Surname"] as? String,
-                let displayPicture = jsonElement["StudentPicture"] as? String
-                
-                //   let dateOfBirth = jsonElement["DateofBirth"] as? Date
-                //    let mother = jsonElement["Mother"] as? String,
-                //    let father = jsonElement["Father"] as? String,
-                //    let guardian = jsonElement["Guardian"] as? String,
-                //    let keyPerson = jsonElement["KeyPerson"] as? String
-                
+                let displayPicture = jsonElement["StudentPicture"] as? String,
+                let dateOfBirth = jsonElement["DateofBirth"] as? String
                 
             {
                 student.studentID = studentID
                 student.firstName = firstName
                 student.surname = surname
                 student.displayPicture = displayPicture
-                
-                //       student.dateOfBirth = dateOfBirth
-                //      student.mother  = mother
-                //      student.father = father
-                //      student.guardian = guardian
-                //      student.keyPerson = keyPerson
-                
-                
+                student.dateOfBirth = dateOfBirth
+            }
+            
+            if let mother = jsonElement["Mother"] as? String {  //these elements might be returned nil, changed to empty string, probably a better method - ask nick? (NIL COALESCING OPERATORS??)
+                student.mother = mother
+            } else {
+                student.mother = ""
+            }
+            if let father = jsonElement["Father"] as? String
+            {
+                student.father = father
+            } else {
+                student.father = ""
+            }
+            if let guardian = jsonElement["Guardian"] as? String
+            {
+                student.guardian = guardian
+            } else {
+                student.guardian = ""
+            }
+            
+            if let keyPerson = jsonElement["KeyPerson"] as? String
+            {
+                student.keyPerson = keyPerson
             }
             studentArr.add(student)
             print("trying to print student")

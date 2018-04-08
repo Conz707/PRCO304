@@ -11,6 +11,8 @@ import LBTAComponents
 
 class ParentLandingPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ViewChildrenModelProtocol {
     
+    let defaultValues = UserDefaults.standard
+    
     var feedItems: NSArray = NSArray()
     var selectedStudent : StudentsModel = StudentsModel()
     @IBOutlet var tblChildren: UITableView!

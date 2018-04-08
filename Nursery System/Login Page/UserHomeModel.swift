@@ -24,8 +24,6 @@ class UserHomeModel: NSObject, URLSessionDelegate {
     var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/NewLogin.php")!)
     request.httpMethod = "POST"
     
-
-    
         let postString = ("email=\(emailLogin)&password=\(passwordLogin)")
     print(postString)
         
@@ -79,10 +77,10 @@ class UserHomeModel: NSObject, URLSessionDelegate {
                 
             {
                 user.userID = userID
-                user.firstName = firstName
-                user.surname = surname
+              //  user.firstName = firstName
+            //    user.surname = surname
                 user.email = email
-                user.telephoneNumber = telephoneNumber
+           //     user.telephoneNumber = telephoneNumber
                 user.password = password
                 user.userType = userType
             }

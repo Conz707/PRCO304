@@ -9,10 +9,11 @@
 import UIKit
 
 class TeacherLandingPageViewController: UIViewController {
-
+let defaultValues = UserDefaults.standard
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let checkUserEmail = self.defaultValues.string(forKey: "UserEmail")
+        print("IS THIS SHIT WORKING? YEET \(checkUserEmail)")
         // Do any additional setup after loading the view.
     }
 

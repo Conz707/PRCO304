@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StudentsModel: NSObject {
+class StudentsModel: NSObject, Decodable {
 
         
         //properties

@@ -8,38 +8,35 @@
 
 import UIKit
 
-class UserModel: NSObject {
+class UserModel: Decodable {
     
     //properties
+    
     var userID: String?
-    var firstName: String?
-    var surname: String?
+   // var firstName: String?
+    //var surname: String?
     var email: String?
-    var telephoneNumber: String?
+    //var telephoneNumber: String?
     var password: String?
     var userType: String?
     
     //empty constructor
-    override init()
-    {
-        
-    }
 
-    init(
+ /*   init(
     userID: String,
-    firstName: String,
-    surname: String,
+   // firstName: String,
+   // surname: String,
     email: String,
-    telephoneNumber: String,
+   // telephoneNumber: String,
     password: String,
     userType: String
     )
     {
         self.userID = userID
-        self.firstName = firstName
-        self.surname = surname
+      //  self.firstName = firstName
+      //  self.surname = surname
         self.email = email
-        self.telephoneNumber = telephoneNumber
+     //   self.telephoneNumber = telephoneNumber
         self.password = password
         self.userType = userType
         
@@ -48,8 +45,5 @@ class UserModel: NSObject {
     
     //print object current state
     
-    override var description: String {
-return "\(email)\(password)\(userType)"
-    }
-    
+    */
 }

@@ -1061,7 +1061,7 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tuj-DR-Kby">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tuj-DR-Kby">
                                 <rect key="frame" x="287" y="946" width="195" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="Kw5-hT-PY4"/>
@@ -1121,6 +1121,7 @@
                     </view>
                     <connections>
                         <outlet property="activityIndicatorTableLoading" destination="K2i-N3-L5X" id="d5v-z1-Ybs"/>
+                        <outlet property="btnAddActivity" destination="Tuj-DR-Kby" id="0oV-Ip-V3E"/>
                         <outlet property="imgStudent" destination="MDb-cV-WDS" id="Og9-xg-dhr"/>
                         <outlet property="lblDateOfBirth" destination="AO6-5m-vbb" id="3pS-mc-f5N"/>
                         <outlet property="lblFather" destination="4NB-ad-xp6" id="kWV-Kr-fPf"/>
