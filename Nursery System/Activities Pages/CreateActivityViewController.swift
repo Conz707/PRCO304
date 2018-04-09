@@ -42,7 +42,8 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
     }
     
     override func viewDidAppear(_ animated: Bool) {
-            progressIndicatorUpload.isHidden = true
+            progressIndicatorUpload.isHidden = false
+            progressIndicatorUpload.setProgress(0, animated: true)
     }
     
     
@@ -103,17 +104,25 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
         
         alertSave.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { _ in
         
+            //for creating activity
             let activity = self.txtStudentActivity.text
             let observation = self.txtStudentObservation.text
             let date = self.dateActivity.date
             let S_ID = self.selectedStudent.studentID!
             let activityPicture = "https://shod-verses.000webhostapp.com/students/\((self.selectedStudent.studentID!))/ActivityPictures/\(self.NewActivityID).jpg"
             
+            //used for emailing parents/guardians
+            let student = (self.selectedStudent.firstName!) + " " + (self.selectedStudent.surname!)
+            let studentMother = self.selectedStudent.mother!
+            let studentFather = self.selectedStudent.father!
+            let studentGuardian = self.selectedStudent.guardian!
+            
+            
             var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/SaveActivity.php")!)
             
             request.httpMethod = "POST"
             
-            let postString = ("S_ID=\(S_ID)&Activity=\(activity!)&Observation=\(observation!)&Date=\(date)&ActivityPicture=\(activityPicture)")
+            let postString = ("S_ID=\(S_ID)&Activity=\(activity!)&Observation=\(observation!)&Date=\(date)&ActivityPicture=\(activityPicture)&SelectedStudent=\(student)&Mother=\(studentMother)&Father=\(studentFather)&Guardian=\(studentGuardian)")
             
             print(postString)
             

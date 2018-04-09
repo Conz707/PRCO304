@@ -102,6 +102,7 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
     
     override func viewDidAppear(_ animated: Bool) {
         
+        
         let checkUserRole = defaultValues.string(forKey: "UserRole")
         print(checkUserRole)
         if(checkUserRole! == "Parent"){ //only for parents -- manager and teacher should bth see it
