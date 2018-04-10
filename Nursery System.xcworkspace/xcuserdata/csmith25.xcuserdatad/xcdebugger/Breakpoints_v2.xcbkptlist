@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nursery System/Login Page/ViewController.swift"
-            timestampString = "544999605.092675"
+            timestampString = "545066798.538437"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "87"
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nursery System/Login Page/ViewController.swift"
-            timestampString = "544999605.093004"
+            timestampString = "545066798.538522"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "93"
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nursery System/Login Page/ViewController.swift"
-            timestampString = "544999605.0932209"
+            timestampString = "545066798.53857"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "102"
@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nursery System/Login Page/ViewController.swift"
-            timestampString = "544999605.09342"
+            timestampString = "545066798.53863"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "108"
@@ -122,7 +122,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nursery System/Login Page/ViewController.swift"
-            timestampString = "544999605.093662"
+            timestampString = "545066798.538669"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "112"
@@ -138,7 +138,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nursery System/Login Page/ViewController.swift"
-            timestampString = "544999605.093861"
+            timestampString = "545066798.538725"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "118"
@@ -154,7 +154,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nursery System/Login Page/ViewController.swift"
-            timestampString = "544999605.094057"
+            timestampString = "545066798.538761"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "43"
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nursery System/Students Pages/Goals/Y1GoalsViewController.swift"
-            timestampString = "544999605.094264"
+            timestampString = "545069529.7392401"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
             landmarkName = "viewDidAppear(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nursery System/Students Pages/Goals/Y1GoalsViewController.swift"
-            timestampString = "544999605.094502"
+            timestampString = "545069529.739301"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "204"
-            endingLineNumber = "204"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
             landmarkName = "updateGoals()"
             landmarkType = "7">
          </BreakpointContent>
@@ -202,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nursery System/Students Pages/Goals/Y1GoalsViewController.swift"
-            timestampString = "544999605.094707"
+            timestampString = "545069529.739338"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "221"
-            endingLineNumber = "221"
+            startingLineNumber = "222"
+            endingLineNumber = "222"
             landmarkName = "updateGoals()"
             landmarkType = "7">
          </BreakpointContent>
@@ -218,7 +218,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nursery System/Students Pages/Goals/LoadGoalsModel.swift"
-            timestampString = "544999605.094909"
+            timestampString = "545066798.538952"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "85"
@@ -234,11 +234,11 @@
                   moduleName = "Nursery System"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/csmith25/Desktop/NurserySystem/Nursery%20System/Students%20Pages/Goals/LoadGoalsModel.swift"
-                  timestampString = "544996693.754353"
+                  timestampString = "545065390.962133"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "84"
-                  endingLineNumber = "84"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
                   offsetFromSymbolStart = "7848">
                </Location>
                <Location
@@ -249,11 +249,11 @@
                   moduleName = "Nursery System"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/csmith25/Desktop/NurserySystem/Nursery%20System/Students%20Pages/Goals/LoadGoalsModel.swift"
-                  timestampString = "544996693.756008"
+                  timestampString = "545065390.963758"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "85"
-                  endingLineNumber = "85"
+                  startingLineNumber = "86"
+                  endingLineNumber = "86"
                   offsetFromSymbolStart = "32">
                </Location>
             </Locations>
@@ -266,13 +266,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nursery System/Students Pages/Goals/LoadGoalsModel.swift"
-            timestampString = "544999605.094954"
+            timestampString = "545066798.539248"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "44"
             endingLineNumber = "44"
-            landmarkName = "LoadGoalsModel"
-            landmarkType = "3">
+            landmarkName = "parseJSON(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -282,13 +282,91 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nursery System/Students Pages/Goals/LoadGoalsModel.swift"
-            timestampString = "544999605.094992"
+            timestampString = "545066798.539451"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "23"
             endingLineNumber = "23"
-            landmarkName = "LoadGoalsModel"
+            landmarkName = "downloadItems()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Nursery System/Students Pages/AllStudentsViewController.swift"
+            timestampString = "545066798.539642"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "StudentsViewController"
             landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Nursery_System.AllStudentsViewController.activityIndicatorTableLoading.getter : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.UIActivityIndicatorView&gt;"
+                  moduleName = "Nursery System"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/csmith25/Desktop/NurserySystem/Nursery%20System/Students%20Pages/AllStudentsViewController.swift"
+                  timestampString = "545065390.14767"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "104">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Nursery_System.AllStudentsViewController.activityIndicatorTableLoading.setter : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.UIActivityIndicatorView&gt;"
+                  moduleName = "Nursery System"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/csmith25/Desktop/NurserySystem/Nursery%20System/Students%20Pages/AllStudentsViewController.swift"
+                  timestampString = "545065390.149307"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "120">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Nursery_System.AllStudentsViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__ObjC.Bundle&gt;) -&gt; Nursery_System.AllStudentsViewController"
+                  moduleName = "Nursery System"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/csmith25/Desktop/NurserySystem/Nursery%20System/Students%20Pages/AllStudentsViewController.swift"
+                  timestampString = "545065390.150807"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "72">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Nursery_System.AllStudentsViewController.init(coder: __ObjC.NSCoder) -&gt; Swift.Optional&lt;Nursery_System.AllStudentsViewController&gt;"
+                  moduleName = "Nursery System"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/csmith25/Desktop/NurserySystem/Nursery%20System/Students%20Pages/AllStudentsViewController.swift"
+                  timestampString = "545065390.152979"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "52">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

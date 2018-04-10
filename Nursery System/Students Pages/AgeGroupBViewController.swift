@@ -31,7 +31,7 @@ class AgeGroupBViewController: UIViewController, UITableViewDataSource, UITableV
         self.tblAgeGroupB.delegate = self
         self.tblAgeGroupB.dataSource = self
         
-        let homeModel = HomeModelB()
+        let homeModel = AgeGroupBModel()
         homeModel.delegate = self
         homeModel.downloadItems()
         

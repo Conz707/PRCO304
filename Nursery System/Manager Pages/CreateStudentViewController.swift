@@ -94,6 +94,10 @@ class CreateStudentViewController: UIViewController,  UINavigationControllerDele
     
     @IBAction func finalizeCreation(_ sender: Any) {
         
+        if((txtMother.text?.isEmpty)! && (txtFather.text?.isEmpty)! && (txtGuardian.text?.isEmpty)!){
+            print("empty fields")
+        } else {
+        
         DispatchQueue.main.async {
             self.getMaxStudentID(completion: { success in
             let firstName = self.txtFirstName.text
@@ -102,6 +106,7 @@ class CreateStudentViewController: UIViewController,  UINavigationControllerDele
             let mother = self.txtMother.text
             let father = self.txtFather.text
             let guardian = self.txtGuardian.text
+                print(self.StudentID)
 
             let keyPerson = self.txtKeyPerson.text
             var studentPicture = "https://shod-verses.000webhostapp.com/students/\((self.StudentID))/DisplayPictures/\((firstName!) + (surname!)).jpg"
@@ -110,7 +115,7 @@ class CreateStudentViewController: UIViewController,  UINavigationControllerDele
         
         request.httpMethod = "POST"
         
-        let postString = "FirstName=\(firstName!)&Surname=\(surname!)&DateOfBirth=\(dateOfBirth)&Mother=\(mother!)&Father=\(father!)&Guardian=\(guardian!)&KeyPerson=\(keyPerson!)&StudentPicture=\(studentPicture)"
+        let postString = "FirstName=\(firstName!)&Surname=\(surname!)&DateOfBirth=\(dateOfBirth)&Mother=\(mother!)&Father=\(father!)&Guardian=\(guardian!)&KeyPerson=\(keyPerson!)&StudentPicture=\(studentPicture)&Student_ID=\(self.StudentID)"
         
         request.httpBody = postString.data(using: .utf8)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -134,7 +139,7 @@ class CreateStudentViewController: UIViewController,  UINavigationControllerDele
             })
         }
     }
-    
+    }
     
     
     func upload(image: UIImage, studentFirstName: String, studentSurname: String){

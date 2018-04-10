@@ -18,12 +18,13 @@ struct Goals: Codable {
     let Goal3Completed: String?
 }
 
-class Y1GoalsViewController: UIViewController, LoadGoalsProtocol {
+class GoalsViewController: UIViewController, LoadGoalsProtocol {
     func itemsDownloaded(items: NSArray)
     {
       
     }
     
+
     @IBOutlet var lblGoal1: UILabel!
     @IBOutlet var lblGoal2: UILabel!
     @IBOutlet var lblGoal3: UILabel!
@@ -45,7 +46,7 @@ class Y1GoalsViewController: UIViewController, LoadGoalsProtocol {
     var tapped = false
     var checkedBox = UIImage(named: "checked box")
     var uncheckedBox = UIImage(named: "unchecked box")
-    var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/Year1Goals.php")!)
+    var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/AgeGroupAGoals.php")!)
     var studentsGoals : GoalsModel = GoalsModel()
     
     override func viewDidLoad() {
@@ -110,7 +111,7 @@ class Y1GoalsViewController: UIViewController, LoadGoalsProtocol {
     func testParseJson(completion: @escaping (_ success : Bool) -> ()){
         var success = true
         
-        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/LoadYear1Goals.php")!)
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/LoadAgeGroupAGoals.php")!)
         request.httpMethod = "POST"
         
         let postString = ("S_ID=257")

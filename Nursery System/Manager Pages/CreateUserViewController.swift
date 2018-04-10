@@ -16,6 +16,11 @@ class CreateUserViewController: UIViewController {
     @IBOutlet var txtEmail: UITextField!
     @IBOutlet var txtSurname: UITextField!
     @IBOutlet var txtFirstName: UITextField!
+    
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,6 +33,9 @@ class CreateUserViewController: UIViewController {
     }
     
     @IBAction func FinalizeCreation(_ sender: Any) {
+        
+       
+        
         
         var firstName = txtFirstName.text
         var surname = txtSurname.text

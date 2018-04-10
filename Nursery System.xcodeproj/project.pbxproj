@@ -22,6 +22,11 @@
 		9C8A23E8203B325A008C4D10 /* Nursery_SystemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8A23E7203B325A008C4D10 /* Nursery_SystemTests.swift */; };
 		9C8A23F3203B325A008C4D10 /* Nursery_SystemUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8A23F2203B325A008C4D10 /* Nursery_SystemUITests.swift */; };
 		9CA199832051A2AB00E4B617 /* LiteracyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA199822051A2AB00E4B617 /* LiteracyViewController.swift */; };
+		9CB78D4F207D0503007B12B5 /* StudentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB78D4E207D0503007B12B5 /* StudentsViewController.swift */; };
+		9CB78D51207D0586007B12B5 /* AllStudentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB78D50207D0586007B12B5 /* AllStudentsModel.swift */; };
+		9CB78D57207D10A8007B12B5 /* AgeGroupBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB78D56207D10A8007B12B5 /* AgeGroupBModel.swift */; };
+		9CB78D59207D1337007B12B5 /* KeyStudentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB78D58207D1337007B12B5 /* KeyStudentsModel.swift */; };
+		9CB78D5B207D1CDB007B12B5 /* ParentTeacherMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB78D5A207D1CDB007B12B5 /* ParentTeacherMeetingViewController.swift */; };
 		9CB9102F20693E6600294C9B /* ManagerLandingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB9102E20693E6600294C9B /* ManagerLandingPageViewController.swift */; };
 		9CB9103120693EC300294C9B /* CreateStudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB9103020693EC300294C9B /* CreateStudentViewController.swift */; };
 		9CB9103320693ECD00294C9B /* CreateUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB9103220693ECD00294C9B /* CreateUserViewController.swift */; };
@@ -29,16 +34,12 @@
 		9CC3AC2B204EF80B003B5359 /* earlyYears.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9CC3AC2A204EF80B003B5359 /* earlyYears.jpg */; };
 		9CC4418B2060029A002E9456 /* ActivityDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4418A2060029A002E9456 /* ActivityDetailsViewController.swift */; };
 		9CC4418D20603365002E9456 /* CreateActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4418C20603365002E9456 /* CreateActivityViewController.swift */; };
-		9CC646732046F467000A3548 /* AgeGroupAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC646722046F467000A3548 /* AgeGroupAViewController.swift */; };
-		9CC646772046F641000A3548 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC646762046F641000A3548 /* HomeModel.swift */; };
+		9CC646772046F641000A3548 /* AgeGroupAModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC646762046F641000A3548 /* AgeGroupAModel.swift */; };
 		9CC6467B2046FAD9000A3548 /* StudentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC6467A2046FAD9000A3548 /* StudentsModel.swift */; };
-		9CC6467D20471527000A3548 /* AgeGroupBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC6467C20471527000A3548 /* AgeGroupBViewController.swift */; };
-		9CC6467F20471532000A3548 /* AgeGroupCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC6467E20471532000A3548 /* AgeGroupCViewController.swift */; };
-		9CC64681204719FE000A3548 /* HomeModelB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC64680204719FE000A3548 /* HomeModelB.swift */; };
-		9CC6468320471A09000A3548 /* HomeModelC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC6468220471A09000A3548 /* HomeModelC.swift */; };
+		9CC6468320471A09000A3548 /* AgeGroupCModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC6468220471A09000A3548 /* AgeGroupCModel.swift */; };
 		9CCE281A205997C0003FBEDA /* LoadActivitiesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCE2819205997C0003FBEDA /* LoadActivitiesModel.swift */; };
 		9CCE281C205997FA003FBEDA /* ActivitiesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCE281B205997FA003FBEDA /* ActivitiesModel.swift */; };
-		9CD126F0207BDED900C170BE /* Y1GoalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD126EF207BDED900C170BE /* Y1GoalsViewController.swift */; };
+		9CD126F0207BDED900C170BE /* GoalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD126EF207BDED900C170BE /* GoalsViewController.swift */; };
 		9CD126F3207BE3E900C170BE /* checked box.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CD126F2207BE3E800C170BE /* checked box.png */; };
 		9CD126F7207BE58200C170BE /* unchecked box.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CD126F6207BE58200C170BE /* unchecked box.png */; };
 		9CD126F9207BF04D00C170BE /* LoadGoalsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD126F8207BF04D00C170BE /* LoadGoalsModel.swift */; };
@@ -91,6 +92,11 @@
 		9C8A23F2203B325A008C4D10 /* Nursery_SystemUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nursery_SystemUITests.swift; sourceTree = "<group>"; };
 		9C8A23F4203B325A008C4D10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9CA199822051A2AB00E4B617 /* LiteracyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiteracyViewController.swift; sourceTree = "<group>"; };
+		9CB78D4E207D0503007B12B5 /* StudentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsViewController.swift; sourceTree = "<group>"; };
+		9CB78D50207D0586007B12B5 /* AllStudentsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllStudentsModel.swift; sourceTree = "<group>"; };
+		9CB78D56207D10A8007B12B5 /* AgeGroupBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgeGroupBModel.swift; sourceTree = "<group>"; };
+		9CB78D58207D1337007B12B5 /* KeyStudentsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStudentsModel.swift; sourceTree = "<group>"; };
+		9CB78D5A207D1CDB007B12B5 /* ParentTeacherMeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentTeacherMeetingViewController.swift; sourceTree = "<group>"; };
 		9CB9102E20693E6600294C9B /* ManagerLandingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerLandingPageViewController.swift; sourceTree = "<group>"; };
 		9CB9103020693EC300294C9B /* CreateStudentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudentViewController.swift; sourceTree = "<group>"; };
 		9CB9103220693ECD00294C9B /* CreateUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserViewController.swift; sourceTree = "<group>"; };
@@ -98,16 +104,12 @@
 		9CC3AC2A204EF80B003B5359 /* earlyYears.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = earlyYears.jpg; path = ../../../../Downloads/earlyYears.jpg; sourceTree = "<group>"; };
 		9CC4418A2060029A002E9456 /* ActivityDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailsViewController.swift; sourceTree = "<group>"; };
 		9CC4418C20603365002E9456 /* CreateActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateActivityViewController.swift; sourceTree = "<group>"; };
-		9CC646722046F467000A3548 /* AgeGroupAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeGroupAViewController.swift; sourceTree = "<group>"; };
-		9CC646762046F641000A3548 /* HomeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
+		9CC646762046F641000A3548 /* AgeGroupAModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgeGroupAModel.swift; sourceTree = "<group>"; };
 		9CC6467A2046FAD9000A3548 /* StudentsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsModel.swift; sourceTree = "<group>"; };
-		9CC6467C20471527000A3548 /* AgeGroupBViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgeGroupBViewController.swift; sourceTree = "<group>"; };
-		9CC6467E20471532000A3548 /* AgeGroupCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgeGroupCViewController.swift; sourceTree = "<group>"; };
-		9CC64680204719FE000A3548 /* HomeModelB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModelB.swift; sourceTree = "<group>"; };
-		9CC6468220471A09000A3548 /* HomeModelC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModelC.swift; sourceTree = "<group>"; };
+		9CC6468220471A09000A3548 /* AgeGroupCModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeGroupCModel.swift; sourceTree = "<group>"; };
 		9CCE2819205997C0003FBEDA /* LoadActivitiesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadActivitiesModel.swift; sourceTree = "<group>"; };
 		9CCE281B205997FA003FBEDA /* ActivitiesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesModel.swift; sourceTree = "<group>"; };
-		9CD126EF207BDED900C170BE /* Y1GoalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Y1GoalsViewController.swift; sourceTree = "<group>"; };
+		9CD126EF207BDED900C170BE /* GoalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsViewController.swift; sourceTree = "<group>"; };
 		9CD126F2207BE3E800C170BE /* checked box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checked box.png"; path = "../../../../Downloads/checked box.png"; sourceTree = "<group>"; };
 		9CD126F6207BE58200C170BE /* unchecked box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "unchecked box.png"; path = "../../../../Downloads/unchecked box.png"; sourceTree = "<group>"; };
 		9CD126F8207BF04D00C170BE /* LoadGoalsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadGoalsModel.swift; sourceTree = "<group>"; };
@@ -165,12 +167,13 @@
 				9CD126F1207BDEDD00C170BE /* Goals */,
 				9CC3AC28204EEB52003B5359 /* StudentDetailsViewController.swift */,
 				9CC6467A2046FAD9000A3548 /* StudentsModel.swift */,
-				9CC646762046F641000A3548 /* HomeModel.swift */,
-				9CC64680204719FE000A3548 /* HomeModelB.swift */,
-				9CC6468220471A09000A3548 /* HomeModelC.swift */,
-				9CC646722046F467000A3548 /* AgeGroupAViewController.swift */,
-				9CC6467C20471527000A3548 /* AgeGroupBViewController.swift */,
-				9CC6467E20471532000A3548 /* AgeGroupCViewController.swift */,
+				9CC646762046F641000A3548 /* AgeGroupAModel.swift */,
+				9CB78D56207D10A8007B12B5 /* AgeGroupBModel.swift */,
+				9CC6468220471A09000A3548 /* AgeGroupCModel.swift */,
+				9CB78D50207D0586007B12B5 /* AllStudentsModel.swift */,
+				9CB78D58207D1337007B12B5 /* KeyStudentsModel.swift */,
+				9CB78D4E207D0503007B12B5 /* StudentsViewController.swift */,
+				9CB78D5A207D1CDB007B12B5 /* ParentTeacherMeetingViewController.swift */,
 			);
 			path = "Students Pages";
 			sourceTree = "<group>";
@@ -288,7 +291,7 @@
 		9CD126F1207BDEDD00C170BE /* Goals */ = {
 			isa = PBXGroup;
 			children = (
-				9CD126EF207BDED900C170BE /* Y1GoalsViewController.swift */,
+				9CD126EF207BDED900C170BE /* GoalsViewController.swift */,
 				9CD126FA207BF05700C170BE /* GoalsModel.swift */,
 				9CD126F8207BF04D00C170BE /* LoadGoalsModel.swift */,
 			);
@@ -599,11 +602,13 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Nursery System/Pods-Nursery System-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework",
 				"${BUILT_PRODUCTS_DIR}/LBTAComponents/LBTAComponents.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DropDown.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LBTAComponents.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -620,15 +625,19 @@
 			files = (
 				9CC4418B2060029A002E9456 /* ActivityDetailsViewController.swift in Sources */,
 				9CCE281C205997FA003FBEDA /* ActivitiesModel.swift in Sources */,
+				9CB78D4F207D0503007B12B5 /* StudentsViewController.swift in Sources */,
 				9C722F7D203F3EF100EB1805 /* TeacherLandingPageViewController.swift in Sources */,
 				9CC6467B2046FAD9000A3548 /* StudentsModel.swift in Sources */,
-				9CC6468320471A09000A3548 /* HomeModelC.swift in Sources */,
+				9CB78D5B207D1CDB007B12B5 /* ParentTeacherMeetingViewController.swift in Sources */,
+				9CC6468320471A09000A3548 /* AgeGroupCModel.swift in Sources */,
 				9CB9102F20693E6600294C9B /* ManagerLandingPageViewController.swift in Sources */,
 				9CD126FB207BF05700C170BE /* GoalsModel.swift in Sources */,
 				9CA199832051A2AB00E4B617 /* LiteracyViewController.swift in Sources */,
 				9CC4418D20603365002E9456 /* CreateActivityViewController.swift in Sources */,
 				9C7AD8062062B3D700623FDE /* ParentLandingPageViewController.swift in Sources */,
-				9CC646772046F641000A3548 /* HomeModel.swift in Sources */,
+				9CC646772046F641000A3548 /* AgeGroupAModel.swift in Sources */,
+				9CB78D57207D10A8007B12B5 /* AgeGroupBModel.swift in Sources */,
+				9CB78D59207D1337007B12B5 /* KeyStudentsModel.swift in Sources */,
 				9C66FB9620767C9A0070E25F /* UserModel.swift in Sources */,
 				9C8A23D5203B3259008C4D10 /* ViewController.swift in Sources */,
 				9C7AD80D2062C35700623FDE /* ViewChildrenModel.swift in Sources */,
@@ -638,14 +647,11 @@
 				9CC3AC29204EEB52003B5359 /* StudentDetailsViewController.swift in Sources */,
 				9CCE281A205997C0003FBEDA /* LoadActivitiesModel.swift in Sources */,
 				9C66FB94207678220070E25F /* AccountDetailsViewController.swift in Sources */,
-				9CC6467F20471532000A3548 /* AgeGroupCViewController.swift in Sources */,
 				9CB9103320693ECD00294C9B /* CreateUserViewController.swift in Sources */,
-				9CC6467D20471527000A3548 /* AgeGroupBViewController.swift in Sources */,
-				9CC646732046F467000A3548 /* AgeGroupAViewController.swift in Sources */,
-				9CD126F0207BDED900C170BE /* Y1GoalsViewController.swift in Sources */,
+				9CD126F0207BDED900C170BE /* GoalsViewController.swift in Sources */,
 				9C8A23D3203B3259008C4D10 /* AppDelegate.swift in Sources */,
+				9CB78D51207D0586007B12B5 /* AllStudentsModel.swift in Sources */,
 				9CD126F9207BF04D00C170BE /* LoadGoalsModel.swift in Sources */,
-				9CC64681204719FE000A3548 /* HomeModelB.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

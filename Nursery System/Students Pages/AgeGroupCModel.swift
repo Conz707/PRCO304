@@ -8,16 +8,16 @@
 
 import Foundation
 
-protocol HomeModelBProtocol: class {
+protocol AgeGroupCProtocol: class {
     func itemsDownloaded(items: NSArray)
 }
 
-class AgeGroupBModel: NSObject, URLSessionDelegate {
+class AgeGroupCModel: NSObject, URLSessionDelegate {
     
     //properties
-    weak var delegate: HomeModelBProtocol!
+    weak var delegate: AgeGroupCProtocol!
     
-    let urlPath: String = "https://shod-verses.000webhostapp.com/AgeGroupB.php"
+    let urlPath: String = "https://shod-verses.000webhostapp.com/AgeGroupC.php"
     
     func downloadItems() {
         let url: URL = URL(string: urlPath)!
@@ -102,5 +102,4 @@ class AgeGroupBModel: NSObject, URLSessionDelegate {
         })
     }
 }
-
 

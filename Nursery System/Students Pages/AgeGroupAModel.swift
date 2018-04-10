@@ -8,14 +8,14 @@
 
 import Foundation
 
-protocol HomeModelProtocol: class {
+protocol AgeGroupAProtocol: class {
     func itemsDownloaded(items: NSArray)
 }
 
-class HomeModel: NSObject, URLSessionDelegate {
+class AgeGroupAModel: NSObject, URLSessionDelegate {
     
     //properties
-    weak var delegate: HomeModelProtocol!
+    weak var delegate: AgeGroupAProtocol!
     
     let urlPath: String = "https://shod-verses.000webhostapp.com/AgeGroupA.php"
     

@@ -29,7 +29,7 @@ class AgeGroupAViewController: UIViewController, UITableViewDataSource, UITableV
         self.tblAgeGroupA.delegate = self
         self.tblAgeGroupA.dataSource = self
         
-        let homeModel = HomeModel()
+        let homeModel = AgeGroupAModel()
         homeModel.delegate = self
         homeModel.downloadItems()
         

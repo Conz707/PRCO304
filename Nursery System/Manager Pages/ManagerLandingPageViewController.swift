@@ -21,7 +21,10 @@ class ManagerLandingPageViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    @IBAction func btnCreateStudent(_ sender: Any) {
+    performSegue(withIdentifier: "createStudentSegue", sender: nil)
+    }
+    
     /*
     // MARK: - Navigation
 
