@@ -201,7 +201,7 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         let guardian = selectedStudent?.guardian
         let keyPerson = selectedStudent?.keyPerson
         
-        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetParentsDetails.php")!)
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetParentsDetails.php")!)      //create one post function and pass the request in instead
         
         request.httpMethod = "POST"
 

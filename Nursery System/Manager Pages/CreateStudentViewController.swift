@@ -36,14 +36,30 @@ class CreateStudentViewController: UIViewController,  UINavigationControllerDele
         print("image tapped")
         let image = UIImagePickerController()  //handles stuff that lets user interact with image
         image.delegate = self
-        image.sourceType = UIImagePickerControllerSourceType.photoLibrary  //pick image from ipad photo library
-        image.allowsEditing = false //hmm
+        let alertImageTapped = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
         
-        self.present(image, animated: true)
-        {
-            //after it is complete
-            
+        alertImageTapped.addAction(UIAlertAction(title: "Take Photo", style: .default, handler: { _ in
+            image.sourceType = UIImagePickerControllerSourceType.camera
+            image.allowsEditing = false
+            self.present(image, animated: true)
+        }))
+        
+        alertImageTapped.addAction(UIAlertAction(title: "Choose from Photo Library", style: .default, handler: { _ in
+            image.sourceType = UIImagePickerControllerSourceType.photoLibrary  //pick image from ipad camera roll
+            image.allowsEditing = true //hmm
+            self.present(image, animated: true, completion: nil)
+        }))
+        
+        alertImageTapped.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+        
+        if let popoverController = alertImageTapped.popoverPresentationController {
+            popoverController.sourceView = self.view
+            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+            popoverController.permittedArrowDirections = []
         }
+        
+        self.present(alertImageTapped, animated: true, completion: nil)
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -136,6 +152,7 @@ class CreateStudentViewController: UIViewController,  UINavigationControllerDele
         }
         task.resume()
             self.upload(image: self.imgStudent.image!, studentFirstName: firstName!, studentSurname: surname!)
+                //here?//
             })
         }
     }

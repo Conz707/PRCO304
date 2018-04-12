@@ -44,8 +44,6 @@ class GoalsViewController: UIViewController, LoadGoalsProtocol {
     var customgoal3Completed = false
     var feedItems : NSArray = NSArray()
     var tapped = false
-    var checkedBox = UIImage(named: "checked box")
-    var uncheckedBox = UIImage(named: "unchecked box")
     var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/AgeGroupAGoals.php")!)
     var studentsGoals : GoalsModel = GoalsModel()
     
@@ -61,7 +59,7 @@ class GoalsViewController: UIViewController, LoadGoalsProtocol {
         loadGoalsModel.downloadItems()
         loadGoalsModel.delegate = self
         
-        testParseJson(completion: { success in
+        checkGoals(completion: { success in
             self.lblGoal1.text = self.goal1
             self.lblGoal2.text = self.goal2
             self.lblGoal3.text = self.goal3
@@ -108,7 +106,7 @@ class GoalsViewController: UIViewController, LoadGoalsProtocol {
         // Dispose of any resources that can be recreated.
     }
     
-    func testParseJson(completion: @escaping (_ success : Bool) -> ()){
+    func checkGoals(completion: @escaping (_ success : Bool) -> ()){
         var success = true
         
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/LoadAgeGroupAGoals.php")!)

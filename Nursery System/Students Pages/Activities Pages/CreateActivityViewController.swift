@@ -122,7 +122,7 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
             
             request.httpMethod = "POST"
             
-            let postString = ("S_ID=\(S_ID)&Activity=\(activity!)&Observation=\(observation!)&Date=\(date)&ActivityPicture=\(activityPicture)&SelectedStudent=\(student)&Mother=\(studentMother)&Father=\(studentFather)&Guardian=\(studentGuardian)")
+            let postString = ("S_ID=\(S_ID)&Activity=\(activity!)&Observation=\(observation!)&Date=\(date)&ActivityPicture=\(activityPicture)&SelectedStudent=\(student)&Mother=\(studentMother)&Father=\(studentFather)&Guardian=\(studentGuardian)&NotificationActivityID=\(self.NewActivityID)")
             
             print(postString)
             

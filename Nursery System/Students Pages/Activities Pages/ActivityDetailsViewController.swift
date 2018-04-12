@@ -13,7 +13,9 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
 
     var selectedActivity : ActivitiesModel?
     var selectedStudent : StudentsModel = StudentsModel()   //WHY???
+    var defaultValues = UserDefaults.standard
     
+    @IBOutlet var btnBookmarkOutlet: UIButton!
     @IBOutlet var btnCancelChangesOutlet: UIButton!
     @IBOutlet var btnEditActivityOutlet: UIButton!
     @IBOutlet var btnSaveChangesOutlet: UIButton!
@@ -21,9 +23,14 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
     @IBOutlet var lblActivityTitle: UILabel!
     @IBOutlet var imgActivity: UIImageView!
     @IBOutlet var lblActivityDate: UILabel!
+    var bookmark = false
+    var A_ID = ""
+    var U_ID = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        A_ID = (selectedActivity?.activityID)!
+        U_ID = defaultValues.string(forKey: "UserU_ID")!
         
         lblActivityTitle.text = selectedActivity?.activity
         txtActivityObservations.text = selectedActivity?.observation
@@ -82,6 +89,20 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
         getImageFromUrl.resume()
     }
 
+    @IBAction func btnBookmark(_ sender: Any) {
+        if(bookmark == true){
+            btnBookmarkOutlet.setImage(UIImage(named: "unchecked bookmark"), for: .normal)
+            bookmark = false
+        } else {
+            btnBookmarkOutlet.setImage(UIImage(named: "checked bookmark"), for: .normal)
+            bookmark = true
+        }
+        
+        updateBookmark()
+        
+    }
+    
+    
     @IBAction func btnEditActivity(_ sender: Any) {
         txtActivityObservations.isEditable = true
         imgActivity.isUserInteractionEnabled = true
@@ -125,14 +146,13 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
             self.imgActivity.isUserInteractionEnabled = false
             
             let activity = self.selectedActivity?.activity
-            let A_ID = self.selectedActivity?.activityID
             let observation = self.txtActivityObservations.text
             
             var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/EditActivity.php")!)
             
             request.httpMethod = "POST"
             
-            let postString = ("activityID=\(A_ID!)&Observation=\(observation!)")
+            let postString = ("activityID=\(self.A_ID)&Observation=\(observation!)")
             
             print(postString)
             
@@ -180,10 +200,18 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
         btnSaveChangesOutlet.isEnabled = false
         btnCancelChangesOutlet.isEnabled = false
         btnEditActivityOutlet.isEnabled = true
+        
+        checkBookmarked { success in
+            if(self.bookmark == true){
+                    self.btnBookmarkOutlet.setImage(UIImage(named: "checked bookmark"), for: .normal)
+            } else {
+                    self.btnBookmarkOutlet.setImage(UIImage(named: "unchecked bookmark"), for: .normal)
+            }
+        }
     }
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer){
-        let tappedImage = tapGestureRecognizer.view as! UIImageView
+        _ = tapGestureRecognizer.view as! UIImageView
         print("image tapped")
         let image = UIImagePickerController()  //handles stuff that lets user interact with image
         image.delegate = self
@@ -266,13 +294,64 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
             }
         }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func updateBookmark(){
+        
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/Bookmarks.php")!)
+        request.httpMethod = "POST"
+        let postString = ("A_ID=\(A_ID)&U_ID=\(U_ID)&Bookmark=\(bookmark)")
+        
+        request.httpBody = postString.data(using: .utf8)
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                print("error=\(error)")
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(response)")
+                
+            }
+            
+            var responseString = String(data: data, encoding: .utf8)!
+            print("responseString = \(responseString)")
+            
+        }
+        task.resume()
+        
     }
-    */
+    func checkBookmarked(completion: @escaping (_ success : Bool) -> ()){
+        var success = true
+        
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/CheckBookmarked.php")!)
+        request.httpMethod = "POST"
+        
+        let postString = ("A_ID=\(self.A_ID)&U_ID=\(self.U_ID)")
+        print(postString)
+        request.httpBody = postString.data(using: .utf8)
+        
+        _ = URLSession.shared.dataTask(with: request) {data, response, error in
+            guard let data = data else { return }
+            do {
+                let responseString = String(data: data, encoding: .utf8)!
+                print("response string \(responseString)")
+                
+                if(responseString == "true"){
+                    self.bookmark = true
+                } else {
+                    self.bookmark = false
+                }
+            } catch let err {
+                print("Err", err)
+                success = false
+            }
+            DispatchQueue.main.async {
+                completion(success)
+                }
+            }.resume()
+        print(success)
+    }
+    
 }

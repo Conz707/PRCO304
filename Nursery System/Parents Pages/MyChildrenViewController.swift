@@ -9,7 +9,7 @@
 import UIKit
 import LBTAComponents
 
-class ParentLandingPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ViewChildrenModelProtocol {
+class MyChildrenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ViewChildrenModelProtocol {
     
     let defaultValues = UserDefaults.standard
     
@@ -23,8 +23,6 @@ class ParentLandingPageViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        
         
         //retrieve cell
         let cellIdentifier: String = "BasicCell"
@@ -65,13 +63,7 @@ class ParentLandingPageViewController: UIViewController, UITableViewDelegate, UI
             }
         }
         getImageFromUrl.resume()
-        
-        
         //get references to labels of cells
-
-        
-        
-    
         return myCell
     }
     

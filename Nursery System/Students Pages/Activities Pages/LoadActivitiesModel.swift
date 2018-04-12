@@ -17,7 +17,6 @@ class LoadActivitiesModel: NSObject, URLSessionDelegate {
     //properties
     weak var delegate: LoadActivitiesModelProtocol!
     var selectedStudent : StudentsModel?
-  //  let urlPath: String = "https://shod-verses.000webhostapp.com/LoadActivities.php?"
     
 
     
