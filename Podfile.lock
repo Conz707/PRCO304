@@ -2,17 +2,20 @@ PODS:
   - Alamofire (4.7.1)
   - DropDown (2.3.1)
   - LBTAComponents (1.0.2)
+  - NWPusher (0.7.5)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7.0)
   - DropDown
   - LBTAComponents
+  - NWPusher (~> 0.7.0)
 
 SPEC CHECKSUMS:
   Alamofire: 68d7d521118d49c615a8d2214d87cdf525599d30
   DropDown: 20499c7b2731b0d21609af924e47c7677a2be50d
   LBTAComponents: c4c8863e0ef6715e378300db148b96a09df656f7
+  NWPusher: 9b29a44754d88cb02c28a1e9bc8750845506123e
 
-PODFILE CHECKSUM: e697b4588262c3bddab49abdbf6140ba6bdfade3
+PODFILE CHECKSUM: f456fd5a6628637d2be69cac4861258a79e8584c
 
 COCOAPODS: 1.4.0

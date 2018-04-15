@@ -184,7 +184,11 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
             }
             var responseString = String(data: data, encoding: .utf8)!
             print("responseString = \(responseString)")
+            if(responseString != ""){
             self.NewActivityID = Int(responseString)! + 1
+            } else {
+                responseString = "1"
+            }
             print("student id is: \(self.NewActivityID)")
             if(self.NewActivityID == 0){
                 success = false

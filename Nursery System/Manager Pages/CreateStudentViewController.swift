@@ -132,6 +132,7 @@ class CreateStudentViewController: UIViewController,  UINavigationControllerDele
         request.httpMethod = "POST"
         
         let postString = "FirstName=\(firstName!)&Surname=\(surname!)&DateOfBirth=\(dateOfBirth)&Mother=\(mother!)&Father=\(father!)&Guardian=\(guardian!)&KeyPerson=\(keyPerson!)&StudentPicture=\(studentPicture)&Student_ID=\(self.StudentID)"
+                print(postString)
         
         request.httpBody = postString.data(using: .utf8)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
