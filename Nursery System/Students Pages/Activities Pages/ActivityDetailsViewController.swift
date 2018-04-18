@@ -15,6 +15,9 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
     var selectedStudent : StudentsModel = StudentsModel()   //WHY???
     var defaultValues = UserDefaults.standard
     
+    @IBOutlet var progressIndicatorUpload: UIProgressView!
+    @IBOutlet var btnDeleteActivityOutlet: UIButton!
+    @IBOutlet var lblStudentName: UILabel!
     @IBOutlet var btnBookmarkOutlet: UIButton!
     @IBOutlet var btnCancelChangesOutlet: UIButton!
     @IBOutlet var btnEditActivityOutlet: UIButton!
@@ -23,17 +26,21 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
     @IBOutlet var lblActivityTitle: UILabel!
     @IBOutlet var imgActivity: UIImageView!
     @IBOutlet var lblActivityDate: UILabel!
+    var dateString = ""
     var bookmark = false
     var A_ID = ""
     var U_ID = ""
+    var myDate = Date()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         A_ID = (selectedActivity?.activityID)!
         U_ID = defaultValues.string(forKey: "UserU_ID")!
         
+        lblStudentName.text = "\(selectedStudent.firstName!) \(selectedStudent.surname!)"
         lblActivityTitle.text = selectedActivity?.activity
         txtActivityObservations.text = selectedActivity?.observation
+        txtActivityObservations.isUserInteractionEnabled = false
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         
@@ -41,11 +48,11 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
         imgActivity.addGestureRecognizer(tapGestureRecognizer)
         
         //Convert String to Date for formatting
-        let dateString = selectedActivity?.activityDate
+        dateString = (selectedActivity?.activityDate)!
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        let myDate = dateFormatter.date(from: dateString!)!
-        print("original date is \(dateString!)")
+        myDate = dateFormatter.date(from: dateString)!
+        print("original date is \(dateString)")
         
         //Convert date back to String
         dateFormatter.dateFormat = "MMMM dd, YYYY"
@@ -97,7 +104,6 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
             btnBookmarkOutlet.setImage(UIImage(named: "checked bookmark"), for: .normal)
             bookmark = true
         }
-        
         updateBookmark()
         
     }
@@ -105,10 +111,12 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
     
     @IBAction func btnEditActivity(_ sender: Any) {
         txtActivityObservations.isEditable = true
+        txtActivityObservations.isUserInteractionEnabled = true
         imgActivity.isUserInteractionEnabled = true
         btnEditActivityOutlet.isEnabled = false
         btnSaveChangesOutlet.isEnabled = true
         btnCancelChangesOutlet.isEnabled = true
+        btnDeleteActivityOutlet.isEnabled = true
     }
     
     @IBAction func btnCancelChanges(_ sender: Any) {
@@ -119,6 +127,7 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
             self.btnEditActivityOutlet.isEnabled = true
             self.btnSaveChangesOutlet.isEnabled = false
             self.btnCancelChangesOutlet.isEnabled = false
+            self.btnDeleteActivityOutlet.isEnabled = false
         }))
         
         alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
@@ -135,6 +144,8 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
     
     @IBAction func btnSaveChanges(_ sender: Any) {
         
+        if(txtActivityObservations.text.isEmpty == false){
+        
         let alert = UIAlertController(title: "Confirm Save Changes - This will overwrite all data", message: nil, preferredStyle: .actionSheet)
         
         alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { _ in
@@ -144,8 +155,7 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
             self.btnCancelChangesOutlet.isEnabled = false
             self.txtActivityObservations.isEditable = false
             self.imgActivity.isUserInteractionEnabled = false
-            
-            let activity = self.selectedActivity?.activity
+        
             let observation = self.txtActivityObservations.text
             
             var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/EditActivity.php")!)
@@ -174,9 +184,10 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
                 
             }
             task.resume()
-            self.upload(image: self.imgActivity.image!, activity2: activity!)
-        }))
-        
+            self.progressIndicatorUpload.isHidden = false
+            self.upload(image: self.imgActivity.image!)
+            }))
+    
         alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
         
         if let popoverController = alert.popoverPresentationController {
@@ -186,6 +197,12 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
         }
         
         self.present(alert, animated: true, completion: nil)
+        } else {
+            let alertController = UIAlertController(title: "Error", message: "Text box can not be empty", preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "Close Alert", style: .default, handler: nil)
+            alertController.addAction(defaultAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
        
     }
     
@@ -195,20 +212,39 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
+        progressIndicatorUpload.isHidden = true
+        progressIndicatorUpload.setProgress(0, animated: true)
+
+        if(defaultValues.string(forKey: "UserRole") == "Parent"){
+            btnBookmarkOutlet.isHidden = false
+            btnDeleteActivityOutlet.isHidden = true
+            btnEditActivityOutlet.isHidden = true
+            btnCancelChangesOutlet.isHidden = true
+            btnSaveChangesOutlet.isHidden = true
+            
+            checkBookmarked { success in
+                if(self.bookmark == true){
+                    self.btnBookmarkOutlet.setImage(UIImage(named: "checked bookmark"), for: .normal)
+                } else {
+                    self.btnBookmarkOutlet.setImage(UIImage(named: "unchecked bookmark"), for: .normal)
+                }
+            }
+        } else {
         txtActivityObservations.isEditable = false
+        btnDeleteActivityOutlet.isEnabled = false
         imgActivity.isUserInteractionEnabled = false
         btnSaveChangesOutlet.isEnabled = false
         btnCancelChangesOutlet.isEnabled = false
         btnEditActivityOutlet.isEnabled = true
-        
-        checkBookmarked { success in
-            if(self.bookmark == true){
-                    self.btnBookmarkOutlet.setImage(UIImage(named: "checked bookmark"), for: .normal)
-            } else {
-                    self.btnBookmarkOutlet.setImage(UIImage(named: "unchecked bookmark"), for: .normal)
-            }
+        btnDeleteActivityOutlet.isHidden = false
+        btnEditActivityOutlet.isHidden = false
+        btnCancelChangesOutlet.isHidden = false
+        btnBookmarkOutlet.isHidden = true
+            
         }
     }
+
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer){
         _ = tapGestureRecognizer.view as! UIImageView
@@ -260,18 +296,18 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
         btnEditActivityOutlet.isEnabled = false
     }
     
-    func upload(image: UIImage, activity2: String){
+    func upload(image: UIImage){
         guard let imageData = UIImageJPEGRepresentation(imgActivity.image!, 0.5) else {
             print("could not get jpeg of image")
             return
         }
         
-        
+        let activityID = self.selectedActivity?.activityID
         let parameters = ["studentID": "\(selectedStudent.studentID!)"]
         print(parameters)
         
         Alamofire.upload(multipartFormData: { multipartFormData in
-            multipartFormData.append(imageData, withName: "file",fileName: "\((activity2) + ".jpg")", mimeType: "image/jpg")
+            multipartFormData.append(imageData, withName: "file",fileName: "\((activityID)! + ".jpg")", mimeType: "image/jpg")
             for (key, value) in parameters {
                 multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
             }
@@ -283,6 +319,22 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
                 
                 upload.uploadProgress(closure: { (progress) in
                     print("Upload Progress: \(progress.fractionCompleted)")
+                    self.progressIndicatorUpload.setProgress(Float(progress.fractionCompleted), animated: true)
+                    if(progress.fractionCompleted == 1.0){
+                        let alertChangesSuccess = UIAlertController(title: "Successfully edited activity", message: nil, preferredStyle: .actionSheet)
+                        
+                        alertChangesSuccess.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { _ in
+                            self.navigationController?.popViewController(animated: true)
+                        }))
+                        
+                        if let popoverController = alertChangesSuccess.popoverPresentationController {
+                            popoverController.sourceView = self.view
+                            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+                            popoverController.permittedArrowDirections = []
+                        }
+                        
+                        self.present(alertChangesSuccess, animated: true, completion: nil)
+                    }
                 })
                 
                 upload.responseString { response in
@@ -295,6 +347,101 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
         }
     }
     
+    @IBAction func btnDeleteActivity(_ sender: Any) {
+        
+        
+        if(defaultValues.string(forKey: "UserRole") != "Manager"){
+       
+            print("original date is: \(dateString)")
+            let deleteDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())
+            print("curr date is \(deleteDate)")
+        
+            if(myDate < deleteDate!){
+                
+                print("require manager to delete")
+                let alertController = UIAlertController(title: "Error", message: "24HR Delete Period Passed - Request Manager to delete activity", preferredStyle: .alert)
+                let defaultAction = UIAlertAction(title: "Close Alert", style: .default, handler: nil)
+                alertController.addAction(defaultAction)
+                self.present(alertController, animated: true, completion: nil)
+                
+            }else {
+                
+                print("delete action")
+                self.deleteAlert()
+            }
+        } else { //if user is manager then dont check for date, just ask for confirmation
+           
+           self.deleteAlert()
+        }
+    }
+    
+    
+    func postRequest(postString: String, request: URLRequest, completion: @escaping (_ success : Bool) -> ()){
+        print(postString, request)
+        var success = true
+            
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                    print("error=\(error)")
+                    return
+                }
+                
+                if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+                    print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                    print("response = \(response)")
+                    success = false
+                }
+                
+                var responseString = String(data: data, encoding: .utf8)!
+                print("responseString = \(responseString)")
+                if(responseString == "true"){
+                    self.bookmark = true
+                } else {
+                    self.bookmark = false
+                }
+                DispatchQueue.main.async{
+                    completion(success)
+                }
+            }
+            task.resume()
+        print("no here")
+        }
+    
+    func deleteAlert(){
+        let alert = UIAlertController(title: "Confirm Delete Activity - This action can NOT be undone.", message: nil, preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { _ in
+            //delete activity
+            self.deleteActivity()
+            
+            let alertDeleteSuccess = UIAlertController(title: "Successfully deleted activity", message: nil, preferredStyle: .actionSheet)
+            
+            //return view
+            alertDeleteSuccess.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { _ in
+                self.navigationController?.popViewController(animated: true)
+            }))
+            
+            if let popoverController = alertDeleteSuccess.popoverPresentationController {
+                popoverController.sourceView = self.view
+                popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+                popoverController.permittedArrowDirections = []
+            }
+            
+            self.present(alertDeleteSuccess, animated: true, completion: nil)
+            
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.sourceView = self.view
+            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+            popoverController.permittedArrowDirections = []
+        }
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func updateBookmark(){
         
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/Bookmarks.php")!)
@@ -302,28 +449,14 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
         let postString = ("A_ID=\(A_ID)&U_ID=\(U_ID)&Bookmark=\(bookmark)")
         
         request.httpBody = postString.data(using: .utf8)
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {                                                 // check for fundamental networking error
-                print("error=\(error)")
-                return
-            }
-            
-            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(response)")
-                
-            }
-            
-            var responseString = String(data: data, encoding: .utf8)!
-            print("responseString = \(responseString)")
-            
-        }
-        task.resume()
-        
+
+            postRequest(postString: postString, request: request, completion: { success in
+            })
     }
+    
+    
     func checkBookmarked(completion: @escaping (_ success : Bool) -> ()){
-        var success = true
+    
         
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/CheckBookmarked.php")!)
         request.httpMethod = "POST"
@@ -332,26 +465,22 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
         print(postString)
         request.httpBody = postString.data(using: .utf8)
         
-        _ = URLSession.shared.dataTask(with: request) {data, response, error in
-            guard let data = data else { return }
-            do {
-                let responseString = String(data: data, encoding: .utf8)!
-                print("response string \(responseString)")
-                
-                if(responseString == "true"){
-                    self.bookmark = true
-                } else {
-                    self.bookmark = false
-                }
-            } catch let err {
-                print("Err", err)
-                success = false
-            }
-            DispatchQueue.main.async {
-                completion(success)
-                }
-            }.resume()
-        print(success)
+        postRequest(postString: postString, request: request, completion: { success in
+            completion(success)
+        })
+        
     }
     
+    func deleteActivity(){
+        
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/DeleteActivity.php")!)
+        request.httpMethod = "POST"
+        let postString = ("A_ID=\(A_ID)")
+        
+        request.httpBody = postString.data(using: .utf8)
+        
+        postRequest(postString: postString, request: request, completion: { success in
+        })
+    }
+
 }

@@ -65,7 +65,7 @@ class ViewController: UIViewController{
  
  
     
-    func testParseJson(completion: @escaping (_ success : Bool) -> ()){
+    func parseJSON(completion: @escaping (_ success : Bool) -> ()){
         var success = true
         let emailVar = emailTxt.text
         let passwordVar = passwordTxt.text
@@ -119,7 +119,7 @@ class ViewController: UIViewController{
         passwordTxt.isEnabled = false
         emailTxt.isEnabled = false
  DispatchQueue.main.async {
-    self.testParseJson(completion: { success in
+    self.parseJSON(completion: { success in
         self.activityIndicatorLogin.stopAnimating()
         let checkUserEmail = self.defaultValues.string(forKey: "UserEmail")
         let checkUserRole = self.defaultValues.string(forKey: "UserRole")

@@ -28,6 +28,10 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        txtStudentActivity.autocapitalizationType = .words
+
+        txtStudentObservation.autocapitalizationType = .sentences
+        
         let minDate = Calendar.current.date(byAdding: .month, value: -18, to: Date())
         dateActivity.minimumDate = minDate // 18Months
         dateActivity.maximumDate = Date() //todays date //this datepicker kinda sucks, try to fix
@@ -42,8 +46,9 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
     }
     
     override func viewDidAppear(_ animated: Bool) {
-            progressIndicatorUpload.isHidden = false
+            progressIndicatorUpload.isHidden = true
             progressIndicatorUpload.setProgress(0, animated: true)
+        
     }
     
     
@@ -96,7 +101,7 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
 
     
     @IBAction func btnSaveActivity(_ sender: Any) {
-       
+        if(txtStudentObservation.text.isEmpty == false && txtStudentActivity.text?.isEmpty == false){
         DispatchQueue.main.async {
             self.getMaxActivityID { success in
         
@@ -162,8 +167,13 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
         }
         
         self.present(alertSave, animated: true, completion: nil)
+                }
             }
-        }
+        } else {
+            let alertController = UIAlertController(title: "Error", message: "Ensure no fields are empty", preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "Close Alert", style: .default, handler: nil)
+            alertController.addAction(defaultAction)
+            self.present(alertController, animated: true, completion: nil)        }
     }
     
     func getMaxActivityID(completion: @escaping (_ success: Bool) -> ()){
