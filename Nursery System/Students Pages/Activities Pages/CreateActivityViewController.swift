@@ -19,7 +19,7 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
     @IBOutlet var lblStudentName: UILabel!
     @IBOutlet var imgActivity: UIImageView!
     var responseSuccess = false
-    var selectedStudent : StudentsModel = StudentsModel()   //WHY???
+    var selectedStudent : StudentsModel = StudentsModel()   
     var image = #imageLiteral(resourceName: "placeholder.png")
     var NewActivityID = 0
 
@@ -29,7 +29,6 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
         super.viewDidLoad()
         
         txtStudentActivity.autocapitalizationType = .words
-
         txtStudentObservation.autocapitalizationType = .sentences
         
         let minDate = Calendar.current.date(byAdding: .month, value: -18, to: Date())

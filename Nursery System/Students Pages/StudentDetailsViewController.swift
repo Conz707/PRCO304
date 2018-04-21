@@ -192,6 +192,15 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
             self.performSegue(withIdentifier: "viewActivity", sender: self)
         }
     
+    @IBAction func btnParentTeacherMeetings(_ sender: Any) {
+        
+        //manually call segue to detail view controller
+        self.performSegue(withIdentifier: "createParentTeacherMeeting", sender: self)
+
+        
+    }
+    
+    
     func getLabelText(completion: @escaping (_ success : Bool) -> ()){
         
         var success = true
@@ -201,40 +210,19 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         let guardian = selectedStudent?.guardian
         let keyPerson = selectedStudent?.keyPerson
         
-        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetParentsDetails.php")!)      //create one post function and pass the request in instead
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetParentsDetails.php")!)     
         
         request.httpMethod = "POST"
 
         let postString = ("Mother=\(mother!)&Father=\(father!)&Guardian=\(guardian!)&KeyPerson=\(keyPerson!)")
         print(postString)
-
-
         
         request.httpBody = postString.data(using: .utf8)
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {                                                 // check for fundamental networking error
-                print("error=\(error)")
-                success = false
-                return
-            }
-            
-            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(response)")
-                
-            }
-  
-
-            var responseString = String(data: data, encoding: .utf8)!
-            self.responseArr = (responseString.split(separator: ";") as NSArray) as! [String]
-            print("responseString <br /> = \(responseString)")
-          
-            DispatchQueue.main.async{
-                completion(success)
-            }
-        }
-        task.resume()
-        print(success)
+        
+        postRequest(postString: postString, request: request, completion: { success in
+            completion(success)
+        })
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -252,10 +240,42 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
             
             let createActivityVC = segue.destination as! CreateActivityViewController
             //set property to selected student so when view loads, it accesses the properties of feeditem obj ??
-            
             createActivityVC.selectedStudent = selectedStudent!
             
+        } else if (segue.identifier == "createParentTeacherMeeting") {
+            print("parentteachermeetingsegueeeeeeeeeeeeeeee")
+            let createParentTeacherMeetingVC = segue.destination as! ParentTeacherMeetingViewController
+            createParentTeacherMeetingVC.selectedStudent = selectedStudent!
         }
+    }
+    
+    func postRequest(postString: String, request: URLRequest, completion: @escaping (_ success : Bool) -> ()){
+        var success = true
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                print("error=\(error)")
+                success = false
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(response)")
+                
+            }
+            
+            
+            var responseString = String(data: data, encoding: .utf8)!
+            self.responseArr = (responseString.split(separator: ";") as NSArray) as! [String]
+            print("responseString <br /> = \(responseString)")
+            
+            DispatchQueue.main.async{
+                completion(success)
+            }
+        }
+        task.resume()
+        print(success)
     }
     
 }

@@ -758,7 +758,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pZM-ck-zAn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-545" y="2605"/>
+            <point key="canvasLocation" x="93" y="2841"/>
         </scene>
         <!--My Children View Controller-->
         <scene sceneID="bHq-rl-0PH">
@@ -1357,7 +1357,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vy6-OK-Uzx">
-                                <rect key="frame" x="249" y="347" width="195" height="41"/>
+                                <rect key="frame" x="249" y="328" width="195" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="UBx-H8-1pt"/>
                                 </constraints>
@@ -1368,14 +1368,14 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2U5-0G-RNn">
-                                <rect key="frame" x="426" y="347" width="322" height="41"/>
+                                <rect key="frame" x="426" y="328" width="322" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="Hg9-8M-Hxh"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="Parent-Teacher Meetings"/>
                                 <connections>
-                                    <segue destination="WTO-te-DVp" kind="show" id="fn5-KL-bhB"/>
+                                    <segue destination="WTO-te-DVp" kind="show" identifier="createParentTeacherMeeting" id="o04-52-ARA"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1401,7 +1401,7 @@
                             <constraint firstItem="Sfv-TU-zHT" firstAttribute="top" secondItem="eeA-4F-dw0" secondAttribute="bottom" constant="10" id="JCm-dR-jU6"/>
                             <constraint firstItem="AO6-5m-vbb" firstAttribute="trailing" secondItem="84P-9O-rJ4" secondAttribute="trailing" id="M3b-eh-Kvd"/>
                             <constraint firstItem="4IJ-fI-ghB" firstAttribute="leading" secondItem="MDb-cV-WDS" secondAttribute="trailing" constant="38" id="NdM-O7-VQg"/>
-                            <constraint firstItem="vy6-OK-Uzx" firstAttribute="top" secondItem="oaD-jQ-8l9" secondAttribute="bottom" constant="19" id="O9j-rJ-nFl"/>
+                            <constraint firstItem="vy6-OK-Uzx" firstAttribute="top" secondItem="oaD-jQ-8l9" secondAttribute="bottom" id="O9j-rJ-nFl"/>
                             <constraint firstItem="4IJ-fI-ghB" firstAttribute="bottom" secondItem="n24-Ve-Lhy" secondAttribute="bottom" id="P28-ly-VKc"/>
                             <constraint firstItem="OzE-nF-xca" firstAttribute="bottom" secondItem="MDb-cV-WDS" secondAttribute="bottom" constant="618" id="QAp-RM-L2q"/>
                             <constraint firstItem="OzE-nF-xca" firstAttribute="bottom" secondItem="Tuj-DR-Kby" secondAttribute="bottom" constant="37" id="R49-fO-lQK"/>
@@ -1851,67 +1851,92 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qlf-uu-SNq">
-                                <rect key="frame" x="100" y="679" width="276" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Student:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvY-1l-Q2O">
+                                <rect key="frame" x="20" y="657" width="154" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AUe-fx-pJJ">
+                                <rect key="frame" x="150" y="652" width="367" height="46"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="46" id="RCH-h7-RJu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <datePicker contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Xph-4Y-1Kr">
+                                <rect key="frame" x="0.0" y="808" width="768" height="157"/>
+                                <date key="date" timeIntervalSinceReferenceDate="546008603.14522004">
+                                    <!--2018-04-21 13:03:23 +0000-->
+                                </date>
+                            </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r2k-ka-Vj3">
+                                <rect key="frame" x="287" y="963" width="195" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="41" id="VpH-NM-Uhk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Add Meeting"/>
+                                <connections>
+                                    <action selector="btnAddMeeting:" destination="WTO-te-DVp" eventType="touchUpInside" id="fx4-7I-e4S"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Parent:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tBl-Q8-gm3">
+                                <rect key="frame" x="34" y="702" width="154" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p6Z-qW-wcp">
+                                <rect key="frame" x="364" y="668" width="97" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="prS-BC-H5l">
-                                <rect key="frame" x="87" y="801" width="229" height="98"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z3A-Pc-Xr9">
-                                        <rect key="frame" x="0.0" y="0.0" width="229" height="38"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                        <state key="normal" title="Select Parent for Meeting"/>
-                                        <connections>
-                                            <action selector="btnSelectParent:" destination="WTO-te-DVp" eventType="touchUpInside" id="EX8-Rk-j9W"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F6k-zC-5Us">
-                                        <rect key="frame" x="0.0" y="38" width="90" height="30"/>
-                                        <state key="normal" title="MotherName"/>
-                                        <connections>
-                                            <action selector="parentTapped:" destination="WTO-te-DVp" eventType="touchUpInside" id="pa2-C2-JdX"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oj5-S7-u76">
-                                        <rect key="frame" x="0.0" y="68" width="84" height="30"/>
-                                        <state key="normal" title="FatherName"/>
-                                        <connections>
-                                            <action selector="parentTapped:" destination="WTO-te-DVp" eventType="touchUpInside" id="Hz3-BH-JFs"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OgL-A7-gey">
+                                <rect key="frame" x="150" y="702" width="289" height="88"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="WTO-te-DVp" id="Hji-Iw-yv5"/>
+                                    <outlet property="delegate" destination="WTO-te-DVp" id="38e-Ga-n1M"/>
+                                </connections>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="r2k-ka-Vj3" firstAttribute="centerX" secondItem="Krp-p8-CGx" secondAttribute="centerX" id="1J1-vj-nxJ"/>
                             <constraint firstItem="LcI-hz-NvX" firstAttribute="trailing" secondItem="UKX-wc-Yae" secondAttribute="trailingMargin" id="1JV-hd-Bvw"/>
                             <constraint firstItem="4de-5Q-PwJ" firstAttribute="bottom" secondItem="Krp-p8-CGx" secondAttribute="bottom" constant="386" id="497-ed-h1P"/>
-                            <constraint firstItem="4de-5Q-PwJ" firstAttribute="bottom" secondItem="prS-BC-H5l" secondAttribute="bottom" constant="125" id="De3-f4-nDI"/>
+                            <constraint firstAttribute="bottom" secondItem="r2k-ka-Vj3" secondAttribute="bottom" constant="20" symbolic="YES" id="4Bj-Xw-lfx"/>
+                            <constraint firstItem="cvY-1l-Q2O" firstAttribute="centerY" secondItem="AUe-fx-pJJ" secondAttribute="centerY" id="4H6-Lh-4nK"/>
+                            <constraint firstItem="r2k-ka-Vj3" firstAttribute="centerX" secondItem="Xph-4Y-1Kr" secondAttribute="centerX" id="6fR-oQ-yOK"/>
+                            <constraint firstItem="4de-5Q-PwJ" firstAttribute="trailing" secondItem="cvY-1l-Q2O" secondAttribute="trailing" constant="594" id="6uk-lR-XRG"/>
+                            <constraint firstItem="4de-5Q-PwJ" firstAttribute="trailing" secondItem="AUe-fx-pJJ" secondAttribute="trailing" constant="251" id="8g9-jw-tDF"/>
                             <constraint firstItem="Krp-p8-CGx" firstAttribute="centerX" secondItem="4de-5Q-PwJ" secondAttribute="centerX" id="RM3-bJ-UjJ"/>
                             <constraint firstItem="LcI-hz-NvX" firstAttribute="leading" secondItem="UKX-wc-Yae" secondAttribute="leadingMargin" id="Tai-Ms-UXV"/>
                             <constraint firstItem="LcI-hz-NvX" firstAttribute="top" secondItem="4de-5Q-PwJ" secondAttribute="top" id="Wsy-Iu-YRT"/>
-                            <constraint firstItem="prS-BC-H5l" firstAttribute="leading" secondItem="4de-5Q-PwJ" secondAttribute="leading" constant="87" id="XOm-QR-mTe"/>
                             <constraint firstItem="Krp-p8-CGx" firstAttribute="top" secondItem="LcI-hz-NvX" secondAttribute="bottom" constant="8" symbolic="YES" id="eo6-dI-8vy"/>
+                            <constraint firstItem="AUe-fx-pJJ" firstAttribute="top" secondItem="Krp-p8-CGx" secondAttribute="bottom" constant="14" id="mUr-Is-snK"/>
+                            <constraint firstItem="AUe-fx-pJJ" firstAttribute="leading" secondItem="4de-5Q-PwJ" secondAttribute="leading" constant="150" id="pb3-qa-7WP"/>
+                            <constraint firstItem="cvY-1l-Q2O" firstAttribute="leading" secondItem="LcI-hz-NvX" secondAttribute="leading" id="rbV-Sn-rhm"/>
+                            <constraint firstItem="r2k-ka-Vj3" firstAttribute="leading" secondItem="4de-5Q-PwJ" secondAttribute="leading" constant="287" id="zis-4C-xja"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4de-5Q-PwJ"/>
                     </view>
                     <connections>
-                        <outlet property="btnSelectParentOutlet" destination="z3A-Pc-Xr9" id="eBG-I6-xLs"/>
-                        <outlet property="dropdown" destination="Qlf-uu-SNq" id="9go-eU-hea"/>
-                        <outlet property="txtBox1" destination="Qlf-uu-SNq" id="PaV-pe-Jgj"/>
-                        <outletCollection property="parentsOutletCollection" destination="F6k-zC-5Us" collectionClass="NSMutableArray" id="CLl-fQ-G6C"/>
-                        <outletCollection property="parentsOutletCollection" destination="oj5-S7-u76" collectionClass="NSMutableArray" id="c79-tP-mnX"/>
-                        <outletCollection property="parentsOutletCollection" destination="F6k-zC-5Us" collectionClass="NSMutableArray" id="okX-WJ-A64"/>
-                        <outletCollection property="parentsOutletCollection" destination="oj5-S7-u76" collectionClass="NSMutableArray" id="leW-cG-IC0"/>
+                        <outlet property="datePicker" destination="Xph-4Y-1Kr" id="hWa-3l-kgI"/>
+                        <outlet property="lblStudent" destination="AUe-fx-pJJ" id="rYd-AO-wHa"/>
+                        <outlet property="pickerDropdown" destination="OgL-A7-gey" id="idR-T6-74N"/>
+                        <outlet property="txtDropdwon" destination="p6Z-qW-wcp" id="gga-eL-3NO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ePl-QS-oNZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="851.5625" y="1546.875"/>
+            <point key="canvasLocation" x="-1934.375" y="4232.8125"/>
         </scene>
         <!--Homepage-->
         <scene sceneID="bih-ue-ILt">
