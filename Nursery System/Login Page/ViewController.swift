@@ -9,14 +9,6 @@
 import UIKit
 import Alamofire
 
-struct User: Codable {
-    let U_ID: String?
-    let Email: String?
-    let Password: String?
-    let UserType: String?
-    
-}
-
 
 
 class ViewController: UIViewController{

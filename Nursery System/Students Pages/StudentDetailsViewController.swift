@@ -11,14 +11,8 @@ import UIKit
 
 class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, LoadActivitiesModelProtocol {
     
-    let defaultValues = UserDefaults.standard
-    var selectedStudent : StudentsModel?
-    var feedItems: NSArray = NSArray()
-    var responseMother = ""
-    var responseArr: [String] = []
+
     @IBOutlet var btnAddActivity: UIButton!
-    
-    @IBOutlet var tblImageView: UIImageView!
     @IBOutlet var activityIndicatorTableLoading: UIActivityIndicatorView!
     @IBOutlet var lblDateOfBirth: UILabel!
     @IBOutlet var imgStudent: UIImageView!
@@ -27,10 +21,14 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var lblKeyPerson: UILabel!
     @IBOutlet weak var lblGuardian: UILabel!
     @IBOutlet weak var lblFather: UILabel!
-    @IBOutlet var lblAgeGroup: UILabel!
     @IBOutlet var tblActivities: UITableView!
     var selectedActivity : ActivitiesModel = ActivitiesModel()
-
+    let defaultValues = UserDefaults.standard
+    var selectedStudent : StudentsModel?
+    var feedItems: NSArray = NSArray()
+    var responseMother = ""
+    var responseArr: [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -277,5 +275,7 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         task.resume()
         print(success)
     }
+    
+  
     
 }

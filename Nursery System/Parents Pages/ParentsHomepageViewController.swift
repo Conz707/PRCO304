@@ -10,11 +10,13 @@ import UIKit
 
 class ParentsHomepageViewController: UIViewController {
 
+    @IBOutlet var imgMeeting: UIImageView!
     @IBOutlet var imgNotification: UIImageView!
     @IBOutlet var lblNumNotifications: UILabel!
     let defaultValues = UserDefaults.standard
     var numNotifications = ""
     
+    @IBOutlet var lblNumMeetings: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 

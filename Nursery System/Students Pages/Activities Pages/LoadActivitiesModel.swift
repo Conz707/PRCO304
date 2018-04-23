@@ -92,6 +92,7 @@ class LoadActivitiesModel: NSObject, URLSessionDelegate {
         }
         DispatchQueue.main.async(execute: { () -> Void in
         self.delegate.itemsDownloaded(items: activityArr)
+            print("trying to print items downloaded \(activityArr)")
         })
     }
 }

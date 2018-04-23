@@ -26,31 +26,31 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
             
         }
     @IBAction func segmentChangeTable(_ sender: Any) {
-        
-        if(segmentedAgeGroups.selectedSegmentIndex == 0){
             activityIndicatorTableLoading.startAnimating()
+        if(segmentedAgeGroups.selectedSegmentIndex == 0){
+
             let studentsModel = AllStudentsModel()
             studentsModel.delegate = self
             studentsModel.downloadItems()
 
             
         } else if(segmentedAgeGroups.selectedSegmentIndex == 1){
-            activityIndicatorTableLoading.startAnimating()
+
             let studentsModel = AgeGroupAModel()
             studentsModel.delegate = self
             studentsModel.downloadItems()
         } else if(segmentedAgeGroups.selectedSegmentIndex == 2){
-            activityIndicatorTableLoading.startAnimating()
+
             let studentsModel = AgeGroupBModel()
             studentsModel.delegate = self
             studentsModel.downloadItems()
         } else if (segmentedAgeGroups.selectedSegmentIndex == 3) {
-            activityIndicatorTableLoading.startAnimating()
+
             let studentsModel = AgeGroupCModel()
             studentsModel.delegate = self
             studentsModel.downloadItems()
         } else {
-            activityIndicatorTableLoading.startAnimating()
+
             let studentsModel = KeyStudentsModel()
             studentsModel.delegate = self
             studentsModel.downloadItems()
