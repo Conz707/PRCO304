@@ -12,6 +12,7 @@
 		9C66FB9620767C9A0070E25F /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C66FB9520767C9A0070E25F /* UserModel.swift */; };
 		9C66FB9820767CB50070E25F /* UserHomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C66FB9720767CB50070E25F /* UserHomeModel.swift */; };
 		9C722F7D203F3EF100EB1805 /* TeacherLandingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C722F7C203F3EF100EB1805 /* TeacherLandingPageViewController.swift */; };
+		9C79A80E208F926B00E2A82F /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C79A80D208F926B00E2A82F /* Student.swift */; };
 		9C7AD8062062B3D700623FDE /* MyChildrenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7AD8052062B3D700623FDE /* MyChildrenViewController.swift */; };
 		9C7AD80D2062C35700623FDE /* ViewChildrenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7AD80C2062C35700623FDE /* ViewChildrenModel.swift */; };
 		9C8A23D3203B3259008C4D10 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8A23D2203B3259008C4D10 /* AppDelegate.swift */; };
@@ -43,6 +44,7 @@
 		9CC6468320471A09000A3548 /* AgeGroupCModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC6468220471A09000A3548 /* AgeGroupCModel.swift */; };
 		9CCE281A205997C0003FBEDA /* LoadActivitiesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCE2819205997C0003FBEDA /* LoadActivitiesModel.swift */; };
 		9CCE281C205997FA003FBEDA /* ActivitiesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCE281B205997FA003FBEDA /* ActivitiesModel.swift */; };
+		9CCF5D53208F82450036C0E7 /* MeetingDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCF5D52208F82450036C0E7 /* MeetingDetailsViewController.swift */; };
 		9CD126F0207BDED900C170BE /* GoalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD126EF207BDED900C170BE /* GoalsViewController.swift */; };
 		9CD126F3207BE3E900C170BE /* checked box.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CD126F2207BE3E800C170BE /* checked box.png */; };
 		9CD126F7207BE58200C170BE /* unchecked box.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CD126F6207BE58200C170BE /* unchecked box.png */; };
@@ -85,6 +87,7 @@
 		9C66FB9520767C9A0070E25F /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		9C66FB9720767CB50070E25F /* UserHomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHomeModel.swift; sourceTree = "<group>"; };
 		9C722F7C203F3EF100EB1805 /* TeacherLandingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherLandingPageViewController.swift; sourceTree = "<group>"; };
+		9C79A80D208F926B00E2A82F /* Student.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 		9C7AD8052062B3D700623FDE /* MyChildrenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChildrenViewController.swift; sourceTree = "<group>"; };
 		9C7AD80C2062C35700623FDE /* ViewChildrenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewChildrenModel.swift; sourceTree = "<group>"; };
 		9C8A23CF203B3259008C4D10 /* Nursery System.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nursery System.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,6 +125,7 @@
 		9CC6468220471A09000A3548 /* AgeGroupCModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeGroupCModel.swift; sourceTree = "<group>"; };
 		9CCE2819205997C0003FBEDA /* LoadActivitiesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadActivitiesModel.swift; sourceTree = "<group>"; };
 		9CCE281B205997FA003FBEDA /* ActivitiesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesModel.swift; sourceTree = "<group>"; };
+		9CCF5D52208F82450036C0E7 /* MeetingDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailsViewController.swift; sourceTree = "<group>"; };
 		9CD126EF207BDED900C170BE /* GoalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsViewController.swift; sourceTree = "<group>"; };
 		9CD126F2207BE3E800C170BE /* checked box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checked box.png"; path = "../../../../Downloads/checked box.png"; sourceTree = "<group>"; };
 		9CD126F6207BE58200C170BE /* unchecked box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "unchecked box.png"; path = "../../../../Downloads/unchecked box.png"; sourceTree = "<group>"; };
@@ -193,6 +197,8 @@
 				9CB78D58207D1337007B12B5 /* KeyStudentsModel.swift */,
 				9CB78D4E207D0503007B12B5 /* StudentsViewController.swift */,
 				9CB78D5A207D1CDB007B12B5 /* ParentTeacherMeetingViewController.swift */,
+				9CC42102208E646100190474 /* MeetingsViewController.swift */,
+				9CCF5D52208F82450036C0E7 /* MeetingDetailsViewController.swift */,
 			);
 			path = "Students Pages";
 			sourceTree = "<group>";
@@ -280,7 +286,6 @@
 				9CEF4EC82056F3AD001A6C1B /* ProgressReport1ViewController.swift */,
 				9CA199822051A2AB00E4B617 /* LiteracyViewController.swift */,
 				9C66FB93207678220070E25F /* AccountDetailsViewController.swift */,
-				9CC42102208E646100190474 /* MeetingsViewController.swift */,
 			);
 			path = "Nursery System";
 			sourceTree = "<group>";
@@ -319,6 +324,7 @@
 				9CC42104208E719D00190474 /* Meeting.swift */,
 				9CC42107208E72D000190474 /* Parent.swift */,
 				9CC42109208E731900190474 /* User.swift */,
+				9C79A80D208F926B00E2A82F /* Student.swift */,
 			);
 			path = structs;
 			sourceTree = "<group>";
@@ -680,8 +686,10 @@
 				9CB78D57207D10A8007B12B5 /* AgeGroupBModel.swift in Sources */,
 				9CC4210A208E731900190474 /* User.swift in Sources */,
 				9CD71B64207FB67500D814CE /* LoadBookmarksModel.swift in Sources */,
+				9CCF5D53208F82450036C0E7 /* MeetingDetailsViewController.swift in Sources */,
 				9CB78D59207D1337007B12B5 /* KeyStudentsModel.swift in Sources */,
 				9C66FB9620767C9A0070E25F /* UserModel.swift in Sources */,
+				9C79A80E208F926B00E2A82F /* Student.swift in Sources */,
 				9C8A23D5203B3259008C4D10 /* ViewController.swift in Sources */,
 				9C7AD80D2062C35700623FDE /* ViewChildrenModel.swift in Sources */,
 				9C66FB9820767CB50070E25F /* UserHomeModel.swift in Sources */,

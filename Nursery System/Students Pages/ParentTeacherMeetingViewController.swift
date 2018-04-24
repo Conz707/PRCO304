@@ -58,13 +58,13 @@ class ParentTeacherMeetingViewController: UIViewController, UIPickerViewDelegate
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
-        return "\(parents[row].firstName) \(parents[row].Surname)"
+        return "\(parents[row].FirstName) \(parents[row].Surname)"
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if (parents.count > 0 && parents.count >= row){
-            self.txtDropdown.text = "\(parents[row].firstName) \(parents[row].Surname) " as? String
-            selectedParentID = parents[row].U_ID
+            self.txtDropdown.text = "\(parents[row].FirstName) \(parents[row].Surname) " as? String
+            selectedParentID = parents[row].U_ID!
             self.pickerDropdown.isHidden = true
             print("text box should display \(self.parents[row])")
             print("selected parent id \(self.parents[row].U_ID)")
@@ -160,7 +160,7 @@ class ParentTeacherMeetingViewController: UIViewController, UIPickerViewDelegate
             self.parents = try JSONDecoder().decode(Array<Parent>.self, from: data)
             print(self.parents)
             for eachParent in self.parents {
-                print("\(eachParent.firstName) \(eachParent.Surname)")
+                print("\(eachParent.FirstName) \(eachParent.Surname)")
             }
         } catch {
             print(error)
@@ -171,6 +171,16 @@ class ParentTeacherMeetingViewController: UIViewController, UIPickerViewDelegate
         }
 
         })
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "meetingDetailsSegue", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let meetingDetailsVC = segue.destination as! MeetingDetailsViewController
+        
+        //     meetingDetailsVC.selectedMeeting = selectedMeeting!
     }
 
     func postRequest(postString: String, request: URLRequest, completion: @escaping (_ success : Bool, _ data: Data) -> ()){
