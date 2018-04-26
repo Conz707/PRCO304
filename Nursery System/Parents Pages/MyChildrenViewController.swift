@@ -11,11 +11,14 @@ import LBTAComponents
 
 class MyChildrenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet var tblChildren: UITableView!
     let defaultValues = UserDefaults.standard
-    
+    var postString = ""
     var feedItems: NSArray = NSArray()
     var selectedStudent : Student = Student()
-    @IBOutlet var tblChildren: UITableView!
+    var U_ID = ""
+    var students = [Student]()
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //return num of feed items
@@ -91,21 +94,58 @@ class MyChildrenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        U_ID = defaultValues.string(forKey: "UserU_ID")!
+        postString = "U_ID=\(U_ID)"
+        print(postString)
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetMyChildren.php")!)
+        request.httpMethod = "POST"
+        request.httpBody = postString.data(using: .utf8)
+        
+        postRequest(postString: postString, request: request, completion: { success, data in
+            
+            do {
+                self.students = try JSONDecoder().decode(Array<Student>.self, from: data)
+                for eachStudent in self.students {
+                    print("\(eachStudent.description)")
+                }
+            } catch {
+                print(error)
+                print("ERROR")
+            }
+            DispatchQueue.main.async {
+                self.itemsDownloaded(items: self.students as NSArray)
+                print("trying to print items downloaded \(self.students)")
+            }
+            
+        })
 
-        self.tblChildren.delegate = self
-        self.tblChildren.dataSource = self
-        
-        let student = Student()
-      //  viewChildrenModel.delegate = self
-       // viewChildrenModel.downloadItems()
-        
-
-        
         
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func postRequest(postString: String, request: URLRequest, completion: @escaping(_ success : Bool, _ data: Data) -> ()){
+        
+        var success = true
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                print("error=\(error)")
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(response)")
+                success = false
+            }
+            
+            var responseString = String(data: data, encoding: .utf8)!
+            print("responseString = \(responseString)")
+            completion(success, data)
+        }
+        task.resume()
     }
 }

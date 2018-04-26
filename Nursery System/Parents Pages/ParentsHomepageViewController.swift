@@ -50,7 +50,7 @@ class ParentsHomepageViewController: UIViewController {
         let U_ID = defaultValues.string(forKey: "UserU_ID")
         
         
-        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/NumberOfNotifications.php")!)
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetNumberOfNotifications.php")!)
         
         request.httpMethod = "POST"
         

@@ -12,7 +12,7 @@ import Alamofire
 class ActivityDetailsViewController: UIViewController, UINavigationControllerDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, URLSessionTaskDelegate, URLSessionDelegate, URLSessionDataDelegate, UIPopoverPresentationControllerDelegate  {
 
     var selectedActivity : ActivitiesModel?
-    var selectedStudent : Student = Student()   //WHY???
+    var selectedStudent : Student = Student()  
     var defaultValues = UserDefaults.standard
     
     @IBOutlet var progressIndicatorUpload: UIProgressView!
@@ -30,12 +30,16 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
     var bookmark = false
     var A_ID = ""
     var U_ID = ""
+    var userRole = ""
     var myDate = Date()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         A_ID = (selectedActivity?.activityID)!
         U_ID = defaultValues.string(forKey: "UserU_ID")!
+        userRole = defaultValues.string(forKey: "UserRole")!
+        print("yo check this shit out \(userRole)")
+
         
         lblStudentName.text = "\(selectedStudent.FirstName!) \(selectedStudent.Surname!)"
         lblActivityTitle.text = selectedActivity?.activity
@@ -216,7 +220,7 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
         progressIndicatorUpload.isHidden = true
         progressIndicatorUpload.setProgress(0, animated: true)
 
-        if(defaultValues.string(forKey: "UserRole") == "Parent"){
+        if(userRole == "Parent"){
             btnBookmarkOutlet.isHidden = false
             btnDeleteActivityOutlet.isHidden = true
             btnEditActivityOutlet.isHidden = true

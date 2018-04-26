@@ -108,7 +108,7 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         } else { btnAddActivity.isHidden = false }
         
                 activityIndicatorTableLoading.startAnimating()
-                navigationController?.navigationBar.isHidden = true
+
                 self.tblActivities.dataSource = self
                 self.tblActivities.delegate = self
                 let loadActivitiesModel = LoadActivitiesModel()
@@ -127,7 +127,7 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
             feedItems = items
             tblActivities.reloadData()
             activityIndicatorTableLoading.stopAnimating()
-             navigationController?.navigationBar.isHidden = false //stops backing too fast crashing application
+ 
             
         }
     

@@ -15,6 +15,8 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet var tblBookmarks: UITableView!
     var feedItems: NSArray = NSArray()
     var selectedActivity : ActivitiesModel = ActivitiesModel()
+    var selectedStudent : Student = Student()
+    var postString = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +24,7 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        navigationController?.navigationBar.isHidden = true
+     
         self.tblBookmarks.dataSource = self
         self.tblBookmarks.delegate = self
         let loadBookmarksModel = LoadBookmarksModel()
@@ -90,18 +92,72 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         //set selected activity to var
         selectedActivity = feedItems[indexPath.row] as! ActivitiesModel
         //manually call segue to detail view controller
-        self.performSegue(withIdentifier: "viewActivity", sender: self)
+        
+
+        
+        postString = "S_ID=\(selectedActivity.studentID!)"
+       
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetSelectedStudent.php")!)
+        request.httpMethod = "POST"
+        request.httpBody = postString.data(using: .utf8)
+        print(postString)
+        postRequest(postString: postString, request: request, completion: { success, data in
+    
+            do {
+                print(data)
+                let student = try JSONDecoder().decode(Student.self, from: data)
+                self.selectedStudent = student
+                print(student.description)
+                print(self.selectedStudent.description)
+                DispatchQueue.main.async{
+                    self.performSegue(withIdentifier: "viewActivity", sender: Any?.self)
+                }
+            } catch {
+                print(error)
+                print("ERROR")
+                
+            }
+            print(self.selectedStudent)
+                    self.performSegue(withIdentifier: "viewActivity", sender: self)
+        })
+        
+        
+        
     }
     
     func itemsDownloaded(items: NSArray) {
         feedItems = items
         tblBookmarks.reloadData()
-        navigationController?.navigationBar.isHidden = false //stops backing too fast crashing application
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
         let viewActivityVC = segue.destination as! ActivityDetailsViewController
         viewActivityVC.selectedActivity = selectedActivity
+        viewActivityVC.selectedStudent = selectedStudent
+        print(selectedStudent.description)
     }
 
+    func postRequest(postString: String, request: URLRequest, completion: @escaping(_ success : Bool, _ data: Data) -> ()){
+        
+        var success = true
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                print("error=\(error)")
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(response)")
+                success = false
+            }
+            
+            var responseString = String(data: data, encoding: .utf8)!
+            print("responseString = \(responseString)")
+            completion(success, data)
+        }
+        task.resume()
+    }
+    
 }

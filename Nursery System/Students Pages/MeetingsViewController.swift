@@ -53,17 +53,18 @@ class MeetingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @IBAction func segmentChangeTable(_ sender: Any) {
     activityIndicatorTableLoading.startAnimating()
-        if(segmentedMeetings.selectedSegmentIndex == 0){
-
+        switch segmentedMeetings.selectedSegmentIndex{
+        case 0:
             postString = "U_ID=\(userID)&querySelector=Upcoming"
-
-        } else if(segmentedMeetings.selectedSegmentIndex == 1){
+        case 1:
             postString = "U_ID=\(userID)&querySelector=Completed"
-            
-        } else if(segmentedMeetings.selectedSegmentIndex == 2){
-                postString = "U_ID=\(userID)&querySelector=All"
+        case 2:
+            postString = "U_ID=\(userID)&querySelector=All"
+        default:
+            segmentedMeetings.selectedSegmentIndex = 1
         }
-       var request = URLRequest(url: URL(string: "https://xshod-verses.000webhostapp.com/GetMyMeetings.php")!)
+        
+       var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetMyMeetings.php")!)
         request.httpMethod = "POST"
                 request.httpBody = postString.data(using: .utf8)
         postRequest(postString: postString, request: request, completion: { success, data in

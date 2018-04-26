@@ -23,7 +23,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     
     override func viewDidAppear(_ animated: Bool) {
         U_ID = defaultValues.string(forKey: "UserU_ID")!
-        navigationController?.navigationBar.isHidden = true
+  
         self.tblNotifications.dataSource = self
         self.tblNotifications.delegate = self
         let loadNotificationsModel = LoadNotificationsModel()
@@ -91,7 +91,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         //set selected activity to var
         selectedActivity = feedItems[indexPath.row] as! ActivitiesModel
         
-        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/MarkNotificationRead.php")!)
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/SetNotificationRead.php")!)
         
         request.httpMethod = "POST"
         
@@ -124,7 +124,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     func itemsDownloaded(items: NSArray) {
         feedItems = items
         tblNotifications.reloadData()
-        navigationController?.navigationBar.isHidden = false //stops backing too fast crashing application
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){

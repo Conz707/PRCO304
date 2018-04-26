@@ -28,7 +28,7 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
 
             activityIndicatorTableLoading.hidesWhenStopped = true
             activityIndicatorTableLoading.startAnimating()
-            navigationController?.navigationBar.isHidden = true    //stops backing too fast crashing application
+
             
         }
     @IBAction func segmentChangeTable(_ sender: Any) {
@@ -89,7 +89,6 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
             feedItems = items
             self.tblAllStudents.reloadData()
             activityIndicatorTableLoading.stopAnimating()
-            navigationController?.navigationBar.isHidden = false
         }
         
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

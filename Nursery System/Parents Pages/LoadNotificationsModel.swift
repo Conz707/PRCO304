@@ -24,7 +24,7 @@ class LoadNotificationsModel: NSObject, URLSessionDelegate {
     
     func downloadItems() {
         
-        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/ViewNotifications.php")!)
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetMyNotifications.php")!)
         request.httpMethod = "POST"
         
         let U_ID = defaultValues.string(forKey: "UserU_ID")

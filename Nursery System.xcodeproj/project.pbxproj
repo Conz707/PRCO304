@@ -50,6 +50,8 @@
 		9CD71B68207FCBF000D814CE /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD71B67207FCBF000D814CE /* NotificationsViewController.swift */; };
 		9CD71B6A207FCCCA00D814CE /* LoadNotificationsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD71B69207FCCCA00D814CE /* LoadNotificationsModel.swift */; };
 		9CEF4EC92056F3AD001A6C1B /* ProgressReport1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEF4EC82056F3AD001A6C1B /* ProgressReport1ViewController.swift */; };
+		9CFB994A209256B2001F3249 /* checked bookmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CFB9948209256B2001F3249 /* checked bookmark.png */; };
+		9CFB994B209256B2001F3249 /* unchecked bookmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CFB9949209256B2001F3249 /* unchecked bookmark.png */; };
 		B8E61290DB2E64D7C48C2383 /* Pods_Nursery_SystemUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD75C73ED3A1145844344D1D /* Pods_Nursery_SystemUITests.framework */; };
 		C239FF7DB5AAF2223BC35693 /* Pods_Nursery_SystemTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A5B899258B9708CEAB0491 /* Pods_Nursery_SystemTests.framework */; };
 /* End PBXBuildFile section */
@@ -124,6 +126,8 @@
 		9CD71B67207FCBF000D814CE /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		9CD71B69207FCCCA00D814CE /* LoadNotificationsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadNotificationsModel.swift; sourceTree = "<group>"; };
 		9CEF4EC82056F3AD001A6C1B /* ProgressReport1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressReport1ViewController.swift; sourceTree = "<group>"; };
+		9CFB9948209256B2001F3249 /* checked bookmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checked bookmark.png"; path = "../../../../Downloads/checked bookmark.png"; sourceTree = "<group>"; };
+		9CFB9949209256B2001F3249 /* unchecked bookmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "unchecked bookmark.png"; path = "../../../../Downloads/unchecked bookmark.png"; sourceTree = "<group>"; };
 		AD75C73ED3A1145844344D1D /* Pods_Nursery_SystemUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nursery_SystemUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4A5B899258B9708CEAB0491 /* Pods_Nursery_SystemTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nursery_SystemTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB4DA789FFEA63BE64846CB0 /* Pods-Nursery SystemUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nursery SystemUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Nursery SystemUITests/Pods-Nursery SystemUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -321,6 +325,8 @@
 		9CD3ACB9203F25D5003A21C0 /* media */ = {
 			isa = PBXGroup;
 			children = (
+				9CFB9948209256B2001F3249 /* checked bookmark.png */,
+				9CFB9949209256B2001F3249 /* unchecked bookmark.png */,
 				9CC3AC2A204EF80B003B5359 /* earlyYears.jpg */,
 				9CD126F2207BE3E800C170BE /* checked box.png */,
 				9CD3ACBA203F25EF003A21C0 /* placeholder.png */,
@@ -461,7 +467,9 @@
 				9C8A23DD203B3259008C4D10 /* LaunchScreen.storyboard in Resources */,
 				9CD3ACBB203F25EF003A21C0 /* placeholder.png in Resources */,
 				9CD126F7207BE58200C170BE /* unchecked box.png in Resources */,
+				9CFB994B209256B2001F3249 /* unchecked bookmark.png in Resources */,
 				9C8A23DA203B3259008C4D10 /* Assets.xcassets in Resources */,
+				9CFB994A209256B2001F3249 /* checked bookmark.png in Resources */,
 				9C8A23D8203B3259008C4D10 /* Main.storyboard in Resources */,
 				9CD126F3207BE3E900C170BE /* checked box.png in Resources */,
 				9CC3AC2B204EF80B003B5359 /* earlyYears.jpg in Resources */,

@@ -15,9 +15,10 @@ class ViewController: UIViewController{
 
      var users = [User]()
     //Properties
+    @IBOutlet var btnLoginOutlet: UIButton!
     @IBOutlet var activityIndicatorLogin: UIActivityIndicatorView!
-    @IBOutlet weak var emailTxt: UITextField!
-    @IBOutlet weak var passwordTxt: UITextField!
+    @IBOutlet weak var txtEmail: UITextField!
+    @IBOutlet weak var txtPassword: UITextField!
     var loginSuccess = false
     var roleString = ""
     let loginRequest = "https://shod-verses.000webhostapp.com/NewLogin.php" //loginRequest as Alamofire has a request function
@@ -33,8 +34,9 @@ class ViewController: UIViewController{
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        passwordTxt.isEnabled = true
-        emailTxt.isEnabled = true
+        txtPassword.isEnabled = true
+        txtEmail.isEnabled = true
+        btnLoginOutlet.isEnabled = true
         let dictionary = self.defaultValues.dictionaryRepresentation()
         dictionary.keys.forEach { key in
             self.defaultValues.removeObject(forKey: key)
@@ -59,8 +61,8 @@ class ViewController: UIViewController{
     
     func parseJSON(completion: @escaping (_ success : Bool) -> ()){
         var success = true
-        let emailVar = emailTxt.text
-        let passwordVar = passwordTxt.text
+        let emailVar = txtEmail.text
+        let passwordVar = txtPassword.text
         
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/NewLogin.php")!)
             request.httpMethod = "POST"
@@ -108,8 +110,9 @@ class ViewController: UIViewController{
     @IBAction func loginBtn(_ sender: Any) {
         
         activityIndicatorLogin.startAnimating()
-        passwordTxt.isEnabled = false
-        emailTxt.isEnabled = false
+        txtPassword.isEnabled = false
+        txtEmail.isEnabled = false
+        btnLoginOutlet.isEnabled = false
  DispatchQueue.main.async {
     self.parseJSON(completion: { success in
         self.activityIndicatorLogin.stopAnimating()
@@ -137,8 +140,9 @@ class ViewController: UIViewController{
             let defaultAction = UIAlertAction(title: "Close Alert", style: .default, handler: nil)
             alertController.addAction(defaultAction)
             self.present(alertController, animated: true, completion: nil)
-            self.passwordTxt.isEnabled = true
-            self.emailTxt.isEnabled = true
+            self.txtPassword.isEnabled = true
+            self.txtEmail.isEnabled = true
+            self.btnLoginOutlet.isEnabled = true
             
                         }
                     })
