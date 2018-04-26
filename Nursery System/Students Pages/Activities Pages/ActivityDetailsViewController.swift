@@ -12,7 +12,7 @@ import Alamofire
 class ActivityDetailsViewController: UIViewController, UINavigationControllerDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, URLSessionTaskDelegate, URLSessionDelegate, URLSessionDataDelegate, UIPopoverPresentationControllerDelegate  {
 
     var selectedActivity : ActivitiesModel?
-    var selectedStudent : StudentsModel = StudentsModel()   //WHY???
+    var selectedStudent : Student = Student()   //WHY???
     var defaultValues = UserDefaults.standard
     
     @IBOutlet var progressIndicatorUpload: UIProgressView!
@@ -37,7 +37,7 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
         A_ID = (selectedActivity?.activityID)!
         U_ID = defaultValues.string(forKey: "UserU_ID")!
         
-        lblStudentName.text = "\(selectedStudent.firstName!) \(selectedStudent.surname!)"
+        lblStudentName.text = "\(selectedStudent.FirstName!) \(selectedStudent.Surname!)"
         lblActivityTitle.text = selectedActivity?.activity
         txtActivityObservations.text = selectedActivity?.observation
         txtActivityObservations.isUserInteractionEnabled = false
@@ -303,7 +303,7 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
         }
         
         let activityID = self.selectedActivity?.activityID
-        let parameters = ["studentID": "\(selectedStudent.studentID!)"]
+        let parameters = ["studentID": "\(selectedStudent.S_ID!)"]
         print(parameters)
         
         Alamofire.upload(multipartFormData: { multipartFormData in
@@ -426,7 +426,7 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
                 popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
                 popoverController.permittedArrowDirections = []
             }
-            
+           
             self.present(alertDeleteSuccess, animated: true, completion: nil)
             
         }))

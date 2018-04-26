@@ -9,17 +9,23 @@
 import UIKit
 import Foundation
 
-class StudentsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AllStudentsModelProtocol, AgeGroupAProtocol, AgeGroupBProtocol, AgeGroupCProtocol, KeyStudentsModelProtocol {
+class StudentsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
         
         @IBOutlet var activityIndicatorTableLoading: UIActivityIndicatorView!
-        
-    @IBOutlet var segmentedAgeGroups: UISegmentedControl!
+        @IBOutlet var segmentedAgeGroups: UISegmentedControl!
+        var postString = ""
+        var students = [Student]()
+        var defaultValues = UserDefaults.standard
+        var U_ID = ""
+    
     var feedItems: NSArray = NSArray()
-        var selectedStudent : StudentsModel = StudentsModel()
+        var selectedStudent : Student = Student()
         @IBOutlet weak var tblAllStudents: UITableView!
         
         override func viewDidLoad() {
             super.viewDidLoad()
+            U_ID = defaultValues.string(forKey: "UserU_ID")!
+
             activityIndicatorTableLoading.hidesWhenStopped = true
             activityIndicatorTableLoading.startAnimating()
             navigationController?.navigationBar.isHidden = true    //stops backing too fast crashing application
@@ -27,46 +33,56 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     @IBAction func segmentChangeTable(_ sender: Any) {
             activityIndicatorTableLoading.startAnimating()
-        if(segmentedAgeGroups.selectedSegmentIndex == 0){
-
-            let studentsModel = AllStudentsModel()
-            studentsModel.delegate = self
-            studentsModel.downloadItems()
-
+    
+       switch segmentedAgeGroups.selectedSegmentIndex {
+        case 0:
+         postString = "DisplayStudents=All"
+         print(postString)
+        case 1:
+         postString = "DisplayStudents=AgeGroupA"
+         print(postString)
+        case 2:
+         postString = "DisplayStudents=AgeGroupB"
+         print(postString)
+        case 3:
+         postString = "DisplayStudents=AgeGroupC"
+         print(postString)
+        case 4:
+         postString = "U_ID=\(U_ID)&DisplayStudents=KeyStudents"
+         print(postString)
             
-        } else if(segmentedAgeGroups.selectedSegmentIndex == 1){
-
-            let studentsModel = AgeGroupAModel()
-            studentsModel.delegate = self
-            studentsModel.downloadItems()
-        } else if(segmentedAgeGroups.selectedSegmentIndex == 2){
-
-            let studentsModel = AgeGroupBModel()
-            studentsModel.delegate = self
-            studentsModel.downloadItems()
-        } else if (segmentedAgeGroups.selectedSegmentIndex == 3) {
-
-            let studentsModel = AgeGroupCModel()
-            studentsModel.delegate = self
-            studentsModel.downloadItems()
-        } else {
-
-            let studentsModel = KeyStudentsModel()
-            studentsModel.delegate = self
-            studentsModel.downloadItems()
+       default:
+        segmentedAgeGroups.selectedSegmentIndex = 1
+        print("default")
         }
+        
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetStudents.php")!)
+        request.httpMethod = "POST"
+        request.httpBody = postString.data(using: .utf8)
 
+        postRequest(postString: postString, request: request, completion: { success, data in
+            do {
+                self.students = try JSONDecoder().decode(Array<Student>.self, from: data)
+                for eachStudent in self.students {
+                    print("\(eachStudent.description)")
+                }
+            } catch {
+                print(error)
+                print("ERROR")
+            }
+            DispatchQueue.main.async {
+                self.itemsDownloaded(items: self.students as NSArray)
+                print("trying to print items downloaded \(self.students)")
+            }
+            
+        })
+        
     }
     
         override func viewDidAppear(_ animated: Bool) {
             
-            self.tblAllStudents.delegate = self
-            self.tblAllStudents.dataSource = self
-            
-            let homeModel = AllStudentsModel()
-            homeModel.delegate = self
-            homeModel.downloadItems()
-            
+            segmentChangeTable((Any).self)
+        
         }
         
         func itemsDownloaded(items: NSArray){
@@ -88,10 +104,10 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
             
             
             //get student to show
-            let item: StudentsModel = feedItems[indexPath.row] as! StudentsModel
+            let item: Student = feedItems[indexPath.row] as! Student
             //get references to labels of cells
             
-            let URL_IMAGE = URL(string: (item.displayPicture)!)
+            let URL_IMAGE = URL(string: (item.StudentPicture)!)
             let session = URLSession(configuration: .default)
             
             //create a dataTask
@@ -111,7 +127,7 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
                             let image = UIImage(data: imageData)
                             //display the image
                             DispatchQueue.main.async{
-                                myCell.textLabel!.text = item.firstName! + " " + item.surname!
+                                myCell.textLabel!.text = item.FirstName! + " " + item.Surname!
                                 myCell.imageView?.image = image
                             }
                         } else {
@@ -128,7 +144,7 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {     //whenever user taps row
             //set selected student to var
-            selectedStudent = feedItems[indexPath.row] as! StudentsModel
+            selectedStudent = feedItems[indexPath.row] as! Student
             //Manually call segue to detail view controller
             self.performSegue(withIdentifier: "StudentSegue", sender: self)
         }
@@ -141,9 +157,31 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
             studentVC.selectedStudent = selectedStudent
             
             print("finding the list of activities")
-            
+            print(selectedStudent.description)
             
         }
+    
+        func postRequest(postString: String, request: URLRequest, completion: @escaping(_ success : Bool, _ data: Data) -> ()){
+            
+            var success = true
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                    print("error=\(error)")
+                    return
+                }
+                
+                if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+                    print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                    print("response = \(response)")
+                    success = false
+                }
+                
+                var responseString = String(data: data, encoding: .utf8)!
+                print("responseString = \(responseString)")
+                completion(success, data)
+            }
+            task.resume()
+    }
         
         override func didReceiveMemoryWarning() {
             super.didReceiveMemoryWarning()

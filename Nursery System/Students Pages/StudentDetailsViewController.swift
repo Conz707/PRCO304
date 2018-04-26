@@ -24,14 +24,14 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet var tblActivities: UITableView!
     var selectedActivity : ActivitiesModel = ActivitiesModel()
     let defaultValues = UserDefaults.standard
-    var selectedStudent : StudentsModel?
+    var selectedStudent : Student!
     var feedItems: NSArray = NSArray()
     var responseMother = ""
     var responseArr: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("oioi \(selectedStudent.description)")
  
         tblActivities.contentInset = UIEdgeInsetsMake(0, 15, 0, 0)
         DispatchQueue.main.async {
@@ -45,7 +45,7 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         
         activityIndicatorTableLoading.hidesWhenStopped = true 
         
-        let URL_IMAGE = URL(string: (selectedStudent?.displayPicture)!)
+        let URL_IMAGE = URL(string: (selectedStudent.StudentPicture)!)
         let session = URLSession(configuration: .default)
         
         //create a dataTask
@@ -79,13 +79,13 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
             getImageFromUrl.resume()
         
 
-        lblName.text = (selectedStudent?.firstName)! + " " + (selectedStudent?.surname)!
-        lblDateOfBirth.text = selectedStudent?.dateOfBirth
-        
+        lblName.text = (selectedStudent.FirstName)! + " " + (selectedStudent.Surname)!
+        lblDateOfBirth.text = selectedStudent.DateofBirth
+   
         //small piece to make date more easily identifiable
         //Convert String to Date for formatting
-      let dateString = selectedStudent?.dateOfBirth
-      let dateFormatter = DateFormatter()
+        let dateString = selectedStudent.DateofBirth
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let myDate = dateFormatter.date(from: dateString!)!
         print("original date is \(dateString!)")
@@ -95,7 +95,7 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         let newDateString = dateFormatter.string(from: myDate)
         print("new date string is \(newDateString)")
         lblDateOfBirth.text = "\(newDateString)"
-        
+ 
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -112,7 +112,8 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
                 self.tblActivities.dataSource = self
                 self.tblActivities.delegate = self
                 let loadActivitiesModel = LoadActivitiesModel()
-                loadActivitiesModel.selectedStudent = selectedStudent
+             //
+        loadActivitiesModel.selectedStudent = selectedStudent
                 loadActivitiesModel.downloadItems()
                 loadActivitiesModel.delegate = self
 
@@ -203,16 +204,16 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         
         var success = true
         
-        let mother = selectedStudent?.mother
-        let father = selectedStudent?.father
-        let guardian = selectedStudent?.guardian
-        let keyPerson = selectedStudent?.keyPerson
+        let mother = selectedStudent.Mother
+        let father = selectedStudent.Father
+        let guardian = selectedStudent.Guardian
+        let keyPerson = selectedStudent.KeyPerson
         
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetParentsDetails.php")!)     
         
         request.httpMethod = "POST"
 
-        let postString = ("Mother=\(mother!)&Father=\(father!)&Guardian=\(guardian!)&KeyPerson=\(keyPerson!)")
+        let postString = ("Mother=\(mother ?? "")&Father=\(father ?? "")&Guardian=\(guardian ?? "")&KeyPerson=\(keyPerson ?? "")")
         print(postString)
         
         request.httpBody = postString.data(using: .utf8)
@@ -232,18 +233,18 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         //set property to selected activity so when view loads, it accesses the properties of feeditem obj
             
             viewActivityVC.selectedActivity = selectedActivity
-            viewActivityVC.selectedStudent = selectedStudent!
+            viewActivityVC.selectedStudent = selectedStudent
         } else if (segue.identifier == "createActivity"){
             //get reference to destination view controller
             
             let createActivityVC = segue.destination as! CreateActivityViewController
             //set property to selected student so when view loads, it accesses the properties of feeditem obj ??
-            createActivityVC.selectedStudent = selectedStudent!
+            createActivityVC.selectedStudent = selectedStudent
             
         } else if (segue.identifier == "createParentTeacherMeeting") {
             print("parentteachermeetingsegueeeeeeeeeeeeeeee")
             let createParentTeacherMeetingVC = segue.destination as! ParentTeacherMeetingViewController
-            createParentTeacherMeetingVC.selectedStudent = selectedStudent!
+            createParentTeacherMeetingVC.selectedStudent = selectedStudent
         }
     }
     

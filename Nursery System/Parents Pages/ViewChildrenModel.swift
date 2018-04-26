@@ -5,7 +5,7 @@
 //  Created by (s) Connor Smith 1 on 21/03/2018.
 //  Copyright © 2018 (s) Connor Smith 1. All rights reserved.
 //
-
+/*
 import UIKit
 
 protocol ViewChildrenModelProtocol: class {
@@ -63,7 +63,7 @@ class ViewChildrenModel: NSObject, URLSessionDelegate {
         for i in 0 ..< jsonResult.count{
             jsonElement = jsonResult[i] as! NSDictionary
             
-            let student = StudentsModel()
+            let student = Student()
             
             //the following ensures none of the JsonElement values are nil through optional binding
             if let studentID = jsonElement["S_ID"] as? String,
@@ -73,11 +73,11 @@ class ViewChildrenModel: NSObject, URLSessionDelegate {
                 let dateOfBirth = jsonElement["DateofBirth"] as? String
                 
             {
-                student.studentID = studentID
-                student.firstName = firstName
-                student.surname = surname
-                student.displayPicture = displayPicture
-                student.dateOfBirth = dateOfBirth
+                student.S_ID = S_ID
+                student.FirstName = FirstName
+                student.Surname = Surname
+                student.StudentPicture = StudentPicture
+                student.DateofBirth = DateofBirth
             }
             
             if let mother = jsonElement["Mother"] as? String {  //these elements might be returned nil, changed to empty string, probably a better method - ask nick? (NIL COALESCING OPERATORS??)
@@ -113,4 +113,4 @@ class ViewChildrenModel: NSObject, URLSessionDelegate {
     }
 }
 
-
+*/

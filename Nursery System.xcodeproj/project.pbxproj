@@ -22,11 +22,7 @@
 		9C8A23DD203B3259008C4D10 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C8A23DB203B3259008C4D10 /* LaunchScreen.storyboard */; };
 		9C8A23E8203B325A008C4D10 /* Nursery_SystemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8A23E7203B325A008C4D10 /* Nursery_SystemTests.swift */; };
 		9C8A23F3203B325A008C4D10 /* Nursery_SystemUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8A23F2203B325A008C4D10 /* Nursery_SystemUITests.swift */; };
-		9CA199832051A2AB00E4B617 /* LiteracyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA199822051A2AB00E4B617 /* LiteracyViewController.swift */; };
 		9CB78D4F207D0503007B12B5 /* StudentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB78D4E207D0503007B12B5 /* StudentsViewController.swift */; };
-		9CB78D51207D0586007B12B5 /* AllStudentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB78D50207D0586007B12B5 /* AllStudentsModel.swift */; };
-		9CB78D57207D10A8007B12B5 /* AgeGroupBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB78D56207D10A8007B12B5 /* AgeGroupBModel.swift */; };
-		9CB78D59207D1337007B12B5 /* KeyStudentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB78D58207D1337007B12B5 /* KeyStudentsModel.swift */; };
 		9CB78D5B207D1CDB007B12B5 /* ParentTeacherMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB78D5A207D1CDB007B12B5 /* ParentTeacherMeetingViewController.swift */; };
 		9CB9102F20693E6600294C9B /* ManagerLandingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB9102E20693E6600294C9B /* ManagerLandingPageViewController.swift */; };
 		9CB9103120693EC300294C9B /* CreateStudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB9103020693EC300294C9B /* CreateStudentViewController.swift */; };
@@ -39,9 +35,6 @@
 		9CC4210A208E731900190474 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC42109208E731900190474 /* User.swift */; };
 		9CC4418B2060029A002E9456 /* ActivityDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4418A2060029A002E9456 /* ActivityDetailsViewController.swift */; };
 		9CC4418D20603365002E9456 /* CreateActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4418C20603365002E9456 /* CreateActivityViewController.swift */; };
-		9CC646772046F641000A3548 /* AgeGroupAModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC646762046F641000A3548 /* AgeGroupAModel.swift */; };
-		9CC6467B2046FAD9000A3548 /* StudentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC6467A2046FAD9000A3548 /* StudentsModel.swift */; };
-		9CC6468320471A09000A3548 /* AgeGroupCModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC6468220471A09000A3548 /* AgeGroupCModel.swift */; };
 		9CCE281A205997C0003FBEDA /* LoadActivitiesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCE2819205997C0003FBEDA /* LoadActivitiesModel.swift */; };
 		9CCE281C205997FA003FBEDA /* ActivitiesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCE281B205997FA003FBEDA /* ActivitiesModel.swift */; };
 		9CCF5D53208F82450036C0E7 /* MeetingDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCF5D52208F82450036C0E7 /* MeetingDetailsViewController.swift */; };
@@ -103,11 +96,7 @@
 		9C8A23EE203B325A008C4D10 /* Nursery SystemUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Nursery SystemUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C8A23F2203B325A008C4D10 /* Nursery_SystemUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nursery_SystemUITests.swift; sourceTree = "<group>"; };
 		9C8A23F4203B325A008C4D10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9CA199822051A2AB00E4B617 /* LiteracyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiteracyViewController.swift; sourceTree = "<group>"; };
 		9CB78D4E207D0503007B12B5 /* StudentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsViewController.swift; sourceTree = "<group>"; };
-		9CB78D50207D0586007B12B5 /* AllStudentsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllStudentsModel.swift; sourceTree = "<group>"; };
-		9CB78D56207D10A8007B12B5 /* AgeGroupBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgeGroupBModel.swift; sourceTree = "<group>"; };
-		9CB78D58207D1337007B12B5 /* KeyStudentsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStudentsModel.swift; sourceTree = "<group>"; };
 		9CB78D5A207D1CDB007B12B5 /* ParentTeacherMeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentTeacherMeetingViewController.swift; sourceTree = "<group>"; };
 		9CB9102E20693E6600294C9B /* ManagerLandingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerLandingPageViewController.swift; sourceTree = "<group>"; };
 		9CB9103020693EC300294C9B /* CreateStudentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudentViewController.swift; sourceTree = "<group>"; };
@@ -120,9 +109,6 @@
 		9CC42109208E731900190474 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9CC4418A2060029A002E9456 /* ActivityDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailsViewController.swift; sourceTree = "<group>"; };
 		9CC4418C20603365002E9456 /* CreateActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateActivityViewController.swift; sourceTree = "<group>"; };
-		9CC646762046F641000A3548 /* AgeGroupAModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgeGroupAModel.swift; sourceTree = "<group>"; };
-		9CC6467A2046FAD9000A3548 /* StudentsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsModel.swift; sourceTree = "<group>"; };
-		9CC6468220471A09000A3548 /* AgeGroupCModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeGroupCModel.swift; sourceTree = "<group>"; };
 		9CCE2819205997C0003FBEDA /* LoadActivitiesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadActivitiesModel.swift; sourceTree = "<group>"; };
 		9CCE281B205997FA003FBEDA /* ActivitiesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesModel.swift; sourceTree = "<group>"; };
 		9CCF5D52208F82450036C0E7 /* MeetingDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailsViewController.swift; sourceTree = "<group>"; };
@@ -189,12 +175,6 @@
 				9C7AD8092062C06600623FDE /* Activities Pages */,
 				9CD126F1207BDEDD00C170BE /* Goals */,
 				9CC3AC28204EEB52003B5359 /* StudentDetailsViewController.swift */,
-				9CC6467A2046FAD9000A3548 /* StudentsModel.swift */,
-				9CC646762046F641000A3548 /* AgeGroupAModel.swift */,
-				9CB78D56207D10A8007B12B5 /* AgeGroupBModel.swift */,
-				9CC6468220471A09000A3548 /* AgeGroupCModel.swift */,
-				9CB78D50207D0586007B12B5 /* AllStudentsModel.swift */,
-				9CB78D58207D1337007B12B5 /* KeyStudentsModel.swift */,
 				9CB78D4E207D0503007B12B5 /* StudentsViewController.swift */,
 				9CB78D5A207D1CDB007B12B5 /* ParentTeacherMeetingViewController.swift */,
 				9CC42102208E646100190474 /* MeetingsViewController.swift */,
@@ -284,7 +264,6 @@
 				9C8A23DB203B3259008C4D10 /* LaunchScreen.storyboard */,
 				9C8A23DE203B3259008C4D10 /* Info.plist */,
 				9CEF4EC82056F3AD001A6C1B /* ProgressReport1ViewController.swift */,
-				9CA199822051A2AB00E4B617 /* LiteracyViewController.swift */,
 				9C66FB93207678220070E25F /* AccountDetailsViewController.swift */,
 			);
 			path = "Nursery System";
@@ -674,20 +653,14 @@
 				9CD71B6A207FCCCA00D814CE /* LoadNotificationsModel.swift in Sources */,
 				9CB78D4F207D0503007B12B5 /* StudentsViewController.swift in Sources */,
 				9C722F7D203F3EF100EB1805 /* TeacherLandingPageViewController.swift in Sources */,
-				9CC6467B2046FAD9000A3548 /* StudentsModel.swift in Sources */,
 				9CB78D5B207D1CDB007B12B5 /* ParentTeacherMeetingViewController.swift in Sources */,
-				9CC6468320471A09000A3548 /* AgeGroupCModel.swift in Sources */,
 				9CB9102F20693E6600294C9B /* ManagerLandingPageViewController.swift in Sources */,
 				9CD126FB207BF05700C170BE /* GoalsModel.swift in Sources */,
-				9CA199832051A2AB00E4B617 /* LiteracyViewController.swift in Sources */,
 				9CC4418D20603365002E9456 /* CreateActivityViewController.swift in Sources */,
 				9C7AD8062062B3D700623FDE /* MyChildrenViewController.swift in Sources */,
-				9CC646772046F641000A3548 /* AgeGroupAModel.swift in Sources */,
-				9CB78D57207D10A8007B12B5 /* AgeGroupBModel.swift in Sources */,
 				9CC4210A208E731900190474 /* User.swift in Sources */,
 				9CD71B64207FB67500D814CE /* LoadBookmarksModel.swift in Sources */,
 				9CCF5D53208F82450036C0E7 /* MeetingDetailsViewController.swift in Sources */,
-				9CB78D59207D1337007B12B5 /* KeyStudentsModel.swift in Sources */,
 				9C66FB9620767C9A0070E25F /* UserModel.swift in Sources */,
 				9C79A80E208F926B00E2A82F /* Student.swift in Sources */,
 				9C8A23D5203B3259008C4D10 /* ViewController.swift in Sources */,
@@ -704,7 +677,6 @@
 				9C8A23D3203B3259008C4D10 /* AppDelegate.swift in Sources */,
 				9CD71B68207FCBF000D814CE /* NotificationsViewController.swift in Sources */,
 				9CC42108208E72D000190474 /* Parent.swift in Sources */,
-				9CB78D51207D0586007B12B5 /* AllStudentsModel.swift in Sources */,
 				9CD126F9207BF04D00C170BE /* LoadGoalsModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,12 +9,12 @@
 import UIKit
 import LBTAComponents
 
-class MyChildrenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ViewChildrenModelProtocol {
+class MyChildrenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let defaultValues = UserDefaults.standard
     
     var feedItems: NSArray = NSArray()
-    var selectedStudent : StudentsModel = StudentsModel()
+    var selectedStudent : Student = Student()
     @IBOutlet var tblChildren: UITableView!
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -29,9 +29,9 @@ class MyChildrenViewController: UIViewController, UITableViewDelegate, UITableVi
         let myCell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)!
         
         //get student to show
-        let item: StudentsModel = feedItems[indexPath.row] as! StudentsModel
+        let item: Student = feedItems[indexPath.row] as! Student
         
-        let URL_IMAGE = URL(string: (item.displayPicture)!)
+        let URL_IMAGE = URL(string: (item.StudentPicture)!)
         let session = URLSession(configuration: .default)
         
         //create a dataTask
@@ -51,7 +51,7 @@ class MyChildrenViewController: UIViewController, UITableViewDelegate, UITableVi
                         let image = UIImage(data: imageData)
                         //display the image
                         DispatchQueue.main.async{
-                        myCell.textLabel!.text = item.firstName! + " " + item.surname!
+                        myCell.textLabel!.text = item.FirstName! + " " + item.Surname!
                             myCell.imageView?.image = image
                         }
                     } else {
@@ -76,7 +76,7 @@ class MyChildrenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //set selected student to var
-        selectedStudent = feedItems[indexPath.row] as! StudentsModel
+        selectedStudent = feedItems[indexPath.row] as! Student
         //Manually call segue to detail view controller
         self.performSegue(withIdentifier: "viewChild", sender: self)
     }
@@ -95,9 +95,9 @@ class MyChildrenViewController: UIViewController, UITableViewDelegate, UITableVi
         self.tblChildren.delegate = self
         self.tblChildren.dataSource = self
         
-        let viewChildrenModel = ViewChildrenModel()
-        viewChildrenModel.delegate = self
-        viewChildrenModel.downloadItems()
+        let student = Student()
+      //  viewChildrenModel.delegate = self
+       // viewChildrenModel.downloadItems()
         
 
         

@@ -19,7 +19,7 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
     @IBOutlet var lblStudentName: UILabel!
     @IBOutlet var imgActivity: UIImageView!
     var responseSuccess = false
-    var selectedStudent : StudentsModel = StudentsModel()   
+    var selectedStudent : Student = Student()
     var image = #imageLiteral(resourceName: "placeholder.png")
     var NewActivityID = 0
 
@@ -35,7 +35,7 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
         dateActivity.minimumDate = minDate // 18Months
         dateActivity.maximumDate = Date() //todays date //this datepicker kinda sucks, try to fix
         
-        lblStudentName.text = selectedStudent.firstName! + " " + selectedStudent.surname!
+        lblStudentName.text = selectedStudent.FirstName! + " " + selectedStudent.Surname!
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
   
         imgActivity.isUserInteractionEnabled = true
@@ -112,14 +112,14 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
             let activity = self.txtStudentActivity.text
             let observation = self.txtStudentObservation.text
             let date = self.dateActivity.date
-            let S_ID = self.selectedStudent.studentID!
-            let activityPicture = "https://shod-verses.000webhostapp.com/students/\((self.selectedStudent.studentID!))/ActivityPictures/\(self.NewActivityID).jpg"
+            let S_ID = self.selectedStudent.S_ID!
+            let activityPicture = "https://shod-verses.000webhostapp.com/students/\((self.selectedStudent.S_ID!))/ActivityPictures/\(self.NewActivityID).jpg"
             
             //used for emailing parents/guardians
-            let student = (self.selectedStudent.firstName!) + " " + (self.selectedStudent.surname!)
-            let studentMother = self.selectedStudent.mother!
-            let studentFather = self.selectedStudent.father!
-            let studentGuardian = self.selectedStudent.guardian!
+            let student = (self.selectedStudent.FirstName!) + " " + (self.selectedStudent.Surname!)
+            let studentMother = self.selectedStudent.Mother!
+            let studentFather = self.selectedStudent.Father!
+            let studentGuardian = self.selectedStudent.Guardian!
             
             
             var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/SaveActivity.php")!)
@@ -217,7 +217,7 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
             return
         }
 
-            let parameters = ["studentID": "\(self.selectedStudent.studentID!)"]
+            let parameters = ["studentID": "\(self.selectedStudent.S_ID!)"]
         print(parameters)
         
         Alamofire.upload(multipartFormData: { multipartFormData in

@@ -12,7 +12,7 @@ class Student: Decodable {
     var S_ID: String?
     var FirstName: String?
     var Surname: String?
-    var DateOfBirth: String?
+    var DateofBirth: String?
     var Mother: String?
     var Father: String?
     var Guardian: String?
@@ -22,7 +22,7 @@ class Student: Decodable {
     init(         S_ID: String? = nil,
                   FirstName: String?  = nil,
                   Surname: String?  = nil,
-                  DateOfBirth: String? = nil,
+                  DateofBirth: String? = nil,
                   Mother: String? = nil,
                   Father: String? = nil,
                   Guardian: String? = nil,
@@ -32,7 +32,7 @@ class Student: Decodable {
         self.FirstName = FirstName
         self.Surname = Surname
         self.StudentPicture = StudentPicture
-        self.DateOfBirth = DateOfBirth
+        self.DateofBirth = DateofBirth
         self.Father = Father
         self.Mother = Mother
         self.Guardian = Guardian
@@ -40,7 +40,7 @@ class Student: Decodable {
     }
     
     var description: String {
-        return "\(S_ID), \(FirstName), \(Surname), \(StudentPicture), \(Mother), \(Father), \(Guardian), \(KeyPerson)"
+        return "\(S_ID), \(FirstName), \(Surname), \(StudentPicture), \(Mother), \(Father), \(Guardian), \(KeyPerson) \(DateofBirth)"
         
     }
 }

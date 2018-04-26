@@ -16,7 +16,7 @@ class LoadActivitiesModel: NSObject, URLSessionDelegate {
 
     //properties
     weak var delegate: LoadActivitiesModelProtocol!
-    var selectedStudent : StudentsModel?
+    var selectedStudent : Student?
     
 
     
@@ -25,7 +25,7 @@ class LoadActivitiesModel: NSObject, URLSessionDelegate {
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/LoadActivities.php")!)
          request.httpMethod = "POST"
         
-      let S_ID = selectedStudent?.studentID
+      let S_ID = selectedStudent?.S_ID
         
         let postString = ("Student_ID=\(S_ID!)")
         print(postString)

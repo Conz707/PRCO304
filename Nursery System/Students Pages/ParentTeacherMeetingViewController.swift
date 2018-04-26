@@ -19,7 +19,7 @@ class ParentTeacherMeetingViewController: UIViewController, UIPickerViewDelegate
     @IBOutlet var tblMeetings: UITableView!
     
     var feedItems: NSArray = NSArray()
-    var selectedStudent : StudentsModel = StudentsModel()
+    var selectedStudent : Student = Student()
     let defaultValues = UserDefaults.standard
     var U_ID = ""
     var parents = [Parent]()
@@ -29,21 +29,11 @@ class ParentTeacherMeetingViewController: UIViewController, UIPickerViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        lblStudent.text = "\(selectedStudent.firstName!) \(selectedStudent.surname!)"
+        lblStudent.text = "\(selectedStudent.FirstName!) \(selectedStudent.Surname!)"
         datePicker.minimumDate = datePicker.date
         U_ID = defaultValues.string(forKey: "UserU_ID")!
         getMeetings()
         getParentsDropdown()
-
-     
-   
-        
-
-
-
-        
-        //postRequest(postString: postString, request: request, completion: { success in
-        print("finished post request get dropdown")
 
         // Do any additional setup after loading the view.
     }
@@ -58,12 +48,12 @@ class ParentTeacherMeetingViewController: UIViewController, UIPickerViewDelegate
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
-        return "\(parents[row].FirstName) \(parents[row].Surname)"
+        return "\(parents[row].FirstName!) \(parents[row].Surname!)"
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if (parents.count > 0 && parents.count >= row){
-            self.txtDropdown.text = "\(parents[row].FirstName) \(parents[row].Surname) " as? String
+            self.txtDropdown.text = "\(parents[row].FirstName!) \(parents[row].Surname!) " as? String
             selectedParentID = parents[row].U_ID!
             self.pickerDropdown.isHidden = true
             print("text box should display \(self.parents[row])")
@@ -89,7 +79,7 @@ class ParentTeacherMeetingViewController: UIViewController, UIPickerViewDelegate
         if(txtDropdown.text?.isEmpty == false){
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/CreateParentTeacherMeeting.php")!)
         request.httpMethod = "POST"
-        let postString = ("S_ID=\(selectedStudent.studentID!)&Parent_ID=\(selectedParentID)&Teacher_ID=\(U_ID)&Date=\(datePicker.date)")
+        let postString = ("S_ID=\(selectedStudent.S_ID!)&Parent_ID=\(selectedParentID)&Teacher_ID=\(U_ID)&Date=\(datePicker.date)")
         print(postString)
         request.httpBody = postString.data(using: .utf8)
         
@@ -110,6 +100,7 @@ class ParentTeacherMeetingViewController: UIViewController, UIPickerViewDelegate
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return feedItems.count
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -119,14 +110,14 @@ class ParentTeacherMeetingViewController: UIViewController, UIPickerViewDelegate
         //get activity to show
         let item: Meeting = self.feedItems[indexPath.row] as! Meeting
         print("items!!!! \(item)")
-        myCell.textLabel!.text = "Meeting on     \(item.Date)"
+        myCell.textLabel!.text = "Meeting on     \(item.Date!)"
         return myCell
     }
     
     func getMeetings(){
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetStudentMeetings.php")!)
         request.httpMethod = "POST"
-        let postString = ("S_ID=\(selectedStudent.studentID!)")
+        let postString = ("S_ID=\(selectedStudent.S_ID!)")
         print(postString)
         request.httpBody = postString.data(using: .utf8)
 
@@ -151,7 +142,7 @@ class ParentTeacherMeetingViewController: UIViewController, UIPickerViewDelegate
   func getParentsDropdown(){
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetParentsDropdown.php")!)
         request.httpMethod = "POST"
-        let postString = ("S_ID=\(selectedStudent.studentID!)")
+        let postString = ("S_ID=\(selectedStudent.S_ID!)")
         print(postString)
         request.httpBody = postString.data(using: .utf8)
         
@@ -160,7 +151,7 @@ class ParentTeacherMeetingViewController: UIViewController, UIPickerViewDelegate
             self.parents = try JSONDecoder().decode(Array<Parent>.self, from: data)
             print(self.parents)
             for eachParent in self.parents {
-                print("\(eachParent.FirstName) \(eachParent.Surname)")
+                print("\(eachParent.FirstName!) \(eachParent.Surname!)")
             }
         } catch {
             print(error)

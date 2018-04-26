@@ -57,14 +57,13 @@ class MeetingsViewController: UIViewController, UITableViewDataSource, UITableVi
 
             postString = "U_ID=\(userID)&querySelector=Upcoming"
 
-            
         } else if(segmentedMeetings.selectedSegmentIndex == 1){
             postString = "U_ID=\(userID)&querySelector=Completed"
             
         } else if(segmentedMeetings.selectedSegmentIndex == 2){
                 postString = "U_ID=\(userID)&querySelector=All"
         }
-       var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetMyMeetings.php")!)
+       var request = URLRequest(url: URL(string: "https://xshod-verses.000webhostapp.com/GetMyMeetings.php")!)
         request.httpMethod = "POST"
                 request.httpBody = postString.data(using: .utf8)
         postRequest(postString: postString, request: request, completion: { success, data in
