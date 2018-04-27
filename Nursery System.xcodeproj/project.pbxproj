@@ -37,8 +37,6 @@
 		9CC4210A208E731900190474 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC42109208E731900190474 /* User.swift */; };
 		9CC4418B2060029A002E9456 /* ActivityDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4418A2060029A002E9456 /* ActivityDetailsViewController.swift */; };
 		9CC4418D20603365002E9456 /* CreateActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4418C20603365002E9456 /* CreateActivityViewController.swift */; };
-		9CCE281A205997C0003FBEDA /* LoadActivitiesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCE2819205997C0003FBEDA /* LoadActivitiesModel.swift */; };
-		9CCE281C205997FA003FBEDA /* ActivitiesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCE281B205997FA003FBEDA /* ActivitiesModel.swift */; };
 		9CCF5D53208F82450036C0E7 /* MeetingDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCF5D52208F82450036C0E7 /* MeetingDetailsViewController.swift */; };
 		9CD126F0207BDED900C170BE /* GoalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD126EF207BDED900C170BE /* GoalsViewController.swift */; };
 		9CD126F3207BE3E900C170BE /* checked box.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CD126F2207BE3E800C170BE /* checked box.png */; };
@@ -47,10 +45,8 @@
 		9CD126FB207BF05700C170BE /* GoalsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD126FA207BF05700C170BE /* GoalsModel.swift */; };
 		9CD3ACBB203F25EF003A21C0 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CD3ACBA203F25EF003A21C0 /* placeholder.png */; };
 		9CD71B62207FB62100D814CE /* BookmarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD71B61207FB62100D814CE /* BookmarksViewController.swift */; };
-		9CD71B64207FB67500D814CE /* LoadBookmarksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD71B63207FB67500D814CE /* LoadBookmarksModel.swift */; };
 		9CD71B66207FC7A700D814CE /* ParentsHomepageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD71B65207FC7A700D814CE /* ParentsHomepageViewController.swift */; };
 		9CD71B68207FCBF000D814CE /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD71B67207FCBF000D814CE /* NotificationsViewController.swift */; };
-		9CD71B6A207FCCCA00D814CE /* LoadNotificationsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD71B69207FCCCA00D814CE /* LoadNotificationsModel.swift */; };
 		9CEF4EC92056F3AD001A6C1B /* ProgressReport1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEF4EC82056F3AD001A6C1B /* ProgressReport1ViewController.swift */; };
 		9CFB994A209256B2001F3249 /* checked bookmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CFB9948209256B2001F3249 /* checked bookmark.png */; };
 		9CFB994B209256B2001F3249 /* unchecked bookmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CFB9949209256B2001F3249 /* unchecked bookmark.png */; };
@@ -115,8 +111,6 @@
 		9CC42109208E731900190474 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9CC4418A2060029A002E9456 /* ActivityDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailsViewController.swift; sourceTree = "<group>"; };
 		9CC4418C20603365002E9456 /* CreateActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateActivityViewController.swift; sourceTree = "<group>"; };
-		9CCE2819205997C0003FBEDA /* LoadActivitiesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadActivitiesModel.swift; sourceTree = "<group>"; };
-		9CCE281B205997FA003FBEDA /* ActivitiesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesModel.swift; sourceTree = "<group>"; };
 		9CCF5D52208F82450036C0E7 /* MeetingDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailsViewController.swift; sourceTree = "<group>"; };
 		9CD126EF207BDED900C170BE /* GoalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsViewController.swift; sourceTree = "<group>"; };
 		9CD126F2207BE3E800C170BE /* checked box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checked box.png"; path = "../../../../Downloads/checked box.png"; sourceTree = "<group>"; };
@@ -125,10 +119,8 @@
 		9CD126FA207BF05700C170BE /* GoalsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsModel.swift; sourceTree = "<group>"; };
 		9CD3ACBA203F25EF003A21C0 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = placeholder.png; path = media/placeholder.png; sourceTree = SOURCE_ROOT; };
 		9CD71B61207FB62100D814CE /* BookmarksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksViewController.swift; sourceTree = "<group>"; };
-		9CD71B63207FB67500D814CE /* LoadBookmarksModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadBookmarksModel.swift; sourceTree = "<group>"; };
 		9CD71B65207FC7A700D814CE /* ParentsHomepageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentsHomepageViewController.swift; sourceTree = "<group>"; };
 		9CD71B67207FCBF000D814CE /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
-		9CD71B69207FCCCA00D814CE /* LoadNotificationsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadNotificationsModel.swift; sourceTree = "<group>"; };
 		9CEF4EC82056F3AD001A6C1B /* ProgressReport1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressReport1ViewController.swift; sourceTree = "<group>"; };
 		9CFB9948209256B2001F3249 /* checked bookmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checked bookmark.png"; path = "../../../../Downloads/checked bookmark.png"; sourceTree = "<group>"; };
 		9CFB9949209256B2001F3249 /* unchecked bookmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "unchecked bookmark.png"; path = "../../../../Downloads/unchecked bookmark.png"; sourceTree = "<group>"; };
@@ -204,8 +196,6 @@
 		9C7AD8092062C06600623FDE /* Activities Pages */ = {
 			isa = PBXGroup;
 			children = (
-				9CCE281B205997FA003FBEDA /* ActivitiesModel.swift */,
-				9CCE2819205997C0003FBEDA /* LoadActivitiesModel.swift */,
 				9CC4418A2060029A002E9456 /* ActivityDetailsViewController.swift */,
 				9CC4418C20603365002E9456 /* CreateActivityViewController.swift */,
 			);
@@ -226,10 +216,8 @@
 				9C7AD8052062B3D700623FDE /* MyChildrenViewController.swift */,
 				9C7AD80C2062C35700623FDE /* ViewChildrenModel.swift */,
 				9CD71B61207FB62100D814CE /* BookmarksViewController.swift */,
-				9CD71B63207FB67500D814CE /* LoadBookmarksModel.swift */,
 				9CD71B65207FC7A700D814CE /* ParentsHomepageViewController.swift */,
 				9CD71B67207FCBF000D814CE /* NotificationsViewController.swift */,
-				9CD71B69207FCCCA00D814CE /* LoadNotificationsModel.swift */,
 			);
 			path = "Parents Pages";
 			sourceTree = "<group>";
@@ -672,8 +660,6 @@
 				9CC42105208E719D00190474 /* Meeting.swift in Sources */,
 				9CD71B62207FB62100D814CE /* BookmarksViewController.swift in Sources */,
 				9CC4418B2060029A002E9456 /* ActivityDetailsViewController.swift in Sources */,
-				9CCE281C205997FA003FBEDA /* ActivitiesModel.swift in Sources */,
-				9CD71B6A207FCCCA00D814CE /* LoadNotificationsModel.swift in Sources */,
 				9CB78D4F207D0503007B12B5 /* StudentsViewController.swift in Sources */,
 				9C722F7D203F3EF100EB1805 /* TeacherLandingPageViewController.swift in Sources */,
 				9CB78D5B207D1CDB007B12B5 /* ParentTeacherMeetingViewController.swift in Sources */,
@@ -683,7 +669,6 @@
 				9C7AD8062062B3D700623FDE /* MyChildrenViewController.swift in Sources */,
 				9CC4210A208E731900190474 /* User.swift in Sources */,
 				9CAA2D93209394CD006D251B /* utilities.swift in Sources */,
-				9CD71B64207FB67500D814CE /* LoadBookmarksModel.swift in Sources */,
 				9CCF5D53208F82450036C0E7 /* MeetingDetailsViewController.swift in Sources */,
 				9C66FB9620767C9A0070E25F /* UserModel.swift in Sources */,
 				9C79A80E208F926B00E2A82F /* Student.swift in Sources */,
@@ -694,7 +679,6 @@
 				9CC42103208E646100190474 /* MeetingsViewController.swift in Sources */,
 				9CB9103120693EC300294C9B /* CreateStudentViewController.swift in Sources */,
 				9CC3AC29204EEB52003B5359 /* StudentDetailsViewController.swift in Sources */,
-				9CCE281A205997C0003FBEDA /* LoadActivitiesModel.swift in Sources */,
 				9C66FB94207678220070E25F /* AccountDetailsViewController.swift in Sources */,
 				9CB9103320693ECD00294C9B /* CreateUserViewController.swift in Sources */,
 				9CD126F0207BDED900C170BE /* GoalsViewController.swift in Sources */,

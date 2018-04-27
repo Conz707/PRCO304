@@ -12,31 +12,39 @@ import UIKit
 
 class ParentTeacherMeetingViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource{
     
+    @IBOutlet var activityIndicatorTableLoading: UIActivityIndicatorView!
     @IBOutlet var txtDropdown: UITextField!
     @IBOutlet var lblStudent: UILabel!
     @IBOutlet var datePicker: UIDatePicker!
     @IBOutlet var pickerDropdown: UIPickerView!
     @IBOutlet var tblMeetings: UITableView!
+    @IBOutlet var segmentedMeetings: UISegmentedControl!
     
     var feedItems: NSArray = NSArray()
     var selectedStudent : Student = Student()
+    var selectedMeeting : Meeting = Meeting()
     let defaultValues = UserDefaults.standard
     var U_ID = ""
     var parents = [Parent]()
     var meetings = [Meeting]()
     var selectedParentID = ""
+    var postString = ""
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         lblStudent.text = "\(selectedStudent.FirstName!) \(selectedStudent.Surname!)"
         datePicker.minimumDate = datePicker.date
         U_ID = defaultValues.string(forKey: "UserU_ID")!
-        getMeetings()
         getParentsDropdown()
+        activityIndicatorTableLoading.hidesWhenStopped = true
+        let minDate = Date()
+        datePicker.minimumDate = minDate
 
         // Do any additional setup after loading the view.
     }
+    
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -84,18 +92,65 @@ class ParentTeacherMeetingViewController: UIViewController, UIPickerViewDelegate
         request.httpBody = postString.data(using: .utf8)
         
         let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data in
-            print("finished record insert??")
-            self.getMeetings()
+            let alertController = UIAlertController(title: "Success", message: "Successfully created meeting", preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "Close Alert", style: .default, handler: nil)
+            alertController.addAction(defaultAction)
+            self.present(alertController, animated: true, completion: nil)
+            self.segmentChangeTable((Any).self)
         })
             
         } else {
-            print("NEED AN ERROR HERE")
+            let alertController = UIAlertController(title: "Error", message: "Ensure parent selected for meeting", preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "Close Alert", style: .default, handler: nil)
+            alertController.addAction(defaultAction)
+            self.present(alertController, animated: true, completion: nil)
         }
+    }
+    
+    @IBAction func segmentChangeTable(_ sender: Any) {
+        
+        activityIndicatorTableLoading.startAnimating()
+        switch segmentedMeetings.selectedSegmentIndex{
+        case 0:
+            postString = "S_ID=\(selectedStudent.S_ID!)&querySelector=Upcoming"
+            print(postString)
+            print("111111")
+        case 1:
+            postString = "S_ID=\(selectedStudent.S_ID!)&querySelector=Completed"
+            print(postString)
+        case 2:
+            postString = "S_ID=\(selectedStudent.S_ID!)&querySelector=All"
+            print(postString)
+        default:
+            print("default")
+            segmentedMeetings.selectedSegmentIndex = 0
+        }
+        
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetStudentMeetings.php")!)
+        request.httpMethod = "POST"
+        request.httpBody = postString.data(using: .utf8)
+        let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data in
+            do {
+                self.meetings = try JSONDecoder().decode(Array<Meeting>.self, from: data)
+                for eachMeeting in self.meetings {
+                    print("\(eachMeeting.Date!)")
+                }
+            } catch {
+                print(error)
+                print("ERROR")
+            }
+            DispatchQueue.main.async {
+                self.itemsDownloaded(items: self.meetings as NSArray)
+                print("trying to print items downloaded \(self.meetings)")
+            }
+            
+        })
     }
     
     func itemsDownloaded(items: NSArray){
         feedItems = items
         tblMeetings.reloadData()
+        activityIndicatorTableLoading.stopAnimating()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -110,33 +165,8 @@ class ParentTeacherMeetingViewController: UIViewController, UIPickerViewDelegate
         //get activity to show
         let item: Meeting = self.feedItems[indexPath.row] as! Meeting
         print("items!!!! \(item)")
-        myCell.textLabel!.text = "Meeting on     \(item.Date!)"
+        myCell.textLabel!.text = "Meeting on \(item.Date!)"
         return myCell
-    }
-    
-    func getMeetings(){
-        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetStudentMeetings.php")!)
-        request.httpMethod = "POST"
-        let postString = ("S_ID=\(selectedStudent.S_ID!)")
-        print(postString)
-        request.httpBody = postString.data(using: .utf8)
-
-        let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data  in
-            do {
-                self.meetings = try JSONDecoder().decode(Array<Meeting>.self, from: data)
-                for eachMeeting in self.meetings {
-                    print("\(eachMeeting.Date)")
-                }
-            } catch {
-                print(error)
-                print("ERROR")
-            }
-            DispatchQueue.main.async {
-                self.itemsDownloaded(items: self.meetings as NSArray)
-                print("trying to print items downloaded \(self.meetings)")
-            }
-
-        })
     }
     
   func getParentsDropdown(){
@@ -164,14 +194,46 @@ class ParentTeacherMeetingViewController: UIViewController, UIPickerViewDelegate
         })
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        segmentChangeTable((Any).self)
+                print("WTF \(selectedStudent.S_ID)")
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "meetingDetailsSegue", sender: nil)
+
+        print(selectedMeeting)
+        
+        selectedMeeting = feedItems[indexPath.row] as! Meeting
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetSelectedStudent.php")!)
+        request.httpMethod = "POST"
+        request.httpBody = postString.data(using: .utf8)
+        
+        print(postString)
+        let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data in
+            
+            do {
+                print(data)
+                let student = try JSONDecoder().decode(Student.self, from: data)
+                self.selectedStudent = student
+                print(student.description)
+                print(self.selectedStudent.description)
+                DispatchQueue.main.async{
+                    self.performSegue(withIdentifier: "meetingDetailsSegue", sender: Any?.self)
+                }
+            } catch {
+                print(error)
+                print("ERROR")
+                
+            }
+        })
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let meetingDetailsVC = segue.destination as! MeetingDetailsViewController
         
-        //     meetingDetailsVC.selectedMeeting = selectedMeeting!
+        meetingDetailsVC.selectedMeeting = selectedMeeting
+        meetingDetailsVC.selectedStudent = selectedStudent  
+        print(selectedMeeting)
     }
 
     

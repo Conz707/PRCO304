@@ -11,8 +11,8 @@ import Alamofire
 
 class ActivityDetailsViewController: UIViewController, UINavigationControllerDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, URLSessionTaskDelegate, URLSessionDelegate, URLSessionDataDelegate, UIPopoverPresentationControllerDelegate  {
 
-    var selectedActivity : Activity?
-    var selectedStudent : Student?
+    var selectedActivity : Activity!
+    var selectedStudent : Student!
     var defaultValues = UserDefaults.standard
     
     @IBOutlet var progressIndicatorUpload: UIProgressView!
@@ -35,15 +35,16 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        A_ID = (selectedActivity?.A_ID)!
+        A_ID = (selectedActivity.A_ID)!
         U_ID = defaultValues.string(forKey: "UserU_ID")!
         userRole = defaultValues.string(forKey: "UserRole")!
         print("yo check this shit out \(userRole)")
 
         
-        lblStudentName.text = "\(selectedStudent?.FirstName!) \(selectedStudent?.Surname!)"
-        lblActivityTitle.text = selectedActivity?.Activity
-        txtActivityObservations.text = selectedActivity?.Observation
+        lblStudentName.text = "\(selectedStudent.FirstName!) \(selectedStudent.Surname!)"
+        print(selectedStudent.FirstName)
+        lblActivityTitle.text = selectedActivity.Activity
+        txtActivityObservations.text = selectedActivity.Observation
         txtActivityObservations.isUserInteractionEnabled = false
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
@@ -52,7 +53,7 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
         imgActivity.addGestureRecognizer(tapGestureRecognizer)
         
         //Convert String to Date for formatting
-        dateString = (selectedActivity?.Date)!
+        dateString = (selectedActivity.Date)!
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         myDate = dateFormatter.date(from: dateString)!
@@ -64,7 +65,7 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
         print("new date string is \(newDateString)")
         lblActivityDate.text = "\(newDateString)"
         
-        let URL_IMAGE = URL(string: (selectedActivity?.A_ID)!)
+        let URL_IMAGE = URL(string: (selectedActivity.A_ID)!)
         print(URL_IMAGE!)
         let session = URLSession(configuration: .default)
         
@@ -306,8 +307,8 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
             return
         }
         
-        let activityID = self.selectedActivity?.A_ID
-        let parameters = ["studentID": "\(selectedStudent?.S_ID!)"]
+        let activityID = self.selectedActivity.A_ID
+        let parameters = ["studentID": "\(selectedStudent.S_ID!)"]
         print(parameters)
         
         Alamofire.upload(multipartFormData: { multipartFormData in

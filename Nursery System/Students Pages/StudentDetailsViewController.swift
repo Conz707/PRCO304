@@ -11,7 +11,7 @@ import UIKit
 
 class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-
+    
     @IBOutlet var btnAddActivity: UIButton!
     @IBOutlet var activityIndicatorTableLoading: UIActivityIndicatorView!
     @IBOutlet var lblDateOfBirth: UILabel!
@@ -23,20 +23,17 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var lblFather: UILabel!
     @IBOutlet var tblActivities: UITableView!
     var selectedActivity : Activity = Activity()
+    var activities = [Activity]()
     let defaultValues = UserDefaults.standard
     var selectedStudent : Student!
     var feedItems: NSArray = NSArray()
     var responseMother = ""
     var responseArr: [String] = []
     var postString = ""
-    var activities = [Activity]()
-    var parents = [Parent]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("oioi \(selectedStudent.description)")
- 
-       // getActivities()
         
         tblActivities.contentInset = UIEdgeInsetsMake(0, 15, 0, 0)
         DispatchQueue.main.async {
@@ -45,19 +42,20 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
                 self.lblFather.text = self.responseArr[1]
                 self.lblGuardian.text = self.responseArr[2]
                 self.lblKeyPerson.text = self.responseArr[3]
-  
             })
         }
         
-        activityIndicatorTableLoading.hidesWhenStopped = true 
+        getActivities()
+        
+        activityIndicatorTableLoading.hidesWhenStopped = true
         
         let URL_IMAGE = URL(string: (selectedStudent.StudentPicture)!)
         let session = URLSession(configuration: .default)
         
         //create a dataTask
         let getImageFromUrl = session.dataTask(with: URL_IMAGE!) { data, response, error in
-        
-           //if error
+            
+            //if error
             if let e = error {
                 //display message
                 print("Error occurred: \(e)")
@@ -72,22 +70,22 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
                         
                         //display the image
                         DispatchQueue.main.async{
-                        self.imgStudent.image = image
-                            }
-                        } else {
-                        print("image corrupted")
+                            self.imgStudent.image = image
                         }
                     } else {
-                        print("No server response")
+                        print("image corrupted")
                     }
+                } else {
+                    print("No server response")
                 }
             }
-            getImageFromUrl.resume()
+        }
+        getImageFromUrl.resume()
         
-
+        
         lblName.text = (selectedStudent.FirstName)! + " " + (selectedStudent.Surname)!
         lblDateOfBirth.text = selectedStudent.DateofBirth
-   
+        
         //small piece to make date more easily identifiable
         //Convert String to Date for formatting
         let dateString = selectedStudent.DateofBirth
@@ -101,7 +99,7 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         let newDateString = dateFormatter.string(from: myDate)
         print("new date string is \(newDateString)")
         lblDateOfBirth.text = "\(newDateString)"
- 
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -113,100 +111,156 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
             btnAddActivity.isHidden = true
         } else { btnAddActivity.isHidden = false }
         
-                activityIndicatorTableLoading.startAnimating()
+        activityIndicatorTableLoading.startAnimating()
+
         
-
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-        func itemsDownloaded(items: NSArray){
-            feedItems = items
-            tblActivities.reloadData()
-            activityIndicatorTableLoading.stopAnimating()
- 
-            
-        }
-    
-    
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            //return num of feed items
-            return feedItems.count
+    func itemsDownloaded(items: NSArray){
+        feedItems = items
+        if (items.count > 0){
+        tblActivities.reloadData()
+        activityIndicatorTableLoading.stopAnimating()
+        } else {
+        activityIndicatorTableLoading.stopAnimating()
+        print("PUT A 0 ACTIVITY RESULTS ON TABLE")
         }
         
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            //retrieve cell
-            let cellIdentifier: String = "BasicCell"
-            let myCell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)!
-            //get activity to show
-                let item: Activity = self.feedItems[indexPath.row] as! Activity
- 
-                    print("attempting to attach activity to table")
+        
+    }
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //return num of feed items
+        return feedItems.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //retrieve cell
+        let cellIdentifier: String = "BasicCell"
+        let myCell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)!
+        //get activity to show
+        let item: Activity = self.feedItems[indexPath.row] as! Activity
+        
+        print("attempting to attach activity to table")
+        
+        let URL_IMAGE = URL(string: (item.ActivityPicture)!)
+        let session = URLSession(configuration: .default)
+        
+        //create a dataTask
+        let getImageFromUrl = session.dataTask(with: URL_IMAGE!) { data, response, error in
             
-            let URL_IMAGE = URL(string: (item.ActivityPicture)!)
-            let session = URLSession(configuration: .default)
-            
-            //create a dataTask
-            let getImageFromUrl = session.dataTask(with: URL_IMAGE!) { data, response, error in
-                
-                //if error
-                if let e = error {
-                    //display message
-                    print("Error occurred: \(e)")
-                } else {
-                    if (response as? HTTPURLResponse) != nil {
+            //if error
+            if let e = error {
+                //display message
+                print("Error occurred: \(e)")
+            } else {
+                if (response as? HTTPURLResponse) != nil {
+                    
+                    //check response contains image
+                    if let imageData = data {
                         
-                        //check response contains image
-                        if let imageData = data {
+                        //get image
+                        let image = UIImage(data: imageData)
+                        //display the image
+                        DispatchQueue.main.async{
+                            myCell.textLabel!.text = item.Activity
+                            myCell.imageView!.clipsToBounds = true
+                            myCell.imageView?.image = image
                             
-                            //get image
-                            let image = UIImage(data: imageData)
-                            //display the image
-                            DispatchQueue.main.async{
-                                myCell.textLabel!.text = item.Activity
-                                myCell.imageView!.clipsToBounds = true
-                                myCell.imageView?.image = image
-
-                                }
-                        } else {
-                            print("image corrupted")
                         }
                     } else {
-                        print("No server response")
+                        print("image corrupted")
                     }
+                } else {
+                    print("No server response")
                 }
             }
-            getImageFromUrl.resume()
-            return myCell
+        }
+        getImageFromUrl.resume()
+        return myCell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {     //whenever user taps row
-
-            //set selected activity to var
-            selectedActivity = feedItems[indexPath.row] as! Activity
-            //manually call segue to detail view controller
-            self.performSegue(withIdentifier: "viewActivity", sender: self)
-        }
+        //set selected activity to var
+        selectedActivity = feedItems[indexPath.row] as! Activity
+        //manually call segue to detail view controller
+        self.performSegue(withIdentifier: "viewActivity", sender: self)
+    }
     
     @IBAction func btnParentTeacherMeetings(_ sender: Any) {
         
         //manually call segue to detail view controller
         self.performSegue(withIdentifier: "createParentTeacherMeeting", sender: self)
-
         
+        
+    }
+    
+    
+    func getLabelText(completion: @escaping (_ success : Bool) -> ()){
+        
+        var success = true
+        
+        let mother = selectedStudent.Mother
+        let father = selectedStudent.Father
+        let guardian = selectedStudent.Guardian
+        let keyPerson = selectedStudent.KeyPerson
+        
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetParentsDetails.php")!)
+        
+        request.httpMethod = "POST"
+        
+        let postString = ("Mother=\(mother ?? "")&Father=\(father ?? "")&Guardian=\(guardian ?? "")&KeyPerson=\(keyPerson ?? "")")
+        print(postString)
+        
+        request.httpBody = postString.data(using: .utf8)
+        
+        postRequest(postString: postString, request: request, completion: { success, data in
+            completion(success)
+        })
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if (segue.identifier == "viewActivity"){
+            //get reference to destination view controller
+            
+            let viewActivityVC = segue.destination as! ActivityDetailsViewController
+            //set property to selected activity so when view loads, it accesses the properties of feeditem obj
+            
+           viewActivityVC.selectedActivity = selectedActivity
+            viewActivityVC.selectedStudent = selectedStudent!
+        } else if (segue.identifier == "createActivity"){
+            //get reference to destination view controller
+            
+            let createActivityVC = segue.destination as! CreateActivityViewController
+            //set property to selected student so when view loads, it accesses the properties of feeditem obj ??
+            createActivityVC.selectedStudent = selectedStudent
+            
+        } else if (segue.identifier == "createParentTeacherMeeting") {
+            print("parentteachermeetingsegueeeeeeeeeeeeeeee")
+            let createParentTeacherMeetingVC = segue.destination as! ParentTeacherMeetingViewController
+            createParentTeacherMeetingVC.selectedStudent = selectedStudent
+        }
     }
     
     func getActivities(){
         
+        postString = "S_ID=\(selectedStudent.S_ID!)"
+        
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetActivities.php")!)
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
-        postString = "Student_ID=\(selectedStudent.S_ID!)"
-        print("sssssssssssss\(postString)")
         
-        postRequest(postString: postString, request: request, completion: { success, data in
+        print("poststring \(postString)")
+        
+        let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data in
+            
             do {
                 self.activities = try JSONDecoder().decode(Array<Activity>.self, from: data)
                 for eachActivity in self.activities {
@@ -222,82 +276,38 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
             }
             
         })
+        print(postRequest)
     }
     
-    func getLabelText(completion: @escaping (_ success : Bool) -> ()){
-        
+    func postRequest(postString: String, request: URLRequest, completion: @escaping (_ success : Bool,_ data: Data) -> ()){
         var success = true
         
-        let mother = selectedStudent.Mother
-        let father = selectedStudent.Father
-        let guardian = selectedStudent.Guardian
-        let keyPerson = selectedStudent.KeyPerson
-        
-        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetParentsDetails.php")!)     
-        
-        request.httpMethod = "POST"
-
-        let postString = ("Mother=\(mother ?? "")&Father=\(father ?? "")&Guardian=\(guardian ?? "")&KeyPerson=\(keyPerson ?? "")")
-        print(postString)
-        
-        request.httpBody = postString.data(using: .utf8)
-        
-        postRequest(postString: postString, request: request, completion: { success, data in
-            completion(success)
-        
-                
-            })
-        
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-       
-        if (segue.identifier == "viewActivity"){
-        //get reference to destination view controller
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                print("error=\(error)")
+                success = false
+                return
+            }
             
-      let viewActivityVC = segue.destination as! ActivityDetailsViewController
-        //set property to selected activity so when view loads, it accesses the properties of feeditem obj
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(response)")
+                
+            }
             
-            viewActivityVC.selectedActivity = selectedActivity
-            viewActivityVC.selectedStudent = selectedStudent
-        } else if (segue.identifier == "createActivity"){
-            //get reference to destination view controller
             
-            let createActivityVC = segue.destination as! CreateActivityViewController
-            //set property to selected student so when view loads, it accesses the properties of feeditem obj ??
-            createActivityVC.selectedStudent = selectedStudent
+            var responseString = String(data: data, encoding: .utf8)!
+            self.responseArr = (responseString.split(separator: ";") as NSArray) as! [String]
+            print("responseString <br /> = \(responseString)")
             
-        } else if (segue.identifier == "createParentTeacherMeeting") {
-            print("parentteachermeetingsegueeeeeeeeeeeeeeee")
-            let createParentTeacherMeetingVC = segue.destination as! ParentTeacherMeetingViewController
-            createParentTeacherMeetingVC.selectedStudent = selectedStudent
-        }
-    }
-        func postRequest(postString: String, request: URLRequest, completion: @escaping(_ success : Bool, _ data: Data) -> ()){
-            
-            var success = true
-            let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                guard let data = data, error == nil else {                                                 // check for fundamental networking error
-                    print("error=\(error)")
-                    return
-                }
-                
-                if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-                    print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                    print("response = \(response)")
-                    success = false
-                }
-                
-                var responseString = String(data: data, encoding: .utf8)!
-                print("responseString = \(responseString)")
-                
-                self.responseArr = (responseString.split(separator: ";") as NSArray) as! [String]
-                print("responseString <br /> = \(responseString)")
-                
-                
+            DispatchQueue.main.async{
                 completion(success, data)
             }
-            task.resume()
         }
+        task.resume()
+        print(success)
+    }
+    
+    
     
 }

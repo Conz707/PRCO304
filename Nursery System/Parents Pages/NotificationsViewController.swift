@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NotificationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, LoadNotificationsModelProtocol {
+class NotificationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
     @IBOutlet var tblNotifications: UITableView!
     var feedItems: NSArray = NSArray()
@@ -26,9 +26,9 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
   
         self.tblNotifications.dataSource = self
         self.tblNotifications.delegate = self
-        let loadNotificationsModel = LoadNotificationsModel()
-        loadNotificationsModel.downloadItems()
-        loadNotificationsModel.delegate = self
+   //     let loadNotificationsModel = LoadNotificationsModel()
+   //     loadNotificationsModel.downloadItems()
+    //    loadNotificationsModel.delegate = self
     }
     
     override func didReceiveMemoryWarning() {
@@ -46,11 +46,11 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         let cellIdentifier: String = "BasicCell"
         let myCell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)!
         //get activity to show
-        let item: ActivitiesModel = self.feedItems[indexPath.row] as! ActivitiesModel
+        let item: Activity = self.feedItems[indexPath.row] as! Activity
         
         print("attempting to attach activity to table")
         
-        let URL_IMAGE = URL(string: (item.activityPicture)!)
+        let URL_IMAGE = URL(string: (item.ActivityPicture)!)
         let session = URLSession(configuration: .default)
         
         //create a dataTask
@@ -70,7 +70,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                         let image = UIImage(data: imageData)
                         //display the image
                         DispatchQueue.main.async{
-                            myCell.textLabel!.text = "New Activity: \(item.activity!)"
+                            myCell.textLabel!.text = "New Activity: \(item.Activity!)"
                             myCell.imageView!.clipsToBounds = true
                             myCell.imageView?.image = image
                             

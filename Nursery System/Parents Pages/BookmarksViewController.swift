@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BookmarksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, LoadBookmarksModelProtocol {
+class BookmarksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
 
 
@@ -27,9 +27,9 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
      
         self.tblBookmarks.dataSource = self
         self.tblBookmarks.delegate = self
-        let loadBookmarksModel = LoadBookmarksModel()
-        loadBookmarksModel.downloadItems()
-        loadBookmarksModel.delegate = self
+     //   let loadBookmarksModel = LoadBookmarksModel()
+      //  loadBookmarksModel.downloadItems()
+     //   loadBookmarksModel.delegate = self
     }
 
     override func didReceiveMemoryWarning() {

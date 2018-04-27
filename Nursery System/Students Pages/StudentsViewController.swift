@@ -10,18 +10,17 @@ import UIKit
 import Foundation
 
 class StudentsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
-        
+    
+        @IBOutlet weak var tblAllStudents: UITableView!
         @IBOutlet var activityIndicatorTableLoading: UIActivityIndicatorView!
         @IBOutlet var segmentedAgeGroups: UISegmentedControl!
         var postString = ""
         var students = [Student]()
         var defaultValues = UserDefaults.standard
         var U_ID = ""
-
-    
-    var feedItems: NSArray = NSArray()
+        var feedItems: NSArray = NSArray()
         var selectedStudent : Student = Student()
-        @IBOutlet weak var tblAllStudents: UITableView!
+
         
         override func viewDidLoad() {
             super.viewDidLoad()
@@ -53,7 +52,7 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
          print(postString)
             
        default:
-        segmentedAgeGroups.selectedSegmentIndex = 1
+        segmentedAgeGroups.selectedSegmentIndex = 0
         print("default")
         }
         
@@ -101,7 +100,6 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
             //retrieve cell
             let cellIdentifier: String = "BasicCell"
             let myCell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)!
-            
             
             //get student to show
             let item: Student = feedItems[indexPath.row] as! Student
