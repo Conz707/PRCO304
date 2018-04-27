@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, LoadActivitiesModelProtocol {
+class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
 
     @IBOutlet var btnAddActivity: UIButton!
@@ -22,24 +22,30 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var lblGuardian: UILabel!
     @IBOutlet weak var lblFather: UILabel!
     @IBOutlet var tblActivities: UITableView!
-    var selectedActivity : ActivitiesModel = ActivitiesModel()
+    var selectedActivity : Activity = Activity()
     let defaultValues = UserDefaults.standard
     var selectedStudent : Student!
     var feedItems: NSArray = NSArray()
     var responseMother = ""
     var responseArr: [String] = []
+    var postString = ""
+    var activities = [Activity]()
+    var parents = [Parent]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("oioi \(selectedStudent.description)")
  
+       // getActivities()
+        
         tblActivities.contentInset = UIEdgeInsetsMake(0, 15, 0, 0)
         DispatchQueue.main.async {
             self.getLabelText(completion: { success in
                 self.lblMother.text = self.responseArr[0]
                 self.lblFather.text = self.responseArr[1]
-                self.lblGuardian.text = self.responseArr[2] 
+                self.lblGuardian.text = self.responseArr[2]
                 self.lblKeyPerson.text = self.responseArr[3]
+  
             })
         }
         
@@ -108,14 +114,7 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         } else { btnAddActivity.isHidden = false }
         
                 activityIndicatorTableLoading.startAnimating()
-
-                self.tblActivities.dataSource = self
-                self.tblActivities.delegate = self
-                let loadActivitiesModel = LoadActivitiesModel()
-             //
-        loadActivitiesModel.selectedStudent = selectedStudent
-                loadActivitiesModel.downloadItems()
-                loadActivitiesModel.delegate = self
+        
 
     }
 
@@ -142,11 +141,11 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
             let cellIdentifier: String = "BasicCell"
             let myCell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)!
             //get activity to show
-                let item: ActivitiesModel = self.feedItems[indexPath.row] as! ActivitiesModel
+                let item: Activity = self.feedItems[indexPath.row] as! Activity
  
                     print("attempting to attach activity to table")
             
-            let URL_IMAGE = URL(string: (item.activityPicture)!)
+            let URL_IMAGE = URL(string: (item.ActivityPicture)!)
             let session = URLSession(configuration: .default)
             
             //create a dataTask
@@ -166,7 +165,7 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
                             let image = UIImage(data: imageData)
                             //display the image
                             DispatchQueue.main.async{
-                                myCell.textLabel!.text = item.activity
+                                myCell.textLabel!.text = item.Activity
                                 myCell.imageView!.clipsToBounds = true
                                 myCell.imageView?.image = image
 
@@ -186,7 +185,7 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {     //whenever user taps row
 
             //set selected activity to var
-            selectedActivity = feedItems[indexPath.row] as! ActivitiesModel
+            selectedActivity = feedItems[indexPath.row] as! Activity
             //manually call segue to detail view controller
             self.performSegue(withIdentifier: "viewActivity", sender: self)
         }
@@ -199,6 +198,31 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         
     }
     
+    func getActivities(){
+        
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetActivities.php")!)
+        request.httpMethod = "POST"
+        request.httpBody = postString.data(using: .utf8)
+        postString = "Student_ID=\(selectedStudent.S_ID!)"
+        print("sssssssssssss\(postString)")
+        
+        postRequest(postString: postString, request: request, completion: { success, data in
+            do {
+                self.activities = try JSONDecoder().decode(Array<Activity>.self, from: data)
+                for eachActivity in self.activities {
+                    print("\(eachActivity.description)")
+                }
+            } catch {
+                print(error)
+                print("ERROR")
+            }
+            DispatchQueue.main.async {
+                self.itemsDownloaded(items: self.activities as NSArray)
+                print("trying to print items downloaded \(self.activities)")
+            }
+            
+        })
+    }
     
     func getLabelText(completion: @escaping (_ success : Bool) -> ()){
         
@@ -218,9 +242,11 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         
         request.httpBody = postString.data(using: .utf8)
         
-        postRequest(postString: postString, request: request, completion: { success in
+        postRequest(postString: postString, request: request, completion: { success, data in
             completion(success)
-        })
+        
+                
+            })
         
     }
     
@@ -247,36 +273,31 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
             createParentTeacherMeetingVC.selectedStudent = selectedStudent
         }
     }
-    
-    func postRequest(postString: String, request: URLRequest, completion: @escaping (_ success : Bool) -> ()){
-        var success = true
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {                                                 // check for fundamental networking error
-                print("error=\(error)")
-                success = false
-                return
-            }
+        func postRequest(postString: String, request: URLRequest, completion: @escaping(_ success : Bool, _ data: Data) -> ()){
             
-            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(response)")
+            var success = true
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                    print("error=\(error)")
+                    return
+                }
                 
+                if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+                    print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                    print("response = \(response)")
+                    success = false
+                }
+                
+                var responseString = String(data: data, encoding: .utf8)!
+                print("responseString = \(responseString)")
+                
+                self.responseArr = (responseString.split(separator: ";") as NSArray) as! [String]
+                print("responseString <br /> = \(responseString)")
+                
+                
+                completion(success, data)
             }
-            
-            
-            var responseString = String(data: data, encoding: .utf8)!
-            self.responseArr = (responseString.split(separator: ";") as NSArray) as! [String]
-            print("responseString <br /> = \(responseString)")
-            
-            DispatchQueue.main.async{
-                completion(success)
-            }
+            task.resume()
         }
-        task.resume()
-        print(success)
-    }
-    
-  
     
 }

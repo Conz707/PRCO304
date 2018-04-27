@@ -2406,9 +2406,10 @@
         <image name="unchecked box.png" width="220" height="220"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="cpF-7D-F0E"/>
         <segue reference="SzF-YC-tkR"/>
         <segue reference="Lcx-rJ-zns"/>
-        <segue reference="OdR-UL-hWL"/>
+        <segue reference="obe-dy-K40"/>
         <segue reference="H2i-y2-wlc"/>
         <segue reference="y13-Cw-fhU"/>
     </inferredMetricsTieBreakers>

@@ -12,7 +12,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
 
     @IBOutlet var tblNotifications: UITableView!
     var feedItems: NSArray = NSArray()
-    var selectedActivity : ActivitiesModel = ActivitiesModel()
+    var selectedActivity : Activity = Activity()
     let defaultValues = UserDefaults.standard
     var U_ID = ""
     
@@ -89,13 +89,13 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //set selected activity to var
-        selectedActivity = feedItems[indexPath.row] as! ActivitiesModel
+        selectedActivity = feedItems[indexPath.row] as! Activity
         
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/SetNotificationRead.php")!)
         
         request.httpMethod = "POST"
         
-        let postString = ("A_ID=\(selectedActivity.activityID!)&U_ID=\(U_ID)")
+        let postString = ("A_ID=\(selectedActivity.A_ID!)&U_ID=\(U_ID)")
         
         request.httpBody = postString.data(using: .utf8)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in

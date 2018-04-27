@@ -31,12 +31,12 @@ class ActivitiesModel: NSObject {
         
     init(activityID: String, studentID: String, activity: String, observation: String, activityDate: String, activityPicture: String)
         {
-            self.activityID = activityID
-            self.studentID = studentID
-            self.activity = activity
-            self.observation = observation
-            self.activityDate = activityDate
-            self.activityPicture = activityPicture
+            var activityID: String?
+            var studentID: String?
+            var activity: String?
+            var observation: String?
+            var activityDate: String?
+            var activityPicture: String?
         }
         
         //print object current state

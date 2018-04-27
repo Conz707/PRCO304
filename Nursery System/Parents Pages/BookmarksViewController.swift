@@ -14,7 +14,7 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
 
     @IBOutlet var tblBookmarks: UITableView!
     var feedItems: NSArray = NSArray()
-    var selectedActivity : ActivitiesModel = ActivitiesModel()
+    var selectedActivity : Activity = Activity()
     var selectedStudent : Student = Student()
     var postString = ""
     
@@ -47,11 +47,11 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         let cellIdentifier: String = "BasicCell"
         let myCell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)!
         //get activity to show
-        let item: ActivitiesModel = self.feedItems[indexPath.row] as! ActivitiesModel
+        let item: Activity = self.feedItems[indexPath.row] as! Activity
         
         print("attempting to attach activity to table")
         
-        let URL_IMAGE = URL(string: (item.activityPicture)!)
+        let URL_IMAGE = URL(string: (item.ActivityPicture)!)
         let session = URLSession(configuration: .default)
         
         //create a dataTask
@@ -71,7 +71,7 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
                         let image = UIImage(data: imageData)
                         //display the image
                         DispatchQueue.main.async{
-                            myCell.textLabel!.text = item.activity
+                            myCell.textLabel!.text = item.Activity
                             myCell.imageView!.clipsToBounds = true
                             myCell.imageView?.image = image
                             
@@ -90,19 +90,18 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //set selected activity to var
-        selectedActivity = feedItems[indexPath.row] as! ActivitiesModel
+        selectedActivity = feedItems[indexPath.row] as! Activity
         //manually call segue to detail view controller
         
 
         
-        postString = "S_ID=\(selectedActivity.studentID!)"
+        postString = "S_ID=\(selectedActivity.S_ID!)"
        
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetSelectedStudent.php")!)
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
         print(postString)
-        postRequest(postString: postString, request: request, completion: { success, data in
-    
+        let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data in
             do {
                 print(data)
                 let student = try JSONDecoder().decode(Student.self, from: data)
@@ -138,26 +137,6 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         print(selectedStudent.description)
     }
 
-    func postRequest(postString: String, request: URLRequest, completion: @escaping(_ success : Bool, _ data: Data) -> ()){
-        
-        var success = true
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {                                                 // check for fundamental networking error
-                print("error=\(error)")
-                return
-            }
-            
-            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(response)")
-                success = false
-            }
-            
-            var responseString = String(data: data, encoding: .utf8)!
-            print("responseString = \(responseString)")
-            completion(success, data)
-        }
-        task.resume()
-    }
+
     
 }

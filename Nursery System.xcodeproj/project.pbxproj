@@ -22,6 +22,8 @@
 		9C8A23DD203B3259008C4D10 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C8A23DB203B3259008C4D10 /* LaunchScreen.storyboard */; };
 		9C8A23E8203B325A008C4D10 /* Nursery_SystemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8A23E7203B325A008C4D10 /* Nursery_SystemTests.swift */; };
 		9C8A23F3203B325A008C4D10 /* Nursery_SystemUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8A23F2203B325A008C4D10 /* Nursery_SystemUITests.swift */; };
+		9CAA2D902093892E006D251B /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CAA2D8F2093892E006D251B /* Activity.swift */; };
+		9CAA2D93209394CD006D251B /* utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CAA2D92209394CD006D251B /* utilities.swift */; };
 		9CB78D4F207D0503007B12B5 /* StudentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB78D4E207D0503007B12B5 /* StudentsViewController.swift */; };
 		9CB78D5B207D1CDB007B12B5 /* ParentTeacherMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB78D5A207D1CDB007B12B5 /* ParentTeacherMeetingViewController.swift */; };
 		9CB9102F20693E6600294C9B /* ManagerLandingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB9102E20693E6600294C9B /* ManagerLandingPageViewController.swift */; };
@@ -98,6 +100,8 @@
 		9C8A23EE203B325A008C4D10 /* Nursery SystemUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Nursery SystemUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C8A23F2203B325A008C4D10 /* Nursery_SystemUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nursery_SystemUITests.swift; sourceTree = "<group>"; };
 		9C8A23F4203B325A008C4D10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9CAA2D8F2093892E006D251B /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
+		9CAA2D92209394CD006D251B /* utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utilities.swift; sourceTree = "<group>"; };
 		9CB78D4E207D0503007B12B5 /* StudentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsViewController.swift; sourceTree = "<group>"; };
 		9CB78D5A207D1CDB007B12B5 /* ParentTeacherMeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentTeacherMeetingViewController.swift; sourceTree = "<group>"; };
 		9CB9102E20693E6600294C9B /* ManagerLandingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerLandingPageViewController.swift; sourceTree = "<group>"; };
@@ -255,6 +259,7 @@
 		9C8A23D1203B3259008C4D10 /* Nursery System */ = {
 			isa = PBXGroup;
 			children = (
+				9CAA2D91209394B9006D251B /* utils */,
 				9CD3ACB9203F25D5003A21C0 /* media */,
 				9CC42106208E72BA00190474 /* structs */,
 				9C7AD8082062C03E00623FDE /* Login Page */,
@@ -291,6 +296,14 @@
 			path = "Nursery SystemUITests";
 			sourceTree = "<group>";
 		};
+		9CAA2D91209394B9006D251B /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				9CAA2D92209394CD006D251B /* utilities.swift */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
 		9CB9103420693ED500294C9B /* Manager Pages */ = {
 			isa = PBXGroup;
 			children = (
@@ -308,6 +321,7 @@
 				9CC42107208E72D000190474 /* Parent.swift */,
 				9CC42109208E731900190474 /* User.swift */,
 				9C79A80D208F926B00E2A82F /* Student.swift */,
+				9CAA2D8F2093892E006D251B /* Activity.swift */,
 			);
 			path = structs;
 			sourceTree = "<group>";
@@ -653,6 +667,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CAA2D902093892E006D251B /* Activity.swift in Sources */,
 				9CD71B66207FC7A700D814CE /* ParentsHomepageViewController.swift in Sources */,
 				9CC42105208E719D00190474 /* Meeting.swift in Sources */,
 				9CD71B62207FB62100D814CE /* BookmarksViewController.swift in Sources */,
@@ -667,6 +682,7 @@
 				9CC4418D20603365002E9456 /* CreateActivityViewController.swift in Sources */,
 				9C7AD8062062B3D700623FDE /* MyChildrenViewController.swift in Sources */,
 				9CC4210A208E731900190474 /* User.swift in Sources */,
+				9CAA2D93209394CD006D251B /* utilities.swift in Sources */,
 				9CD71B64207FB67500D814CE /* LoadBookmarksModel.swift in Sources */,
 				9CCF5D53208F82450036C0E7 /* MeetingDetailsViewController.swift in Sources */,
 				9C66FB9620767C9A0070E25F /* UserModel.swift in Sources */,
