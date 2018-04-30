@@ -34,6 +34,7 @@
 		9CC4210A208E731900190474 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC42109208E731900190474 /* User.swift */; };
 		9CC4418B2060029A002E9456 /* ActivityDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4418A2060029A002E9456 /* ActivityDetailsViewController.swift */; };
 		9CC4418D20603365002E9456 /* CreateActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4418C20603365002E9456 /* CreateActivityViewController.swift */; };
+		9CCEACC92097A5B800C44D0B /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCEACC82097A5B800C44D0B /* Goal.swift */; };
 		9CCF5D53208F82450036C0E7 /* MeetingDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCF5D52208F82450036C0E7 /* MeetingDetailsViewController.swift */; };
 		9CD126F0207BDED900C170BE /* GoalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD126EF207BDED900C170BE /* GoalsViewController.swift */; };
 		9CD126F3207BE3E900C170BE /* checked box.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CD126F2207BE3E800C170BE /* checked box.png */; };
@@ -102,6 +103,7 @@
 		9CC42109208E731900190474 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9CC4418A2060029A002E9456 /* ActivityDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailsViewController.swift; sourceTree = "<group>"; };
 		9CC4418C20603365002E9456 /* CreateActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateActivityViewController.swift; sourceTree = "<group>"; };
+		9CCEACC82097A5B800C44D0B /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		9CCF5D52208F82450036C0E7 /* MeetingDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailsViewController.swift; sourceTree = "<group>"; };
 		9CD126EF207BDED900C170BE /* GoalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsViewController.swift; sourceTree = "<group>"; };
 		9CD126F2207BE3E800C170BE /* checked box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checked box.png"; path = "../../../../Downloads/checked box.png"; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 				9CC42109208E731900190474 /* User.swift */,
 				9C79A80D208F926B00E2A82F /* Student.swift */,
 				9CAA2D8F2093892E006D251B /* Activity.swift */,
+				9CCEACC82097A5B800C44D0B /* Goal.swift */,
 			);
 			path = structs;
 			sourceTree = "<group>";
@@ -667,6 +670,7 @@
 				9C66FB94207678220070E25F /* AccountDetailsViewController.swift in Sources */,
 				9CB9103320693ECD00294C9B /* CreateUserViewController.swift in Sources */,
 				9CD126F0207BDED900C170BE /* GoalsViewController.swift in Sources */,
+				9CCEACC92097A5B800C44D0B /* Goal.swift in Sources */,
 				9C8A23D3203B3259008C4D10 /* AppDelegate.swift in Sources */,
 				9CD71B68207FCBF000D814CE /* NotificationsViewController.swift in Sources */,
 				9CC42108208E72D000190474 /* Parent.swift in Sources */,

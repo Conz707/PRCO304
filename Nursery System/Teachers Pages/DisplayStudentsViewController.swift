@@ -104,8 +104,7 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
             //get student to show
             let item: Student = feedItems[indexPath.row] as! Student
             //get references to labels of cells
-            
-            let URL_IMAGE = URL(string: (item.StudentPicture)!)
+        let URL_IMAGE = URL(string: (item.StudentPicture)!)
             let session = URLSession(configuration: .default)
             
             //create a dataTask
@@ -137,6 +136,7 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
                 }
             }
             getImageFromUrl.resume()
+
             return myCell
         }
         

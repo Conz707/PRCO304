@@ -6,20 +6,78 @@
 //  Copyright © 2018 (s) Connor Smith 1. All rights reserved.
 //NEEDS BIG CLEANUP
 //MAKE THIS CONFORM TO SELECTED STUDENT TO SEND THE ID
-/*
+
 import UIKit
 
-struct Goals: Codable {
-    let Goal1: String?
-    let Goal1Completed: String?
-    let Goal2: String?
-    let Goal2Completed: String?
-    let Goal3: String?
-    let Goal3Completed: String?
-}
 
-class GoalsViewController: UIViewController, LoadGoalsProtocol {
-    func itemsDownloaded(items: NSArray)
+class GoalsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    @IBOutlet var tblGoals: UITableView!
+    @IBOutlet var activityIndicatorTableLoading: UIActivityIndicatorView!
+    
+    var goals = [Goal]()
+    var selectedGoal : Goal = Goal()
+    var feedItems: NSArray = NSArray()
+    var postString = ""
+    var selectedStudent : Student = Student()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/GetStudentGoals.php")!)
+        postString = "querySelector=All&S_ID=\(selectedStudent.S_ID!)"
+        request.httpMethod = "POST"
+        request.httpBody = postString.data(using: .utf8)
+        
+        let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data in
+            do {
+                self.goals = try JSONDecoder().decode(Array<Goal>.self, from: data)
+                for eachGoal in self.goals {
+                    print("\(eachGoal.description)")
+                }
+            } catch {
+                print(error)
+                print("ERROR")
+            }
+            DispatchQueue.main.async {
+                self.itemsDownloaded(items: self.goals as NSArray)
+                print("trying to print items downloaded \(self.goals)")
+            }
+            
+        })
+        
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return feedItems.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //retrieve cell
+        let cellIdentifier: String = "BasicCell"
+        let myCell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)!
+        //get activity to show
+        let item: Goal = self.feedItems[indexPath.row] as! Goal
+        
+        myCell.textLabel!.text = "\(item.Goal)"
+        
+        return myCell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {     //whenever user taps row
+        //set selected student to var
+        selectedGoal = feedItems[indexPath.row] as! Goal
+        //Manually call segue to detail view controller
+        self.performSegue(withIdentifier: "goalDetails", sender: self)
+    }
+    
+    func itemsDownloaded(items: NSArray){
+        feedItems = items
+        self.tblGoals.reloadData()
+        activityIndicatorTableLoading.stopAnimating()
+    }
+    
+/*    func itemsDownloaded(items: NSArray)
     {
       
     }
@@ -224,8 +282,8 @@ class GoalsViewController: UIViewController, LoadGoalsProtocol {
         task.resume()
         
     }
-    
+    */
     
 
 }
- */
+

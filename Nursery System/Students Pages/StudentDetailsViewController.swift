@@ -234,7 +234,13 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
             print("parentteachermeetingsegueeeeeeeeeeeeeeee")
             let createParentTeacherMeetingVC = segue.destination as! ParentTeacherMeetingViewController
             createParentTeacherMeetingVC.selectedStudent = selectedStudent
+        } else if (segue.identifier == "goalsSegue"){
+            let goalsVC = segue.destination as! GoalsViewController
+            goalsVC.selectedStudent = selectedStudent
         }
+        
+        
+        //change to switch???
     }
     
     func getActivities(){

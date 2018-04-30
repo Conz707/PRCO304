@@ -555,7 +555,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d9k-Pj-jN7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1268.75" y="2347.8515625"/>
+            <point key="canvasLocation" x="-930" y="2055"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="cRg-4A-E3j">
@@ -1235,7 +1235,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ss7-o9-eTg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-553.125" y="1876.7578124999998"/>
+            <point key="canvasLocation" x="533" y="2372"/>
         </scene>
         <!--Student Details View Controller-->
         <scene sceneID="eQc-k6-bb8">
@@ -1408,7 +1408,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="Goals"/>
                                 <connections>
-                                    <segue destination="wff-0M-Hur" kind="show" id="HuD-g9-6SD"/>
+                                    <segue destination="WCW-Ey-lgy" kind="show" identifier="goalsSegue" id="gdr-H9-scP"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2U5-0G-RNn">
@@ -1490,12 +1490,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="umk-uU-FQU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1856" y="3134"/>
+            <point key="canvasLocation" x="972" y="2372"/>
         </scene>
-        <!--Goals View Controller-->
+        <!--View Controller-->
         <scene sceneID="UPh-Ys-4fV">
             <objects>
-                <viewController id="wff-0M-Hur" customClass="GoalsViewController" customModule="Nursery_System" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="wff-0M-Hur" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bcK-fW-jTZ">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1573,7 +1573,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S5b-wL-cgw">
-                                <rect key="frame" x="708" y="460" width="40" height="40"/>
+                                <rect key="frame" x="667" y="468" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="unchecked box.png"/>
                                 <connections>
@@ -1608,7 +1608,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aia-zg-Dqm">
-                                <rect key="frame" x="708" y="275" width="40" height="40"/>
+                                <rect key="frame" x="667" y="283" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="unchecked box.png"/>
                                 <connections>
@@ -1634,7 +1634,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ccs-Xk-Tck">
-                                <rect key="frame" x="708" y="173" width="40" height="40"/>
+                                <rect key="frame" x="667" y="181" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="unchecked box.png"/>
                                 <connections>
@@ -1642,7 +1642,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RP9-GX-bwf">
-                                <rect key="frame" x="708" y="336" width="40" height="40"/>
+                                <rect key="frame" x="667" y="344" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="unchecked box.png"/>
                                 <connections>
@@ -1650,7 +1650,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZC-nV-Qzx">
-                                <rect key="frame" x="708" y="506" width="40" height="40"/>
+                                <rect key="frame" x="667" y="514" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="unchecked box.png"/>
                                 <connections>
@@ -1665,6 +1665,41 @@
                                     <action selector="btnCheckbox1:" destination="wff-0M-Hur" eventType="touchUpInside" id="mYd-Zw-M29"/>
                                 </connections>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="65" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OWY-HI-xqO">
+                                <rect key="frame" x="20" y="576" width="728" height="403"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <activityIndicatorView key="tableFooterView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" id="hqW-jH-eZV">
+                                    <rect key="frame" x="0.0" y="93" width="728" height="37"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </activityIndicatorView>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="5" reuseIdentifier="BasicCell" id="dba-nN-sH5">
+                                        <rect key="frame" x="0.0" y="28" width="728" height="65"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dba-nN-sH5" id="r6g-c4-dP2">
+                                            <rect key="frame" x="0.0" y="0.0" width="728" height="64.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fiG-eq-m6X">
+                                                    <rect key="frame" x="628" y="-29" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="3UE-Lz-k5y"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="fiG-eq-m6X" secondAttribute="trailing" constant="40" id="K2e-0x-mBY"/>
+                                                <constraint firstItem="fiG-eq-m6X" firstAttribute="top" secondItem="r6g-c4-dP2" secondAttribute="topMargin" constant="-40" id="LFC-ud-lKr"/>
+                                                <constraint firstItem="fiG-eq-m6X" firstAttribute="top" secondItem="r6g-c4-dP2" secondAttribute="topMargin" constant="-60" id="Qhc-ou-3k7"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="fiG-eq-m6X" secondAttribute="bottom" constant="33" id="idf-T4-aZF"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="fiG-eq-m6X" secondAttribute="trailing" constant="35" id="jPS-Fz-T8y"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -1708,7 +1743,67 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GoV-uD-UYc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="741.40625" y="838.4765625"/>
+            <point key="canvasLocation" x="533" y="970"/>
+        </scene>
+        <!--Goals View Controller-->
+        <scene sceneID="Lve-qa-PVe">
+            <objects>
+                <viewController id="WCW-Ey-lgy" customClass="GoalsViewController" customModule="Nursery_System" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xKJ-eg-MAT">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="65" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ktu-Be-d2Y">
+                                <rect key="frame" x="20" y="104" width="728" height="900"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <activityIndicatorView key="tableFooterView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" id="Q8L-Hw-dBa">
+                                    <rect key="frame" x="0.0" y="93" width="728" height="37"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </activityIndicatorView>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="5" reuseIdentifier="BasicCell" id="mM4-Y6-egi">
+                                        <rect key="frame" x="0.0" y="28" width="728" height="65"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mM4-Y6-egi" id="Hmo-Sf-t37">
+                                            <rect key="frame" x="0.0" y="0.0" width="728" height="64.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gvX-6Y-ape">
+                                                    <rect key="frame" x="628" y="-29" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="RRp-V6-4RS"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="gvX-6Y-ape" secondAttribute="trailing" constant="40" id="Jmg-m6-H0I"/>
+                                                <constraint firstItem="gvX-6Y-ape" firstAttribute="top" secondItem="Hmo-Sf-t37" secondAttribute="topMargin" constant="-60" id="Vgz-Tw-wxY"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="gvX-6Y-ape" secondAttribute="bottom" constant="33" id="cuW-cW-hzp"/>
+                                                <constraint firstItem="gvX-6Y-ape" firstAttribute="top" secondItem="Hmo-Sf-t37" secondAttribute="topMargin" constant="-40" id="dAa-5N-IiO"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="gvX-6Y-ape" secondAttribute="trailing" constant="35" id="x7W-WR-vRi"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="WCW-Ey-lgy" id="Y2T-sE-sHz"/>
+                                    <outlet property="delegate" destination="WCW-Ey-lgy" id="U5Z-Fk-mgw"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Ixa-Ng-Ntu"/>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicatorTableLoading" destination="Q8L-Hw-dBa" id="IqJ-95-dsj"/>
+                        <outlet property="tblGoals" destination="ktu-Be-d2Y" id="Cer-zc-xoc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l4j-dk-U0Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1179" y="970"/>
         </scene>
         <!--Create Activity View Controller-->
         <scene sceneID="pav-w9-jx2">
@@ -2464,9 +2559,10 @@
         <image name="unchecked box.png" width="220" height="220"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="cpF-7D-F0E"/>
         <segue reference="p3N-86-anD"/>
-        <segue reference="hrn-xK-P0F"/>
-        <segue reference="ngs-qy-lP5"/>
+        <segue reference="Lcx-rJ-zns"/>
+        <segue reference="obe-dy-K40"/>
         <segue reference="H2i-y2-wlc"/>
         <segue reference="y13-Cw-fhU"/>
     </inferredMetricsTieBreakers>
