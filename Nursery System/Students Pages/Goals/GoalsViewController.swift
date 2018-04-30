@@ -6,7 +6,7 @@
 //  Copyright © 2018 (s) Connor Smith 1. All rights reserved.
 //NEEDS BIG CLEANUP
 //MAKE THIS CONFORM TO SELECTED STUDENT TO SEND THE ID
-
+/*
 import UIKit
 
 struct Goals: Codable {
@@ -228,3 +228,4 @@ class GoalsViewController: UIViewController, LoadGoalsProtocol {
     
 
 }
+ */

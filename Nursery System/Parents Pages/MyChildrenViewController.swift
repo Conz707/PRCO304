@@ -97,7 +97,7 @@ class MyChildrenViewController: UIViewController, UITableViewDelegate, UITableVi
         U_ID = defaultValues.string(forKey: "UserU_ID")!
         postString = "U_ID=\(U_ID)"
         print(postString)
-        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetMyChildren.php")!)
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/ParentSidePHPFiles/GetMyChildren.php")!)
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
         

@@ -13,22 +13,45 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet var tblNotifications: UITableView!
     var feedItems: NSArray = NSArray()
     var selectedActivity : Activity = Activity()
+    var selectedStudent : Student = Student()
     let defaultValues = UserDefaults.standard
+    var activities = [Activity]()
     var U_ID = ""
-    
+    var postString = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        U_ID = defaultValues.string(forKey: "UserU_ID")!
+        
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/ParentSidePHPFiles/GetMyNotifications.php")!)
+        request.httpMethod = "POST"
+        
+        postString = ("U_ID=\(U_ID)")
+        print(postString)
+        request.httpBody = postString.data(using: .utf8)
+        
+        let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data in
+            
+            do {
+                self.activities = try JSONDecoder().decode(Array<Activity>.self, from: data)
+                for eachActivity in self.activities {
+                    print("\(eachActivity.description)")
+                }
+            } catch {
+                print(error)
+                print("ERROR")
+            }
+            DispatchQueue.main.async {
+                self.itemsDownloaded(items: self.activities as NSArray)
+                print("trying to print items downloaded \(self.activities)")
+            }
+            
+        })
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        U_ID = defaultValues.string(forKey: "UserU_ID")!
-  
-        self.tblNotifications.dataSource = self
-        self.tblNotifications.delegate = self
-   //     let loadNotificationsModel = LoadNotificationsModel()
-   //     loadNotificationsModel.downloadItems()
-    //    loadNotificationsModel.delegate = self
+       
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -91,31 +114,9 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         //set selected activity to var
         selectedActivity = feedItems[indexPath.row] as! Activity
         
-        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/SetNotificationRead.php")!)
         
-        request.httpMethod = "POST"
-        
-        let postString = ("A_ID=\(selectedActivity.A_ID!)&U_ID=\(U_ID)")
-        
-        request.httpBody = postString.data(using: .utf8)
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {                                                 // check for fundamental networking error
-                print("error=\(error)")
-                return
-            }
-            
-            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(response)")
-                
-            }
-            
-            var responseString = String(data: data, encoding: .utf8)!
-            print("responseString = \(responseString)")
-            
-        }
-        task.resume()
-        
+        markNotificationRead()
+        getSelectedStudent()
         
         //manually call segue to detail view controller
         self.performSegue(withIdentifier: "viewActivity", sender: self)
@@ -127,9 +128,49 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         
     }
     
+    func getSelectedStudent(){
+        postString = "S_ID=\(selectedActivity.S_ID)"
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/ParentSidePHPFiles/GetSelectedStudent.php")!)
+        request.httpMethod = "POST"
+        request.httpBody = postString.data(using: .utf8)
+        print(postString)
+        let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data in
+            
+            do {
+                print(data)
+                let student = try JSONDecoder().decode(Student.self, from: data)
+                self.selectedStudent = student
+                print(student.description)
+                print(self.selectedStudent.description)
+                DispatchQueue.main.async{
+                    self.performSegue(withIdentifier: "viewActivity", sender: Any?.self)
+                }
+            } catch {
+                print(error)
+                print("ERROR")
+                
+            }
+            
+        })
+    }
+    
+    func markNotificationRead(){
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/SetNotificationRead.php")!)
+        request.httpMethod = "POST"
+        let postString = ("A_ID=\(selectedActivity.A_ID!)&U_ID=\(U_ID)")
+        request.httpBody = postString.data(using: .utf8)
+        
+        let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data in
+            
+        })
+    }
+    
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
         let viewActivityVC = segue.destination as! ActivityDetailsViewController
         viewActivityVC.selectedActivity = selectedActivity
+        viewActivityVC.selectedStudent = selectedStudent
     }
     
 }

@@ -56,7 +56,7 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
         print("default")
         }
         
-        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetStudents.php")!)
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/GetStudents.php")!)
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
 

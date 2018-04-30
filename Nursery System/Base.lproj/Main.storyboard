@@ -900,6 +900,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="gKP-3U-EIc" id="eAs-nK-S87"/>
+                                    <outlet property="delegate" destination="gKP-3U-EIc" id="Sqz-kL-ffz"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -964,6 +968,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="cQp-fX-g9O" id="tA6-eZ-fPN"/>
+                                    <outlet property="delegate" destination="cQp-fX-g9O" id="pyS-X8-k48"/>
+                                </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Bookmarks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qVG-1E-FYe">
                                 <rect key="frame" x="272.5" y="31" width="223" height="67"/>
@@ -985,6 +993,7 @@
                         <viewLayoutGuide key="safeArea" id="WZC-DP-ZIW"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicatorTableLoading" destination="dgs-qe-p33" id="Shm-Yw-KHi"/>
                         <outlet property="tblBookmarks" destination="H4F-2y-Ekd" id="qwz-RR-2aB"/>
                         <segue destination="xv0-XX-uYC" kind="show" identifier="viewActivity" id="OdR-UL-hWL"/>
                     </connections>
@@ -2457,7 +2466,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="p3N-86-anD"/>
         <segue reference="hrn-xK-P0F"/>
-        <segue reference="obe-dy-K40"/>
+        <segue reference="ngs-qy-lP5"/>
         <segue reference="H2i-y2-wlc"/>
         <segue reference="y13-Cw-fhU"/>
     </inferredMetricsTieBreakers>

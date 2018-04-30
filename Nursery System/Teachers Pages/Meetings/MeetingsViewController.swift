@@ -64,7 +64,7 @@ class MeetingsViewController: UIViewController, UITableViewDataSource, UITableVi
             segmentedMeetings.selectedSegmentIndex = 1
         }
         
-       var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetMyMeetings.php")!)
+       var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/GetMyMeetings.php")!)
         request.httpMethod = "POST"
                 request.httpBody = postString.data(using: .utf8)
         let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data in

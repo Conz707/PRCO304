@@ -84,21 +84,9 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         
         
         lblName.text = (selectedStudent.FirstName)! + " " + (selectedStudent.Surname)!
-        lblDateOfBirth.text = selectedStudent.DateofBirth
         
-        //small piece to make date more easily identifiable
-        //Convert String to Date for formatting
-        let dateString = selectedStudent.DateofBirth
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let myDate = dateFormatter.date(from: dateString!)!
-        print("original date is \(dateString!)")
-        
-        //Convert date back to String
-        dateFormatter.dateFormat = "MMMM dd, YYYY"
-        let newDateString = dateFormatter.string(from: myDate)
-        print("new date string is \(newDateString)")
-        lblDateOfBirth.text = "\(newDateString)"
+        let formatDate = utilities.formatDateToString(dateString: selectedStudent.DateofBirth!)
+        lblDateOfBirth.text = formatDate
         
     }
     
@@ -210,7 +198,7 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         let guardian = selectedStudent.Guardian
         let keyPerson = selectedStudent.KeyPerson
         
-        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetParentsDetails.php")!)
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/GetParentsDetails.php")!)
         
         request.httpMethod = "POST"
         
@@ -253,7 +241,7 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         
         postString = "S_ID=\(selectedStudent.S_ID!)"
         
-        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetActivities.php")!)
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/GetActivities.php")!)
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
         

@@ -52,18 +52,11 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
         imgActivity.isUserInteractionEnabled = true
         imgActivity.addGestureRecognizer(tapGestureRecognizer)
         
-        //Convert String to Date for formatting
-        dateString = (selectedActivity.Date)!
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        myDate = dateFormatter.date(from: dateString)!
-        print("original date is \(dateString)")
-        
-        //Convert date back to String
-        dateFormatter.dateFormat = "MMMM dd, YYYY"
-        let newDateString = dateFormatter.string(from: myDate)
-        print("new date string is \(newDateString)")
-        lblActivityDate.text = "\(newDateString)"
+        let formateDate = utilities.formatDateToString(dateString: selectedActivity.Date!)
+        print("heres the returned date \(formateDate)")
+        lblActivityDate.text = formateDate
+
+
         
         let URL_IMAGE = URL(string: (selectedActivity.A_ID)!)
         print(URL_IMAGE!)
@@ -163,7 +156,7 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
         
             let observation = self.txtActivityObservations.text
             
-            var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/EditActivity.php")!)
+            var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/EditActivity.php")!)
             
             request.httpMethod = "POST"
             
@@ -317,7 +310,7 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
                 multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
             }
         },
-                         to:"https://shod-verses.000webhostapp.com/ImageUpload.php")
+                         to:"https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/ImageUpload.php")
         { (result) in
             switch result {
             case .success(let upload, _, _):
@@ -449,7 +442,7 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
     
     func updateBookmark(){
         
-        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/Bookmarks.php")!)
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/ParentSidePHPFiles/Bookmarks.php")!)
         request.httpMethod = "POST"
         let postString = ("A_ID=\(A_ID)&U_ID=\(U_ID)&Bookmark=\(bookmark)")
         
@@ -463,7 +456,7 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
     func checkBookmarked(completion: @escaping (_ success : Bool) -> ()){
     
         
-        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/CheckBookmarked.php")!)
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/ParentSidePHPFiles/CheckBookmarked.php")!)
         request.httpMethod = "POST"
         
         let postString = ("A_ID=\(self.A_ID)&U_ID=\(self.U_ID)")
@@ -478,7 +471,7 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
     
     func deleteActivity(){
         
-        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/DeleteActivity.php")!)
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/DeleteActivity.php")!)
         request.httpMethod = "POST"
         let postString = ("A_ID=\(A_ID)")
         

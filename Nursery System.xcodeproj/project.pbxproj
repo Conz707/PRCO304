@@ -21,7 +21,7 @@
 		9C8A23F3203B325A008C4D10 /* Nursery_SystemUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8A23F2203B325A008C4D10 /* Nursery_SystemUITests.swift */; };
 		9CAA2D902093892E006D251B /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CAA2D8F2093892E006D251B /* Activity.swift */; };
 		9CAA2D93209394CD006D251B /* utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CAA2D92209394CD006D251B /* utilities.swift */; };
-		9CB78D4F207D0503007B12B5 /* StudentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB78D4E207D0503007B12B5 /* StudentsViewController.swift */; };
+		9CB78D4F207D0503007B12B5 /* DisplayStudentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB78D4E207D0503007B12B5 /* DisplayStudentsViewController.swift */; };
 		9CB78D5B207D1CDB007B12B5 /* ParentTeacherMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB78D5A207D1CDB007B12B5 /* ParentTeacherMeetingViewController.swift */; };
 		9CB9102F20693E6600294C9B /* ManagerLandingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB9102E20693E6600294C9B /* ManagerLandingPageViewController.swift */; };
 		9CB9103120693EC300294C9B /* CreateStudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB9103020693EC300294C9B /* CreateStudentViewController.swift */; };
@@ -38,7 +38,6 @@
 		9CD126F0207BDED900C170BE /* GoalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD126EF207BDED900C170BE /* GoalsViewController.swift */; };
 		9CD126F3207BE3E900C170BE /* checked box.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CD126F2207BE3E800C170BE /* checked box.png */; };
 		9CD126F7207BE58200C170BE /* unchecked box.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CD126F6207BE58200C170BE /* unchecked box.png */; };
-		9CD3ACBB203F25EF003A21C0 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CD3ACBA203F25EF003A21C0 /* placeholder.png */; };
 		9CD71B62207FB62100D814CE /* BookmarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD71B61207FB62100D814CE /* BookmarksViewController.swift */; };
 		9CD71B66207FC7A700D814CE /* ParentsHomepageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD71B65207FC7A700D814CE /* ParentsHomepageViewController.swift */; };
 		9CD71B68207FCBF000D814CE /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD71B67207FCBF000D814CE /* NotificationsViewController.swift */; };
@@ -90,7 +89,7 @@
 		9C8A23F4203B325A008C4D10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9CAA2D8F2093892E006D251B /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		9CAA2D92209394CD006D251B /* utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utilities.swift; sourceTree = "<group>"; };
-		9CB78D4E207D0503007B12B5 /* StudentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsViewController.swift; sourceTree = "<group>"; };
+		9CB78D4E207D0503007B12B5 /* DisplayStudentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayStudentsViewController.swift; sourceTree = "<group>"; };
 		9CB78D5A207D1CDB007B12B5 /* ParentTeacherMeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentTeacherMeetingViewController.swift; sourceTree = "<group>"; };
 		9CB9102E20693E6600294C9B /* ManagerLandingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerLandingPageViewController.swift; sourceTree = "<group>"; };
 		9CB9103020693EC300294C9B /* CreateStudentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudentViewController.swift; sourceTree = "<group>"; };
@@ -107,7 +106,6 @@
 		9CD126EF207BDED900C170BE /* GoalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsViewController.swift; sourceTree = "<group>"; };
 		9CD126F2207BE3E800C170BE /* checked box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checked box.png"; path = "../../../../Downloads/checked box.png"; sourceTree = "<group>"; };
 		9CD126F6207BE58200C170BE /* unchecked box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "unchecked box.png"; path = "../../../../Downloads/unchecked box.png"; sourceTree = "<group>"; };
-		9CD3ACBA203F25EF003A21C0 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = placeholder.png; path = media/placeholder.png; sourceTree = SOURCE_ROOT; };
 		9CD71B61207FB62100D814CE /* BookmarksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksViewController.swift; sourceTree = "<group>"; };
 		9CD71B65207FC7A700D814CE /* ParentsHomepageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentsHomepageViewController.swift; sourceTree = "<group>"; };
 		9CD71B67207FCBF000D814CE /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
@@ -162,13 +160,9 @@
 		9C7AD8072062C01100623FDE /* Students Pages */ = {
 			isa = PBXGroup;
 			children = (
-				9C7AD8092062C06600623FDE /* Activities Pages */,
-				9CD126F1207BDEDD00C170BE /* Goals */,
 				9CC3AC28204EEB52003B5359 /* StudentDetailsViewController.swift */,
-				9CB78D4E207D0503007B12B5 /* StudentsViewController.swift */,
-				9CB78D5A207D1CDB007B12B5 /* ParentTeacherMeetingViewController.swift */,
-				9CC42102208E646100190474 /* MeetingsViewController.swift */,
-				9CCF5D52208F82450036C0E7 /* MeetingDetailsViewController.swift */,
+				9CD126F1207BDEDD00C170BE /* Goals */,
+				9C7AD8092062C06600623FDE /* Activities Pages */,
 			);
 			path = "Students Pages";
 			sourceTree = "<group>";
@@ -194,6 +188,8 @@
 			isa = PBXGroup;
 			children = (
 				9C722F7C203F3EF100EB1805 /* TeacherLandingPageViewController.swift */,
+				9CB78D4E207D0503007B12B5 /* DisplayStudentsViewController.swift */,
+				9CCEACC720977C6E00C44D0B /* Meetings */,
 			);
 			path = "Teachers Pages";
 			sourceTree = "<group>";
@@ -234,14 +230,14 @@
 		9C8A23D1203B3259008C4D10 /* Nursery System */ = {
 			isa = PBXGroup;
 			children = (
+				9C7AD8082062C03E00623FDE /* Login Page */,
+				9C7AD80A2062C0BE00623FDE /* Teachers Pages */,
+				9CB9103420693ED500294C9B /* Manager Pages */,
+				9C7AD8072062C01100623FDE /* Students Pages */,
+				9C7AD80B2062C0FD00623FDE /* Parents Pages */,
 				9CAA2D91209394B9006D251B /* utils */,
 				9CD3ACB9203F25D5003A21C0 /* media */,
 				9CC42106208E72BA00190474 /* structs */,
-				9C7AD8082062C03E00623FDE /* Login Page */,
-				9C7AD80B2062C0FD00623FDE /* Parents Pages */,
-				9C7AD80A2062C0BE00623FDE /* Teachers Pages */,
-				9C7AD8072062C01100623FDE /* Students Pages */,
-				9CB9103420693ED500294C9B /* Manager Pages */,
 				9C8A23D2203B3259008C4D10 /* AppDelegate.swift */,
 				9C8A23D6203B3259008C4D10 /* Main.storyboard */,
 				9C8A23D9203B3259008C4D10 /* Assets.xcassets */,
@@ -301,6 +297,16 @@
 			path = structs;
 			sourceTree = "<group>";
 		};
+		9CCEACC720977C6E00C44D0B /* Meetings */ = {
+			isa = PBXGroup;
+			children = (
+				9CB78D5A207D1CDB007B12B5 /* ParentTeacherMeetingViewController.swift */,
+				9CC42102208E646100190474 /* MeetingsViewController.swift */,
+				9CCF5D52208F82450036C0E7 /* MeetingDetailsViewController.swift */,
+			);
+			path = Meetings;
+			sourceTree = "<group>";
+		};
 		9CD126F1207BDEDD00C170BE /* Goals */ = {
 			isa = PBXGroup;
 			children = (
@@ -316,7 +322,6 @@
 				9CFB9949209256B2001F3249 /* unchecked bookmark.png */,
 				9CC3AC2A204EF80B003B5359 /* earlyYears.jpg */,
 				9CD126F2207BE3E800C170BE /* checked box.png */,
-				9CD3ACBA203F25EF003A21C0 /* placeholder.png */,
 				9CD126F6207BE58200C170BE /* unchecked box.png */,
 			);
 			path = media;
@@ -452,7 +457,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C8A23DD203B3259008C4D10 /* LaunchScreen.storyboard in Resources */,
-				9CD3ACBB203F25EF003A21C0 /* placeholder.png in Resources */,
 				9CD126F7207BE58200C170BE /* unchecked box.png in Resources */,
 				9CFB994B209256B2001F3249 /* unchecked bookmark.png in Resources */,
 				9C8A23DA203B3259008C4D10 /* Assets.xcassets in Resources */,
@@ -645,7 +649,7 @@
 				9CC42105208E719D00190474 /* Meeting.swift in Sources */,
 				9CD71B62207FB62100D814CE /* BookmarksViewController.swift in Sources */,
 				9CC4418B2060029A002E9456 /* ActivityDetailsViewController.swift in Sources */,
-				9CB78D4F207D0503007B12B5 /* StudentsViewController.swift in Sources */,
+				9CB78D4F207D0503007B12B5 /* DisplayStudentsViewController.swift in Sources */,
 				9C722F7D203F3EF100EB1805 /* TeacherLandingPageViewController.swift in Sources */,
 				9CB78D5B207D1CDB007B12B5 /* ParentTeacherMeetingViewController.swift in Sources */,
 				9CB9102F20693E6600294C9B /* ManagerLandingPageViewController.swift in Sources */,

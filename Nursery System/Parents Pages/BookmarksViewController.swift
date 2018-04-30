@@ -11,25 +11,50 @@ import UIKit
 class BookmarksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
 
-
+    @IBOutlet var activityIndicatorTableLoading: UIActivityIndicatorView!
     @IBOutlet var tblBookmarks: UITableView!
     var feedItems: NSArray = NSArray()
     var selectedActivity : Activity = Activity()
     var selectedStudent : Student = Student()
+    var activities = [Activity]()
     var postString = ""
+    var defaultValues = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+       
+        let U_ID = defaultValues.string(forKey: "UserU_ID")
+        postString = "U_ID=\(U_ID!)"
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/ParentSidePHPFiles/GetMyBookmarks.php")!)
+        request.httpMethod = "POST"
+        request.httpBody = postString.data(using: .utf8)
+        let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data in
+            do {
+                self.activities = try JSONDecoder().decode(Array<Activity>.self, from: data)
+                for eachActivity in self.activities {
+                    print("\(eachActivity.description)")
+                }
+            } catch {
+                print(error)
+                print("ERROR")
+            }
+            DispatchQueue.main.async {
+                self.itemsDownloaded(items: self.activities as NSArray)
+                print("trying to print items downloaded \(self.activities)")
+            }
+            
+        })
+    }
+    
+    func itemsDownloaded(items: NSArray){
+        feedItems = items
+        self.tblBookmarks.reloadData()
+        activityIndicatorTableLoading.stopAnimating()
     }
     
     override func viewDidAppear(_ animated: Bool) {
      
-        self.tblBookmarks.dataSource = self
-        self.tblBookmarks.delegate = self
-     //   let loadBookmarksModel = LoadBookmarksModel()
-      //  loadBookmarksModel.downloadItems()
-     //   loadBookmarksModel.delegate = self
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -121,12 +146,6 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         })
         
         
-        
-    }
-    
-    func itemsDownloaded(items: NSArray) {
-        feedItems = items
-        tblBookmarks.reloadData()
         
     }
     

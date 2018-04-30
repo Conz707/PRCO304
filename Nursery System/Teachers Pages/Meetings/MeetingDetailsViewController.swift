@@ -85,7 +85,7 @@ saveAlert()
     }
    
     func cancelMeeting(){
-    var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/CancelMeeting")!)
+    var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/CancelMeeting.php")!)
     request.httpMethod = "POST"
     postString = ("M_ID=\(selectedMeeting.M_ID)")
     
@@ -174,7 +174,7 @@ saveAlert()
             meetingCompleted = 1
         }
         
-        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/SaveMeetingDetails.php")!)
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/SaveMeetingDetails.php")!)
         postString = "M_ID=\(selectedMeeting.M_ID!)&Notes=\(txtNotes.text!)&Completed=\(meetingCompleted)"
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
@@ -197,7 +197,7 @@ saveAlert()
     
     func getParent(){
         
-        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetMeetingParent.php")!)
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/GetMeetingParent.php")!)
         postString = "U_ID=\(selectedMeeting.Parent_ID!)"
         print("memes \(postString)")
         request.httpMethod = "POST"
@@ -222,7 +222,7 @@ saveAlert()
     func checkCompleted(completion: @escaping (_ success : Bool) -> ()){
 
         
-        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/CheckCompleted.php")!)
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/CheckCompleted.php")!)
         request.httpMethod = "POST"
         
         let postString = ("M_ID=\(selectedMeeting.M_ID!)")

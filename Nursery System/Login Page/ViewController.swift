@@ -21,7 +21,6 @@ class ViewController: UIViewController{
     @IBOutlet weak var txtPassword: UITextField!
     var loginSuccess = false
     var roleString = ""
-    let loginRequest = "https://shod-verses.000webhostapp.com/NewLogin.php" //loginRequest as Alamofire has a request function
     let defaultValues = UserDefaults.standard //used to store user data?
     var responseSuccess = ""
  
@@ -121,8 +120,6 @@ class ViewController: UIViewController{
         
         print(checkUserEmail)
         print(checkUserRole)
-        
-        
         
         switch(checkUserRole){
         case "Teacher"?:

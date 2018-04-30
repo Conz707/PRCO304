@@ -85,7 +85,7 @@ class ParentTeacherMeetingViewController: UIViewController, UIPickerViewDelegate
 
     @IBAction func btnAddMeeting(_ sender: Any) {
         if(txtDropdown.text?.isEmpty == false){
-        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/CreateParentTeacherMeeting.php")!)
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/CreateParentTeacherMeeting.php")!)
         request.httpMethod = "POST"
         let postString = ("S_ID=\(selectedStudent.S_ID!)&Parent_ID=\(selectedParentID)&Teacher_ID=\(U_ID)&Date=\(datePicker.date)")
         print(postString)
@@ -126,7 +126,7 @@ class ParentTeacherMeetingViewController: UIViewController, UIPickerViewDelegate
             segmentedMeetings.selectedSegmentIndex = 0
         }
         
-        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetStudentMeetings.php")!)
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/GetStudentMeetings.php")!)
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
         let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data in
@@ -170,7 +170,7 @@ class ParentTeacherMeetingViewController: UIViewController, UIPickerViewDelegate
     }
     
   func getParentsDropdown(){
-        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetParentsDropdown.php")!)
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/GetParentsDropdown.php")!)
         request.httpMethod = "POST"
         let postString = ("S_ID=\(selectedStudent.S_ID!)")
         print(postString)
@@ -204,7 +204,7 @@ class ParentTeacherMeetingViewController: UIViewController, UIPickerViewDelegate
         print(selectedMeeting)
         
         selectedMeeting = feedItems[indexPath.row] as! Meeting
-        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetSelectedStudent.php")!)
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/GetSelectedStudent.php")!)
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
         
