@@ -15,3 +15,5 @@ struct User: Decodable {
     let UserType: String?
     
 }
+
+

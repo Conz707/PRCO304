@@ -20,7 +20,6 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
     @IBOutlet var imgActivity: UIImageView!
     var responseSuccess = false
     var selectedStudent : Student = Student()
-    var image = #imageLiteral(resourceName: "placeholder.png")
     var NewActivityID = 0
 
     

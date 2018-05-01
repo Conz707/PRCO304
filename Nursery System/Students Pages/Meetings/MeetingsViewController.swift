@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class ParentTeacherMeetingViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource{
+class MeetingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource{
     
     @IBOutlet var activityIndicatorTableLoading: UIActivityIndicatorView!
     @IBOutlet var txtDropdown: UITextField!
@@ -96,7 +96,7 @@ class ParentTeacherMeetingViewController: UIViewController, UIPickerViewDelegate
             let defaultAction = UIAlertAction(title: "Close Alert", style: .default, handler: nil)
             alertController.addAction(defaultAction)
             self.present(alertController, animated: true, completion: nil)
-            self.segmentChangeTable((Any).self)
+
         })
             
         } else {
@@ -105,6 +105,7 @@ class ParentTeacherMeetingViewController: UIViewController, UIPickerViewDelegate
             alertController.addAction(defaultAction)
             self.present(alertController, animated: true, completion: nil)
         }
+                    self.segmentChangeTable((Any).self)
     }
     
     @IBAction func segmentChangeTable(_ sender: Any) {

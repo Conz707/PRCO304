@@ -9,7 +9,7 @@
 import UIKit
 
 
-class MeetingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
+class TeacherMeetingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
 
     @IBOutlet var activityIndicatorTableLoading: UIActivityIndicatorView!
     @IBOutlet var segmentedMeetings: UISegmentedControl!

@@ -22,13 +22,13 @@
 		9CAA2D902093892E006D251B /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CAA2D8F2093892E006D251B /* Activity.swift */; };
 		9CAA2D93209394CD006D251B /* utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CAA2D92209394CD006D251B /* utilities.swift */; };
 		9CB78D4F207D0503007B12B5 /* DisplayStudentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB78D4E207D0503007B12B5 /* DisplayStudentsViewController.swift */; };
-		9CB78D5B207D1CDB007B12B5 /* ParentTeacherMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB78D5A207D1CDB007B12B5 /* ParentTeacherMeetingViewController.swift */; };
+		9CB78D5B207D1CDB007B12B5 /* MeetingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB78D5A207D1CDB007B12B5 /* MeetingsViewController.swift */; };
 		9CB9102F20693E6600294C9B /* ManagerLandingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB9102E20693E6600294C9B /* ManagerLandingPageViewController.swift */; };
 		9CB9103120693EC300294C9B /* CreateStudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB9103020693EC300294C9B /* CreateStudentViewController.swift */; };
 		9CB9103320693ECD00294C9B /* CreateUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB9103220693ECD00294C9B /* CreateUserViewController.swift */; };
 		9CC3AC29204EEB52003B5359 /* StudentDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC3AC28204EEB52003B5359 /* StudentDetailsViewController.swift */; };
 		9CC3AC2B204EF80B003B5359 /* earlyYears.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9CC3AC2A204EF80B003B5359 /* earlyYears.jpg */; };
-		9CC42103208E646100190474 /* MeetingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC42102208E646100190474 /* MeetingsViewController.swift */; };
+		9CC42103208E646100190474 /* TeacherMeetingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC42102208E646100190474 /* TeacherMeetingsViewController.swift */; };
 		9CC42105208E719D00190474 /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC42104208E719D00190474 /* Meeting.swift */; };
 		9CC42108208E72D000190474 /* Parent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC42107208E72D000190474 /* Parent.swift */; };
 		9CC4210A208E731900190474 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC42109208E731900190474 /* User.swift */; };
@@ -91,13 +91,13 @@
 		9CAA2D8F2093892E006D251B /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		9CAA2D92209394CD006D251B /* utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utilities.swift; sourceTree = "<group>"; };
 		9CB78D4E207D0503007B12B5 /* DisplayStudentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayStudentsViewController.swift; sourceTree = "<group>"; };
-		9CB78D5A207D1CDB007B12B5 /* ParentTeacherMeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentTeacherMeetingViewController.swift; sourceTree = "<group>"; };
+		9CB78D5A207D1CDB007B12B5 /* MeetingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingsViewController.swift; sourceTree = "<group>"; };
 		9CB9102E20693E6600294C9B /* ManagerLandingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerLandingPageViewController.swift; sourceTree = "<group>"; };
 		9CB9103020693EC300294C9B /* CreateStudentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudentViewController.swift; sourceTree = "<group>"; };
 		9CB9103220693ECD00294C9B /* CreateUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserViewController.swift; sourceTree = "<group>"; };
 		9CC3AC28204EEB52003B5359 /* StudentDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentDetailsViewController.swift; sourceTree = "<group>"; };
 		9CC3AC2A204EF80B003B5359 /* earlyYears.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = earlyYears.jpg; path = ../../../../Downloads/earlyYears.jpg; sourceTree = "<group>"; };
-		9CC42102208E646100190474 /* MeetingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingsViewController.swift; sourceTree = "<group>"; };
+		9CC42102208E646100190474 /* TeacherMeetingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherMeetingsViewController.swift; sourceTree = "<group>"; };
 		9CC42104208E719D00190474 /* Meeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
 		9CC42107208E72D000190474 /* Parent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parent.swift; sourceTree = "<group>"; };
 		9CC42109208E731900190474 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -162,9 +162,10 @@
 		9C7AD8072062C01100623FDE /* Students Pages */ = {
 			isa = PBXGroup;
 			children = (
+				9CCBB9312098E97400D2695D /* Meetings */,
 				9CC3AC28204EEB52003B5359 /* StudentDetailsViewController.swift */,
 				9CD126F1207BDEDD00C170BE /* Goals */,
-				9C7AD8092062C06600623FDE /* Activities Pages */,
+				9C7AD8092062C06600623FDE /* Activities */,
 			);
 			path = "Students Pages";
 			sourceTree = "<group>";
@@ -177,13 +178,13 @@
 			path = "Login Page";
 			sourceTree = "<group>";
 		};
-		9C7AD8092062C06600623FDE /* Activities Pages */ = {
+		9C7AD8092062C06600623FDE /* Activities */ = {
 			isa = PBXGroup;
 			children = (
 				9CC4418A2060029A002E9456 /* ActivityDetailsViewController.swift */,
 				9CC4418C20603365002E9456 /* CreateActivityViewController.swift */,
 			);
-			path = "Activities Pages";
+			path = Activities;
 			sourceTree = "<group>";
 		};
 		9C7AD80A2062C0BE00623FDE /* Teachers Pages */ = {
@@ -300,12 +301,19 @@
 			path = structs;
 			sourceTree = "<group>";
 		};
+		9CCBB9312098E97400D2695D /* Meetings */ = {
+			isa = PBXGroup;
+			children = (
+				9CB78D5A207D1CDB007B12B5 /* MeetingsViewController.swift */,
+				9CCF5D52208F82450036C0E7 /* MeetingDetailsViewController.swift */,
+			);
+			path = Meetings;
+			sourceTree = "<group>";
+		};
 		9CCEACC720977C6E00C44D0B /* Meetings */ = {
 			isa = PBXGroup;
 			children = (
-				9CB78D5A207D1CDB007B12B5 /* ParentTeacherMeetingViewController.swift */,
-				9CC42102208E646100190474 /* MeetingsViewController.swift */,
-				9CCF5D52208F82450036C0E7 /* MeetingDetailsViewController.swift */,
+				9CC42102208E646100190474 /* TeacherMeetingsViewController.swift */,
 			);
 			path = Meetings;
 			sourceTree = "<group>";
@@ -654,7 +662,7 @@
 				9CC4418B2060029A002E9456 /* ActivityDetailsViewController.swift in Sources */,
 				9CB78D4F207D0503007B12B5 /* DisplayStudentsViewController.swift in Sources */,
 				9C722F7D203F3EF100EB1805 /* TeacherLandingPageViewController.swift in Sources */,
-				9CB78D5B207D1CDB007B12B5 /* ParentTeacherMeetingViewController.swift in Sources */,
+				9CB78D5B207D1CDB007B12B5 /* MeetingsViewController.swift in Sources */,
 				9CB9102F20693E6600294C9B /* ManagerLandingPageViewController.swift in Sources */,
 				9CC4418D20603365002E9456 /* CreateActivityViewController.swift in Sources */,
 				9C7AD8062062B3D700623FDE /* MyChildrenViewController.swift in Sources */,
@@ -664,7 +672,7 @@
 				9C79A80E208F926B00E2A82F /* Student.swift in Sources */,
 				9C8A23D5203B3259008C4D10 /* ViewController.swift in Sources */,
 				9CEF4EC92056F3AD001A6C1B /* ProgressReport1ViewController.swift in Sources */,
-				9CC42103208E646100190474 /* MeetingsViewController.swift in Sources */,
+				9CC42103208E646100190474 /* TeacherMeetingsViewController.swift in Sources */,
 				9CB9103120693EC300294C9B /* CreateStudentViewController.swift in Sources */,
 				9CC3AC29204EEB52003B5359 /* StudentDetailsViewController.swift in Sources */,
 				9C66FB94207678220070E25F /* AccountDetailsViewController.swift in Sources */,

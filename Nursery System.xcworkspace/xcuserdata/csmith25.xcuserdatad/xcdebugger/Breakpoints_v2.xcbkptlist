@@ -298,7 +298,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nursery System/Parents Pages/ParentsHomepageViewController.swift"
-            timestampString = "546802582.180131"
+            timestampString = "546895040.451827"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "33"
@@ -337,38 +337,6 @@
             endingLineNumber = "158"
             landmarkName = "btnSaveActivity(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Bool) -&gt; () in closure #1 () -&gt; () in Nursery_System.CreateActivityViewController.btnSaveActivity(Any) -&gt; ()"
-                  moduleName = "Nursery System"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/csmith25/Desktop/NurserySystem/Nursery%20System/Students%20Pages/Activities%20Pages/CreateActivityViewController.swift"
-                  timestampString = "546802582.337275"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "158"
-                  endingLineNumber = "158"
-                  offsetFromSymbolStart = "252">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__ObjC.UIAlertAction) -&gt; () in closure #1 (Swift.Bool) -&gt; () in closure #1 () -&gt; () in Nursery_System.CreateActivityViewController.btnSaveActivity(Any) -&gt; ()"
-                  moduleName = "Nursery System"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/csmith25/Desktop/NurserySystem/Nursery%20System/Students%20Pages/Activities%20Pages/CreateActivityViewController.swift"
-                  timestampString = "546802582.339015"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "158"
-                  endingLineNumber = "158"
-                  offsetFromSymbolStart = "6888">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -385,38 +353,6 @@
             endingLineNumber = "170"
             landmarkName = "btnSaveActivity(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Nursery_System.CreateActivityViewController.btnSaveActivity(Any) -&gt; ()"
-                  moduleName = "Nursery System"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/csmith25/Desktop/NurserySystem/Nursery%20System/Students%20Pages/Activities%20Pages/CreateActivityViewController.swift"
-                  timestampString = "546802582.342675"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "170"
-                  endingLineNumber = "170"
-                  offsetFromSymbolStart = "1312">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in Nursery_System.CreateActivityViewController.btnSaveActivity(Any) -&gt; ()"
-                  moduleName = "Nursery System"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/csmith25/Desktop/NurserySystem/Nursery%20System/Students%20Pages/Activities%20Pages/CreateActivityViewController.swift"
-                  timestampString = "546802582.344128"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "170"
-                  endingLineNumber = "170"
-                  offsetFromSymbolStart = "144">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -465,38 +401,6 @@
             endingLineNumber = "241"
             landmarkName = "upload(image:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in closure #1 (__ObjC.Progress) -&gt; () in closure #2 (Alamofire.SessionManager.MultipartFormDataEncodingResult) -&gt; () in Nursery_System.CreateActivityViewController.upload(image: __ObjC.UIImage) -&gt; ()"
-                  moduleName = "Nursery System"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/csmith25/Desktop/NurserySystem/Nursery%20System/Students%20Pages/Activities%20Pages/CreateActivityViewController.swift"
-                  timestampString = "546802582.353361"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "241"
-                  endingLineNumber = "241"
-                  offsetFromSymbolStart = "180">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__ObjC.UIAlertAction) -&gt; () in closure #1 () -&gt; () in closure #1 (__ObjC.Progress) -&gt; () in closure #2 (Alamofire.SessionManager.MultipartFormDataEncodingResult) -&gt; () in Nursery_System.CreateActivityViewController.upload(image: __ObjC.UIImage) -&gt; ()"
-                  moduleName = "Nursery System"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/csmith25/Desktop/NurserySystem/Nursery%20System/Students%20Pages/Activities%20Pages/CreateActivityViewController.swift"
-                  timestampString = "546802582.354903"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "242"
-                  endingLineNumber = "242"
-                  offsetFromSymbolStart = "32">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -529,38 +433,6 @@
             endingLineNumber = "243"
             landmarkName = "upload(image:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in closure #1 (__ObjC.Progress) -&gt; () in closure #2 (Alamofire.SessionManager.MultipartFormDataEncodingResult) -&gt; () in Nursery_System.CreateActivityViewController.upload(image: __ObjC.UIImage) -&gt; ()"
-                  moduleName = "Nursery System"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/csmith25/Desktop/NurserySystem/Nursery%20System/Students%20Pages/Activities%20Pages/CreateActivityViewController.swift"
-                  timestampString = "546802582.361425"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "243"
-                  endingLineNumber = "243"
-                  offsetFromSymbolStart = "288">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__ObjC.UIAlertAction) -&gt; () in closure #1 () -&gt; () in closure #1 (__ObjC.Progress) -&gt; () in closure #2 (Alamofire.SessionManager.MultipartFormDataEncodingResult) -&gt; () in Nursery_System.CreateActivityViewController.upload(image: __ObjC.UIImage) -&gt; ()"
-                  moduleName = "Nursery System"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/csmith25/Desktop/NurserySystem/Nursery%20System/Students%20Pages/Activities%20Pages/CreateActivityViewController.swift"
-                  timestampString = "546802582.363003"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "243"
-                  endingLineNumber = "243"
-                  offsetFromSymbolStart = "196">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -625,38 +497,6 @@
             endingLineNumber = "418"
             landmarkName = "deleteAlert()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__ObjC.UIAlertAction) -&gt; () in Nursery_System.ActivityDetailsViewController.deleteAlert() -&gt; ()"
-                  moduleName = "Nursery System"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/csmith25/Desktop/NurserySystem/Nursery%20System/Students%20Pages/Activities%20Pages/ActivityDetailsViewController.swift"
-                  timestampString = "546802582.375894"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "418"
-                  endingLineNumber = "418"
-                  offsetFromSymbolStart = "180">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__ObjC.UIAlertAction) -&gt; () in closure #1 (__ObjC.UIAlertAction) -&gt; () in Nursery_System.ActivityDetailsViewController.deleteAlert() -&gt; ()"
-                  moduleName = "Nursery System"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/csmith25/Desktop/NurserySystem/Nursery%20System/Students%20Pages/Activities%20Pages/ActivityDetailsViewController.swift"
-                  timestampString = "546802582.3773839"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "419"
-                  endingLineNumber = "419"
-                  offsetFromSymbolStart = "32">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -689,38 +529,6 @@
             endingLineNumber = "411"
             landmarkName = "deleteAlert()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Nursery_System.ActivityDetailsViewController.deleteAlert() -&gt; ()"
-                  moduleName = "Nursery System"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/csmith25/Desktop/NurserySystem/Nursery%20System/Students%20Pages/Activities%20Pages/ActivityDetailsViewController.swift"
-                  timestampString = "546802582.383975"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "411"
-                  endingLineNumber = "411"
-                  offsetFromSymbolStart = "132">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__ObjC.UIAlertAction) -&gt; () in Nursery_System.ActivityDetailsViewController.deleteAlert() -&gt; ()"
-                  moduleName = "Nursery System"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/csmith25/Desktop/NurserySystem/Nursery%20System/Students%20Pages/Activities%20Pages/ActivityDetailsViewController.swift"
-                  timestampString = "546802582.38552"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "413"
-                  endingLineNumber = "413"
-                  offsetFromSymbolStart = "44">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -794,7 +602,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nursery System/Parents Pages/MyChildrenViewController.swift"
-            timestampString = "546802582.182755"
+            timestampString = "546895040.4523211"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "108"
@@ -810,7 +618,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nursery System/Parents Pages/MyChildrenViewController.swift"
-            timestampString = "546802582.183174"
+            timestampString = "546895040.452552"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "109"
@@ -826,7 +634,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nursery System/Parents Pages/MyChildrenViewController.swift"
-            timestampString = "546802582.183531"
+            timestampString = "546895040.452747"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "98"
@@ -842,7 +650,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nursery System/Parents Pages/MyChildrenViewController.swift"
-            timestampString = "546802582.183884"
+            timestampString = "546895040.452939"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "100"
@@ -858,7 +666,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nursery System/Parents Pages/MyChildrenViewController.swift"
-            timestampString = "546802582.184236"
+            timestampString = "546895040.453126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "104"
@@ -874,7 +682,7 @@
                   moduleName = "Nursery System"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/csmith25/Desktop/NurserySystem/Nursery%20System/Parents%20Pages/MyChildrenViewController.swift"
-                  timestampString = "546802582.408031"
+                  timestampString = "546894007.114651"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "104"
@@ -889,7 +697,7 @@
                   moduleName = "Nursery System"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/csmith25/Desktop/NurserySystem/Nursery%20System/Parents%20Pages/MyChildrenViewController.swift"
-                  timestampString = "546802582.4095269"
+                  timestampString = "546894007.116221"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "107"
@@ -906,7 +714,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nursery System/Parents Pages/BookmarksViewController.swift"
-            timestampString = "546802582.184589"
+            timestampString = "546895040.453319"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "156"
@@ -922,7 +730,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nursery System/Parents Pages/BookmarksViewController.swift"
-            timestampString = "546802582.184822"
+            timestampString = "546895040.45354"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "145"
@@ -992,6 +800,118 @@
             startingLineNumber = "114"
             endingLineNumber = "114"
             landmarkName = "segmentChangeTable(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Nursery System/Students Pages/Goals/GoalsViewController.swift"
+            timestampString = "546895040.453788"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "btnAddGoal(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Nursery System/Students Pages/Goals/GoalsViewController.swift"
+            timestampString = "546895040.453832"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "btnAddGoal(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Nursery_System.GoalsViewController.btnAddGoal(Any) -&gt; ()"
+                  moduleName = "Nursery System"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/csmith25/Desktop/NurserySystem/Nursery%20System/Students%20Pages/Goals/GoalsViewController.swift"
+                  timestampString = "546894007.132075"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "86"
+                  endingLineNumber = "86"
+                  offsetFromSymbolStart = "2148">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Bool, Foundation.Data) -&gt; () in Nursery_System.GoalsViewController.btnAddGoal(Any) -&gt; ()"
+                  moduleName = "Nursery System"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/csmith25/Desktop/NurserySystem/Nursery%20System/Students%20Pages/Goals/GoalsViewController.swift"
+                  timestampString = "546894007.13358"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "87"
+                  endingLineNumber = "87"
+                  offsetFromSymbolStart = "40">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Nursery System/Students Pages/Goals/GoalsViewController.swift"
+            timestampString = "546895040.453872"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "btnAddGoal(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Nursery System/Students Pages/Goals/GoalsViewController.swift"
+            timestampString = "546895040.4539109"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "btnAddGoal(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Nursery System/Students Pages/Goals/GoalsViewController.swift"
+            timestampString = "546895040.453951"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "btnAddGoal(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

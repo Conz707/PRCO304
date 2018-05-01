@@ -64,7 +64,7 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
             do {
                 self.students = try JSONDecoder().decode(Array<Student>.self, from: data)
                 for eachStudent in self.students {
-                    print("\(eachStudent.description)")
+                    print("\(eachStudent.StudentPicture) \(eachStudent.S_ID)")
                 }
             } catch {
                 print(error)
@@ -96,49 +96,50 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
             return feedItems.count
         }
         
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            //retrieve cell
-            let cellIdentifier: String = "BasicCell"
-            let myCell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)!
-            
-            //get student to show
-            let item: Student = feedItems[indexPath.row] as! Student
-            //get references to labels of cells
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //retrieve cell
+        let cellIdentifier: String = "BasicCell"
+        let myCell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)!
+        
+        
+        //get student to show
+        let item: Student = feedItems[indexPath.row] as! Student
+        //get references to labels of cells
+        
         let URL_IMAGE = URL(string: (item.StudentPicture)!)
-            let session = URLSession(configuration: .default)
+        let session = URLSession(configuration: .default)
+        
+        //create a dataTask
+        let getImageFromUrl = session.dataTask(with: URL_IMAGE!) { data, response, error in
             
-            //create a dataTask
-            let getImageFromUrl = session.dataTask(with: URL_IMAGE!) { data, response, error in
-                
-                //if error
-                if let e = error {
-                    //display message
-                    print("Error occurred: \(e)")
-                } else {
-                    if (response as? HTTPURLResponse) != nil {
+            //if error
+            if let e = error {
+                //display message
+                print("Error occurred: \(e)")
+            } else {
+                if (response as? HTTPURLResponse) != nil {
+                    
+                    //check response contains image
+                    if let imageData = data {
                         
-                        //check response contains image
-                        if let imageData = data {
-                            
-                            //get image
-                            let image = UIImage(data: imageData)
-                            //display the image
-                            DispatchQueue.main.async{
-                                myCell.textLabel!.text = item.FirstName! + " " + item.Surname!
-                                myCell.imageView?.image = image
-                            }
-                        } else {
-                            print("image corrupted")
+                        //get image
+                        let image = UIImage(data: imageData)
+                        //display the imagex
+                        DispatchQueue.main.async{
+                            myCell.textLabel!.text = item.FirstName! + " " + item.Surname!
+                            myCell.imageView?.image = image
                         }
                     } else {
-                        print("No server response")
+                        print("image corrupted")
                     }
+                } else {
+                    print("No server response")
                 }
             }
-            getImageFromUrl.resume()
-
-            return myCell
         }
+        getImageFromUrl.resume()
+        return myCell
+    }
         
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {     //whenever user taps row
             //set selected student to var

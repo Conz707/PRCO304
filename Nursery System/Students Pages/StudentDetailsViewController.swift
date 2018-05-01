@@ -232,7 +232,7 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
             
         } else if (segue.identifier == "createParentTeacherMeeting") {
             print("parentteachermeetingsegueeeeeeeeeeeeeeee")
-            let createParentTeacherMeetingVC = segue.destination as! ParentTeacherMeetingViewController
+            let createParentTeacherMeetingVC = segue.destination as! MeetingsViewController
             createParentTeacherMeetingVC.selectedStudent = selectedStudent
         } else if (segue.identifier == "goalsSegue"){
             let goalsVC = segue.destination as! GoalsViewController
