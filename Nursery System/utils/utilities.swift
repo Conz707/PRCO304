@@ -50,6 +50,21 @@ class utilities{
         return newDateString
     }
     
+    static func formatStringToDate(dateString: String) -> Date{
+        
+        var newDate = Date()
+        print(dateString)
+
+        //Convert String to Date for formatting
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        newDate = dateFormatter.date(from: dateString)!
+        print("original date is \(dateString)")
+        
+        return newDate
+        
+    }
+    
 }
 
 

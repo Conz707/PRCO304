@@ -15,19 +15,42 @@ class GoalsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet var tblGoals: UITableView!
     @IBOutlet var activityIndicatorTableLoading: UIActivityIndicatorView!
     @IBOutlet var segmentedGoals: UISegmentedControl!
-    @IBOutlet var txtGoal: UITextField!
+    @IBOutlet var txtGoal: UITextView!
     @IBOutlet var btnAddGoalOutlet: UIButton!
     var goals = [Goal]()
     var selectedGoal : Goal = Goal()
     var feedItems: NSArray = NSArray()
     var postString = ""
     var selectedStudent : Student = Student()
+    var ageGroup = ""
+    var ageGroupRequest = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         txtGoal.autocapitalizationType = .sentences
         
+        switch(ageGroup){
+        case "a":
+            print("a")
+            ageGroupRequest = "AgeGroupA"
+            break
+        case "b":
+            print("b")
+            ageGroupRequest = "AgeGroupB"
+            break
+        case "c":
+            print("c")
+            ageGroupRequest = "AgeGroupC"
+            break
+        default:
+            break
+        }
+            
     }
+    
+
+    
+    
     @IBAction func segmentChangeTable(_ sender: Any) {
         
         activityIndicatorTableLoading.startAnimating()
@@ -46,7 +69,7 @@ class GoalsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             segmentedGoals.selectedSegmentIndex = 0
         }
         
-        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/GetStudentGoals.php")!)
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/GetStudent\(ageGroupRequest)Goals.php")!)
         postString = "querySelector=All&S_ID=\(selectedStudent.S_ID!)"
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
@@ -77,7 +100,6 @@ class GoalsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBAction func btnAddGoal(_ sender: Any) {
         if(txtGoal.text?.isEmpty == false){
-         
             var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/CreateAgeGroupAGoal.php")!)
             request.httpMethod = "POST"
             let postString = ("S_ID=\(selectedStudent.S_ID!)&Goal=\(txtGoal.text!)")
@@ -85,11 +107,12 @@ class GoalsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             request.httpBody = postString.data(using: .utf8)
             
             let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data in
+                DispatchQueue.main.async{
                 let alertController = UIAlertController(title: "Success", message: "Successfully created goal", preferredStyle: .alert)
                 let defaultAction = UIAlertAction(title: "Close Alert", style: .default, handler: nil)
                 alertController.addAction(defaultAction)
                 self.present(alertController, animated: true, completion: nil)
-
+                }
             })
             
         } else {
@@ -98,7 +121,7 @@ class GoalsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             alertController.addAction(defaultAction)
             self.present(alertController, animated: true, completion: nil)
         }
-        self.segmentChangeTable((Any).self)
+ 
     }
     
     
@@ -128,6 +151,7 @@ class GoalsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         selectedGoal = feedItems[indexPath.row] as! Goal
         //Manually call segue to detail view controller
         self.performSegue(withIdentifier: "goalDetails", sender: self)
+        print("AGE GROUP \(ageGroup)")
     }
     
     func itemsDownloaded(items: NSArray){
@@ -136,6 +160,12 @@ class GoalsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         activityIndicatorTableLoading.stopAnimating()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let goalDetailsVC = segue.destination as! GoalsDetailsViewController
+        
+        goalDetailsVC.selectedGoal = selectedGoal
+        goalDetailsVC.ageGroup = ageGroup
+    }
 
 
 }

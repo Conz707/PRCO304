@@ -30,10 +30,30 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
     var responseMother = ""
     var responseArr: [String] = []
     var postString = ""
+    var ageGroup = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("oioi \(selectedStudent.description)")
+        
+        let formatStringToDate = (utilities.formatStringToDate(dateString: selectedStudent.DateofBirth!))
+        
+        print("original date string \(selectedStudent.DateofBirth!)")
+        print("new Date() \(formatStringToDate)")
+        
+        
+        let ageGroupA = (Calendar.current.date(byAdding: .month, value: -18, to: Date()))!
+        let ageGroupB = (Calendar.current.date(byAdding: .month, value: -36, to: Date()))!
+        let ageGroupC = (Calendar.current.date(byAdding: .month, value: -48, to: Date()))!
+        
+        
+        if(formatStringToDate >= ageGroupA){
+            ageGroup = "a"
+        } else if (formatStringToDate < ageGroupA && formatStringToDate >= ageGroupB) {
+            ageGroup = "b"
+        } else {
+            ageGroup = "c"
+        }
         
         tblActivities.contentInset = UIEdgeInsetsMake(0, 15, 0, 0)
         DispatchQueue.main.async {
@@ -237,6 +257,7 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         } else if (segue.identifier == "goalsSegue"){
             let goalsVC = segue.destination as! GoalsViewController
             goalsVC.selectedStudent = selectedStudent
+            goalsVC.ageGroup = ageGroup
         }
         
         

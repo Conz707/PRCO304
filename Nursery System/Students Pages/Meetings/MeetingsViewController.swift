@@ -92,11 +92,12 @@ class MeetingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         request.httpBody = postString.data(using: .utf8)
         
         let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data in
+            DispatchQueue.main.async{
             let alertController = UIAlertController(title: "Success", message: "Successfully created meeting", preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "Close Alert", style: .default, handler: nil)
             alertController.addAction(defaultAction)
             self.present(alertController, animated: true, completion: nil)
-
+                }
         })
             
         } else {
@@ -205,6 +206,7 @@ class MeetingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         print(selectedMeeting)
         
         selectedMeeting = feedItems[indexPath.row] as! Meeting
+        
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/GetSelectedStudent.php")!)
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)

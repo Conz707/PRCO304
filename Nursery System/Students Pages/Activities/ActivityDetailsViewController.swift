@@ -350,7 +350,6 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
         
         if(defaultValues.string(forKey: "UserRole") != "Manager"){
        
-            print("original date is: \(dateString)")
             let deleteDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())
             print("curr date is \(deleteDate)")
         

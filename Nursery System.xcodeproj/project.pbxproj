@@ -34,6 +34,7 @@
 		9CC4210A208E731900190474 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC42109208E731900190474 /* User.swift */; };
 		9CC4418B2060029A002E9456 /* ActivityDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4418A2060029A002E9456 /* ActivityDetailsViewController.swift */; };
 		9CC4418D20603365002E9456 /* CreateActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4418C20603365002E9456 /* CreateActivityViewController.swift */; };
+		9CCBB9332098FB3D00D2695D /* GoalsDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCBB9322098FB3D00D2695D /* GoalsDetailsViewController.swift */; };
 		9CCEACC92097A5B800C44D0B /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCEACC82097A5B800C44D0B /* Goal.swift */; };
 		9CCF5D53208F82450036C0E7 /* MeetingDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCF5D52208F82450036C0E7 /* MeetingDetailsViewController.swift */; };
 		9CD126F0207BDED900C170BE /* GoalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD126EF207BDED900C170BE /* GoalsViewController.swift */; };
@@ -103,6 +104,7 @@
 		9CC42109208E731900190474 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9CC4418A2060029A002E9456 /* ActivityDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailsViewController.swift; sourceTree = "<group>"; };
 		9CC4418C20603365002E9456 /* CreateActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateActivityViewController.swift; sourceTree = "<group>"; };
+		9CCBB9322098FB3D00D2695D /* GoalsDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsDetailsViewController.swift; sourceTree = "<group>"; };
 		9CCEACC82097A5B800C44D0B /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		9CCF5D52208F82450036C0E7 /* MeetingDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailsViewController.swift; sourceTree = "<group>"; };
 		9CD126EF207BDED900C170BE /* GoalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsViewController.swift; sourceTree = "<group>"; };
@@ -322,6 +324,7 @@
 			isa = PBXGroup;
 			children = (
 				9CD126EF207BDED900C170BE /* GoalsViewController.swift */,
+				9CCBB9322098FB3D00D2695D /* GoalsDetailsViewController.swift */,
 			);
 			path = Goals;
 			sourceTree = "<group>";
@@ -675,6 +678,7 @@
 				9CC42103208E646100190474 /* TeacherMeetingsViewController.swift in Sources */,
 				9CB9103120693EC300294C9B /* CreateStudentViewController.swift in Sources */,
 				9CC3AC29204EEB52003B5359 /* StudentDetailsViewController.swift in Sources */,
+				9CCBB9332098FB3D00D2695D /* GoalsDetailsViewController.swift in Sources */,
 				9C66FB94207678220070E25F /* AccountDetailsViewController.swift in Sources */,
 				9CB9103320693ECD00294C9B /* CreateUserViewController.swift in Sources */,
 				9CD126F0207BDED900C170BE /* GoalsViewController.swift in Sources */,
