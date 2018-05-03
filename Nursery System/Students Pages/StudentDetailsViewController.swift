@@ -48,11 +48,11 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         
         
         if(formatStringToDate >= ageGroupA){
-            ageGroup = "a"
+            ageGroup = "A"
         } else if (formatStringToDate < ageGroupA && formatStringToDate >= ageGroupB) {
-            ageGroup = "b"
+            ageGroup = "B"
         } else {
-            ageGroup = "c"
+            ageGroup = "C"
         }
         
         tblActivities.contentInset = UIEdgeInsetsMake(0, 15, 0, 0)
@@ -235,7 +235,8 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if (segue.identifier == "viewActivity"){
+        switch(segue.identifier!){
+        case "viewActivity":
             //get reference to destination view controller
             
             let viewActivityVC = segue.destination as! ActivityDetailsViewController
@@ -243,26 +244,36 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
             
            viewActivityVC.selectedActivity = selectedActivity
             viewActivityVC.selectedStudent = selectedStudent!
-        } else if (segue.identifier == "createActivity"){
+            viewActivityVC.ageGroup = ageGroup
+            
+            break
+            
+        case "createActivity":
             //get reference to destination view controller
             
             let createActivityVC = segue.destination as! CreateActivityViewController
             //set property to selected student so when view loads, it accesses the properties of feeditem obj ??
             createActivityVC.selectedStudent = selectedStudent
-            
-        } else if (segue.identifier == "createParentTeacherMeeting") {
-            print("parentteachermeetingsegueeeeeeeeeeeeeeee")
-            let createParentTeacherMeetingVC = segue.destination as! MeetingsViewController
-            createParentTeacherMeetingVC.selectedStudent = selectedStudent
-        } else if (segue.identifier == "goalsSegue"){
+            createActivityVC.ageGroup = ageGroup
+            break
+        case "meetingsSegue":
+            let meetingVC = segue.destination as! MeetingsViewController
+            meetingVC.selectedStudent = selectedStudent
+            break
+        case "goalsSegue":
             let goalsVC = segue.destination as! GoalsViewController
             goalsVC.selectedStudent = selectedStudent
             goalsVC.ageGroup = ageGroup
+            break
+        default:
+            break
+            
         }
         
         
         //change to switch???
     }
+    
     
     func getActivities(){
         

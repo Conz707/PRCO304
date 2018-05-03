@@ -32,6 +32,7 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
     var U_ID = ""
     var userRole = ""
     var myDate = Date()
+    var ageGroup = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,8 +46,7 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
         print(selectedStudent.FirstName)
         lblActivityTitle.text = selectedActivity.Activity
         txtActivityObservations.text = selectedActivity.Observation
-        txtActivityObservations.isUserInteractionEnabled = false
-        
+
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         
         imgActivity.isUserInteractionEnabled = true
@@ -107,25 +107,13 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
     }
     
     
-    @IBAction func btnEditActivity(_ sender: Any) {
-        txtActivityObservations.isEditable = true
-        txtActivityObservations.isUserInteractionEnabled = true
-        imgActivity.isUserInteractionEnabled = true
-        btnEditActivityOutlet.isEnabled = false
-        btnSaveChangesOutlet.isEnabled = true
-        btnCancelChangesOutlet.isEnabled = true
-        btnDeleteActivityOutlet.isEnabled = true
-    }
+
     
     @IBAction func btnCancelChanges(_ sender: Any) {
         let alert = UIAlertController(title: "Confirm Cancel Changes - This will revert all data", message: nil, preferredStyle: .actionSheet)
         
         alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { _ in
             self.viewDidLoad()
-            self.btnEditActivityOutlet.isEnabled = true
-            self.btnSaveChangesOutlet.isEnabled = false
-            self.btnCancelChangesOutlet.isEnabled = false
-            self.btnDeleteActivityOutlet.isEnabled = false
         }))
         
         alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
@@ -148,11 +136,6 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
         
         alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { _ in
             
-            self.btnEditActivityOutlet.isEnabled = true
-            self.btnSaveChangesOutlet.isEnabled = false
-            self.btnCancelChangesOutlet.isEnabled = false
-            self.txtActivityObservations.isEditable = false
-            self.imgActivity.isUserInteractionEnabled = false
         
             let observation = self.txtActivityObservations.text
             
@@ -217,7 +200,6 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
         if(userRole == "Parent"){
             btnBookmarkOutlet.isHidden = false
             btnDeleteActivityOutlet.isHidden = true
-            btnEditActivityOutlet.isHidden = true
             btnCancelChangesOutlet.isHidden = true
             btnSaveChangesOutlet.isHidden = true
             
@@ -229,14 +211,11 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
                 }
             }
         } else {
-        txtActivityObservations.isEditable = false
-        btnDeleteActivityOutlet.isEnabled = false
-        imgActivity.isUserInteractionEnabled = false
-        btnSaveChangesOutlet.isEnabled = false
+        btnDeleteActivityOutlet.isEnabled = true
+        imgActivity.isUserInteractionEnabled = true
+        btnSaveChangesOutlet.isEnabled = true
         btnCancelChangesOutlet.isEnabled = false
-        btnEditActivityOutlet.isEnabled = true
         btnDeleteActivityOutlet.isHidden = false
-        btnEditActivityOutlet.isHidden = false
         btnCancelChangesOutlet.isHidden = false
         btnBookmarkOutlet.isHidden = true
             

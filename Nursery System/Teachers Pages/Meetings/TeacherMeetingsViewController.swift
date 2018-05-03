@@ -23,12 +23,17 @@ class TeacherMeetingsViewController: UIViewController, UITableViewDataSource, UI
     var selectedStudent : Student = Student()
     var selectedMeeting : Meeting = Meeting()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         userID = defaultValues.string(forKey: "UserU_ID")!
-        segmentChangeTable((Any).self)
+ 
         activityIndicatorTableLoading.hidesWhenStopped = true
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+               segmentChangeTable((Any).self)
     }
 
     override func didReceiveMemoryWarning() {

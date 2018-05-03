@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 
 
-class CreateActivityViewController: UIViewController, UINavigationControllerDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, URLSessionTaskDelegate, URLSessionDelegate, URLSessionDataDelegate {
+class CreateActivityViewController: UIViewController, UINavigationControllerDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, URLSessionTaskDelegate, URLSessionDelegate, URLSessionDataDelegate, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     @IBOutlet var progressIndicatorUpload: UIProgressView!
     @IBOutlet var dateActivity: UIDatePicker!
@@ -18,14 +18,43 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
     @IBOutlet var txtStudentActivity: UITextField!
     @IBOutlet var lblStudentName: UILabel!
     @IBOutlet var imgActivity: UIImageView!
+    @IBOutlet var txtDropdown: UITextField!
+    @IBOutlet var pickerDropdown: UIPickerView!
     var responseSuccess = false
     var selectedStudent : Student = Student()
     var NewActivityID = 0
-
+    var goals = [Goal]()
+    var ageGroup = ""
+    var ageGroupGoals = ""
+    var selectedGoalID = ""
+    var postString = ""
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        switch(ageGroup){
+        case "A":
+            print("a")
+            print("age group \(ageGroup)")
+            ageGroupGoals = "AgeGroupAGoals"
+            break
+        case "B":
+            print("b")
+            print("age group \(ageGroup)")
+            ageGroupGoals = "AgeGroupBGoals"
+            break
+        case "c":
+            print("C")
+            print("age group \(ageGroup)")
+            ageGroupGoals = "AgeGroupCGoals"
+            break
+        default:
+            break
+        }
+        
+        getGoalsDropdown()
         
         txtStudentActivity.autocapitalizationType = .words
         txtStudentObservation.autocapitalizationType = .sentences
@@ -47,6 +76,38 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
             progressIndicatorUpload.isHidden = true
             progressIndicatorUpload.setProgress(0, animated: true)
         
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return self.goals.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        return "\(goals[row].Goal!)"
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if (goals.count > 0 && goals.count >= row){
+            self.txtDropdown.text = "\(goals[row].Goal!)" as? String
+            selectedGoalID = goals[row].G_ID!
+            self.pickerDropdown.isHidden = true
+            print("text box should display \(self.goals[row])")
+            print("selected goal id \(self.goals[row].G_ID)")
+        }
+    }
+    
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if (textField == self.txtDropdown){    //ask nick about this
+            print("working")
+            self.pickerDropdown.isHidden = false
+            self.view.endEditing(true)
+        }
     }
     
     
@@ -121,15 +182,18 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
             let studentGuardian = self.selectedStudent.Guardian!
             
             
-            var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/SaveActivity.php")!)
+            var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/SaveActivity.php")!)
             
             request.httpMethod = "POST"
+            if(self.txtDropdown.text?.isEmpty)!{
+                self.postString = ("A_ID=\(self.NewActivityID)&S_ID=\(S_ID)&Activity=\(activity!)&Observation=\(observation!)&Date=\(date)&ActivityPicture=\(activityPicture)&SelectedStudent=\(student)&Mother=\(studentMother)&Father=\(studentFather)&Guardian=\(studentGuardian)&NotificationActivityID=\(self.NewActivityID)&AgeGroupGoals=\(self.ageGroupGoals)")
+                } else {
+                self.postString = ("A_ID=\(self.NewActivityID)&S_ID=\(S_ID)&Activity=\(activity!)&Observation=\(observation!)&Date=\(date)&ActivityPicture=\(activityPicture)&SelectedStudent=\(student)&Mother=\(studentMother)&Father=\(studentFather)&Guardian=\(studentGuardian)&NotificationActivityID=\(self.NewActivityID)&G_ID=\(self.selectedGoalID)&AgeGroupGoals=\(self.ageGroupGoals)")
+                }
             
-            let postString = ("S_ID=\(S_ID)&Activity=\(activity!)&Observation=\(observation!)&Date=\(date)&ActivityPicture=\(activityPicture)&SelectedStudent=\(student)&Mother=\(studentMother)&Father=\(studentFather)&Guardian=\(studentGuardian)&NotificationActivityID=\(self.NewActivityID)")
+            print(self.postString)
             
-            print(postString)
-            
-            request.httpBody = postString.data(using: .utf8)
+            request.httpBody = self.postString.data(using: .utf8)
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 guard let data = data, error == nil else {                                                 // check for fundamental networking error
                     print("error=\(error)")
@@ -210,6 +274,31 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
     
     }
     
+    func getGoalsDropdown(){
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/GetGoalsDropdown.php")!)
+        request.httpMethod = "POST"
+        let postString = ("S_ID=\(selectedStudent.S_ID!)&AgeGroupGoals=\(ageGroupGoals)")
+        print(postString)
+        request.httpBody = postString.data(using: .utf8)
+        
+        let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data in
+            do {
+                self.goals = try JSONDecoder().decode(Array<Goal>.self, from: data)
+                print(self.goals)
+                for eachGoal in self.goals {
+                    print("\(eachGoal.Goal!)")
+                }
+            } catch {
+                print(error)
+                print("ERROR")
+            }
+            DispatchQueue.main.async {
+                self.pickerDropdown.reloadComponent(0)
+            }
+            
+        })
+    }
+    
     func upload(image: UIImage){
         guard let imageData = UIImageJPEGRepresentation(imgActivity.image!, 0.5) else {
             print("could not get jpeg of image")
@@ -264,4 +353,6 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
             }
         }
     }
+    
+    
 }

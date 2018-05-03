@@ -76,6 +76,7 @@ class ViewController: UIViewController{
                     let responseString = String(data: data, encoding: .utf8)!
                     print("new response string \(responseString)")
                     self.responseSuccess = responseString
+                                       print("attempting response string \(responseString)")
                     
                     if(self.responseSuccess == "") || (self.responseSuccess == "ERROR"){print("dont do anything?")} else {
                     let decoder = JSONDecoder()
@@ -93,6 +94,8 @@ class ViewController: UIViewController{
                             }
                         }
                     }
+                    
+                    print("attempting response string \(responseString)")
                 } catch let err {
                     print("Err", err)
                     success = false
@@ -119,7 +122,7 @@ class ViewController: UIViewController{
         let checkUserRole = self.defaultValues.string(forKey: "UserRole")
         
         print(checkUserEmail)
-        print(checkUserRole)
+      print("attempting check use role and email string \(checkUserRole) \(checkUserEmail)")
         
         switch(checkUserRole){
         case "Teacher"?:

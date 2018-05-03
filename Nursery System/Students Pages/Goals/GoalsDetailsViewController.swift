@@ -13,39 +13,68 @@ class GoalsDetailsViewController: UIViewController {
     @IBOutlet var txtGoal: UITextField!
     @IBOutlet var lblStudent: UILabel!
     var selectedGoal : Goal = Goal()
+    var selectedStudent : Student = Student()
     var postString = ""
     var ageGroup = ""
-    var ageGroupRequest = ""
-    
+    var ageGroupGoals = ""
+    var completed = false
+    @IBOutlet var btnGoalCompletedOutlet: UIButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         txtGoal.text = selectedGoal.Goal
+        lblStudent.text = "\(selectedStudent.FirstName!) \(selectedStudent.Surname!)"
         // Do any additional setup after loading the view.
         print(selectedGoal.description)
         print(ageGroup)
         
+
+        
+        
         switch(ageGroup){
-        case "a":
+        case "A":
             print("a")
-            ageGroupRequest = "AgeGroupA"
+            ageGroupGoals = "AgeGroupAGoals"
             break
-        case "b":
+        case "B":
             print("b")
-            ageGroupRequest = "AgeGroupB"
+            ageGroupGoals = "AgeGroupBGoals"
             break
-        case "c":
+        case "C":
             print("c")
-            ageGroupRequest = "AgeGroupC"
+            ageGroupGoals = "AgeGroupCGoals"
             break
         default:
             break
         }
         
+        
+        checkGoalCompleted { success in
+            if(self.completed == true){
+                self.btnGoalCompletedOutlet.setImage(UIImage(named: "checked box"), for: .normal)
+            } else {
+                self.btnGoalCompletedOutlet.setImage(UIImage(named: "unchecked box"), for: .normal)
+            }
+            
+        }
+        
     }
+    
 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func btnGoalCompleted(_ sender: Any) {
+        if(completed == true){
+            btnGoalCompletedOutlet.setImage(UIImage(named: "unchecked box"), for: .normal)
+            completed = false
+        } else {
+            btnGoalCompletedOutlet.setImage(UIImage(named: "checked box"), for: .normal)
+            completed = true
+        }
     }
     
     @IBAction func btnSaveChanges(_ sender: Any) {
@@ -69,7 +98,13 @@ class GoalsDetailsViewController: UIViewController {
     
     func editGoal(){
         
-        postString = "G_ID=\(selectedGoal.G_ID!)&Goal=\(txtGoal.text!)"
+        var goalCompleted = 0
+        
+        if(completed == true){
+            goalCompleted = 1
+        }
+        
+        postString = "AgeGroupGoals=\(ageGroupGoals)&G_ID=\(selectedGoal.G_ID!)&Goal=\(txtGoal.text!)&Completed=\(goalCompleted)"
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/EditGoal.php")!)
         request.httpMethod = "POST"
                 request.httpBody = postString.data(using: .utf8)
@@ -81,7 +116,7 @@ class GoalsDetailsViewController: UIViewController {
     
     func deleteGoal(){
         
-        postString = "G_ID=\(selectedGoal.G_ID!)"
+        postString = "AgeGroupGoals=\(ageGroupGoals)&G_ID=\(selectedGoal.G_ID!)"
         
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/DeleteGoal.php")!)
         request.httpMethod = "POST"
@@ -129,7 +164,7 @@ class GoalsDetailsViewController: UIViewController {
     }
 
     func editAlert(){
-        let alert = UIAlertController(title: "Confirm Save Goal Changes - This action can NOT be undone.", message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Confirm Save Goal Changes.", message: nil, preferredStyle: .actionSheet)
         
         alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { _ in
             //delete activity
@@ -164,5 +199,51 @@ class GoalsDetailsViewController: UIViewController {
     }
 
     
+    func postRequest(postString: String, request: URLRequest, completion: @escaping (_ success : Bool) -> ()){  //extends postrequest but dk how to do that using utilities
+        print(postString, request)
+        var success = true
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                print("error=\(error)")
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(response)")
+                success = false
+            }
+            
+            var responseString = String(data: data, encoding: .utf8)!
+            print("responseString = \(responseString)")
+            if(responseString == "true"){
+                self.completed = true
+            } else {
+                self.completed = false
+            }
+            DispatchQueue.main.async{
+                completion(success)
+            }
+        }
+        task.resume()
+        print("no here")
+    }
+    
+    func checkGoalCompleted(completion: @escaping (_ success : Bool) -> ()){
+        
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/CheckGoalCompleted.php")!)
+        request.httpMethod = "POST"
+        
+        let postString = ("AgeGroupGoals=\(ageGroupGoals)&G_ID=\(selectedGoal.G_ID!)")
+        print(postString)
+        request.httpBody = postString.data(using: .utf8)
+        
+        postRequest(postString: postString, request: request, completion: { success in
+            completion(success)
+        })
+        
+    }
+
     
 }

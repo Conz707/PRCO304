@@ -12,6 +12,7 @@ import UIKit
 
 class GoalsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet var lblAddGoal: UILabel!
     @IBOutlet var tblGoals: UITableView!
     @IBOutlet var activityIndicatorTableLoading: UIActivityIndicatorView!
     @IBOutlet var segmentedGoals: UISegmentedControl!
@@ -23,24 +24,37 @@ class GoalsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var postString = ""
     var selectedStudent : Student = Student()
     var ageGroup = ""
-    var ageGroupRequest = ""
+    var ageGroupGoals = ""
+    var defaultValues = UserDefaults.standard
+    var userRole = ""
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         txtGoal.autocapitalizationType = .sentences
+        userRole = defaultValues.string(forKey: "UserRole")!
+        if(userRole == "Parent"){
+            txtGoal.isHidden = true
+            btnAddGoalOutlet.isHidden = true
+            lblAddGoal.isHidden = true
+            
+        }
         
         switch(ageGroup){
-        case "a":
+        case "A":
             print("a")
-            ageGroupRequest = "AgeGroupA"
+            print("age group \(ageGroup)")
+            ageGroupGoals = "AgeGroupAGoals"
             break
-        case "b":
+        case "B":
             print("b")
-            ageGroupRequest = "AgeGroupB"
+            print("age group \(ageGroup)")
+            ageGroupGoals = "AgeGroupBGoals"
             break
         case "c":
-            print("c")
-            ageGroupRequest = "AgeGroupC"
+            print("C")
+            print("age group \(ageGroup)")
+            ageGroupGoals = "AgeGroupCGoals"
             break
         default:
             break
@@ -56,21 +70,21 @@ class GoalsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         activityIndicatorTableLoading.startAnimating()
         switch segmentedGoals.selectedSegmentIndex{
         case 0:
-            postString = "S_ID=\(selectedStudent.S_ID!)&querySelector=Upcoming"
+            postString = "AgeGroupGoals=\(ageGroupGoals)&S_ID=\(selectedStudent.S_ID!)&querySelector=Upcoming"
             print(postString)
         case 1:
-            postString = "S_ID=\(selectedStudent.S_ID!)&querySelector=Completed"
+            postString = "AgeGroupGoals=\(ageGroupGoals)&S_ID=\(selectedStudent.S_ID!)&querySelector=Completed"
             print(postString)
         case 2:
-            postString = "S_ID=\(selectedStudent.S_ID!)&querySelector=All"
+            postString = "AgeGroupGoals=\(ageGroupGoals)&S_ID=\(selectedStudent.S_ID!)&querySelector=All"
             print(postString)
         default:
             print("default")
             segmentedGoals.selectedSegmentIndex = 0
         }
         
-        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/GetStudent\(ageGroupRequest)Goals.php")!)
-        postString = "querySelector=All&S_ID=\(selectedStudent.S_ID!)"
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/GetStudentGoals.php")!)
+      //  postString = "querySelector=All&S_ID=\(selectedStudent.S_ID!)"
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
         
@@ -147,11 +161,16 @@ class GoalsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {     //whenever user taps row
+        
+        if(userRole == "Parent"){
+            
+        } else {
         //set selected student to var
         selectedGoal = feedItems[indexPath.row] as! Goal
         //Manually call segue to detail view controller
         self.performSegue(withIdentifier: "goalDetails", sender: self)
         print("AGE GROUP \(ageGroup)")
+        }
     }
     
     func itemsDownloaded(items: NSArray){
@@ -164,6 +183,7 @@ class GoalsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let goalDetailsVC = segue.destination as! GoalsDetailsViewController
         
         goalDetailsVC.selectedGoal = selectedGoal
+        goalDetailsVC.selectedStudent = selectedStudent
         goalDetailsVC.ageGroup = ageGroup
     }
 
