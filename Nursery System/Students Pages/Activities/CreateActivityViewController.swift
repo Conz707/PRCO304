@@ -177,9 +177,10 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
             
             //used for emailing parents/guardians
             let student = (self.selectedStudent.FirstName!) + " " + (self.selectedStudent.Surname!)
-            let studentMother = self.selectedStudent.Mother!
-            let studentFather = self.selectedStudent.Father!
-            let studentGuardian = self.selectedStudent.Guardian!
+            let studentMother = self.selectedStudent.Mother ?? ""
+            let studentFather = self.selectedStudent.Father ?? ""
+            let studentGuardian = self.selectedStudent.Guardian ?? ""
+            print("attempting to print parents \(studentFather) \(studentMother) \(studentGuardian)")
             
             
             var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/SaveActivity.php")!)

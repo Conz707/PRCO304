@@ -112,6 +112,7 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
     
     override func viewDidAppear(_ animated: Bool) {
         
+        getActivities()
         
         let checkUserRole = defaultValues.string(forKey: "UserRole")
         print(checkUserRole)

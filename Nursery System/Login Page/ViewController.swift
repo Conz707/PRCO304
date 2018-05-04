@@ -80,9 +80,9 @@ class ViewController: UIViewController{
                     
                     if(self.responseSuccess == "") || (self.responseSuccess == "ERROR"){print("dont do anything?")} else {
                     let decoder = JSONDecoder()
-                    let users = try decoder.decode(Array<User>.self, from: data) //this is an array but shouldnt be..
+                    let users = try decoder.decode(Array<User>.self, from: data)
                     print(users.first?.Email)
-                    if(users.first?.Email != ""){
+                    if(users.first?.Email != "" && users.first?.Active != "0"){
                     self.defaultValues.set(users.first?.U_ID, forKey: "UserU_ID")
                     self.defaultValues.set(users.first?.Email, forKey: "UserEmail")
                     self.defaultValues.set(users.first?.Password, forKey: "UserPassword")

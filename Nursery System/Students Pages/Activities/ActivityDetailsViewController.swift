@@ -11,6 +11,8 @@ import Alamofire
 
 class ActivityDetailsViewController: UIViewController, UINavigationControllerDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, URLSessionTaskDelegate, URLSessionDelegate, URLSessionDataDelegate, UIPopoverPresentationControllerDelegate  {
 
+    @IBOutlet var lblGoal: UILabel!
+    @IBOutlet var lblGoalAchieved: UILabel!
     var selectedActivity : Activity!
     var selectedStudent : Student!
     var defaultValues = UserDefaults.standard
@@ -41,6 +43,7 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
         userRole = defaultValues.string(forKey: "UserRole")!
         print("yo check this shit out \(userRole)")
 
+        checkIfGoalAchieved()
         
         lblStudentName.text = "\(selectedStudent.FirstName!) \(selectedStudent.Surname!)"
         print(selectedStudent.FirstName)
@@ -214,7 +217,7 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
         btnDeleteActivityOutlet.isEnabled = true
         imgActivity.isUserInteractionEnabled = true
         btnSaveChangesOutlet.isEnabled = true
-        btnCancelChangesOutlet.isEnabled = false
+        btnCancelChangesOutlet.isEnabled = true
         btnDeleteActivityOutlet.isHidden = false
         btnCancelChangesOutlet.isHidden = false
         btnBookmarkOutlet.isHidden = true
@@ -458,5 +461,43 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
         postRequest(postString: postString, request: request, completion: { success in
         })
     }
+    
+    func checkIfGoalAchieved(){
+        
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/CheckIfGoalAchieved.php")!)
+        request.httpMethod = "POST"
+        
+        let postString = ("A_ID=\(self.A_ID)")
+        print(postString)
+        request.httpBody = postString.data(using: .utf8)
+        
+            var success = true
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                    print("error=\(error)")
+                    return
+                }
+                
+                if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+                    print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                    print("response = \(response)")
+                    success = false
+                }
+                
+                var responseString = String(data: data, encoding: .utf8)!
+                print("responseString = \(responseString)")
+                DispatchQueue.main.async{
+                if(responseString != ""){
+                    self.lblGoal.text = responseString
+                    self.lblGoalAchieved.isHidden = false
+                } else {
+                    self.lblGoal.isHidden = true
+                    self.lblGoalAchieved.isHidden = true
+                    }
+                }
+            }
+            task.resume()
+        }
+    }
 
-}
+

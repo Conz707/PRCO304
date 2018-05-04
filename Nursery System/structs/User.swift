@@ -13,7 +13,7 @@ struct User: Decodable {
     let Email: String?
     let Password: String?
     let UserType: String?
-    
+    let Active: String?
 }
 
 

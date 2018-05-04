@@ -9,9 +9,11 @@
 import UIKit
 import Foundation
 
-class StudentsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
+class StudentsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate{
     
-        @IBOutlet weak var tblAllStudents: UITableView!
+    @IBOutlet var searchBar: UISearchBar!
+    @IBOutlet var txtSearch: UITextField!
+    @IBOutlet weak var tblAllStudents: UITableView!
         @IBOutlet var activityIndicatorTableLoading: UIActivityIndicatorView!
         @IBOutlet var segmentedAgeGroups: UISegmentedControl!
         var postString = ""
@@ -19,8 +21,8 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
         var defaultValues = UserDefaults.standard
         var U_ID = ""
         var feedItems: NSArray = NSArray()
+        var filterStudents = [Student]()
         var selectedStudent : Student = Student()
-
         
         override func viewDidLoad() {
             super.viewDidLoad()
@@ -28,9 +30,9 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
 
             activityIndicatorTableLoading.hidesWhenStopped = true
             activityIndicatorTableLoading.startAnimating()
-
             
         }
+    
     @IBAction func segmentChangeTable(_ sender: Any) {
             activityIndicatorTableLoading.startAnimating()
     
@@ -65,6 +67,7 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
                 self.students = try JSONDecoder().decode(Array<Student>.self, from: data)
                 for eachStudent in self.students {
                     print("\(eachStudent.StudentPicture) \(eachStudent.S_ID)")
+                
                 }
             } catch {
                 print(error)
@@ -76,6 +79,7 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
             }
         
           })
+
     
     }
     
@@ -87,13 +91,15 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         func itemsDownloaded(items: NSArray){
             feedItems = items
+            filterStudents = items as! [Student]
             self.tblAllStudents.reloadData()
             activityIndicatorTableLoading.stopAnimating()
         }
         
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             //return num of feed items
-            return feedItems.count
+     
+            return filterStudents.count
         }
         
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -103,7 +109,11 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         
         //get student to show
-        let item: Student = feedItems[indexPath.row] as! Student
+        var item: Student = filterStudents[indexPath.row] as! Student
+        
+
+        print("trying to print item \(item.FirstName)")
+
         //get references to labels of cells
         
         let URL_IMAGE = URL(string: (item.StudentPicture)!)
@@ -143,11 +153,32 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {     //whenever user taps row
             //set selected student to var
-            selectedStudent = feedItems[indexPath.row] as! Student
+            selectedStudent = filterStudents[indexPath.row] as! Student
             //Manually call segue to detail view controller
             self.performSegue(withIdentifier: "StudentSegue", sender: self)
         }
-        
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard !searchText.isEmpty else {
+            filterStudents = students
+            tblAllStudents.reloadData()
+            return
+            
+        }
+        filterStudents = students.filter({ student -> Bool in
+            
+             student.FirstName!.lowercased().contains(searchText.lowercased()) || student.Surname!.lowercased().contains(searchText.lowercased())
+        })
+        tblAllStudents.reloadData()
+    }
+    
+
+    
+
         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
             
             //get reference to destination view controller
@@ -163,6 +194,10 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
         override func didReceiveMemoryWarning() {
             super.didReceiveMemoryWarning()
         }
-    }
+    
+    
+
+    
+}
 
 
