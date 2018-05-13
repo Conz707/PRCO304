@@ -281,6 +281,8 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         postString = "S_ID=\(selectedStudent.S_ID!)"
         
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/GetActivities.php")!)
+        
+        
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
         

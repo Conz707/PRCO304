@@ -23,6 +23,7 @@ class ViewController: UIViewController{
     var roleString = ""
     let defaultValues = UserDefaults.standard //used to store user data?
     var responseSuccess = ""
+    var postString = ""
  
     
 
@@ -60,7 +61,8 @@ class ViewController: UIViewController{
     
     func parseJSON(completion: @escaping (_ success : Bool) -> ()){
         var success = true
-        let emailVar = txtEmail.text
+      
+     let emailVar = txtEmail.text
         let passwordVar = txtPassword.text
         
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/NewLogin.php")!)
@@ -74,15 +76,16 @@ class ViewController: UIViewController{
                 guard let data = data else { return }
                 do {
                     let responseString = String(data: data, encoding: .utf8)!
-                    print("new response string \(responseString)")
+                    print("response string \(responseString)")
                     self.responseSuccess = responseString
-                                       print("attempting response string \(responseString)")
                     
                     if(self.responseSuccess == "") || (self.responseSuccess == "ERROR"){print("dont do anything?")} else {
                     let decoder = JSONDecoder()
                     let users = try decoder.decode(Array<User>.self, from: data)
                     print(users.first?.Email)
-                    if(users.first?.Email != "" && users.first?.Active != "0"){
+                  
+                        
+                        if(users.first?.Email != "" && users.first?.Active != "0"){
                     self.defaultValues.set(users.first?.U_ID, forKey: "UserU_ID")
                     self.defaultValues.set(users.first?.Email, forKey: "UserEmail")
                     self.defaultValues.set(users.first?.Password, forKey: "UserPassword")
@@ -104,8 +107,10 @@ class ViewController: UIViewController{
             DispatchQueue.main.async {
                 completion(success)
                     }
+            
                 }.resume()
             print(success)
+        
         }
 
     

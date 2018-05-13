@@ -12,7 +12,6 @@ import Foundation
 class StudentsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate{
     
     @IBOutlet var searchBar: UISearchBar!
-    @IBOutlet var txtSearch: UITextField!
     @IBOutlet weak var tblAllStudents: UITableView!
         @IBOutlet var activityIndicatorTableLoading: UIActivityIndicatorView!
         @IBOutlet var segmentedAgeGroups: UISegmentedControl!
@@ -153,7 +152,7 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {     //whenever user taps row
             //set selected student to var
-            selectedStudent = filterStudents[indexPath.row] as! Student
+            selectedStudent = filterStudents[indexPath.row]
             //Manually call segue to detail view controller
             self.performSegue(withIdentifier: "StudentSegue", sender: self)
         }
