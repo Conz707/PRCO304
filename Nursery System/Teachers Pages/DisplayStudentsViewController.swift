@@ -11,6 +11,7 @@ import Foundation
 
 class StudentsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate{
     
+    @IBOutlet weak var btnAddUserOutlet: UIButton!
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet weak var tblAllStudents: UITableView!
         @IBOutlet var activityIndicatorTableLoading: UIActivityIndicatorView!
@@ -22,9 +23,19 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
         var feedItems: NSArray = NSArray()
         var filterStudents = [Student]()
         var selectedStudent : Student = Student()
-        
+    
+    
         override func viewDidLoad() {
             super.viewDidLoad()
+            
+      
+            
+            if(defaultValues.string(forKey: "UserRole") == "Manager"){
+                btnAddUserOutlet.isHidden = false
+            } else {
+                btnAddUserOutlet.isHidden = true
+            }
+            
             U_ID = defaultValues.string(forKey: "UserU_ID")!
 
             activityIndicatorTableLoading.hidesWhenStopped = true
@@ -85,6 +96,7 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
         override func viewDidAppear(_ animated: Bool) {
             
             segmentChangeTable((Any).self)
+            selectedStudent = Student()
         
         }
         
@@ -180,6 +192,7 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
 
         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
             
+            if(segue.identifier == "StudentSegue"){
             //get reference to destination view controller
             let studentVC = segue.destination as! StudentDetailsViewController
             //set property to selected student so when view loads, it accesses the properties of feeditem obj
@@ -187,6 +200,10 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
             
             print("finding the list of activities")
             print(selectedStudent.description)
+            } else {
+            let createStudentVC = segue.destination as! CreateOrEditStudentViewController
+            createStudentVC.selectedStudent = selectedStudent
+            }
             
         }
     

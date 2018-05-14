@@ -11,7 +11,7 @@ import UIKit
 
 class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
+    @IBOutlet weak var btnEditStudentOutlet: UIButton!
     @IBOutlet var btnAddActivity: UIButton!
     @IBOutlet var activityIndicatorTableLoading: UIActivityIndicatorView!
     @IBOutlet var lblDateOfBirth: UILabel!
@@ -34,6 +34,8 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
         print("oioi \(selectedStudent.description)")
         
         let formatStringToDate = (utilities.formatStringToDate(dateString: selectedStudent.DateofBirth!))
@@ -57,7 +59,7 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         
         tblActivities.contentInset = UIEdgeInsetsMake(0, 15, 0, 0)
         DispatchQueue.main.async {
-            self.getLabelText(completion: { success in
+            self.getParentLabels(completion: { success in
                 self.lblMother.text = self.responseArr[0]
                 self.lblFather.text = self.responseArr[1]
                 self.lblGuardian.text = self.responseArr[2]
@@ -66,43 +68,10 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         }
         
         getActivities()
-        
+        getImage()
         activityIndicatorTableLoading.hidesWhenStopped = true
         
-        let URL_IMAGE = URL(string: (selectedStudent.StudentPicture)!)
-        let session = URLSession(configuration: .default)
-        
-        //create a dataTask
-        let getImageFromUrl = session.dataTask(with: URL_IMAGE!) { data, response, error in
-            
-            //if error
-            if let e = error {
-                //display message
-                print("Error occurred: \(e)")
-            } else {
-                if (response as? HTTPURLResponse) != nil {
-                    
-                    //check response contains image
-                    if let imageData = data {
-                        
-                        //get image
-                        let image = UIImage(data: imageData)
-                        
-                        //display the image
-                        DispatchQueue.main.async{
-                            self.imgStudent.image = image
-                        }
-                    } else {
-                        print("image corrupted")
-                    }
-                } else {
-                    print("No server response")
-                }
-            }
-        }
-        getImageFromUrl.resume()
-        
-        
+
         lblName.text = (selectedStudent.FirstName)! + " " + (selectedStudent.Surname)!
         
         let formatDate = utilities.formatDateToString(dateString: selectedStudent.DateofBirth!)
@@ -118,7 +87,12 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         print(checkUserRole)
         if(checkUserRole! == "Parent"){ //only for parents -- manager and teacher should bth see it
             btnAddActivity.isHidden = true
-        } else { btnAddActivity.isHidden = false }
+        } else if (checkUserRole == "Manager"){
+            btnEditStudentOutlet.isHidden = false
+            } else{
+            btnAddActivity.isHidden = false
+            
+        }
         
         activityIndicatorTableLoading.startAnimating()
 
@@ -210,7 +184,7 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     
-    func getLabelText(completion: @escaping (_ success : Bool) -> ()){
+     func getParentLabels(completion: @escaping (_ success : Bool) -> ()){
         
         var success = true
         
@@ -233,7 +207,7 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         })
         
     }
-    
+ 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         switch(segue.identifier!){
@@ -266,13 +240,15 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
             goalsVC.selectedStudent = selectedStudent
             goalsVC.ageGroup = ageGroup
             break
+        case "editSegue":
+            let editStudentVC = segue.destination as! CreateOrEditStudentViewController
+            editStudentVC.selectedStudent = selectedStudent
+            break
         default:
             break
             
         }
         
-        
-        //change to switch???
     }
     
     
@@ -306,6 +282,41 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
             
         })
         print(postRequest)
+    }
+    
+    func getImage(){
+        let URL_IMAGE = URL(string: (selectedStudent.StudentPicture)!)
+        let session = URLSession(configuration: .default)
+        
+        //create a dataTask
+        let getImageFromUrl = session.dataTask(with: URL_IMAGE!) { data, response, error in
+            
+            //if error
+            if let e = error {
+                //display message
+                print("Error occurred: \(e)")
+            } else {
+                if (response as? HTTPURLResponse) != nil {
+                    
+                    //check response contains image
+                    if let imageData = data {
+                        
+                        //get image
+                        let image = UIImage(data: imageData)
+                        
+                        //display the image
+                        DispatchQueue.main.async{
+                            self.imgStudent.image = image
+                        }
+                    } else {
+                        print("image corrupted")
+                    }
+                } else {
+                    print("No server response")
+                }
+            }
+        }
+        getImageFromUrl.resume()
     }
     
     func postRequest(postString: String, request: URLRequest, completion: @escaping (_ success : Bool,_ data: Data) -> ()){

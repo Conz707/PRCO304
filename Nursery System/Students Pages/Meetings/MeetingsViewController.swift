@@ -25,7 +25,7 @@ class MeetingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     var selectedMeeting : Meeting = Meeting()
     let defaultValues = UserDefaults.standard
     var U_ID = ""
-    var parents = [Parent]()
+    var parents = [User]()
     var meetings = [Meeting]()
     var selectedParentID = ""
     var postString = ""
@@ -180,7 +180,7 @@ class MeetingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
         let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data in
         do {
-            self.parents = try JSONDecoder().decode(Array<Parent>.self, from: data)
+            self.parents = try JSONDecoder().decode(Array<User>.self, from: data)
             print(self.parents)
             for eachParent in self.parents {
                 print("\(eachParent.FirstName!) \(eachParent.Surname!)")

@@ -18,7 +18,7 @@ class MeetingDetailsViewController: UIViewController {
     @IBOutlet var lblParentName: UILabel!
     @IBOutlet var lblStudentName: UILabel!
     var selectedStudent : Student = Student()
-    var parents = [Parent]()
+    var parents = [User]()
     var selectedMeeting : Meeting = Meeting()
     var postString = ""
     var defaultValues = UserDefaults.standard
@@ -181,7 +181,7 @@ saveAlert()
         let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data in
             
             do {
-                let parent = try JSONDecoder().decode(Parent.self, from: data)
+                let parent = try JSONDecoder().decode(User.self, from: data)
                 print("parent firstname \(parent.FirstName)")
                 DispatchQueue.main.async{
                     self.lblParentName.text = "\(parent.FirstName!) \(parent.Surname!)"
@@ -205,7 +205,7 @@ saveAlert()
         let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data in
             
             do {
-                let parent = try JSONDecoder().decode(Parent.self, from: data)
+                let parent = try JSONDecoder().decode(User.self, from: data)
                 print("parent firstname \(parent.FirstName)")
                 DispatchQueue.main.async{
                     self.lblParentName.text = "\(parent.FirstName!) \(parent.Surname!)"
