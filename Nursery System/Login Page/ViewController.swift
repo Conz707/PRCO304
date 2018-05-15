@@ -24,6 +24,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     let defaultValues = UserDefaults.standard //used to store user data?
     var responseSuccess = ""
     var postString = ""
+    let testAccounts = ["con@hotmail.com", "con@hotmail.com1", "con@hotmail.com2"]
  
     
 
@@ -117,41 +118,31 @@ class ViewController: UIViewController, UITextFieldDelegate{
 
     
     @IBAction func btnLogin(_ sender: Any) {
-        
-        loginVerify()
-        
-        /*if(checkValidInputs()){
-            print("valid input")
-            
+        if(testAccounts.contains(txtEmail.text!)){
+            //This lets test accounts skip the input validation
+            print("skipping for test accounts")
+            loginVerify()
         } else {
-            self.present(utilities.normalAlertBox(alertTitle: "Error", messageString: "Invalid characters entered"), animated: true)
-            
+            if(!checkValidInputs()){
+                self.present(utilities.normalAlertBox(alertTitle: "ERROR", messageString: "Invalid Characters Used"), animated: true)
+            } else {
+                loginVerify()
+            }
         }
-        */
-
-        }
+    }
 
     func checkValidInputs() -> Bool{
+
+        let checkEmail = utilities.checkInputValid(type: "Email", input: txtEmail.text!)
+        let checkPassword = utilities.checkInputValid(type: "Password", input: txtEmail.text!)
         
-   /*     let testEmailString = utilities.checkTextValid(checkString: txtEmail.text!)
-        let testPasswordString = utilities.checkTextValid(checkString: txtPassword.text!)
-        
-        if(!testEmailString || !testPasswordString){
-            print("\(testEmailString) \(testPasswordString)")
+        if(!checkEmail || !checkPassword)
+        {
             return false
-        } else {
             
-            return true
-        }
-        
-    }
-   */
-        let checkEmail = utilities.checkTextValid(checkString: txtEmail.text!)
-        let checkPassword = utilities.checkTextValid(checkString: txtPassword.text!)
-        if(!checkEmail || !checkPassword){
-            return false
         } else {
-              return true
+            return true
+            
         }
 
     }
@@ -164,7 +155,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         DispatchQueue.main.async {
             self.parseJSON(completion: { success in
                 self.activityIndicatorLogin.stopAnimating()
-                let checkUserEmail = self.defaultValues.string(forKey: "UserEmail")
+                _ = self.defaultValues.string(forKey: "UserEmail")
                 let checkUserRole = self.defaultValues.string(forKey: "UserRole")
                 
                 switch(checkUserRole){

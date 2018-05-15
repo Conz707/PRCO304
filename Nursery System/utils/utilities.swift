@@ -107,16 +107,38 @@ class utilities{
 
     }
     
-    static func checkTextValid(checkString: String) -> Bool{
+    static func checkInputValid(type:String, input: String) -> Bool {
+        var textRegEx = ""
         
-        let textRegEx = "[A-Z0-9a-z.-_]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,3}"
+        switch(type){
+        case "Email":
+            textRegEx = "[A-Z0-9a-z.-_]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,3}"
+            print("switch email")
+            
+        case "Password":
+            textRegEx = "[a-z0-9_-]{6,18}" // password entry must be 6 - 18 digits - make sure alert represents this
+            
+            print("switch Password")
+        case "Text":
+            textRegEx = "[a-zA-Z0-9,.!? @]"
+            
+            print("switch Text")
+        case "TelNum":
+            textRegEx = "[0]+[0-9]{1,10}"   //ensure telnum starts with 0 and 11 digits total
+            
+            print("switch TelNum")
+        default:
+            
+            print("switch default")
+        }
         
         let testIfValid = NSPredicate(format: "SELF MATCHES %@", textRegEx)
+        return testIfValid.evaluate(with: input)
         
-        let result = testIfValid.evaluate(with: checkString)
-        
-        return testIfValid.evaluate(with: checkString)    //return true or false based on whether email in email format or using illegal characters
     }
+    
+
+    
     
     static func normalAlertBox(alertTitle: String,messageString: String) -> UIAlertController{   //call alert box with custom title and message
         let alertController = UIAlertController(title: "Error", message: messageString, preferredStyle: .alert)
