@@ -95,28 +95,16 @@ class MeetingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             DispatchQueue.main.async{
 
                 self.present(utilities.normalAlertBox(alertTitle: "Success", messageString: "Successfully created meeting"), animated: true)
-                
-                /*TEST
-            let alertController = UIAlertController(title: "Success", message: "Successfully created meeting", preferredStyle: .alert)
-            let defaultAction = UIAlertAction(title: "Close Alert", style: .default, handler: nil)
-            alertController.addAction(defaultAction)
-            self.present(alertController, animated: true, completion: nil)
-                } */
+
             }
         })
             
         } else {
             
         self.present(utilities.normalAlertBox(alertTitle: "Error", messageString: "Ensure parent selected for meeting"), animated: true)
-            
-            /*let alertController = UIAlertController(title: "Error", message: "Ensure parent selected for meeting", preferredStyle: .alert)
-            let defaultAction = UIAlertAction(title: "Close Alert", style: .default, handler: nil)
-            alertController.addAction(defaultAction)
-            self.present(alertController, animated: true, completion: nil)
-            }
                     self.segmentChangeTable((Any).self)
- */
         }
+    }
     
     @IBAction func segmentChangeTable(_ sender: Any) {
         
