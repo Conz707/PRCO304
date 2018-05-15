@@ -91,7 +91,7 @@ class MeetingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         print(postString)
         request.httpBody = postString.data(using: .utf8)
         
-        let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data in
+        utilities.postRequest(postString: postString, request: request, completion: { success, data in
             DispatchQueue.main.async{
             let alertController = UIAlertController(title: "Success", message: "Successfully created meeting", preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "Close Alert", style: .default, handler: nil)
@@ -131,7 +131,7 @@ class MeetingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/GetStudentMeetings.php")!)
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
-        let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data in
+        utilities.postRequest(postString: postString, request: request, completion: { success, data in
             do {
                 self.meetings = try JSONDecoder().decode(Array<Meeting>.self, from: data)
                 for eachMeeting in self.meetings {
@@ -178,7 +178,7 @@ class MeetingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         print(postString)
         request.httpBody = postString.data(using: .utf8)
         
-        let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data in
+        utilities.postRequest(postString: postString, request: request, completion: { success, data in
         do {
             self.parents = try JSONDecoder().decode(Array<User>.self, from: data)
             print(self.parents)
@@ -198,7 +198,6 @@ class MeetingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     override func viewDidAppear(_ animated: Bool) {
         segmentChangeTable((Any).self)
-                print("WTF \(selectedStudent.S_ID)")
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -212,7 +211,7 @@ class MeetingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         request.httpBody = postString.data(using: .utf8)
         
         print(postString)
-        let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data in
+        utilities.postRequest(postString: postString, request: request, completion: { success, data in
             
             do {
                 print(data)

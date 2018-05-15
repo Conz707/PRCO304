@@ -23,12 +23,13 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
        
+        activityIndicatorTableLoading.hidesWhenStopped = true
         let U_ID = defaultValues.string(forKey: "UserU_ID")
         postString = "U_ID=\(U_ID!)"
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/ParentSidePHPFiles/GetMyBookmarks.php")!)
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
-        let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data in
+        utilities.postRequest(postString: postString, request: request, completion: { success, data in
             do {
                 self.activities = try JSONDecoder().decode(Array<Activity>.self, from: data)
                 for eachActivity in self.activities {
@@ -76,40 +77,17 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         
         print("attempting to attach activity to table")
         
-        let URL_IMAGE = URL(string: (item.ActivityPicture)!)
-        let session = URLSession(configuration: .default)
         
-        //create a dataTask
-        let getImageFromUrl = session.dataTask(with: URL_IMAGE!) { data, response, error in
+        utilities.getImages(URL_IMAGE: URL(string: (item.ActivityPicture)!)!, completion: { success, image in
             
-            //if error
-            if let e = error {
-                //display message
-                print("Error occurred: \(e)")
-            } else {
-                if (response as? HTTPURLResponse) != nil {
-                    
-                    //check response contains image
-                    if let imageData = data {
-                        
-                        //get image
-                        let image = UIImage(data: imageData)
-                        //display the image
-                        DispatchQueue.main.async{
-                            myCell.textLabel!.text = item.Activity
-                            myCell.imageView!.clipsToBounds = true
-                            myCell.imageView?.image = image
-                            
-                        }
-                    } else {
-                        print("image corrupted")
-                    }
-                } else {
-                    print("No server response")
-                }
+            //display the image
+            DispatchQueue.main.async{
+                myCell.textLabel!.text = item.Activity!
+                myCell.imageView!.clipsToBounds = true
+                myCell.imageView?.image = image
+                
             }
-        }
-        getImageFromUrl.resume()
+        })
         return myCell
     }
     
@@ -117,16 +95,20 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         //set selected activity to var
         selectedActivity = feedItems[indexPath.row] as! Activity
         //manually call segue to detail view controller
+        getSelectedStudent()
         
+    }
+    
+    func getSelectedStudent(){
 
-        
         postString = "S_ID=\(selectedActivity.S_ID!)"
-       
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetSelectedStudent.php")!)
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
         print(postString)
-        let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data in
+        
+        utilities.postRequest(postString: postString, request: request, completion: { success, data in
+
             do {
                 print(data)
                 let student = try JSONDecoder().decode(Student.self, from: data)
@@ -140,14 +122,10 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
                 print(error)
                 print("ERROR")
                 
-            }
-            print(self.selectedStudent)
-                    self.performSegue(withIdentifier: "viewActivity", sender: self)
-        })
-        
-        
-        
-    }
+                }
+            })
+        }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
         let viewActivityVC = segue.destination as! ActivityDetailsViewController

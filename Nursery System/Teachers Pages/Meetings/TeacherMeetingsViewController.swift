@@ -72,7 +72,7 @@ class TeacherMeetingsViewController: UIViewController, UITableViewDataSource, UI
        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/GetMyMeetings.php")!)
         request.httpMethod = "POST"
                 request.httpBody = postString.data(using: .utf8)
-        let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data in
+        utilities.postRequest(postString: postString, request: request, completion: { success, data in
             do {
                 self.meetings = try JSONDecoder().decode(Array<Meeting>.self, from: data)
                 for eachMeeting in self.meetings {
@@ -92,7 +92,7 @@ class TeacherMeetingsViewController: UIViewController, UITableViewDataSource, UI
     
     func itemsDownloaded(items: NSArray){
         feedItems = items
-                   activityIndicatorTableLoading.stopAnimating()
+        activityIndicatorTableLoading.stopAnimating()
         tblMeetings.reloadData()
     }
     
@@ -101,31 +101,37 @@ class TeacherMeetingsViewController: UIViewController, UITableViewDataSource, UI
         
         
         selectedMeeting = feedItems[indexPath.row] as! Meeting
-
-            postString = "S_ID=\(selectedMeeting.S_ID!)"
-            var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetSelectedStudent.php")!)
-            request.httpMethod = "POST"
-            request.httpBody = postString.data(using: .utf8)
-            print(postString)
-            let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data in
-                
-                do {
-                    print(data)
-                    let student = try JSONDecoder().decode(Student.self, from: data)
-                    self.selectedStudent = student
-                    print(student.description)
-                    print(self.selectedStudent.description)
-                    DispatchQueue.main.async{
-                    self.performSegue(withIdentifier: "meetingDetailsSegue", sender: Any?.self)
-                    }
-                } catch {
-                    print(error)
-                    print("ERROR")
-                    
-                }
-   
-            })
+        getSelectedStudent()
     //
+    }
+    
+    func getSelectedStudent(){
+    
+        
+        postString = "S_ID=\(selectedMeeting.S_ID!)"
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetSelectedStudent.php")!)
+        request.httpMethod = "POST"
+        request.httpBody = postString.data(using: .utf8)
+        print(postString)
+        utilities.postRequest(postString: postString, request: request, completion: { success, data in
+            
+            do {
+                print(data)
+                let student = try JSONDecoder().decode(Student.self, from: data)
+                self.selectedStudent = student
+                print(student.description)
+                print(self.selectedStudent.description)
+                DispatchQueue.main.async{
+                    self.performSegue(withIdentifier: "meetingDetailsSegue", sender: Any?.self)
+                }
+            } catch {
+                print(error)
+                print("ERROR")
+                
+            }
+            
+        })
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

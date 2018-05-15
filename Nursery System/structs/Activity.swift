@@ -35,5 +35,6 @@ struct Activity: Decodable {
             return "\(A_ID)  \(S_ID)  \(Activity)   \(Observation)   \(Date) \(ActivityPicture) "
         
     }
+    
 }
 

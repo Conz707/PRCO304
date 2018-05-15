@@ -72,7 +72,7 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
 
-       let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data in
+       utilities.postRequest(postString: postString, request: request, completion: { success, data in
             do {
                 self.students = try JSONDecoder().decode(Array<Student>.self, from: data)
                 for eachStudent in self.students {
@@ -120,47 +120,28 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         
         //get student to show
-        var item: Student = filterStudents[indexPath.row] as! Student
+        let item: Student = filterStudents[indexPath.row]
         
-
-        print("trying to print item \(item.FirstName)")
 
         //get references to labels of cells
         
-        let URL_IMAGE = URL(string: (item.StudentPicture)!)
+
         let session = URLSession(configuration: .default)
         
-        //create a dataTask
-        let getImageFromUrl = session.dataTask(with: URL_IMAGE!) { data, response, error in
+        utilities.getImages(URL_IMAGE: URL(string: (item.StudentPicture)!)!, completion: { success, image in
             
-            //if error
-            if let e = error {
-                //display message
-                print("Error occurred: \(e)")
-            } else {
-                if (response as? HTTPURLResponse) != nil {
-                    
-                    //check response contains image
-                    if let imageData = data {
-                        
-                        //get image
-                        let image = UIImage(data: imageData)
-                        //display the imagex
-                        DispatchQueue.main.async{
-                            myCell.textLabel!.text = item.FirstName! + " " + item.Surname!
-                            myCell.imageView?.image = image
-                        }
-                    } else {
-                        print("image corrupted")
-                    }
-                } else {
-                    print("No server response")
-                }
+            //display the images
+            DispatchQueue.main.async{
+                myCell.textLabel!.text = item.FirstName! + " " + item.Surname!
+                myCell.imageView?.image = image
             }
-        }
-        getImageFromUrl.resume()
+        })
+        
         return myCell
+        
     }
+    
+
         
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {     //whenever user taps row
             //set selected student to var

@@ -139,7 +139,7 @@ func textFieldDidBeginEditing(_ textField: UITextField) {
         request.httpBody = postString.data(using: .utf8)
         print(postString)
         
-        let postRequest = utilities.postRequest(postString: postString, request: request) { success, data in
+        utilities.postRequest(postString: postString, request: request) { success, data in
         }
 
         

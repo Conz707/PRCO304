@@ -134,37 +134,17 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         let URL_IMAGE = URL(string: (item.ActivityPicture)!)
         let session = URLSession(configuration: .default)
         
-        //create a dataTask
-        let getImageFromUrl = session.dataTask(with: URL_IMAGE!) { data, response, error in
+        utilities.getImages(URL_IMAGE: URL(string: (item.ActivityPicture)!)!, completion: { success, image in
             
-            //if error
-            if let e = error {
-                //display message
-                print("Error occurred: \(e)")
-            } else {
-                if (response as? HTTPURLResponse) != nil {
-                    
-                    //check response contains image
-                    if let imageData = data {
-                        
-                        //get image
-                        let image = UIImage(data: imageData)
-                        //display the image
-                        DispatchQueue.main.async{
-                            myCell.textLabel!.text = item.Activity
-                            myCell.imageView!.clipsToBounds = true
-                            myCell.imageView?.image = image
-                            
-                        }
-                    } else {
-                        print("image corrupted")
-                    }
-                } else {
-                    print("No server response")
-                }
+            //display the image
+            DispatchQueue.main.async{
+                myCell.textLabel!.text = item.Activity!
+                myCell.imageView!.clipsToBounds = true
+                myCell.imageView?.image = image
+                
             }
-        }
-        getImageFromUrl.resume()
+        })
+        
         return myCell
     }
     
@@ -264,8 +244,9 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         
         print("poststring \(postString)")
         
-        let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data in
+        utilities.postRequest(postString: postString, request: request, completion: { success, data in
             
+
             do {
                 self.activities = try JSONDecoder().decode(Array<Activity>.self, from: data)
                 for eachActivity in self.activities {
@@ -285,38 +266,15 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func getImage(){
-        let URL_IMAGE = URL(string: (selectedStudent.StudentPicture)!)
         let session = URLSession(configuration: .default)
         
-        //create a dataTask
-        let getImageFromUrl = session.dataTask(with: URL_IMAGE!) { data, response, error in
+        utilities.getImages(URL_IMAGE: URL(string: (selectedStudent.StudentPicture)!)!, completion: { success, image in
             
-            //if error
-            if let e = error {
-                //display message
-                print("Error occurred: \(e)")
-            } else {
-                if (response as? HTTPURLResponse) != nil {
-                    
-                    //check response contains image
-                    if let imageData = data {
-                        
-                        //get image
-                        let image = UIImage(data: imageData)
-                        
-                        //display the image
-                        DispatchQueue.main.async{
-                            self.imgStudent.image = image
-                        }
-                    } else {
-                        print("image corrupted")
-                    }
-                } else {
-                    print("No server response")
-                }
+            //display the image
+            DispatchQueue.main.async{
+                self.imgStudent.image = image
             }
-        }
-        getImageFromUrl.resume()
+        })
     }
     
     func postRequest(postString: String, request: URLRequest, completion: @escaping (_ success : Bool,_ data: Data) -> ()){

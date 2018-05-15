@@ -79,6 +79,7 @@ func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard !searchText.isEmpty else {
             filterUsers = users
+            
             tblUsers.reloadData()
             return
             
@@ -87,6 +88,7 @@ func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { 
             
                 user.FirstName!.lowercased().contains(searchText.lowercased()) ||
                 user.Surname!.lowercased().contains(searchText.lowercased()) ||
+                user.FirstName!.lowercased().contains(searchText.lowercased())                                                            ||
                 user.Email!.lowercased().contains(searchText.lowercased())
         })
         tblUsers.reloadData()
@@ -116,7 +118,7 @@ func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { 
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
       
-        let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data in
+        utilities.postRequest(postString: postString, request: request, completion: { success, data in
             do {
                 self.users = try JSONDecoder().decode(Array<User>.self, from: data)
                 for eachUser in self.users {

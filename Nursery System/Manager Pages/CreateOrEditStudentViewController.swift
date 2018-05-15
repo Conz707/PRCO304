@@ -250,7 +250,7 @@ class CreateOrEditStudentViewController: UIViewController,  UINavigationControll
                 print(postString)
                 request.httpBody = postString.data(using: .utf8)
                 
-                let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data in
+                utilities.postRequest(postString: postString, request: request, completion: { success, data in
                     DispatchQueue.main.async{
                     self.upload(image: self.imgStudent.image!, studentFirstName: firstName!, studentSurname: surname!)
                     }
@@ -280,7 +280,7 @@ class CreateOrEditStudentViewController: UIViewController,  UINavigationControll
                 print(postString)
                 request.httpBody = postString.data(using: .utf8)
                 
-                let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data in
+                utilities.postRequest(postString: postString, request: request, completion: { success, data in
                     DispatchQueue.main.async {
                     self.upload(image: self.imgStudent.image!, studentFirstName: firstName!, studentSurname: surname!)
                     }

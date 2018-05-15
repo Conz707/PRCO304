@@ -64,7 +64,48 @@ class utilities{
         return newDate
         
     }
+    
+    static func getImages(URL_IMAGE: URL, completion: @escaping (_ success : Bool, _ image : UIImage) -> ()){
+        print("attempting to attach activity to table")
+        
+        var success = true
+        
+        let session = URLSession(configuration: .default)
+        
+        //create a dataTask
+        let getImageFromUrl = session.dataTask(with: URL_IMAGE) { data, response, error in
+            
+            //if error
+            if let e = error {
+                //display message
+                print("Error occurred: \(e)")
+            } else {
+                if (response as? HTTPURLResponse) != nil {
+                    
+                    //check response contains image
+                    if let imageData = data {
+                        
+                        //get image
+                        let image = UIImage(data: imageData)
+                        
+                        //complete - return image
+                        completion(success, image!)
+                        
+                    } else {
+                        print("image corrupted")
+                        success = false
+                    }
+                } else {
+                    print("No server response")
+                    success = false
+                }
+            }
+            
+        }
+        getImageFromUrl.resume()
+    
 
+    }
     
 }
 

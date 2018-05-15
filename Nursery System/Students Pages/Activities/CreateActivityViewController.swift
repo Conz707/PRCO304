@@ -282,7 +282,7 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
         print(postString)
         request.httpBody = postString.data(using: .utf8)
         
-        let postRequest = utilities.postRequest(postString: postString, request: request, completion: { success, data in
+        utilities.postRequest(postString: postString, request: request, completion: { success, data in
             do {
                 self.goals = try JSONDecoder().decode(Array<Goal>.self, from: data)
                 print(self.goals)
