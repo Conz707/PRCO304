@@ -11,7 +11,7 @@ import Alamofire
 
 
 
-class ViewController: UIViewController{
+class ViewController: UIViewController, UITextFieldDelegate{
 
      var users = [User]()
     //Properties
@@ -30,6 +30,8 @@ class ViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
        activityIndicatorLogin.hidesWhenStopped = true
+        txtEmail.delegate = self
+        txtPassword.delegate = self
         
     }
     
@@ -114,45 +116,80 @@ class ViewController: UIViewController{
         }
 
     
-    @IBAction func loginBtn(_ sender: Any) {
+    @IBAction func btnLogin(_ sender: Any) {
         
+        loginVerify()
+        
+        /*if(checkValidInputs()){
+            print("valid input")
+            
+        } else {
+            self.present(utilities.normalAlertBox(alertTitle: "Error", messageString: "Invalid characters entered"), animated: true)
+            
+        }
+        */
+
+        }
+
+    func checkValidInputs() -> Bool{
+        
+   /*     let testEmailString = utilities.checkTextValid(checkString: txtEmail.text!)
+        let testPasswordString = utilities.checkTextValid(checkString: txtPassword.text!)
+        
+        if(!testEmailString || !testPasswordString){
+            print("\(testEmailString) \(testPasswordString)")
+            return false
+        } else {
+            
+            return true
+        }
+        
+    }
+   */
+        let checkEmail = utilities.checkTextValid(checkString: txtEmail.text!)
+        let checkPassword = utilities.checkTextValid(checkString: txtPassword.text!)
+        if(!checkEmail || !checkPassword){
+            return false
+        } else {
+              return true
+        }
+
+    }
+    
+    func loginVerify(){
         activityIndicatorLogin.startAnimating()
         txtPassword.isEnabled = false
         txtEmail.isEnabled = false
         btnLoginOutlet.isEnabled = false
- DispatchQueue.main.async {
-    self.parseJSON(completion: { success in
-        self.activityIndicatorLogin.stopAnimating()
-        let checkUserEmail = self.defaultValues.string(forKey: "UserEmail")
-        let checkUserRole = self.defaultValues.string(forKey: "UserRole")
-        
-        print(checkUserEmail)
-      print("attempting check use role and email string \(checkUserRole) \(checkUserEmail)")
-        
-        switch(checkUserRole){
-        case "Teacher"?:
-            print("Teacher")
-            self.performSegue(withIdentifier: "segueGoTeacher", sender: self)
-        case "Parent"?:
-            print("Parent")
-            self.performSegue(withIdentifier: "segueGoParent", sender: self)
-        case "Manager"?:
-            print("Manager")
-            self.performSegue(withIdentifier: "segueGoManager", sender: self)
-        default:
-            print("ERROR")
-            let alertController = UIAlertController(title: "Error", message: "Incorrect Email or Password", preferredStyle: .alert)
-            let defaultAction = UIAlertAction(title: "Close Alert", style: .default, handler: nil)
-            alertController.addAction(defaultAction)
-            self.present(alertController, animated: true, completion: nil)
-            self.txtPassword.isEnabled = true
-            self.txtEmail.isEnabled = true
-            self.btnLoginOutlet.isEnabled = true
-            
-                        }
-                    })
-    
+        DispatchQueue.main.async {
+            self.parseJSON(completion: { success in
+                self.activityIndicatorLogin.stopAnimating()
+                let checkUserEmail = self.defaultValues.string(forKey: "UserEmail")
+                let checkUserRole = self.defaultValues.string(forKey: "UserRole")
+                
+                switch(checkUserRole){
+                case "Teacher"?:
+                    print("Teacher")
+                    self.performSegue(withIdentifier: "segueGoTeacher", sender: self)
+                case "Parent"?:
+                    print("Parent")
+                    self.performSegue(withIdentifier: "segueGoParent", sender: self)
+                case "Manager"?:
+                    print("Manager")
+                    self.performSegue(withIdentifier: "segueGoManager", sender: self)
+                default:
+                    print("ERROR")
+                    
+                    self.present(utilities.normalAlertBox(alertTitle: "Error", messageString: "Incorrect Email or Password"), animated: true)
+                    
+                    self.txtPassword.isEnabled = true
+                    self.txtEmail.isEnabled = true
+                    self.btnLoginOutlet.isEnabled = true
+                    
                 }
+            })
+            
         }
+    }
 }
 

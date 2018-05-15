@@ -142,10 +142,15 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
         
         self.present(alert, animated: true, completion: nil)
         } else {
+            
+            self.present(utilities.normalAlertBox(alertTitle: "Error", messageString: "Text box can not be empty"), animated: true)
+            
+            /*TEST
             let alertController = UIAlertController(title: "Error", message: "Text box can not be empty", preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "Close Alert", style: .default, handler: nil)
             alertController.addAction(defaultAction)
             self.present(alertController, animated: true, completion: nil)
+ */
         }
        
     }
@@ -298,11 +303,13 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
             if(myDate < deleteDate!){
                 
                 print("require manager to delete")
+                    self.present(utilities.normalAlertBox(alertTitle: "Error", messageString: "24HR Delete Period Passed - Request Manager to delete activity"), animated: true)
+                /*
                 let alertController = UIAlertController(title: "Error", message: "24HR Delete Period Passed - Request Manager to delete activity", preferredStyle: .alert)
                 let defaultAction = UIAlertAction(title: "Close Alert", style: .default, handler: nil)
                 alertController.addAction(defaultAction)
                 self.present(alertController, animated: true, completion: nil)
-                
+                */
             }else {
                 
                 print("delete action")

@@ -68,7 +68,7 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         }
         
         getActivities()
-        getImage()
+        getStudentImage()
         activityIndicatorTableLoading.hidesWhenStopped = true
         
 
@@ -131,8 +131,6 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         
         print("attempting to attach activity to table")
         
-        let URL_IMAGE = URL(string: (item.ActivityPicture)!)
-        let session = URLSession(configuration: .default)
         
         utilities.getImages(URL_IMAGE: URL(string: (item.ActivityPicture)!)!, completion: { success, image in
             
@@ -265,8 +263,7 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         print(postRequest)
     }
     
-    func getImage(){
-        let session = URLSession(configuration: .default)
+    func getStudentImage(){
         
         utilities.getImages(URL_IMAGE: URL(string: (selectedStudent.StudentPicture)!)!, completion: { success, image in
             

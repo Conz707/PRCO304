@@ -107,6 +107,30 @@ class utilities{
 
     }
     
+    static func checkTextValid(checkString: String) -> Bool{
+        
+        let textRegEx = "[A-Z0-9a-z.-_]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,3}"
+        
+        let testIfValid = NSPredicate(format: "SELF MATCHES %@", textRegEx)
+        
+        let result = testIfValid.evaluate(with: checkString)
+        
+        return testIfValid.evaluate(with: checkString)    //return true or false based on whether email in email format or using illegal characters
+    }
+    
+    static func normalAlertBox(alertTitle: String,messageString: String) -> UIAlertController{   //call alert box with custom title and message
+        let alertController = UIAlertController(title: "Error", message: messageString, preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "Close Alert", style: .default, handler: nil)
+        alertController.addAction(defaultAction)
+        
+       return alertController
+        
+    }
+    
+    static func actionAlertBox(){
+        
+    }
+
 }
 
 

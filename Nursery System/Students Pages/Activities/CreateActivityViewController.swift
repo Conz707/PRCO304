@@ -233,10 +233,14 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
                 }
             }
         } else {
+            self.present(utilities.normalAlertBox(alertTitle: "Error", messageString: "Ensure no fields are empty"), animated: true)
+            /*test
             let alertController = UIAlertController(title: "Error", message: "Ensure no fields are empty", preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "Close Alert", style: .default, handler: nil)
             alertController.addAction(defaultAction)
-            self.present(alertController, animated: true, completion: nil)        }
+            self.present(alertController, animated: true, completion: nil)
+        */
+        }
     }
     
     func getMaxActivityID(completion: @escaping (_ success: Bool) -> ()){
@@ -354,6 +358,8 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
             }
         }
     }
+    
+
     
     
 }

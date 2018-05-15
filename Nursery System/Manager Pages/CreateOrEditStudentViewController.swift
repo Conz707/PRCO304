@@ -193,38 +193,14 @@ class CreateOrEditStudentViewController: UIViewController,  UINavigationControll
     
     func getImage(){
         
-        let URL_IMAGE = URL(string: (selectedStudent.StudentPicture)!)
-        let session = URLSession(configuration: .default)
-        
-        //create a dataTask
-        let getImageFromUrl = session.dataTask(with: URL_IMAGE!) { data, response, error in
+        utilities.getImages(URL_IMAGE: URL(string: (selectedStudent.StudentPicture)!)!, completion: { success, image in
             
-            //if error
-            if let e = error {
-                //display message
-                print("Error occurred: \(e)")
-            } else {
-                if (response as? HTTPURLResponse) != nil {
-                    
-                    //check response contains image
-                    if let imageData = data {
-                        
-                        //get image
-                        let image = UIImage(data: imageData)
-                        
-                        //display the image
-                        DispatchQueue.main.async{
-                            self.imgStudent.image = image
-                        }
-                    } else {
-                        print("image corrupted")
-                    }
-                } else {
-                    print("No server response")
-                }
+            //display the image
+            DispatchQueue.main.async{
+                    self.imgStudent.image = image
+                
             }
-        }
-        getImageFromUrl.resume()
+        })
         if(imgStudent == nil){
             imgStudent.image = #imageLiteral(resourceName: "earlyYearsTapToChange.jpg")
         }

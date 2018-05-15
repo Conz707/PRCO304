@@ -122,18 +122,26 @@ class GoalsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             utilities.postRequest(postString: postString, request: request, completion: { success, data in
                 DispatchQueue.main.async{
-                let alertController = UIAlertController(title: "Success", message: "Successfully created goal", preferredStyle: .alert)
+                    self.present(utilities.normalAlertBox(alertTitle: "Success", messageString: "Successfully created goal"), animated: true)
+                    //TEST
+                /*let alertController = UIAlertController(title: "Success", message: "Successfully created goal", preferredStyle: .alert)
                 let defaultAction = UIAlertAction(title: "Close Alert", style: .default, handler: nil)
                 alertController.addAction(defaultAction)
                 self.present(alertController, animated: true, completion: nil)
+                    */
                 }
             })
             
         } else {
+            
+        self.present(utilities.normalAlertBox(alertTitle: "Error", messageString: "Ensure goal contains text"), animated: true)
+            
+            /*
             let alertController = UIAlertController(title: "Error", message: "Ensure goal contains text", preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "Close Alert", style: .default, handler: nil)
             alertController.addAction(defaultAction)
             self.present(alertController, animated: true, completion: nil)
+ */
         }
  
     }

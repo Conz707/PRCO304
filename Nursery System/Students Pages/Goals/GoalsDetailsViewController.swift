@@ -82,10 +82,14 @@ class GoalsDetailsViewController: UIViewController {
         editAlert()
         } else {
             
+            self.present(utilities.normalAlertBox(alertTitle: "Error", messageString: "Ensure goal contains text"), animated: true)
+            
+            /*
             let alertController = UIAlertController(title: "Error", message: "Ensure goal contains text", preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "Close Alert", style: .default, handler: nil)
             alertController.addAction(defaultAction)
             self.present(alertController, animated: true, completion: nil)
+             */
         }
         
     }
