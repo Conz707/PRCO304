@@ -94,7 +94,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/ParentSidePHPFiles/GetMyNotifications.php")!)
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
-        utilities.postRequest(postString: postString, request: request, completion: { success, data in
+        utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
             
             do {
                 self.activities = try JSONDecoder().decode(Array<Activity>.self, from: data)
@@ -120,7 +120,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         request.httpBody = postString.data(using: .utf8)
         print(postString)
         
-        utilities.postRequest(postString: postString, request: request, completion: { success, data in
+        utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
             
             do {
                 print(data)
@@ -145,7 +145,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         let postString = ("A_ID=\(selectedActivity.A_ID!)&U_ID=\(U_ID)")
         request.httpBody = postString.data(using: .utf8)
         
-        utilities.postRequest(postString: postString, request: request, completion: { success, data in
+        utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
             
         })
     }

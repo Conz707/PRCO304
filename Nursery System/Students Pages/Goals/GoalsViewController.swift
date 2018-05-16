@@ -88,7 +88,7 @@ class GoalsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
         
-        utilities.postRequest(postString: postString, request: request, completion: { success, data in
+        utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
             do {
                 self.goals = try JSONDecoder().decode(Array<Goal>.self, from: data)
                 for eachGoal in self.goals {
@@ -120,7 +120,7 @@ class GoalsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             print(postString)
             request.httpBody = postString.data(using: .utf8)
             
-            utilities.postRequest(postString: postString, request: request, completion: { success, data in
+            utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
                 DispatchQueue.main.async{
                     self.present(utilities.normalAlertBox(alertTitle: "Success", messageString: "Successfully created goal"), animated: true)
                 }

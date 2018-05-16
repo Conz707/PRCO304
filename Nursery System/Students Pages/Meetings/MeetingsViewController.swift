@@ -91,7 +91,7 @@ class MeetingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         print(postString)
         request.httpBody = postString.data(using: .utf8)
         
-        utilities.postRequest(postString: postString, request: request, completion: { success, data in
+        utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
             DispatchQueue.main.async{
 
                 self.present(utilities.normalAlertBox(alertTitle: "Success", messageString: "Successfully created meeting"), animated: true)
@@ -128,7 +128,7 @@ class MeetingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/GetStudentMeetings.php")!)
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
-        utilities.postRequest(postString: postString, request: request, completion: { success, data in
+        utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
             do {
                 self.meetings = try JSONDecoder().decode(Array<Meeting>.self, from: data)
                 for eachMeeting in self.meetings {
@@ -175,7 +175,7 @@ class MeetingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         print(postString)
         request.httpBody = postString.data(using: .utf8)
         
-        utilities.postRequest(postString: postString, request: request, completion: { success, data in
+        utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
         do {
             self.parents = try JSONDecoder().decode(Array<User>.self, from: data)
             print(self.parents)
@@ -208,7 +208,7 @@ class MeetingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         request.httpBody = postString.data(using: .utf8)
         
         print(postString)
-        utilities.postRequest(postString: postString, request: request, completion: { success, data in
+        utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
             
             do {
                 print(data)

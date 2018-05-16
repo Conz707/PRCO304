@@ -35,56 +35,26 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-        print("oioi \(selectedStudent.description)")
-        
-        let formatStringToDate = (utilities.formatStringToDate(dateString: selectedStudent.DateofBirth!))
-        
-        print("original date string \(selectedStudent.DateofBirth!)")
-        print("new Date() \(formatStringToDate)")
-        
-        
-        let ageGroupA = (Calendar.current.date(byAdding: .month, value: -18, to: Date()))!
-        let ageGroupB = (Calendar.current.date(byAdding: .month, value: -36, to: Date()))!
-        let ageGroupC = (Calendar.current.date(byAdding: .month, value: -48, to: Date()))!
-        
-        
-        if(formatStringToDate >= ageGroupA){
-            ageGroup = "A"
-        } else if (formatStringToDate < ageGroupA && formatStringToDate >= ageGroupB) {
-            ageGroup = "B"
-        } else {
-            ageGroup = "C"
-        }
-        
-        tblActivities.contentInset = UIEdgeInsetsMake(0, 15, 0, 0)
-        DispatchQueue.main.async {
-            self.getParentLabels(completion: { success in
-                self.lblMother.text = self.responseArr[0]
-                self.lblFather.text = self.responseArr[1]
-                self.lblGuardian.text = self.responseArr[2]
-                self.lblKeyPerson.text = self.responseArr[3]
-            })
-        }
-        
-        getActivities()
-        getStudentImage()
         activityIndicatorTableLoading.hidesWhenStopped = true
+        
+        setStudentAgeGroup()
+        getParentLabels()
+        decodeActivities()
+        getStudentImage()
+        
         
 
         lblName.text = (selectedStudent.FirstName)! + " " + (selectedStudent.Surname)!
-        
         let formatDate = utilities.formatDateToString(dateString: selectedStudent.DateofBirth!)
         lblDateOfBirth.text = formatDate
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) { //when reentering view, reload activities - for after adding an activity
         
-        getActivities()
+        decodeActivities()
         
         let checkUserRole = defaultValues.string(forKey: "UserRole")
-        print(checkUserRole)
         if(checkUserRole! == "Parent"){ //only for parents -- manager and teacher should bth see it
             btnAddActivity.isHidden = true
         } else if (checkUserRole == "Manager"){
@@ -103,17 +73,10 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         super.didReceiveMemoryWarning()
     }
     
-    func itemsDownloaded(items: NSArray){
+    func itemsDownloaded(items: NSArray){ //once items downloaded, reload table and stop animation
         feedItems = items
-        if (items.count > 0){
         tblActivities.reloadData()
         activityIndicatorTableLoading.stopAnimating()
-        } else {
-        activityIndicatorTableLoading.stopAnimating()
-        print("PUT A 0 ACTIVITY RESULTS ON TABLE")
-        }
-        
-        
     }
     
     
@@ -122,7 +85,7 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         return feedItems.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {    //getting table cell images and info from URL using utility function
         //retrieve cell
         let cellIdentifier: String = "BasicCell"
         let myCell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)!
@@ -158,11 +121,10 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         //manually call segue to detail view controller
         self.performSegue(withIdentifier: "createParentTeacherMeeting", sender: self)
         
-        
     }
     
     
-     func getParentLabels(completion: @escaping (_ success : Bool) -> ()){
+     func getParentLabels(){  //get labels for displaying parents
         
         var success = true
         
@@ -175,18 +137,93 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         
         request.httpMethod = "POST"
         
-        let postString = ("Mother=\(mother ?? "")&Father=\(father ?? "")&Guardian=\(guardian ?? "")&KeyPerson=\(keyPerson ?? "")")
+        let postString = ("Mother=\(mother ?? "")&Father=\(father ?? "")&Guardian=\(guardian ?? "")&KeyPerson=\(keyPerson ?? "")")          //prevents nil values by returning an empty string, prevents php issues
         print(postString)
         
         request.httpBody = postString.data(using: .utf8)
         
-        postRequest(postString: postString, request: request, completion: { success, data in
-            completion(success)
+        utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
+            
+            self.responseArr = (responseString.split(separator: ";") as NSArray) as! [String]   //splits response string into an array for displaying names of parents and key person
+            print("responseString <br /> = \(responseString)")
+            print("this the response string yo \(responseString)")
+            DispatchQueue.main.async{
+                self.lblMother.text = self.responseArr[0]
+                self.lblFather.text = self.responseArr[1]
+                self.lblGuardian.text = self.responseArr[2]
+                self.lblKeyPerson.text = self.responseArr[3]
+            }
         })
-        
     }
  
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+    
+    func setStudentAgeGroup(){  //set student age group, used for things such as displaying relevant goals
+        
+        let formatStringToDate = (utilities.formatStringToDate(dateString: selectedStudent.DateofBirth!))
+        
+        print("original date string \(selectedStudent.DateofBirth!)")
+        print("new Date() \(formatStringToDate)")
+        
+        
+        let ageGroupA = (Calendar.current.date(byAdding: .month, value: -18, to: Date()))!
+        let ageGroupB = (Calendar.current.date(byAdding: .month, value: -36, to: Date()))!
+        let ageGroupC = (Calendar.current.date(byAdding: .month, value: -48, to: Date()))!
+        
+        
+        if(formatStringToDate >= ageGroupA){
+            ageGroup = "A"
+        } else if (formatStringToDate < ageGroupA && formatStringToDate >= ageGroupB) {
+            ageGroup = "B"
+        } else {
+            ageGroup = "C"
+        }
+    }
+    
+    func decodeActivities(){       //decode student's activities into struct
+        
+        postString = "S_ID=\(selectedStudent.S_ID!)"
+        
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/GetActivities.php")!)
+        
+        
+        request.httpMethod = "POST"
+        request.httpBody = postString.data(using: .utf8)
+        
+        print("poststring \(postString)")
+        
+        utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
+            
+
+            do {
+                self.activities = try JSONDecoder().decode(Array<Activity>.self, from: data)
+                for eachActivity in self.activities {
+                    print("\(eachActivity.description)")
+                }
+            } catch {
+                print(error)
+                print("ERROR")
+            }
+            DispatchQueue.main.async {
+                self.itemsDownloaded(items: self.activities as NSArray)
+                print("trying to print items downloaded \(self.activities)")
+            }
+            
+        })
+    }
+    
+    func getStudentImage(){     //perform utility function to get student image from FTP server
+        
+        utilities.getImages(URL_IMAGE: URL(string: (selectedStudent.StudentPicture)!)!, completion: { success, image in
+            
+            //display the image
+            DispatchQueue.main.async{
+                self.imgStudent.image = image
+            }
+        })
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) { //preparing selected activities and students
         
         switch(segue.identifier!){
         case "viewActivity":
@@ -195,7 +232,7 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
             let viewActivityVC = segue.destination as! ActivityDetailsViewController
             //set property to selected activity so when view loads, it accesses the properties of feeditem obj
             
-           viewActivityVC.selectedActivity = selectedActivity
+            viewActivityVC.selectedActivity = selectedActivity
             viewActivityVC.selectedStudent = selectedStudent!
             viewActivityVC.ageGroup = ageGroup
             
@@ -228,81 +265,5 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         }
         
     }
-    
-    
-    func getActivities(){
-        
-        postString = "S_ID=\(selectedStudent.S_ID!)"
-        
-        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/GetActivities.php")!)
-        
-        
-        request.httpMethod = "POST"
-        request.httpBody = postString.data(using: .utf8)
-        
-        print("poststring \(postString)")
-        
-        utilities.postRequest(postString: postString, request: request, completion: { success, data in
-            
-
-            do {
-                self.activities = try JSONDecoder().decode(Array<Activity>.self, from: data)
-                for eachActivity in self.activities {
-                    print("\(eachActivity.description)")
-                }
-            } catch {
-                print(error)
-                print("ERROR")
-            }
-            DispatchQueue.main.async {
-                self.itemsDownloaded(items: self.activities as NSArray)
-                print("trying to print items downloaded \(self.activities)")
-            }
-            
-        })
-        print(postRequest)
-    }
-    
-    func getStudentImage(){
-        
-        utilities.getImages(URL_IMAGE: URL(string: (selectedStudent.StudentPicture)!)!, completion: { success, image in
-            
-            //display the image
-            DispatchQueue.main.async{
-                self.imgStudent.image = image
-            }
-        })
-    }
-    
-    func postRequest(postString: String, request: URLRequest, completion: @escaping (_ success : Bool,_ data: Data) -> ()){
-        var success = true
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {                                                 // check for fundamental networking error
-                print("error=\(error)")
-                success = false
-                return
-            }
-            
-            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(response)")
-                
-            }
-            
-            
-            var responseString = String(data: data, encoding: .utf8)!
-            self.responseArr = (responseString.split(separator: ";") as NSArray) as! [String]
-            print("responseString <br /> = \(responseString)")
-            
-            DispatchQueue.main.async{
-                completion(success, data)
-            }
-        }
-        task.resume()
-        print(success)
-    }
-    
-    
     
 }

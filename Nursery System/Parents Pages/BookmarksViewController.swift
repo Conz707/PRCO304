@@ -29,7 +29,7 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/ParentSidePHPFiles/GetMyBookmarks.php")!)
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
-        utilities.postRequest(postString: postString, request: request, completion: { success, data in
+        utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
             do {
                 self.activities = try JSONDecoder().decode(Array<Activity>.self, from: data)
                 for eachActivity in self.activities {
@@ -107,7 +107,7 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         request.httpBody = postString.data(using: .utf8)
         print(postString)
         
-        utilities.postRequest(postString: postString, request: request, completion: { success, data in
+        utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
 
             do {
                 print(data)

@@ -29,8 +29,7 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
             super.viewDidLoad()
             
       
-            
-            if(defaultValues.string(forKey: "UserRole") == "Manager"){
+            if(defaultValues.string(forKey: "UserRole") == "Manager"){      //manager only function
                 btnAddUserOutlet.isHidden = false
             } else {
                 btnAddUserOutlet.isHidden = true
@@ -68,16 +67,20 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
         print("default")
         }
         
+        decodeStudent(postString: postString)
+    }
+    
+    func decodeStudent(postString: String){     //decode student into struct for use
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/GetStudents.php")!)
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
-
-       utilities.postRequest(postString: postString, request: request, completion: { success, data in
+        
+        utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString  in
             do {
                 self.students = try JSONDecoder().decode(Array<Student>.self, from: data)
                 for eachStudent in self.students {
                     print("\(eachStudent.StudentPicture) \(eachStudent.S_ID)")
-                
+                    
                 }
             } catch {
                 print(error)
@@ -87,10 +90,8 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
                 self.itemsDownloaded(items: self.students as NSArray)
                 print("trying to print items downloaded \(self.students)")
             }
-        
-          })
-
-    
+            
+        })
     }
     
         override func viewDidAppear(_ animated: Bool) {
@@ -100,7 +101,7 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         }
         
-        func itemsDownloaded(items: NSArray){
+        func itemsDownloaded(items: NSArray){   //once items downloaded perform these tasks
             feedItems = items
             filterStudents = items as! [Student]
             self.tblAllStudents.reloadData()
@@ -113,24 +114,17 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
             return filterStudents.count
         }
         
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {    //adding cell properties to table
         //retrieve cell
         let cellIdentifier: String = "BasicCell"
         let myCell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)!
         
-        
-        //get student to show
+        //get students
         let item: Student = filterStudents[indexPath.row]
-        
-
-        //get references to labels of cells
-        
-
-        let session = URLSession(configuration: .default)
         
         utilities.getImages(URL_IMAGE: URL(string: (item.StudentPicture)!)!, completion: { success, image in
             
-            //display the images
+            //display the cells
             DispatchQueue.main.async{
                 myCell.textLabel!.text = item.FirstName! + " " + item.Surname!
                 myCell.imageView?.image = image
@@ -143,7 +137,7 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
     
 
         
-        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {     //whenever user taps row
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {     //whenever user taps row perform actions
             //set selected student to var
             selectedStudent = filterStudents[indexPath.row]
             //Manually call segue to detail view controller
@@ -154,7 +148,7 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
         return 100
     }
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {    //filter students when text entered / deleted
         guard !searchText.isEmpty else {
             filterStudents = students
             tblAllStudents.reloadData()
@@ -171,16 +165,13 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
 
     
 
-        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        override func prepare(for segue: UIStoryboardSegue, sender: Any?) { //prepare the next view by sending  the selected student
             
             if(segue.identifier == "StudentSegue"){
             //get reference to destination view controller
             let studentVC = segue.destination as! StudentDetailsViewController
             //set property to selected student so when view loads, it accesses the properties of feeditem obj
             studentVC.selectedStudent = selectedStudent
-            
-            print("finding the list of activities")
-            print(selectedStudent.description)
             } else {
             let createStudentVC = segue.destination as! CreateOrEditStudentViewController
             createStudentVC.selectedStudent = selectedStudent

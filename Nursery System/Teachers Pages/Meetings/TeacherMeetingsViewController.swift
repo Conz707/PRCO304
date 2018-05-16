@@ -69,10 +69,17 @@ class TeacherMeetingsViewController: UIViewController, UITableViewDataSource, UI
             segmentedMeetings.selectedSegmentIndex = 1
         }
         
-       var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/GetMyMeetings.php")!)
+        decodeMeetings(postString: postString)
+        
+
+    }
+    
+    func decodeMeetings(postString: String){
+        
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/GetMyMeetings.php")!)
         request.httpMethod = "POST"
-                request.httpBody = postString.data(using: .utf8)
-        utilities.postRequest(postString: postString, request: request, completion: { success, data in
+        request.httpBody = postString.data(using: .utf8)
+        utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
             do {
                 self.meetings = try JSONDecoder().decode(Array<Meeting>.self, from: data)
                 for eachMeeting in self.meetings {
@@ -113,7 +120,7 @@ class TeacherMeetingsViewController: UIViewController, UITableViewDataSource, UI
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
         print(postString)
-        utilities.postRequest(postString: postString, request: request, completion: { success, data in
+        utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
             
             do {
                 print(data)

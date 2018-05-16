@@ -113,40 +113,26 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer){
         let tappedImage = tapGestureRecognizer.view as! UIImageView
-        print("image tapped")
-        let image = UIImagePickerController()  //handles stuff that lets user interact with image
+        let image = UIImagePickerController()
         image.delegate = self
-
-        let alertImageTapped = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
+       
+        let utilImageTapped = utilities.imageTapped(image: image, sender: self)
         
-        alertImageTapped.addAction(UIAlertAction(title: "Take Photo", style: .default, handler: { _ in
-            image.sourceType = UIImagePickerControllerSourceType.camera
-            image.allowsEditing = false
-            self.present(image, animated: true)
-        }))
-        
-        alertImageTapped.addAction(UIAlertAction(title: "Choose from Photo Library", style: .default, handler: { _ in
-            image.sourceType = UIImagePickerControllerSourceType.photoLibrary  //pick image from ipad camera roll
-            image.allowsEditing = true //hmm
-            self.present(image, animated: true, completion: nil)
-        }))
-        
-        alertImageTapped.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
-        
-        if let popoverController = alertImageTapped.popoverPresentationController {
+        if let popoverController = utilImageTapped.popoverPresentationController {
             popoverController.sourceView = self.view
             popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
             popoverController.permittedArrowDirections = []
         }
         
-        self.present(alertImageTapped, animated: true, completion: nil)
+        self.present(utilImageTapped, animated: true)
     }
+ 
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+ 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage{ //check if using image possible
             imgActivity.image = image
@@ -280,7 +266,7 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
         print(postString)
         request.httpBody = postString.data(using: .utf8)
         
-        utilities.postRequest(postString: postString, request: request, completion: { success, data in
+        utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
             do {
                 self.goals = try JSONDecoder().decode(Array<Goal>.self, from: data)
                 print(self.goals)

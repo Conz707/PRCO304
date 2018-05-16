@@ -5,8 +5,6 @@ target 'Nursery System' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
   pod 'Alamofire', '~> 4.7.0'
-  pod 'LBTAComponents'
-  pod 'NWPusher', '~> 0.7.0'
 pod 'DropDown'
 
 

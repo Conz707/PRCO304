@@ -77,7 +77,7 @@ class MyChildrenViewController: UIViewController, UITableViewDelegate, UITableVi
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
         
-        utilities.postRequest(postString: postString, request: request, completion: { success, data in
+        utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
             
             do {
                 self.students = try JSONDecoder().decode(Array<Student>.self, from: data)

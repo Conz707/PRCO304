@@ -178,7 +178,7 @@ saveAlert()
         postString = "M_ID=\(selectedMeeting.M_ID!)&Notes=\(txtNotes.text!)&Completed=\(meetingCompleted)"
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
-        utilities.postRequest(postString: postString, request: request, completion: { success, data in
+        utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
             
             do {
                 let parent = try JSONDecoder().decode(User.self, from: data)
@@ -202,7 +202,7 @@ saveAlert()
         print("memes \(postString)")
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
-        utilities.postRequest(postString: postString, request: request, completion: { success, data in
+        utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
             
             do {
                 let parent = try JSONDecoder().decode(User.self, from: data)

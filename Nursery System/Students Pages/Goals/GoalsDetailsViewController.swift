@@ -107,7 +107,7 @@ class GoalsDetailsViewController: UIViewController {
         request.httpMethod = "POST"
                 request.httpBody = postString.data(using: .utf8)
         
-        utilities.postRequest(postString: postString, request: request) { success, data in
+        utilities.postRequest(postString: postString, request: request) { success, data, responseString in
         }
         
     }
@@ -121,7 +121,7 @@ class GoalsDetailsViewController: UIViewController {
         request.httpBody = postString.data(using: .utf8)
         print(postString)
         
-        utilities.postRequest(postString: postString, request: request) { success, data in
+        utilities.postRequest(postString: postString, request: request) { success, data, responseString in
         }
         
     }

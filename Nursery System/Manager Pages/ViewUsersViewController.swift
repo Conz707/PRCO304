@@ -118,7 +118,7 @@ func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { 
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
       
-        utilities.postRequest(postString: postString, request: request, completion: { success, data in
+        utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
             do {
                 self.users = try JSONDecoder().decode(Array<User>.self, from: data)
                 for eachUser in self.users {
@@ -139,6 +139,9 @@ func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { 
         
     }
     
+    func callDecode(){
+        
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 75
