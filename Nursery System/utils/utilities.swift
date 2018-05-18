@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class utilities{
     
@@ -148,9 +149,6 @@ class utilities{
         
     }
     
-
-    
-    
     static func normalAlertBox(alertTitle: String,messageString: String) -> UIAlertController{   //call alert box with custom title and message
         
         let alertController = UIAlertController(title: alertTitle, message: messageString, preferredStyle: .alert)
@@ -221,8 +219,6 @@ class utilities{
         
         return alertImageTapped
     }
-    
-
     
 }
 

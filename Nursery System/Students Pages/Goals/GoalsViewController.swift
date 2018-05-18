@@ -175,7 +175,7 @@ class GoalsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         activityIndicatorTableLoading.stopAnimating()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {     //preparing things for next view
         let goalDetailsVC = segue.destination as! GoalsDetailsViewController
         
         goalDetailsVC.selectedGoal = selectedGoal
