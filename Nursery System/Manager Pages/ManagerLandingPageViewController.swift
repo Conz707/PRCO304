@@ -9,10 +9,11 @@
 import UIKit
 
 class ManagerLandingPageViewController: UIViewController {
-
+    
+    @IBOutlet var tabBarTeacher: UITabBarItem!
+    @IBOutlet var tabBarManager: UITabBarItem!
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
 

@@ -59,6 +59,7 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
             btnAddActivity.isHidden = true
         } else if (checkUserRole == "Manager"){
             btnEditStudentOutlet.isHidden = false
+            btnAddActivity.isHidden = false
             } else{
             btnAddActivity.isHidden = false
             

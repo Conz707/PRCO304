@@ -352,6 +352,7 @@ func updateActivity(){      //called after update alert confirmed
                 if(responseString != ""){
                     self.lblGoal.text = responseString
                     self.lblGoalAchieved.isHidden = false
+                    self.lblGoal.isHidden = false
                 } else {
                     self.lblGoal.isHidden = true
                     self.lblGoalAchieved.isHidden = true

@@ -10,6 +10,8 @@ import UIKit
 
 class ParentsHomepageViewController: UIViewController {
 
+    @IBOutlet var tabBarTeacher: UITabBarItem!
+    @IBOutlet var tabBarManager: UITabBarItem!
     @IBOutlet var imgMeeting: UIImageView!
     @IBOutlet var imgNotification: UIImageView!
     @IBOutlet var lblNumNotifications: UILabel!
@@ -19,7 +21,13 @@ class ParentsHomepageViewController: UIViewController {
     @IBOutlet var lblNumMeetings: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        if(defaultValues.string(forKey: "UserRole") == "Parent"){
+            tabBarManager.isEnabled = false
+            tabBarTeacher.isEnabled = false
+        } else if (defaultValues.string(forKey: "UserRole") == "Teacher"){
+            tabBarManager.isEnabled = false
+        }
+        
         // Do any additional setup after loading the view.
     }
     

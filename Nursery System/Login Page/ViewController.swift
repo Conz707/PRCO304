@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Alamofire
-
 
 
 class ViewController: UIViewController, UITextFieldDelegate{
@@ -23,7 +21,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
     var roleString = ""
     let defaultValues = UserDefaults.standard //used to store user data?
     var responseSuccess = ""
-    var postString = ""
     let testAccounts = ["con@hotmail.com", "con@hotmail.com1", "con@hotmail.com2"]
  
     
@@ -118,13 +115,9 @@ class ViewController: UIViewController, UITextFieldDelegate{
         
         if(!checkEmail || !checkPassword)
         {
-            print("not valid input")
-            print("email \(checkEmail)")
-            print("password \(checkPassword)")
             return false
             
         } else {
-            print("valid input")
             return true
             
         }
@@ -153,8 +146,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
                     print("Manager")
                     self.performSegue(withIdentifier: "segueGoManager", sender: self)
                 default:
-                    print("ERROR why u do this")
-                    
+
                     self.txtPassword.isEnabled = true
                     self.txtEmail.isEnabled = true
                     self.btnLoginOutlet.isEnabled = true

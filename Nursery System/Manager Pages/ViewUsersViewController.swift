@@ -149,7 +149,7 @@ func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         //get reference to destination view controller
-        let userVC = segue.destination as! UserViewController
+        let userVC = segue.destination as! CreateOrEditUserViewController
         //set property to selected student so when view loads, it accesses the properties of feeditem obj
         userVC.selectedUser = selectedUser
         

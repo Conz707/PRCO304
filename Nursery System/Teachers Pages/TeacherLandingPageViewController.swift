@@ -12,12 +12,15 @@ class TeacherLandingPageViewController: UIViewController {
     
     @IBOutlet var segmentedUserRole: UISegmentedControl!
     
+    @IBOutlet var tabBarManager: UITabBarItem!
     let defaultValues = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let checkUserEmail = self.defaultValues.string(forKey: "UserEmail")
-        print("IS THIS SHIT WORKING? YEET \(checkUserEmail)")
+        if(defaultValues.string(forKey: "UserRole") == "Teacher"){
+            tabBarManager.isEnabled = false
+        }
+     
         // Do any additional setup after loading the view.
     }
 

@@ -132,9 +132,13 @@ class utilities{
             
             print("switch Password")
         case "Text":
-            textRegEx = "[a-zA-Z0-9,.!?@'()£$%&+_?|:}]"
+            textRegEx = "[a-zA-Z0-9,.!?@'()£$%&+_?|:}]{1,400}"
             
             print("switch Text")
+        case "Name":
+            textRegEx = "[A-Z0-9a-z]{1,16}"
+            
+            print("switch Name")
         case "TelNum":
             textRegEx = "[0]+[0-9]{1,10}"   //ensure telnum starts with 0 and 11 digits total
             

@@ -8,8 +8,10 @@
 
 import UIKit
 
-class UserViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+class CreateOrEditUserViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
+    
+    
     @IBOutlet var pickerUserType: UIPickerView!
     @IBOutlet var txtPassword: UITextField!
     @IBOutlet var txtTelephoneNumber: UITextField!
@@ -116,38 +118,82 @@ func textFieldDidBeginEditing(_ textField: UITextField) {
     
     @IBAction func btnSave(_ sender: Any) {
         
-       
+        if((txtFirstName.text?.isEmpty)! || (txtSurname.text?.isEmpty)! || (txtEmail.text?.isEmpty)! || (txtTelephoneNumber.text?.isEmpty)! || (txtPassword.text?.isEmpty)! || (txtDropdown.text?.isEmpty)!){
+        let alert = utilities.normalAlertBox(alertTitle: "ERROR", messageString: "Ensure all fields filled in")
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            if(checkValidInputs()){
+                addOrEditUser()
+            } else {
+                let alert = utilities.normalAlertBox(alertTitle: "ERROR", messageString: "Ensure all inputs correct format")
+                
+            self.present(alert, animated: true, completion: nil)
+            }
+        }
+
+        }
+    
+    func addOrEditUser(){
+        
         let firstName = txtFirstName.text
         let surname = txtSurname.text
         let email = txtEmail.text
         let telephoneNumber = txtTelephoneNumber.text
         let password = txtPassword.text
         let userType = txtDropdown.text
+        var addOrEdit = ""
         
         if(selectedUser.FirstName != nil){    //if  selecter used then edit
             postString = "AddOrEdit=Edit&U_ID=\(selectedUser.U_ID!)&FirstName=\(firstName!)&Surname=\(surname!)&Email=\(email!)&TelephoneNumber=\(telephoneNumber!)&Password=\(password!)&UserType=\(userType!)"
-
+                addOrEdit = "edited"
         } else {                    //if no selected user then add
             postString = "AddOrEdit=Add&FirstName=\(firstName!)&Surname=\(surname!)&Email=\(email!)&TelephoneNumber=\(telephoneNumber!)&Password=\(password!)&UserType=\(userType!)"
             print(postString)
-
+                addOrEdit = "added"
+            
         }
-       
-      
+        
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/ManagerSidePHPFiles/AddOrEditUser.php")!)
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
         print(postString)
         
         utilities.postRequest(postString: postString, request: request) { success, data, responseString in
+            if(responseString == "ERROR"){      //if error then email already exists within database
+                let alert = utilities.normalAlertBox(alertTitle: "ERROR", messageString: "User with this email already registered.")
+                
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                
+                let alert = utilities.normalAlertBox(alertTitle: "Success", messageString: "Successfully \(addOrEdit) User")
+                self.present(alert, animated: true, completion: nil)
+            }
         }
 
-        
     }
+    
     
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
+
+    func checkValidInputs() -> Bool{        //use utilities function to compare text to RegEx
         
+        let checkEmail = utilities.checkInputValid(type: "Email", input: txtEmail.text!)
+        let checkFirstName = utilities.checkInputValid(type: "Name", input: txtFirstName.text!)
+        let checkSurname = utilities.checkInputValid(type: "Name", input: txtSurname.text!)
+        let checkTelNum = utilities.checkInputValid(type: "TelNum", input: txtTelephoneNumber.text!)
+        let checkPassword = utilities.checkInputValid(type: "Password", input: txtPassword.text!)
+        
+        if(!checkSurname || !checkEmail || !checkFirstName || !checkTelNum || !checkPassword)
+        {
+            return false
+        } else {
+            return true
+            
+        }
+        
+    }
+
 }
