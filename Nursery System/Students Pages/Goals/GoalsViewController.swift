@@ -40,7 +40,7 @@ class GoalsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
         }
         
-        switch(ageGroup){
+        switch(ageGroup){       //set the age group, this willbe used to run the appropriate sql query for the age group
         case "A":
             print("a")
             print("age group \(ageGroup)")
@@ -65,7 +65,7 @@ class GoalsViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     
     
-    @IBAction func segmentChangeTable(_ sender: Any) {
+    @IBAction func segmentChangeTable(_ sender: Any) {      //change sql query for age group
         
         activityIndicatorTableLoading.startAnimating()
         switch segmentedGoals.selectedSegmentIndex{
@@ -139,7 +139,7 @@ class GoalsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return feedItems.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {        //prepare and display table
         //retrieve cell
         let cellIdentifier: String = "BasicCell"
         let myCell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)!

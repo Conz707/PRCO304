@@ -30,7 +30,7 @@ class MeetingDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        if(defaultValues.string(forKey: "UserRole") == "Parent"){
+        if(defaultValues.string(forKey: "UserRole") == "Parent"){   //hide things parent shouldnt see or use
             btnSaveOutlet.isHidden = true
             btnCancelOutlet.isHidden = true
         } else {
@@ -40,14 +40,11 @@ class MeetingDetailsViewController: UIViewController {
         
         getParent()
         
-        print(selectedStudent.description)
          lblStudentName.text = "\(selectedStudent.FirstName!) \(selectedStudent.Surname!)"
-        print("\(selectedMeeting.M_ID!) \(selectedStudent.FirstName!)")
-        lblDate.text = selectedMeeting.Date
+        
+        lblDate.text = selectedMeeting.Date!
         self.txtNotes.text = (self.selectedMeeting.Notes!)
-        print(selectedMeeting.Notes)
-        print(selectedMeeting.Notes!)
-        checkCompleted { success in
+        checkCompleted { success in             //check whether meeting has been completed and set the check box to checked or not
             if(self.completed == true){
                 self.btnCompletedOutlet.setImage(UIImage(named: "checked box"), for: .normal)
             } else {
@@ -64,7 +61,7 @@ class MeetingDetailsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func btnCompleted(_ sender: Any) {
+    @IBAction func btnCompleted(_ sender: Any) {        //set the check box to the opposite of what it is currently set as and change boolean
         if(completed == true){
             btnCompletedOutlet.setImage(UIImage(named: "unchecked box"), for: .normal)
             completed = false
@@ -76,7 +73,7 @@ class MeetingDetailsViewController: UIViewController {
 
     
     @IBAction func btnCancelMeeting(_ sender: Any) {
-deleteAlert()
+cancelAlert()
     }
     
     
@@ -84,18 +81,18 @@ deleteAlert()
 saveAlert()
     }
    
-    func cancelMeeting(){
-    var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/CancelMeeting.php")!)
-    request.httpMethod = "POST"
-    postString = ("M_ID=\(selectedMeeting.M_ID)")
-    
-    request.httpBody = postString.data(using: .utf8)
-    
-    postRequest(postString: postString, request: request, completion: { success in
-    })
+func cancelMeeting(){ //if alert box for cancel confirmed this runs
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/CancelMeeting.php")!)
+        request.httpMethod = "POST"
+        postString = ("M_ID=\(selectedMeeting.M_ID!)")
+        
+        request.httpBody = postString.data(using: .utf8)
+        
+        postRequest(postString: postString, request: request, completion: { success in
+        })
 }
     
-    func deleteAlert(){
+    func cancelAlert(){         //display alert to ensure cancel wanted
         let alert = UIAlertController(title: "Confirm Cancel Meeting - This action can NOT be undone.", message: nil, preferredStyle: .actionSheet)
         
         alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { _ in
@@ -130,7 +127,7 @@ saveAlert()
         self.present(alert, animated: true, completion: nil)
     }
     
-    func saveAlert(){
+    func saveAlert(){           //confirm saving the meeting details
         let alert = UIAlertController(title: "Are you sure you would like to save meeting notes?", message: nil, preferredStyle: .actionSheet)
         
         alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { _ in
@@ -166,7 +163,7 @@ saveAlert()
     }
     
     
-    func saveMeetingNotes(){
+    func saveMeetingNotes(){        //run this if confirm saving the meeting details
         
         var meetingCompleted = 0
         

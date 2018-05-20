@@ -10,35 +10,30 @@ import UIKit
 
 class TeacherLandingPageViewController: UIViewController {
     
-    @IBOutlet var segmentedUserRole: UISegmentedControl!
     
+    @IBOutlet var tabBar: UITabBar!
     @IBOutlet var tabBarManager: UITabBarItem!
     let defaultValues = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
         if(defaultValues.string(forKey: "UserRole") == "Teacher"){
-            tabBarManager.isEnabled = false
-        }
-     
-        // Do any additional setup after loading the view.
-    }
 
-    @IBAction func segmentUserRole(_ sender: Any) {
-        switch (segmentedUserRole.selectedSegmentIndex){
-        case 0:
-            break
-        case 1:
-            break
-        default:
-            print("mems")
         }
         
-    }
+
+
+
+    // Do any additional setup after loading the view.
+}
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
 
+    @IBAction func btnEditAccount(_ sender: Any) {
+        performSegue(withIdentifier: "editAccountSegue", sender: nil)
+    }
 }

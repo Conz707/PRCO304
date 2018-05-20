@@ -24,6 +24,17 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
        
         activityIndicatorTableLoading.hidesWhenStopped = true
+            getBookmarks()
+    }
+    
+    func itemsDownloaded(items: NSArray){
+        feedItems = items
+        self.tblBookmarks.reloadData()
+        activityIndicatorTableLoading.stopAnimating()
+    }
+    
+    
+    func getBookmarks(){        //get bookmarked activities for the table
         let U_ID = defaultValues.string(forKey: "UserU_ID")
         postString = "U_ID=\(U_ID!)"
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/ParentSidePHPFiles/GetMyBookmarks.php")!)
@@ -45,12 +56,6 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
             }
             
         })
-    }
-    
-    func itemsDownloaded(items: NSArray){
-        feedItems = items
-        self.tblBookmarks.reloadData()
-        activityIndicatorTableLoading.stopAnimating()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -99,7 +104,7 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         
     }
     
-    func getSelectedStudent(){
+    func getSelectedStudent(){      // get selected student for segue
 
         postString = "S_ID=\(selectedActivity.S_ID!)"
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetSelectedStudent.php")!)

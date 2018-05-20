@@ -26,13 +26,12 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         activityIndicatorTableLoading.startAnimating()
         activityIndicatorTableLoading.hidesWhenStopped = true
         U_ID = defaultValues.string(forKey: "UserU_ID")!
-        
 
         
         getActivities()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {     //after viewing a notification it will disappear from list so reload the activities
        
         getActivities()
     }
@@ -88,7 +87,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
 
-    func getActivities(){
+    func getActivities(){      //get any unviewed activities and display in table
         
         postString = ("U_ID=\(U_ID)")
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/ParentSidePHPFiles/GetMyNotifications.php")!)
@@ -113,7 +112,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         })
     }
     
-    func getSelectedStudent(){
+    func getSelectedStudent(){      //get student for segue
         postString = "S_ID=\(selectedActivity.S_ID!)"
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetSelectedStudent.php")!)
         request.httpMethod = "POST"
@@ -139,7 +138,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         })
     }
     
-    func markNotificationRead(){
+    func markNotificationRead(){        //when clicking on an activity, mark it as read within the database
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/ParentSidePHPFiles/SetNotificationRead.php")!)
         request.httpMethod = "POST"
         let postString = ("A_ID=\(selectedActivity.A_ID!)&U_ID=\(U_ID)")

@@ -59,7 +59,7 @@ class MeetingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         return "\(parents[row].FirstName!) \(parents[row].Surname!)"
     }
 
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {                //change text to picked item from picker view and hide picker
         if (parents.count > 0 && parents.count >= row){
             self.txtDropdown.text = "\(parents[row].FirstName!) \(parents[row].Surname!) " as? String
             selectedParentID = parents[row].U_ID!
@@ -70,7 +70,7 @@ class MeetingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     }
     
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {           //when text field tapped dont show keyboard and unhide picker view
         if (textField == self.txtDropdown){    //ask nick about this
            print("working")
             self.pickerDropdown.isHidden = false
@@ -84,7 +84,7 @@ class MeetingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     }
 
     @IBAction func btnAddMeeting(_ sender: Any) {
-        if(txtDropdown.text?.isEmpty == false){
+        if(txtDropdown.text?.isEmpty == false){         //ensure parent selected for meeting
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/CreateParentTeacherMeeting.php")!)
         request.httpMethod = "POST"
         let postString = ("S_ID=\(selectedStudent.S_ID!)&Parent_ID=\(selectedParentID)&Teacher_ID=\(U_ID)&Date=\(datePicker.date)")
@@ -95,6 +95,7 @@ class MeetingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             DispatchQueue.main.async{
 
                 self.present(utilities.normalAlertBox(alertTitle: "Success", messageString: "Successfully created meeting"), animated: true)
+                self.segmentChangeTable((Any).self)             //reload table with new data
 
             }
         })
@@ -106,7 +107,7 @@ class MeetingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         }
     }
     
-    @IBAction func segmentChangeTable(_ sender: Any) {
+    @IBAction func segmentChangeTable(_ sender: Any) {      //change SQL query
         
         activityIndicatorTableLoading.startAnimating()
         switch segmentedMeetings.selectedSegmentIndex{
@@ -128,7 +129,7 @@ class MeetingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/GetStudentMeetings.php")!)
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
-        utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
+        utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in      //fill meetings array with users meetings
             do {
                 self.meetings = try JSONDecoder().decode(Array<Meeting>.self, from: data)
                 for eachMeeting in self.meetings {
@@ -138,7 +139,7 @@ class MeetingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
                 print(error)
                 print("ERROR")
             }
-            DispatchQueue.main.async {
+            DispatchQueue.main.async {          //display meetings from array
                 self.itemsDownloaded(items: self.meetings as NSArray)
                 print("trying to print items downloaded \(self.meetings)")
             }
@@ -157,7 +158,7 @@ class MeetingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {            //prepare and display table
         //retrieve cell
         let cellIdentifier: String = "BasicCell"
         let myCell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)!
@@ -168,14 +169,14 @@ class MeetingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         return myCell
     }
     
-  func getParentsDropdown(){
+  func getParentsDropdown(){                //get the parents of a selected student for the picker
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/GetParentsDropdown.php")!)
         request.httpMethod = "POST"
         let postString = ("S_ID=\(selectedStudent.S_ID!)")
         print(postString)
         request.httpBody = postString.data(using: .utf8)
         
-        utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
+        utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in      //add parents to an array
         do {
             self.parents = try JSONDecoder().decode(Array<User>.self, from: data)
             print(self.parents)
@@ -187,7 +188,7 @@ class MeetingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             print("ERROR")
         }
         DispatchQueue.main.async {
-            self.pickerDropdown.reloadComponent(0)
+            self.pickerDropdown.reloadComponent(0)          //reload picker once data retrieved
         }
 
         })
@@ -197,7 +198,7 @@ class MeetingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         segmentChangeTable((Any).self)
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {     //find which student is assigned in meeting and prepare for segue
 
         print(selectedMeeting)
         

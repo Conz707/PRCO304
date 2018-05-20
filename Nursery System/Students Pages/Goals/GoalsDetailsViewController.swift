@@ -31,7 +31,7 @@ class GoalsDetailsViewController: UIViewController {
 
         
         
-        switch(ageGroup){
+        switch(ageGroup){       //set and display goals from the appropriate age group
         case "A":
             print("a")
             ageGroupGoals = "AgeGroupAGoals"
@@ -49,7 +49,7 @@ class GoalsDetailsViewController: UIViewController {
         }
         
         
-        checkGoalCompleted { success in
+        checkGoalCompleted { success in     //check if goal completed or not and set the check box appropriately
             if(self.completed == true){
                 self.btnGoalCompletedOutlet.setImage(UIImage(named: "checked box"), for: .normal)
             } else {
@@ -67,7 +67,7 @@ class GoalsDetailsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func btnGoalCompleted(_ sender: Any) {
+    @IBAction func btnGoalCompleted(_ sender: Any) {        //set the box to the opposite of its current state
         if(completed == true){
             btnGoalCompletedOutlet.setImage(UIImage(named: "unchecked box"), for: .normal)
             completed = false
@@ -94,11 +94,11 @@ class GoalsDetailsViewController: UIViewController {
         
     }
     
-    func editGoal(){
+    func editGoal(){        //after confirming save changes
         
         var goalCompleted = 0
         
-        if(completed == true){
+        if(completed == true){      //if goal marked as complete, set to 1 and send that to db
             goalCompleted = 1
         }
         
@@ -112,7 +112,7 @@ class GoalsDetailsViewController: UIViewController {
         
     }
     
-    func deleteGoal(){
+    func deleteGoal(){      //if confirm delete goal
         
         postString = "AgeGroupGoals=\(ageGroupGoals)&G_ID=\(selectedGoal.G_ID!)"
         
@@ -228,7 +228,7 @@ class GoalsDetailsViewController: UIViewController {
         print("no here")
     }
     
-    func checkGoalCompleted(completion: @escaping (_ success : Bool) -> ()){
+    func checkGoalCompleted(completion: @escaping (_ success : Bool) -> ()){        //run on entering page, check whether goal is completed and make appropriate changes to page
         
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/CheckGoalCompleted.php")!)
         request.httpMethod = "POST"

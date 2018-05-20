@@ -10,23 +10,13 @@ import UIKit
 
 class ParentsHomepageViewController: UIViewController {
 
-    @IBOutlet var tabBarTeacher: UITabBarItem!
-    @IBOutlet var tabBarManager: UITabBarItem!
-    @IBOutlet var imgMeeting: UIImageView!
     @IBOutlet var imgNotification: UIImageView!
     @IBOutlet var lblNumNotifications: UILabel!
     let defaultValues = UserDefaults.standard
     var numNotifications = ""
     
-    @IBOutlet var lblNumMeetings: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        if(defaultValues.string(forKey: "UserRole") == "Parent"){
-            tabBarManager.isEnabled = false
-            tabBarTeacher.isEnabled = false
-        } else if (defaultValues.string(forKey: "UserRole") == "Teacher"){
-            tabBarManager.isEnabled = false
-        }
         
         // Do any additional setup after loading the view.
     }
@@ -35,7 +25,7 @@ class ParentsHomepageViewController: UIViewController {
         imgNotification.isHidden = true;
         lblNumNotifications.isHidden = true;
         DispatchQueue.main.async{
-            self.getNotifications { success in
+            self.getNotifications { success in      //after notifications have been got, if there are > 0 then display a red crcle with the number in it.
                 if(self.numNotifications != "0"){
                     self.self.lblNumNotifications.text = self.numNotifications
                     self.imgNotification.isHidden = false;
@@ -53,7 +43,7 @@ class ParentsHomepageViewController: UIViewController {
     }
     
 
-    func getNotifications(completion: @escaping (_ success : Bool) ->()){
+    func getNotifications(completion: @escaping (_ success : Bool) ->()){       //check database if there are any unviewed activities for user
         var success = true
         let U_ID = defaultValues.string(forKey: "UserU_ID")
         
@@ -80,7 +70,7 @@ class ParentsHomepageViewController: UIViewController {
             
             var responseString = String(data: data, encoding: .utf8)!
             print("responseString = \(responseString)")
-            self.numNotifications = responseString
+            self.numNotifications = responseString      //set number of notifications to the nubmber in response string
             
             DispatchQueue.main.async{
                 completion(success)

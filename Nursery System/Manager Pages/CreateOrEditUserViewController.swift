@@ -26,7 +26,7 @@ class CreateOrEditUserViewController: UIViewController, UIPickerViewDelegate, UI
     var postString = ""
     var typesOfUser = ["Parent", "Teacher"]
     var pickerData: [String] = [String]()
-    
+    var addOrEdit = ""
     
     
     override func viewDidLoad() {
@@ -66,7 +66,7 @@ class CreateOrEditUserViewController: UIViewController, UIPickerViewDelegate, UI
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func btnEditUser(_ sender: Any) {
+    @IBAction func btnEditUser(_ sender: Any) {     //enable text fields
         txtEmail.isEnabled = true
         txtSurname.isEnabled  = true
         txtPassword.isEnabled  = true
@@ -75,7 +75,7 @@ class CreateOrEditUserViewController: UIViewController, UIPickerViewDelegate, UI
         btnCancelOutlet.isEnabled = true
     }
     
-    @IBAction func btnCancel(_ sender: Any) {
+    @IBAction func btnCancel(_ sender: Any) {       //reset view
         viewDidLoad()
         
         
@@ -99,7 +99,7 @@ class CreateOrEditUserViewController: UIViewController, UIPickerViewDelegate, UI
         return typesOfUser[row]
     }
     
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {        //when select from picker, fill text box and hide picker
         
             self.txtDropdown.text = typesOfUser[row]
             self.pickerUserType.isHidden = true
@@ -122,8 +122,13 @@ func textFieldDidBeginEditing(_ textField: UITextField) {
         let alert = utilities.normalAlertBox(alertTitle: "ERROR", messageString: "Ensure all fields filled in")
             self.present(alert, animated: true, completion: nil)
         } else {
-            if(checkValidInputs()){
-                addOrEditUser()
+            if(checkValidInputs()){     //ensure input valid
+                if(selectedUser.FirstName != nil){ //if  selecter used then edit
+                    editUser()
+                } else {
+                    addUser()         //if no selected user then add
+                }
+ 
             } else {
                 let alert = utilities.normalAlertBox(alertTitle: "ERROR", messageString: "Ensure all inputs correct format")
                 
@@ -133,7 +138,7 @@ func textFieldDidBeginEditing(_ textField: UITextField) {
 
         }
     
-    func addOrEditUser(){
+    func addUser(){     //ran if user not selected then adds to db
         
         let firstName = txtFirstName.text
         let surname = txtSurname.text
@@ -141,17 +146,11 @@ func textFieldDidBeginEditing(_ textField: UITextField) {
         let telephoneNumber = txtTelephoneNumber.text
         let password = txtPassword.text
         let userType = txtDropdown.text
-        var addOrEdit = ""
-        
-        if(selectedUser.FirstName != nil){    //if  selecter used then edit
-            postString = "AddOrEdit=Edit&U_ID=\(selectedUser.U_ID!)&FirstName=\(firstName!)&Surname=\(surname!)&Email=\(email!)&TelephoneNumber=\(telephoneNumber!)&Password=\(password!)&UserType=\(userType!)"
-                addOrEdit = "edited"
-        } else {                    //if no selected user then add
+
+
             postString = "AddOrEdit=Add&FirstName=\(firstName!)&Surname=\(surname!)&Email=\(email!)&TelephoneNumber=\(telephoneNumber!)&Password=\(password!)&UserType=\(userType!)"
             print(postString)
                 addOrEdit = "added"
-            
-        }
         
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/ManagerSidePHPFiles/AddOrEditUser.php")!)
         request.httpMethod = "POST"
@@ -165,11 +164,44 @@ func textFieldDidBeginEditing(_ textField: UITextField) {
                 self.present(alert, animated: true, completion: nil)
             } else {
                 
-                let alert = utilities.normalAlertBox(alertTitle: "Success", messageString: "Successfully \(addOrEdit) User")
+                let alert = utilities.normalAlertBox(alertTitle: "Success", messageString: "Successfully \(self.addOrEdit) User")
                 self.present(alert, animated: true, completion: nil)
             }
         }
 
+    }
+    
+    func editUser(){         //ran if user  selected then edits in db
+        
+        let firstName = txtFirstName.text
+        let surname = txtSurname.text
+        let email = txtEmail.text
+        let telephoneNumber = txtTelephoneNumber.text
+        let password = txtPassword.text
+        let userType = txtDropdown.text
+        
+        
+            postString = "AddOrEdit=Edit&U_ID=\(selectedUser.U_ID!)&FirstName=\(firstName!)&Surname=\(surname!)&Email=\(email!)&TelephoneNumber=\(telephoneNumber!)&Password=\(password!)&UserType=\(userType!)"
+            addOrEdit = "edited"
+
+        
+        var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/ManagerSidePHPFiles/AddOrEditUser.php")!)
+        request.httpMethod = "POST"
+        request.httpBody = postString.data(using: .utf8)
+        print(postString)
+        
+        utilities.postRequest(postString: postString, request: request) { success, data, responseString in
+            if(responseString == "ERROR"){      //if error then email already exists within database
+                let alert = utilities.normalAlertBox(alertTitle: "ERROR", messageString: "User with this email already registered.")
+                
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                
+                let alert = utilities.normalAlertBox(alertTitle: "Success", messageString: "Successfully \(self.addOrEdit) User")
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+        
     }
     
     

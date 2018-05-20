@@ -26,7 +26,7 @@ class CreateOrEditStudentViewController: UIViewController,  UINavigationControll
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))      //set variable to recognize tap on screen then run image tapped
         
         datePicker.maximumDate = Date()
         txtFirstName.autocapitalizationType = .words
@@ -38,14 +38,14 @@ class CreateOrEditStudentViewController: UIViewController,  UINavigationControll
         // Do any additional setup after loading the view.
         
         if(selectedStudent.FirstName != nil){   //if selected student
-            getParentsLabels()
+            fillFields()
                 }
         }
         
 
     
     
-    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer){
+    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer){           //recognize image being tapped and call utilities function
         let tappedImage = tapGestureRecognizer.view as! UIImageView
         let image = UIImagePickerController()
         image.delegate = self
@@ -79,9 +79,9 @@ class CreateOrEditStudentViewController: UIViewController,  UINavigationControll
         
     }
     
-    func getParentsLabels(){
+    func fillFields(){        //get parents emails then fill in text boxes
     
-       //ensure that labels are put in box after they're pulled from DB
+
     
     let mother = selectedStudent.Mother
     let father = selectedStudent.Father
@@ -92,12 +92,12 @@ class CreateOrEditStudentViewController: UIViewController,  UINavigationControll
     
     request.httpMethod = "POST"
     
-    let postString = ("Mother=\(mother ?? "")&Father=\(father ?? "")&Guardian=\(guardian ?? "")&KeyPerson=\(keyPerson ?? "")")
+    let postString = ("Mother=\(mother ?? "")&Father=\(father ?? "")&Guardian=\(guardian ?? "")&KeyPerson=\(keyPerson ?? "")")      //if post string is nil set to empty string preventing php error
     print(postString)
     
     request.httpBody = postString.data(using: .utf8)
     
-    postRequest(postString: postString, request: request, completion: { success, data in
+    postRequest(postString: postString, request: request, completion: { success, data in               //ensure that email are put in box after they're pulled from DB, if no parent assigned set box to N/A
             DispatchQueue.main.async {
                     if(self.responseArr[0] != "N/A"){
                         self.txtMother.text = self.responseArr[0]
@@ -113,16 +113,16 @@ class CreateOrEditStudentViewController: UIViewController,  UINavigationControll
                     self.txtFirstName.text = self.selectedStudent.FirstName
                     self.txtSurname.text = self.selectedStudent.Surname
                     
-                    let formatDate = utilities.formatStringToDate(dateString: self.selectedStudent.DateofBirth!)
+                    let formatDate = utilities.formatStringToDate(dateString: self.selectedStudent.DateofBirth!)        //format date to easily readable string using utilities
                     
-                    self.datePicker.date = formatDate
+                    self.datePicker.date = formatDate       //set label to newly formatted date
                     
-                    self.getImage()
+                    self.getImage()     //get students current profile image
             }
         })
     }
 
-    func getMaxStudentID(completion: @escaping (_ success: Bool) -> ()){
+    func getMaxStudentID(completion: @escaping (_ success: Bool) -> ()){        //get max student id, used for creating correct file names in ftp
         var success = true
         
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/ManagerSidePHPFiles/GetMaxStudentID.php")!)
@@ -165,19 +165,18 @@ class CreateOrEditStudentViewController: UIViewController,  UINavigationControll
             if(selectedStudent.FirstName != nil){ //if selected student then edit student
                 editStudent()
             } else {
-                addStudent()
+                addStudent()        //else no selected student so create student
             }
 
         }
     }
     
     @IBAction func btnCancel(_ sender: Any) {
-        
-        viewDidLoad()
+        self.viewDidLoad()
     }
     
     
-    func getImage(){
+    func getImage(){        //run utilities function to get image location from database then display
         
         utilities.getImages(URL_IMAGE: URL(string: (selectedStudent.StudentPicture)!)!, completion: { success, image in
             
@@ -192,7 +191,7 @@ class CreateOrEditStudentViewController: UIViewController,  UINavigationControll
         }
     }
     
-    func addStudent(){
+    func addStudent(){          //run if no selected student to add to DB
         DispatchQueue.main.async {
             self.getMaxStudentID(completion: { success in   //need to find a new student id before adding
                 let firstName = self.txtFirstName.text
@@ -222,7 +221,7 @@ class CreateOrEditStudentViewController: UIViewController,  UINavigationControll
         }
     }
     
-    func editStudent(){
+    func editStudent(){             //run if selected student to edit in DB
  
 
                 let firstName = self.txtFirstName.text
@@ -252,7 +251,7 @@ class CreateOrEditStudentViewController: UIViewController,  UINavigationControll
         
     }
     
-    func upload(image: UIImage, studentFirstName: String, studentSurname: String){
+    func upload(image: UIImage, studentFirstName: String, studentSurname: String){      //upload image to FTP
         guard let imageData = UIImageJPEGRepresentation(imgStudent.image!, 0.5) else {
             print("could not get jpeg of image")
             return
@@ -263,15 +262,15 @@ class CreateOrEditStudentViewController: UIViewController,  UINavigationControll
         print(parameters)
         
         Alamofire.upload(multipartFormData: { multipartFormData in
-            multipartFormData.append(imageData, withName: "file",fileName: "\((studentFirstName) + (studentSurname) + ".jpg")", mimeType: "image/jpg")
+            multipartFormData.append(imageData, withName: "file",fileName: "\((studentFirstName) + (studentSurname) + ".jpg")", mimeType: "image/jpg")      //upload to ftp in multipart form JPEG with student name as file name
             for (key, value) in parameters {
                 multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
             }
         },
-                         to:"https://shod-verses.000webhostapp.com/ManagerSidePHPFiles/ProfileImageUpload.php")
+                         to:"https://shod-verses.000webhostapp.com/ManagerSidePHPFiles/ProfileImageUpload.php")     //which php function to use to upload iamge
         { (result) in
             switch result {
-            case .success(let upload, _, _):
+            case .success(let upload, _, _):            //if successful
                 
                 upload.uploadProgress(closure: { (progress) in
                     print("Upload Progress: \(progress.fractionCompleted)")
@@ -281,7 +280,7 @@ class CreateOrEditStudentViewController: UIViewController,  UINavigationControll
                     print(response.result.value)
                 }
                 
-            case .failure(let encodingError):
+            case .failure(let encodingError):       //if failed uploading
                 print(encodingError)
             }
         }

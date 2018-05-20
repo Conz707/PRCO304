@@ -56,7 +56,7 @@ class TeacherMeetingsViewController: UIViewController, UITableViewDataSource, UI
         return myCell
     }
     
-    @IBAction func segmentChangeTable(_ sender: Any) {
+    @IBAction func segmentChangeTable(_ sender: Any) {      //change the sql query to pull data in grouping
     activityIndicatorTableLoading.startAnimating()
         switch segmentedMeetings.selectedSegmentIndex{
         case 0:
@@ -74,7 +74,7 @@ class TeacherMeetingsViewController: UIViewController, UITableViewDataSource, UI
 
     }
     
-    func decodeMeetings(postString: String){
+    func decodeMeetings(postString: String){        //get all meetings for the teacher
         
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/GetMyMeetings.php")!)
         request.httpMethod = "POST"
@@ -103,7 +103,7 @@ class TeacherMeetingsViewController: UIViewController, UITableViewDataSource, UI
         tblMeetings.reloadData()
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {         //set selected meeting to the row selected and select the student that is assigned to that meeting
         
         
         
@@ -112,7 +112,7 @@ class TeacherMeetingsViewController: UIViewController, UITableViewDataSource, UI
     //
     }
     
-    func getSelectedStudent(){
+    func getSelectedStudent(){          //get selected student to pass in to the meeting details
     
         
         postString = "S_ID=\(selectedMeeting.S_ID!)"

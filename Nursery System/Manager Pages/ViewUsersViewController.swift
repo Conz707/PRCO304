@@ -76,19 +76,19 @@ func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { 
     self.performSegue(withIdentifier: "UserSegue", sender: self)
 }
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {        //for searching users
         guard !searchText.isEmpty else {
-            filterUsers = users
+            filterUsers = users     //set filterUsers array to fill with Users
             
             tblUsers.reloadData()
             return
             
         }
-        filterUsers = users.filter({ user -> Bool in
+        filterUsers = users.filter({ user -> Bool in            //when typing filter the user array and fill filterUsers with new
             
-                user.FirstName!.lowercased().contains(searchText.lowercased()) ||
+                user.FirstName!.lowercased().contains(searchText.lowercased()) ||       //lowercases all writing and results
                 user.Surname!.lowercased().contains(searchText.lowercased()) ||
-                user.FirstName!.lowercased().contains(searchText.lowercased())                                                            ||
+                user.FirstName!.lowercased().contains(searchText.lowercased()) ||
                 user.Email!.lowercased().contains(searchText.lowercased())
         })
         tblUsers.reloadData()
@@ -99,7 +99,7 @@ func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { 
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func segmentedUsers(_ sender: Any) {
+    @IBAction func segmentedUsers(_ sender: Any) {      //change SQL query for grouping
         switch segmentUserType.selectedSegmentIndex {
         case 0:
             postString = "DisplayUsers=All"
@@ -118,7 +118,7 @@ func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { 
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
       
-        utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
+        utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in      //decode users into an array
             do {
                 self.users = try JSONDecoder().decode(Array<User>.self, from: data)
                 for eachUser in self.users {
@@ -129,7 +129,7 @@ func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { 
                 print(error)
                 print("ERROR")
             }
-            DispatchQueue.main.async {
+            DispatchQueue.main.async {          //display users
                 self.itemsDownloaded(items: self.users as NSArray)
                 print("trying to print items downloaded \(self.users)")
             }
@@ -139,9 +139,6 @@ func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { 
         
     }
     
-    func callDecode(){
-        
-    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 75

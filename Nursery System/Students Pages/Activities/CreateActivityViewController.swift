@@ -34,7 +34,7 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
         super.viewDidLoad()
         
         
-        switch(ageGroup){
+        switch(ageGroup){       //set age group for finding students goals
         case "A":
             print("a")
             print("age group \(ageGroup)")
@@ -54,17 +54,17 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
             break
         }
         
-        getGoalsDropdown()
+        getGoalsDropdown()      //get list of students goals for the drop down
         
         txtStudentActivity.autocapitalizationType = .words
         txtStudentObservation.autocapitalizationType = .sentences
         
         let minDate = Calendar.current.date(byAdding: .month, value: -18, to: Date())
         dateActivity.minimumDate = minDate // 18Months
-        dateActivity.maximumDate = Date() //todays date //this datepicker kinda sucks, try to fix
+        dateActivity.maximumDate = Date() //todays date
         
         lblStudentName.text = selectedStudent.FirstName! + " " + selectedStudent.Surname!
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))      //set a variable to recognize tap gestures and run image tapped
   
         imgActivity.isUserInteractionEnabled = true
         imgActivity.addGestureRecognizer(tapGestureRecognizer)
@@ -91,7 +91,7 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
         return "\(goals[row].Goal!)"
     }
     
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {        //selected goals fill in the text box
         if (goals.count > 0 && goals.count >= row){
             self.txtDropdown.text = "\(goals[row].Goal!)" as? String
             selectedGoalID = goals[row].G_ID!
@@ -111,7 +111,7 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
     }
     
     
-    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer){
+    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer){       //if image tapped run the utility for picking image
         let tappedImage = tapGestureRecognizer.view as! UIImageView
         let image = UIImagePickerController()
         image.delegate = self
@@ -167,9 +167,9 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
             var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/SaveActivity.php")!)
             
             request.httpMethod = "POST"
-            if(self.txtDropdown.text?.isEmpty)!{
+            if(self.txtDropdown.text?.isEmpty)!{        //if text bos is empty then goal hasnt been completed with challenge, so dont mark it in database
                 self.postString = ("A_ID=\(self.NewActivityID)&S_ID=\(S_ID)&Activity=\(activity!)&Observation=\(observation!)&Date=\(date)&ActivityPicture=\(activityPicture)&SelectedStudent=\(student)&Mother=\(studentMother)&Father=\(studentFather)&Guardian=\(studentGuardian)&NotificationActivityID=\(self.NewActivityID)&AgeGroupGoals=\(self.ageGroupGoals)")
-                } else {
+                } else {                        //otherwse goal has been met, mark this in database
                 self.postString = ("A_ID=\(self.NewActivityID)&S_ID=\(S_ID)&Activity=\(activity!)&Observation=\(observation!)&Date=\(date)&ActivityPicture=\(activityPicture)&SelectedStudent=\(student)&Mother=\(studentMother)&Father=\(studentFather)&Guardian=\(studentGuardian)&NotificationActivityID=\(self.NewActivityID)&G_ID=\(self.selectedGoalID)&AgeGroupGoals=\(self.ageGroupGoals)")
                 }
             
@@ -218,7 +218,7 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
         }
     }
     
-    func getMaxActivityID(completion: @escaping (_ success: Bool) -> ()){
+    func getMaxActivityID(completion: @escaping (_ success: Bool) -> ()){       //get max activity id for naming the image within the ftp
         //Get max activity id +1
         var success = true
         
@@ -254,7 +254,7 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
     
     }
     
-    func getGoalsDropdown(){
+    func getGoalsDropdown(){            //get a students goals for dropdown menu
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/GetGoalsDropdown.php")!)
         request.httpMethod = "POST"
         let postString = ("S_ID=\(selectedStudent.S_ID!)&AgeGroupGoals=\(ageGroupGoals)")
@@ -279,7 +279,7 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
         })
     }
     
-    func upload(image: UIImage){
+    func upload(image: UIImage){         //upload image to FTP
         guard let imageData = UIImageJPEGRepresentation(imgActivity.image!, 0.5) else {
             print("could not get jpeg of image")
             return
@@ -289,7 +289,7 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
         print(parameters)
         
         Alamofire.upload(multipartFormData: { multipartFormData in
-            multipartFormData.append(imageData, withName: "file",fileName: "\((String(self.NewActivityID)) + ".jpg")", mimeType: "image/jpg")
+            multipartFormData.append(imageData, withName: "file",fileName: "\((String(self.NewActivityID)) + ".jpg")", mimeType: "image/jpg")   //upload to ftp in multipart form JPEG with student name as file name
             for (key, value) in parameters {
                 multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
             }
@@ -297,7 +297,7 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
                          to:"https://shod-verses.000webhostapp.com/ImageUpload.php")
         { (result) in
             switch result {
-            case .success(let upload, _, _):
+            case .success(let upload, _, _):         //if successful
                 
                 upload.uploadProgress(closure: { (progress) in
                     print("Upload Progress: \(progress.fractionCompleted)")
@@ -326,7 +326,7 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
                     print(response.result.value)
                 }
                 
-            case .failure(let encodingError):
+            case .failure(let encodingError):         //if failed uploading
                 print(encodingError)
                 
                 

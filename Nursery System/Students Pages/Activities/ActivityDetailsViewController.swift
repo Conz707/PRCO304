@@ -188,11 +188,10 @@ func updateActivity(){      //called after update alert confirmed
             print("error using image")//error message
         }
         self.dismiss(animated: true, completion: nil)
-    //    popoverPresentationController?.delegate?.popoverPresentationControllerDidDismissPopover?(popoverPresentationController!)
         
     }
 
-    func upload(image: UIImage){
+    func upload(image: UIImage){         //upload image to FTP
         guard let imageData = UIImageJPEGRepresentation(imgActivity.image!, 0.5) else {
             print("could not get jpeg of image")
             return
@@ -204,14 +203,14 @@ func updateActivity(){      //called after update alert confirmed
         
         Alamofire.upload(multipartFormData: { multipartFormData in
             multipartFormData.append(imageData, withName: "file",fileName: "\((activityID)! + ".jpg")", mimeType: "image/jpg")
-            for (key, value) in parameters {
+            for (key, value) in parameters {        //upload to ftp in multipart form JPEG with student name as file name
                 multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
             }
         },
-                         to:"https://shod-verses.000webhostapp.com/ImageUpload.php")
+                         to:"https://shod-verses.000webhostapp.com/ImageUpload.php")        //which php function to use to upload iamge
         { (result) in
             switch result {
-            case .success(let upload, _, _):
+            case .success(let upload, _, _):             //if successful
                 
                 upload.uploadProgress(closure: { (progress) in
                     print("Upload Progress: \(progress.fractionCompleted)")
@@ -237,7 +236,7 @@ func updateActivity(){      //called after update alert confirmed
                     print(response.result.value)
                 }
                 
-            case .failure(let encodingError):
+            case .failure(let encodingError):        //if failed uploading
                 print(encodingError)
             }
         }
@@ -314,7 +313,7 @@ func updateActivity(){      //called after update alert confirmed
         
         utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
           
-            if(responseString == "true"){
+            if(responseString == "true"){           //if response is true then activity is bookmarked, set boolean to true
                 self.bookmark = true
             } else {
                 self.bookmark = false
