@@ -21,9 +21,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     var roleString = ""
     let defaultValues = UserDefaults.standard //used to store user data?
     var responseSuccess = ""
-    let testAccounts = ["con@hotmail.com", "con@hotmail.com1", "con@hotmail.com2"]
  
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,16 +92,11 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     @IBAction func btnLogin(_ sender: Any) {
         
-        if(testAccounts.contains(txtEmail.text!)){              //This lets test accounts skip the input validation
-                startAuthentication()
-            
-        } else {
             if(!checkValidInputs()){                        //check for input validity
                 self.present(utilities.normalAlertBox(alertTitle: "ERROR", messageString: "Invalid Characters Used"), animated: true)
             } else {
                 startAuthentication()
             }
-        }
     }
 
     func checkValidInputs() -> Bool{        //use utilities function to compare text to RegEx
