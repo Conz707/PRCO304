@@ -57,10 +57,8 @@ class ViewUsersViewController: UIViewController, UITableViewDelegate, UITableVie
         
         
         //get student to show
-        var item: User = filterUsers[indexPath.row] as! User
+        let item: User = filterUsers[indexPath.row]
         
-        
-        print("trying to print item \(item.FirstName)")
         
         //get references to labels of cells
         myCell.textLabel!.text = ("\(item.FirstName!) \(item.Surname!)")
@@ -103,13 +101,10 @@ func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { 
         switch segmentUserType.selectedSegmentIndex {
         case 0:
             postString = "DisplayUsers=All"
-            print(postString)
         case 1:
             postString = "DisplayUsers=Teachers"
-            print(postString)
         case 2:
             postString = "DisplayUsers=Parents"
-            print(postString)
             
         default: break
         }
@@ -121,9 +116,6 @@ func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { 
         utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in      //decode users into an array
             do {
                 self.users = try JSONDecoder().decode(Array<User>.self, from: data)
-                for eachUser in self.users {
-                    print("\(eachUser.FirstName)")
-                }
                 
             } catch {
                 print(error)
@@ -131,7 +123,6 @@ func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { 
             }
             DispatchQueue.main.async {          //display users
                 self.itemsDownloaded(items: self.users as NSArray)
-                print("trying to print items downloaded \(self.users)")
             }
             
         })
@@ -151,7 +142,6 @@ func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { 
         userVC.selectedUser = selectedUser
         
         print("finding the list of activities")
-    //    print(selectedStudent.description)
         
     }
 

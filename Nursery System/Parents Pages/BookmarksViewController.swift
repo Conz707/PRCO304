@@ -43,16 +43,11 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
             do {
                 self.activities = try JSONDecoder().decode(Array<Activity>.self, from: data)
-                for eachActivity in self.activities {
-                    print("\(eachActivity.description)")
-                }
             } catch {
                 print(error)
-                print("ERROR")
             }
             DispatchQueue.main.async {
                 self.itemsDownloaded(items: self.activities as NSArray)
-                print("trying to print items downloaded \(self.activities)")
             }
             
         })
@@ -79,9 +74,6 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         let myCell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)!
         //get activity to show
         let item: Activity = self.feedItems[indexPath.row] as! Activity
-        
-        print("attempting to attach activity to table")
-        
         
         utilities.getImages(URL_IMAGE: URL(string: (item.ActivityPicture)!)!, completion: { success, image in
             
@@ -110,7 +102,6 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetSelectedStudent.php")!)
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
-        print(postString)
         
         utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
 
@@ -118,8 +109,6 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
                 print(data)
                 let student = try JSONDecoder().decode(Student.self, from: data)
                 self.selectedStudent = student
-                print(student.description)
-                print(self.selectedStudent.description)
                 DispatchQueue.main.async{
                     self.performSegue(withIdentifier: "viewActivity", sender: Any?.self)
                 }
@@ -136,7 +125,7 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         let viewActivityVC = segue.destination as! ActivityDetailsViewController
         viewActivityVC.selectedActivity = selectedActivity
         viewActivityVC.selectedStudent = selectedStudent
-        print(selectedStudent.description)
+
     }
 
 

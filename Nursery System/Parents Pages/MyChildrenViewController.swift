@@ -90,7 +90,6 @@ class MyChildrenViewController: UIViewController, UITableViewDelegate, UITableVi
             }
             DispatchQueue.main.async {
                 self.itemsDownloaded(items: self.students as NSArray)
-                print("trying to print items downloaded \(self.students)")
             }
             
         })

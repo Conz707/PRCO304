@@ -48,23 +48,17 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
        switch segmentedAgeGroups.selectedSegmentIndex {
         case 0:
          postString = "DisplayStudents=All"
-         print(postString)
         case 1:
          postString = "DisplayStudents=AgeGroupA"
-         print(postString)
         case 2:
          postString = "DisplayStudents=AgeGroupB"
-         print(postString)
         case 3:
          postString = "DisplayStudents=AgeGroupC"
-         print(postString)
         case 4:
          postString = "U_ID=\(U_ID)&DisplayStudents=KeyStudents"
-         print(postString)
             
        default:
         segmentedAgeGroups.selectedSegmentIndex = 0
-        print("default")
         }
         
         decodeStudent(postString: postString)
@@ -78,17 +72,12 @@ class StudentsViewController: UIViewController, UITableViewDataSource, UITableVi
         utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString  in
             do {
                 self.students = try JSONDecoder().decode(Array<Student>.self, from: data)
-                for eachStudent in self.students {
-                    print("\(eachStudent.StudentPicture) \(eachStudent.S_ID)")
-                    
-                }
             } catch {
                 print(error)
                 print("ERROR")
             }
             DispatchQueue.main.async {
                 self.itemsDownloaded(items: self.students as NSArray)
-                print("trying to print items downloaded \(self.students)")
             }
             
         })

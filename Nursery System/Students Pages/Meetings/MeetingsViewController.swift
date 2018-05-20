@@ -61,18 +61,15 @@ class MeetingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {                //change text to picked item from picker view and hide picker
         if (parents.count > 0 && parents.count >= row){
-            self.txtDropdown.text = "\(parents[row].FirstName!) \(parents[row].Surname!) " as? String
+            self.txtDropdown.text = "\(parents[row].FirstName!) \(parents[row].Surname!) "
             selectedParentID = parents[row].U_ID!
             self.pickerDropdown.isHidden = true
-            print("text box should display \(self.parents[row])")
-            print("selected parent id \(self.parents[row].U_ID)")
         }
     }
     
     
     func textFieldDidBeginEditing(_ textField: UITextField) {           //when text field tapped dont show keyboard and unhide picker view
         if (textField == self.txtDropdown){    //ask nick about this
-           print("working")
             self.pickerDropdown.isHidden = false
             self.view.endEditing(true)
         }
@@ -88,7 +85,6 @@ class MeetingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/CreateParentTeacherMeeting.php")!)
         request.httpMethod = "POST"
         let postString = ("S_ID=\(selectedStudent.S_ID!)&Parent_ID=\(selectedParentID)&Teacher_ID=\(U_ID)&Date=\(datePicker.date)")
-        print(postString)
         request.httpBody = postString.data(using: .utf8)
         
         utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
@@ -113,16 +109,11 @@ class MeetingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         switch segmentedMeetings.selectedSegmentIndex{
         case 0:
             postString = "S_ID=\(selectedStudent.S_ID!)&querySelector=Upcoming"
-            print(postString)
-            print("111111")
         case 1:
             postString = "S_ID=\(selectedStudent.S_ID!)&querySelector=Completed"
-            print(postString)
         case 2:
             postString = "S_ID=\(selectedStudent.S_ID!)&querySelector=All"
-            print(postString)
         default:
-            print("default")
             segmentedMeetings.selectedSegmentIndex = 0
         }
         
@@ -215,8 +206,6 @@ class MeetingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
                 print(data)
                 let student = try JSONDecoder().decode(Student.self, from: data)
                 self.selectedStudent = student
-                print(student.description)
-                print(self.selectedStudent.description)
                 DispatchQueue.main.async{
                     self.performSegue(withIdentifier: "meetingDetailsSegue", sender: Any?.self)
                 }

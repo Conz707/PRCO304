@@ -25,23 +25,18 @@ class GoalsDetailsViewController: UIViewController {
         txtGoal.text = selectedGoal.Goal
         lblStudent.text = "\(selectedStudent.FirstName!) \(selectedStudent.Surname!)"
         // Do any additional setup after loading the view.
-        print(selectedGoal.description)
-        print(ageGroup)
         
 
         
         
         switch(ageGroup){       //set and display goals from the appropriate age group
         case "A":
-            print("a")
             ageGroupGoals = "AgeGroupAGoals"
             break
         case "B":
-            print("b")
             ageGroupGoals = "AgeGroupBGoals"
             break
         case "C":
-            print("c")
             ageGroupGoals = "AgeGroupCGoals"
             break
         default:
@@ -119,7 +114,6 @@ class GoalsDetailsViewController: UIViewController {
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/DeleteGoal.php")!)
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
-        print(postString)
         
         utilities.postRequest(postString: postString, request: request) { success, data, responseString in
         }
@@ -198,7 +192,6 @@ class GoalsDetailsViewController: UIViewController {
 
     
     func postRequest(postString: String, request: URLRequest, completion: @escaping (_ success : Bool) -> ()){  //extends postrequest but dk how to do that using utilities
-        print(postString, request)
         var success = true
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -213,7 +206,7 @@ class GoalsDetailsViewController: UIViewController {
                 success = false
             }
             
-            var responseString = String(data: data, encoding: .utf8)!
+            let responseString = String(data: data, encoding: .utf8)!
             print("responseString = \(responseString)")
             if(responseString == "true"){
                 self.completed = true
@@ -225,7 +218,6 @@ class GoalsDetailsViewController: UIViewController {
             }
         }
         task.resume()
-        print("no here")
     }
     
     func checkGoalCompleted(completion: @escaping (_ success : Bool) -> ()){        //run on entering page, check whether goal is completed and make appropriate changes to page
@@ -234,7 +226,6 @@ class GoalsDetailsViewController: UIViewController {
         request.httpMethod = "POST"
         
         let postString = ("AgeGroupGoals=\(ageGroupGoals)&G_ID=\(selectedGoal.G_ID!)")
-        print(postString)
         request.httpBody = postString.data(using: .utf8)
         
         postRequest(postString: postString, request: request, completion: { success in

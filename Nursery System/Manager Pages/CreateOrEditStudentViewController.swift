@@ -46,10 +46,8 @@ class CreateOrEditStudentViewController: UIViewController,  UINavigationControll
     
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer){           //recognize image being tapped and call utilities function
-        let tappedImage = tapGestureRecognizer.view as! UIImageView
         let image = UIImagePickerController()
         image.delegate = self
-        print("image tapped")
         
         let utilImageTapped = utilities.imageTapped(image: image, sender: self)
         
@@ -93,7 +91,6 @@ class CreateOrEditStudentViewController: UIViewController,  UINavigationControll
     request.httpMethod = "POST"
     
     let postString = ("Mother=\(mother ?? "")&Father=\(father ?? "")&Guardian=\(guardian ?? "")&KeyPerson=\(keyPerson ?? "")")      //if post string is nil set to empty string preventing php error
-    print(postString)
     
     request.httpBody = postString.data(using: .utf8)
     
@@ -129,7 +126,6 @@ class CreateOrEditStudentViewController: UIViewController,  UINavigationControll
         request.httpMethod = "GET"
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {                                                 // check for fundamental networking error
-                print("\(String(describing: error))")
                 success = false
                 return
             }
@@ -137,9 +133,7 @@ class CreateOrEditStudentViewController: UIViewController,  UINavigationControll
                 print("statusCode should be 200, but is \(httpStatus.statusCode)")
             }
             let responseString = String(data: data, encoding: .utf8)!
-            print("responseString = \(responseString)")
             self.StudentID = Int(responseString)! + 1
-            print("student id is: \(self.StudentID)")
             if(self.StudentID == 0){
                 success = false
             }
@@ -155,10 +149,8 @@ class CreateOrEditStudentViewController: UIViewController,  UINavigationControll
     @IBAction func btnSave(_ sender: Any) {
         
         if((txtMother.text?.isEmpty)! && (txtFather.text?.isEmpty)! && (txtGuardian.text?.isEmpty)!){
-            
-            
-            print("empty fields")
-            
+            let alert = utilities.normalAlertBox(alertTitle: "ERROR", messageString: "Ensure text boxes aren't empty")
+            self.present(alert, animated: true, completion: nil)
             
         } else {
             
@@ -200,20 +192,20 @@ class CreateOrEditStudentViewController: UIViewController,  UINavigationControll
                 let mother = self.txtMother.text
                 let father = self.txtFather.text
                 let guardian = self.txtGuardian.text
-                print(self.StudentID)
                 let keyPerson = self.txtKeyPerson.text
                 
-                var studentPicture = "https://shod-verses.000webhostapp.com/students/\((self.StudentID))/DisplayPictures/\((firstName!) + (surname!)).jpg"
+                let studentPicture = "https://shod-verses.000webhostapp.com/students/\((self.StudentID))/DisplayPictures/\((firstName!) + (surname!)).jpg"
                 
                 var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/ManagerSidePHPFiles/AddOrEditStudent.php")!)
                 request.httpMethod = "POST"
                 let postString = "AddOrEdit=Add&FirstName=\(firstName!)&Surname=\(surname!)&DateOfBirth=\(dateOfBirth)&Mother=\(mother! ?? "")&Father=\(father! ?? "")&Guardian=\(guardian! ?? "")&KeyPerson=\(keyPerson!)&StudentPicture=\(studentPicture)&Student_ID=\(self.StudentID)"
-                print(postString)
                 request.httpBody = postString.data(using: .utf8)
                 
                 utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
                     DispatchQueue.main.async{
                     self.upload(image: self.imgStudent.image!, studentFirstName: firstName!, studentSurname: surname!)
+                    let alert = utilities.normalAlertBox(alertTitle: "Success", messageString: "Student added.")
+                        self.present(alert, animated: true, completion: nil)
                     }
                 })
 
@@ -230,15 +222,13 @@ class CreateOrEditStudentViewController: UIViewController,  UINavigationControll
                 let mother = self.txtMother.text
                 let father = self.txtFather.text
                 let guardian = self.txtGuardian.text
-                print(self.StudentID)
                 let keyPerson = self.txtKeyPerson.text
                 
-                var studentPicture = "https://shod-verses.000webhostapp.com/students/\((self.StudentID))/DisplayPictures/\((firstName!) + (surname!)).jpg"
+                let studentPicture = "https://shod-verses.000webhostapp.com/students/\((self.StudentID))/DisplayPictures/\((firstName!) + (surname!)).jpg"
                 
                 var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/ManagerSidePHPFiles/AddOrEditStudent.php")!)
                 request.httpMethod = "POST"
                 let postString = "AddOrEdit=Edit&FirstName=\(firstName!)&Surname=\(surname!)&DateOfBirth=\(dateOfBirth)&Mother=\(mother! ?? "")&Father=\(father! ?? "")&Guardian=\(guardian! ?? "")&KeyPerson=\(keyPerson!)&StudentPicture=\(studentPicture)&Student_ID=\(self.StudentID)"
-                print(postString)
                 request.httpBody = postString.data(using: .utf8)
                 
                 utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
@@ -303,7 +293,7 @@ class CreateOrEditStudentViewController: UIViewController,  UINavigationControll
             }
             
             
-            var responseString = String(data: data, encoding: .utf8)!
+            let responseString = String(data: data, encoding: .utf8)!
             self.responseArr = (responseString.split(separator: ";") as NSArray) as! [String]
             print("responseString <br /> = \(responseString)")
             

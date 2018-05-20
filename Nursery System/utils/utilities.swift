@@ -125,27 +125,22 @@ class utilities{
         switch(type){
         case "Email":
             textRegEx = "[A-Z0-9a-z.-_]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,3}"
-            print("switch email")
             
         case "Password":
             textRegEx = "[A-Z0-9a-z]{6,18}" // password entry must be 6 - 18 digits - make sure alert represents this
             
-            print("switch Password")
         case "Text":
             textRegEx = "[a-zA-Z0-9,.!?@'()£$%&+_?|:}]{1,400}"
             
-            print("switch Text")
         case "Name":
             textRegEx = "[A-Z0-9a-z]{1,16}"
             
-            print("switch Name")
         case "TelNum":
             textRegEx = "[0]+[0-9]{1,10}"   //ensure telnum starts with 0 and 11 digits total
             
-            print("switch TelNum")
         default:
+            break
             
-            print("switch default")
         }
         
         let testIfValid = NSPredicate(format: "SELF MATCHES %@", textRegEx)
@@ -183,7 +178,6 @@ class utilities{
 
     
     @objc static func imageTapped(image: UIImagePickerController, sender: Any) -> UIAlertController{     //function to recognise tapping an image to upload or change photo
-        print("image tapped")
         
         let alertImageTapped = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
 

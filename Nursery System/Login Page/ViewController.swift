@@ -61,7 +61,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/NewLogin.php")!)
         request.httpMethod = "POST"
         let postString = ("Email=\(emailVar!)&Password=\(passwordVar!)")
-        print(postString)
         request.httpBody = postString.data(using: .utf8)
         
         utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString  in
@@ -96,7 +95,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
     @IBAction func btnLogin(_ sender: Any) {
         
         if(testAccounts.contains(txtEmail.text!)){              //This lets test accounts skip the input validation
-            print("skipping for test accounts")
                 startAuthentication()
             
         } else {
@@ -137,13 +135,10 @@ class ViewController: UIViewController, UITextFieldDelegate{
                 let checkUserRole = self.defaultValues.string(forKey: "UserRole")
                 switch(checkUserRole){
                 case "Teacher"?:
-                    print("Teacher")
                     self.performSegue(withIdentifier: "segueGoTeacher", sender: self)
                 case "Parent"?:
-                    print("Parent")
                     self.performSegue(withIdentifier: "segueGoParent", sender: self)
                 case "Manager"?:
-                    print("Manager")
                     self.performSegue(withIdentifier: "segueGoManager", sender: self)
                 default:
 

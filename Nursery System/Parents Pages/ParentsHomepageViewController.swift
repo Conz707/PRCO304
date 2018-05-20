@@ -68,7 +68,7 @@ class ParentsHomepageViewController: UIViewController {
                 
             }
             
-            var responseString = String(data: data, encoding: .utf8)!
+            let responseString = String(data: data, encoding: .utf8)!
             print("responseString = \(responseString)")
             self.numNotifications = responseString      //set number of notifications to the nubmber in response string
             

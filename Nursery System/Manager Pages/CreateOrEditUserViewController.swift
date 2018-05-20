@@ -37,7 +37,6 @@ class CreateOrEditUserViewController: UIViewController, UIPickerViewDelegate, UI
         
         
         if(selectedUser.FirstName != nil){  //if user then prep for editing
-            print("user selected \(selectedUser.FirstName)")
             txtEmail.text = selectedUser.Email
             txtSurname.text = selectedUser.Surname
             txtTelephoneNumber.text = selectedUser.TelephoneNumber
@@ -47,10 +46,8 @@ class CreateOrEditUserViewController: UIViewController, UIPickerViewDelegate, UI
             btnCancelOutlet.isHidden = false
             
 
-                        print("found selected user")
         } else {        //else if no user prep for creating
             
-            print("no selected user")
             txtEmail.isEnabled = true
             txtSurname.isEnabled  = true
             txtPassword.isEnabled  = true
@@ -149,13 +146,11 @@ func textFieldDidBeginEditing(_ textField: UITextField) {
 
 
             postString = "AddOrEdit=Add&FirstName=\(firstName!)&Surname=\(surname!)&Email=\(email!)&TelephoneNumber=\(telephoneNumber!)&Password=\(password!)&UserType=\(userType!)"
-            print(postString)
                 addOrEdit = "added"
         
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/ManagerSidePHPFiles/AddOrEditUser.php")!)
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
-        print(postString)
         
         utilities.postRequest(postString: postString, request: request) { success, data, responseString in
             if(responseString == "ERROR"){      //if error then email already exists within database
@@ -166,6 +161,7 @@ func textFieldDidBeginEditing(_ textField: UITextField) {
                 
                 let alert = utilities.normalAlertBox(alertTitle: "Success", messageString: "Successfully \(self.addOrEdit) User")
                 self.present(alert, animated: true, completion: nil)
+                self.navigationController?.popViewController(animated: true)
             }
         }
 
@@ -188,7 +184,6 @@ func textFieldDidBeginEditing(_ textField: UITextField) {
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/ManagerSidePHPFiles/AddOrEditUser.php")!)
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
-        print(postString)
         
         utilities.postRequest(postString: postString, request: request) { success, data, responseString in
             if(responseString == "ERROR"){      //if error then email already exists within database
@@ -199,6 +194,7 @@ func textFieldDidBeginEditing(_ textField: UITextField) {
                 
                 let alert = utilities.normalAlertBox(alertTitle: "Success", messageString: "Successfully \(self.addOrEdit) User")
                 self.present(alert, animated: true, completion: nil)
+                self.navigationController?.popViewController(animated: true)
             }
         }
         

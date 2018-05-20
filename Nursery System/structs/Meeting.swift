@@ -36,7 +36,3 @@ struct Meeting: Decodable {
     }
 
 }
-
-
-
-

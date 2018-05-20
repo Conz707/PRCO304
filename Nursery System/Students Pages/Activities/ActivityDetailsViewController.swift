@@ -45,7 +45,6 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
         getActivityImage()
         
         lblStudentName.text = "\(selectedStudent.FirstName!) \(selectedStudent.Surname!)"
-        print(selectedStudent.FirstName)
         lblActivityTitle.text = selectedActivity.Activity
         txtActivityObservations.text = selectedActivity.Observation
 
@@ -60,7 +59,6 @@ class ActivityDetailsViewController: UIViewController, UINavigationControllerDel
         imgActivity.addGestureRecognizer(tapGestureRecognizer)
         
         let formateDate = utilities.formatDateToString(dateString: selectedActivity.Date!)
-        print("heres the returned date \(formateDate)")
         lblActivityDate.text = formateDate
 
         
@@ -172,7 +170,6 @@ func updateActivity(){      //called after update alert confirmed
         _ = tapGestureRecognizer.view as! UIImageView
         let image = UIImagePickerController()
         image.delegate = self
-        print("image tapped")
         
         let utilImageTapped = utilities.imageTapped(image: image, sender: self)
 

@@ -31,6 +31,8 @@ class GoalsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        activityIndicatorTableLoading.hidesWhenStopped = true
         txtGoal.autocapitalizationType = .sentences
         userRole = defaultValues.string(forKey: "UserRole")!
         if(userRole == "Parent"){
@@ -42,18 +44,12 @@ class GoalsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         switch(ageGroup){       //set the age group, this willbe used to run the appropriate sql query for the age group
         case "A":
-            print("a")
-            print("age group \(ageGroup)")
             ageGroupGoals = "AgeGroupAGoals"
             break
         case "B":
-            print("b")
-            print("age group \(ageGroup)")
             ageGroupGoals = "AgeGroupBGoals"
             break
         case "c":
-            print("C")
-            print("age group \(ageGroup)")
             ageGroupGoals = "AgeGroupCGoals"
             break
         default:
@@ -71,36 +67,27 @@ class GoalsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         switch segmentedGoals.selectedSegmentIndex{
         case 0:
             postString = "AgeGroupGoals=\(ageGroupGoals)&S_ID=\(selectedStudent.S_ID!)&querySelector=Upcoming"
-            print(postString)
         case 1:
             postString = "AgeGroupGoals=\(ageGroupGoals)&S_ID=\(selectedStudent.S_ID!)&querySelector=Completed"
-            print(postString)
         case 2:
             postString = "AgeGroupGoals=\(ageGroupGoals)&S_ID=\(selectedStudent.S_ID!)&querySelector=All"
-            print(postString)
         default:
-            print("default")
             segmentedGoals.selectedSegmentIndex = 0
         }
         
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/GetStudentGoals.php")!)
-      //  postString = "querySelector=All&S_ID=\(selectedStudent.S_ID!)"
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
         
         utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
             do {
                 self.goals = try JSONDecoder().decode(Array<Goal>.self, from: data)
-                for eachGoal in self.goals {
-                    print("\(eachGoal.description)")
-                }
             } catch {
                 print(error)
                 print("ERROR")
             }
             DispatchQueue.main.async {
                 self.itemsDownloaded(items: self.goals as NSArray)
-                print("trying to print items downloaded \(self.goals)")
             }
             
         })
@@ -117,12 +104,12 @@ class GoalsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/CreateAgeGroupAGoal.php")!)
             request.httpMethod = "POST"
             let postString = ("S_ID=\(selectedStudent.S_ID!)&Goal=\(txtGoal.text!)")
-            print(postString)
             request.httpBody = postString.data(using: .utf8)
             
             utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
                 DispatchQueue.main.async{
                     self.present(utilities.normalAlertBox(alertTitle: "Success", messageString: "Successfully created goal"), animated: true)
+                    self.segmentChangeTable((Any).self) //reloads table
                 }
             })
             
@@ -165,7 +152,6 @@ class GoalsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         selectedGoal = feedItems[indexPath.row] as! Goal
         //Manually call segue to detail view controller
         self.performSegue(withIdentifier: "goalDetails", sender: self)
-        print("AGE GROUP \(ageGroup)")
         }
     }
     

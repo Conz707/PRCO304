@@ -62,9 +62,6 @@ class PasswordRecoveryViewController: UIViewController {
         
         if(!checkSurname || !checkEmail)
         {
-            print(checkEmail)
-            print(checkSurname)
-            print(txtSurname.text!)
             return false
         } else {
             return true

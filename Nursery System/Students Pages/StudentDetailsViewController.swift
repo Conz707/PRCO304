@@ -93,8 +93,6 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         //get activity to show
         let item: Activity = self.feedItems[indexPath.row] as! Activity
         
-        print("attempting to attach activity to table")
-        
         
         utilities.getImages(URL_IMAGE: URL(string: (item.ActivityPicture)!)!, completion: { success, image in
             
@@ -146,8 +144,6 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
             
             self.responseArr = (responseString.split(separator: ";") as NSArray) as! [String]   //splits response string into an array for displaying names of parents and key person
-            print("responseString <br /> = \(responseString)")
-            print("this the response string yo \(responseString)")
             DispatchQueue.main.async{
                 self.lblMother.text = self.responseArr[0]
                 self.lblFather.text = self.responseArr[1]
@@ -163,13 +159,8 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
         
         let formatStringToDate = (utilities.formatStringToDate(dateString: selectedStudent.DateofBirth!))
         
-        print("original date string \(selectedStudent.DateofBirth!)")
-        print("new Date() \(formatStringToDate)")
-        
-        
         let ageGroupA = (Calendar.current.date(byAdding: .month, value: -18, to: Date()))!
         let ageGroupB = (Calendar.current.date(byAdding: .month, value: -36, to: Date()))!
-        let ageGroupC = (Calendar.current.date(byAdding: .month, value: -48, to: Date()))!
         
         
         if(formatStringToDate >= ageGroupA){
@@ -198,16 +189,11 @@ class StudentDetailsViewController: UIViewController, UITableViewDelegate, UITab
 
             do {
                 self.activities = try JSONDecoder().decode(Array<Activity>.self, from: data)
-                for eachActivity in self.activities {
-                    print("\(eachActivity.description)")
-                }
             } catch {
                 print(error)
-                print("ERROR")
             }
             DispatchQueue.main.async {
                 self.itemsDownloaded(items: self.activities as NSArray)
-                print("trying to print items downloaded \(self.activities)")
             }
             
         })

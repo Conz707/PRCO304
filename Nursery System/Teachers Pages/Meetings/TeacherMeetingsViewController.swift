@@ -51,7 +51,6 @@ class TeacherMeetingsViewController: UIViewController, UITableViewDataSource, UI
         let myCell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)!
         //get activity to show
         let item: Meeting = self.feedItems[indexPath.row] as! Meeting
-        print("items!!!! \(item)")
         myCell.textLabel!.text = "Meeting on  \(item.Date!)"
         return myCell
     }
@@ -82,16 +81,11 @@ class TeacherMeetingsViewController: UIViewController, UITableViewDataSource, UI
         utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
             do {
                 self.meetings = try JSONDecoder().decode(Array<Meeting>.self, from: data)
-                for eachMeeting in self.meetings {
-                    print("\(eachMeeting.Date!)")
-                }
             } catch {
                 print(error)
-                print("ERROR")
             }
             DispatchQueue.main.async {
                 self.itemsDownloaded(items: self.meetings as NSArray)
-                print("trying to print items downloaded \(self.meetings)")
             }
             
         })
@@ -119,21 +113,16 @@ class TeacherMeetingsViewController: UIViewController, UITableViewDataSource, UI
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/GetSelectedStudent.php")!)
         request.httpMethod = "POST"
         request.httpBody = postString.data(using: .utf8)
-        print(postString)
         utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
             
             do {
-                print(data)
                 let student = try JSONDecoder().decode(Student.self, from: data)
                 self.selectedStudent = student
-                print(student.description)
-                print(self.selectedStudent.description)
                 DispatchQueue.main.async{
                     self.performSegue(withIdentifier: "meetingDetailsSegue", sender: Any?.self)
                 }
             } catch {
                 print(error)
-                print("ERROR")
                 
             }
             

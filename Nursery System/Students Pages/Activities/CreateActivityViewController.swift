@@ -36,18 +36,12 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
         
         switch(ageGroup){       //set age group for finding students goals
         case "A":
-            print("a")
-            print("age group \(ageGroup)")
             ageGroupGoals = "AgeGroupAGoals"
             break
         case "B":
-            print("b")
-            print("age group \(ageGroup)")
             ageGroupGoals = "AgeGroupBGoals"
             break
         case "c":
-            print("C")
-            print("age group \(ageGroup)")
             ageGroupGoals = "AgeGroupCGoals"
             break
         default:
@@ -93,18 +87,15 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {        //selected goals fill in the text box
         if (goals.count > 0 && goals.count >= row){
-            self.txtDropdown.text = "\(goals[row].Goal!)" as? String
+            self.txtDropdown.text = "\(goals[row].Goal!)"
             selectedGoalID = goals[row].G_ID!
             self.pickerDropdown.isHidden = true
-            print("text box should display \(self.goals[row])")
-            print("selected goal id \(self.goals[row].G_ID)")
         }
     }
     
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if (textField == self.txtDropdown){    //ask nick about this
-            print("working")
             self.pickerDropdown.isHidden = false
             self.view.endEditing(true)
         }
@@ -112,7 +103,6 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
     
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer){       //if image tapped run the utility for picking image
-        let tappedImage = tapGestureRecognizer.view as! UIImageView
         let image = UIImagePickerController()
         image.delegate = self
        
@@ -161,7 +151,6 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
             let studentMother = self.selectedStudent.Mother ?? ""
             let studentFather = self.selectedStudent.Father ?? ""
             let studentGuardian = self.selectedStudent.Guardian ?? ""
-            print("attempting to print parents \(studentFather) \(studentMother) \(studentGuardian)")
             
             
             var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/SaveActivity.php")!)
@@ -172,8 +161,6 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
                 } else {                        //otherwse goal has been met, mark this in database
                 self.postString = ("A_ID=\(self.NewActivityID)&S_ID=\(S_ID)&Activity=\(activity!)&Observation=\(observation!)&Date=\(date)&ActivityPicture=\(activityPicture)&SelectedStudent=\(student)&Mother=\(studentMother)&Father=\(studentFather)&Guardian=\(studentGuardian)&NotificationActivityID=\(self.NewActivityID)&G_ID=\(self.selectedGoalID)&AgeGroupGoals=\(self.ageGroupGoals)")
                 }
-            
-            print(self.postString)
             
             request.httpBody = self.postString.data(using: .utf8)
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -241,7 +228,6 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
             } else {
                 responseString = "1"
             }
-            print("student id is: \(self.NewActivityID)")
             if(self.NewActivityID == 0){
                 success = false
             }
@@ -258,16 +244,11 @@ class CreateActivityViewController: UIViewController, UINavigationControllerDele
         var request = URLRequest(url: URL(string: "https://shod-verses.000webhostapp.com/TeacherSidePHPFiles/GetGoalsDropdown.php")!)
         request.httpMethod = "POST"
         let postString = ("S_ID=\(selectedStudent.S_ID!)&AgeGroupGoals=\(ageGroupGoals)")
-        print(postString)
         request.httpBody = postString.data(using: .utf8)
         
         utilities.postRequest(postString: postString, request: request, completion: { success, data, responseString in
             do {
                 self.goals = try JSONDecoder().decode(Array<Goal>.self, from: data)
-                print(self.goals)
-                for eachGoal in self.goals {
-                    print("\(eachGoal.Goal!)")
-                }
             } catch {
                 print(error)
                 print("ERROR")
