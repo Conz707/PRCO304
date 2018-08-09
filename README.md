@@ -1,9 +1,12 @@
 # PRCO304
 Final Year Dissertation Project
+
 Nursery System
+
 Final Grade: 71% - First Class Honours
 
 Technologies:
+
 For this project, I decided on using technologies I hadn't used before to challenge myself and further my programming skills. The technologies used were Swift to create the mobile application, MySQL for the database and PHP as the middleware for CRUD operations.  
 
 This project was undertaken to convert the dated paper-based system nurseries in the UK use for tracking students information, activity,
